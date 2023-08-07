@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Popup from '../components/Popup/Popup.js';
+import Delete from '../components/Deleteproduct/Delete.js';
 import Dashboard from './dashboard.js';
 function Product() {
   
   const [products, setProducts] = useState([]);
  
   const [show , setShow ] = useState(false);
+
+  const [deleteShow, setDeleteShow ] = useState(false);
+
   
   useEffect(() => {
     axios
@@ -20,6 +24,8 @@ function Product() {
    
 <div>
 {show && <Popup close={setShow} />}
+{deleteShow && <Delete open={setDeleteShow} />}
+
  <div className='flex'>
      <Dashboard/>
      <div className="h-full w-full ml-56 mt-14 mb-10 ">
@@ -66,7 +72,7 @@ function Product() {
     <button  className="text-white font-bold py-1 px-2" type="submit">Edit</button>
   </div>
   <div className="bg-yellow-500 rounded">
-    <button  className="text-white font-bold py-1 px-2" type="submit">Delete</button>
+    <button  className="text-white font-bold py-1 px-2" type="submit" onClick={() => setDeleteShow(true)} >Delete</button>
   </div>
 </div>
 
