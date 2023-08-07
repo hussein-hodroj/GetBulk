@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header.jsx';
 
@@ -8,7 +7,7 @@ function ForgotPassword() {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); 
   const [showMessage, setShowMessage] = useState(false);
-  const navigate = useNavigate();
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,9 +55,16 @@ function ForgotPassword() {
     <div>
       <Header/>
    
-    <div className="flex items-center justify-center h-screen bg-black">
-      <div className="bg-black p-8 m-8 rounded-lg shadow-md w-96">
-        <h4 className="text-2xl font-bold text-yellow-500 mb-4">Forgot Password</h4>
+      <div
+      className="flex items-center justify-center h-screen bg-black"
+      style={{
+        backgroundImage: "url('./assets/images/login4.jpg')",
+        backgroundSize: 'cover',
+      }}
+    >
+      <div className="bg-transparent p-8 m-8 rounded-lg shadow-md w-96 transition-transform duration-200 transform hover:scale-105 hover:shadow-lg ">
+        <h4 className="text-2xl font-bold text-yellow-500 mb-4">Forgot Password?</h4>
+        <p className='text-yellow-500'>Don't worry. Resetting your password is easy, just tell us the email address you registered with GetBulk.</p>
         {showMessage && (
           <p className={`mb-4 ${messageType === 'success' ? 'text-green-500' : 'text-red-500'}`}>
             {message}
@@ -66,22 +72,27 @@ function ForgotPassword() {
         )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-yellow-500 font-semibold mb-2">
-              Email
+            <label htmlFor="email" className="block text-yellow-500 font-semibold mb-2 mt-2">
+              
             </label>
             <input
               type="email"
-              placeholder="Enter Email"
+              placeholder="Email Address"
               autoComplete="off"
               name="email"
-              className="w-full px-3 py-2 rounded border-2 border-yellow-500"
+              className="w-full px-3 py-2 rounded border-2 border-black-500 focus:outline-none focus:border-yellow-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <button type="submit" className="text-yellow-500 py-2 rounded">
-            Send
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="text-yellow-500 py-2 px-6 rounded hover:bg-yellow-500 hover:text-black transition duration-200"
+            >
+              Send
+            </button>
+          </div>
         </form>
       </div>
     </div>
