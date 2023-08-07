@@ -66,7 +66,7 @@ function Popup ({ close }) {
 
   return (
     <div className = "modalBackground">
-          <form  onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
       <div className= "modalContainer">
         <div className = "titleCloseBtn">
         <button onClick = {() => close(false) } className="text-white">  X  </button>
@@ -86,6 +86,7 @@ function Popup ({ close }) {
               id="name"
               type="text"
               name="name"
+              value={name}
               placeholder="Enter product's name" 
               onChange={(e) => setName(e.target.value)}
               /> 
@@ -100,6 +101,7 @@ function Popup ({ close }) {
               id="price"
               type="text"
               name="price"
+              value={price}
               placeholder="Enter product's price" 
               onChange={(e) => setPrice(e.target.value)}
               /> 
@@ -117,14 +119,15 @@ function Popup ({ close }) {
               id="category"
               type="text"
               name="category"
+              value={category}
               placeholder="Enter product's category" 
               onChange={(e) => setCategory(e.target.value)}
               >
 
                  <option value="" disabled selected > Please select product's category </option>    
-                 {categories.map((category) => (
-        <option key={category._id} value={category.name}>
-          {category.name}
+                 {categories.map((c) => (
+        <option key={c._id} value={c._id}>
+          {c.name}
         </option>
       ))}       
               </select>
@@ -140,6 +143,7 @@ function Popup ({ close }) {
               id="description"
               type="text"
               name="description"
+              value={description}
               placeholder="Enter product's description"
               onChange={(e) => setDescription(e.target.value)}
               />   
