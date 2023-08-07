@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* src/styles/tailwind.css */
+
+/* Import the base styles */
+@import 'tailwindcss/base';
+
+/* Import the pre-styled components */
+@import 'tailwindcss/components';
+
+/* Import the utility classes */
+@import 'tailwindcss/utilities';
+
+/*Hassan*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
