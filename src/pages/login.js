@@ -8,7 +8,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate()
-
+  
 // Validation state variables
 const [errors, setErrors] = useState({});
 const [isValid, setIsValid] = useState(false);
@@ -51,10 +51,11 @@ const validateForm = () => {
     axios
       .post('http://localhost:8000/user/login', {email, password})
       .then(result => {
-        console.log(result)
-        navigate('/dashboard')
-        alert('Login success');
-        
+        const token = result.data.token;
+          localStorage.setItem('token', token); // Make sure this line is present
+          console.log(token); // Add this line
+          navigate('/dashboard');
+          alert('Login success');
       })
       .catch((error) => {
         console.log(error);
