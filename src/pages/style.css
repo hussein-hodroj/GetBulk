@@ -1,16 +1,16 @@
-/* Custom style */
+Custom style
 .header-right {
   width: calc(100% - 3.5rem);
 }
 
 .sidebar {
   width: 11rem; /* Set the default width */
-  transition: width 0.3s; /* Add transition for smooth hover effect */
+   transition: width 0.3s; /* Add transition for smooth hover effect */
 }
 
 .sidebar:hover {
   width: 13rem; /* Set the width on hover */
-}
+ }
 
 @media only screen and (min-width: 700px) {
   .header-right {
@@ -24,5 +24,5 @@
 .table th,
 .table td {
   border: 1px solid #ccc;
-}
-
+} 
+ 
