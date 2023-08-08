@@ -100,13 +100,13 @@ const storage = multer.diskStorage({
   
   export const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, price, description } = req.body;
+    const { name, price, description, category, imagePath } = req.body;
   
     try {
 
       const product = await ProductModel.findByIdAndUpdate(
         id,
-        { name, price, description },
+        { name, price, description, category, imagePath: req.file.originalname},
         { new: true }
       );
 

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Style from './style.css';
 function Dashboard() {
-
-  
+const [activeLink, setActiveLink] = useState('')
+const handleSidebarItemClick = (link) => {
+  setActiveLink(link);
+};
   return (
    
     <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
@@ -37,7 +39,13 @@ function Dashboard() {
               </div>
             </li>
             <li>
-              <a href="dashboard" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+            <a
+                href="dashboard"
+                className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
+                  activeLink === 'Dashboard' ? 'border-yellow-500' : 'border-transparent'
+                } dark:hover:border-gray-800 pr-6`}
+                onClick={() => handleSidebarItemClick('Dashboard')}
+              >               
                 <span className="inline-flex justify-center items-center ml-4">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 </span>
@@ -56,8 +64,14 @@ function Dashboard() {
               </a>
             </li>
             <li>
-              <a href="products" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
-                <span className="inline-flex justify-center items-center ml-4">
+            <a
+                href="products"
+                className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
+                  activeLink === 'Products' ? 'border-yellow-500' : 'border-transparent'
+                } dark:hover:border-gray-800 pr-6`}
+                onClick={() => handleSidebarItemClick('Products')}
+              >                
+              <span className="inline-flex justify-center items-center ml-4">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h-2a2 2 0 01-2-2v-3c0-2.209 1.791-4 4-4s4 1.791 4 4v3a2 2 0 01-2 2z"></path>
   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6h18v12H3z"></path>
