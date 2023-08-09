@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import Header from './Header.jsx';
 
 function Register() {
   const [fullname, setFullname] = useState('');
@@ -86,12 +85,8 @@ const handleSubmit = (e) => {
 };
 
   return (
-    <div>
-           <Header/>
-
     <div className="min-h-screen flex items-center justify-center bg-black">
      <div className=" shadow-md rounded-lg p-8">
-
   <img
     src="./assets/images/register.jpg"
     alt="register"
@@ -272,7 +267,6 @@ const handleSubmit = (e) => {
   </Link>
 </p>
       </form>
-    </div>
     </div>
   );
 }

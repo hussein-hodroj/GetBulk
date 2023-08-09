@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import Header from './Header.jsx';
-
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate()
-  
+
 // Validation state variables
 const [errors, setErrors] = useState({});
 const [isValid, setIsValid] = useState(false);
@@ -51,11 +49,10 @@ const validateForm = () => {
     axios
       .post('http://localhost:8000/user/login', {email, password})
       .then(result => {
-        const token = result.data.token;
-          localStorage.setItem('token', token); // Make sure this line is present
-          console.log(token); // Add this line
-          navigate('/dashboard');
-          alert('Login success');
+        console.log(result)
+        navigate('/dashboard')
+        alert('Login success');
+        
       })
       .catch((error) => {
         console.log(error);
@@ -64,8 +61,7 @@ const validateForm = () => {
   };
 
       return (
-        <div>
-          <Header/>
+
         <div className="min-h-screen flex items-center justify-center" 
         style={{
             backgroundImage: 'url(./assets/images/back2.jpg)',
@@ -125,12 +121,11 @@ const validateForm = () => {
   </button>
 </div>
 <div className="text-center mt-4">
-          <Link to="/forgot-password" className="text-zinc-800 font-bold  underline">
+          <Link to="/forgettpassword" className="text-zinc-800 font-bold  underline">
             Forgot Password?
           </Link>
         </div>
           </form>
-   </div>
    </div>
       );
 
