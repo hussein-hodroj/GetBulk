@@ -23,12 +23,12 @@ const Home = () => {
   };
 
   return (
-    <div className='bg-black'>
+    <div className='bg-zinc-900'>
       <Hero />
       
       <div className='my-4 mx-auto max-w-md'>
         <label className='block text-yellow-500 text-sm font-bold mb-2' htmlFor='category'>
-          Search for a product
+          Search for a products
         </label>
         <input
           type='text'
