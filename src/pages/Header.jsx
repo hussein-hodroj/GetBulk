@@ -89,7 +89,7 @@ const Header = () => {
                 onClick={() => handleLinkClick('produ')}
               >
                 Product
-              </a>
+              </a> 
               <a
                 href="http://localhost:3000/#ContactUs"
                 className={`href ${
