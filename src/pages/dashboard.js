@@ -1,17 +1,84 @@
-import React, { useState } from 'react';
+
+
+
+
+
+import React, { useState,useEffect  } from 'react';
+import axios from 'axios'; 
+import jwt_decode from 'jwt-decode';
 import Style from './style.css';
+
+
 function Dashboard() {
 const [activeLink, setActiveLink] = useState('')
+const [userImage, setUserImage] = useState(''); // State for user's uploaded image
+const [userName, setUserName] = useState('Admin');
+const [updateSuccess, setUpdateSuccess] = useState(false);
+
+
 const handleSidebarItemClick = (link) => {
   setActiveLink(link);
 };
+
+
+const token = localStorage.getItem('token');
+  
+    // Decode the token to get user information
+  const decodedToken = jwt_decode(token);
+    
+    // Extract the user ID from the decoded token
+  const id = decodedToken.id;
+
+  axios
+      .put(`http://localhost:8000/user/${id}`)
+      .then((response) => {
+        console.log(response.data); // Handle success
+        setUpdateSuccess(true);
+        setTimeout(() => {
+          setUpdateSuccess(false);
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+  
+  // Decode the token to get user information
+  const decodedToken = jwt_decode(token);
+  
+  // Extract the user ID from the decoded token
+  const userId = decodedToken.id;
+  console.log("decodedToken=>",userId);
+    // Fetch user information (replace with your actual API endpoint)
+    axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint
+      .then((response) => {
+        const userData = response.data;
+        console.log("das",response.data)
+        if (userData) {
+          setUserName(userData.fullname); // Update user's name
+          setUserImage(userData.imagePath); // Update user's image
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []);
+
+const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg';
   return (
    
     <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
       <div className="fixed w-full flex items-center justify-between h-14 text-white z-10">
-        <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-zinc-900 dark:bg-gray-800 border-none">
-          <img className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden " src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
-          <span className="hidden md:block text-white">ADMIN</span>
+      <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-zinc-900 dark:bg-gray-800 border-none">
+                  <img
+              className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
+              src={`uploads/usersImages/${userImage}` || defaultImageUrl}
+              alt="User Avatar"
+            />
+
+          <span className="hidden md:block text-white">{userName}</span>
         </div>
         <div className="flex justify-between items-center h-14 bg-zinc-900 dark:bg-gray-800 header-right">
           <div className="bg-zinc-900 rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm  ">

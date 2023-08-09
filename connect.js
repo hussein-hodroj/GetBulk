@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import multer from 'multer'; 
 import dotenv from 'dotenv';
 // Routes
 import usersRoutes from './src/routes/users.js';
@@ -19,6 +20,7 @@ import { getAllProducts } from './src/controller/products.js';
 dotenv.config();
 
 const app = express();
+const upload = multer({ dest: 'uploads/' });
 
 // Middleware
 app.use(cors());
@@ -45,6 +47,16 @@ mongoose
   .connect(process.env.MONGODB_URL, connectionOptions)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log(err));
+
+
+
+  // Image Upload Route
+
+
+app.post('/upload', upload.single('profileImage'), (req, res) => {
+  const imageUrl = req.file.path; // You might want to store this URL in a database
+  res.json({ imageUrl });
+});
 
 
 // Start the server

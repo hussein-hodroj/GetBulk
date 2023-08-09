@@ -62,14 +62,14 @@ export const getUser = async (req, res) => {
 };
 
 export const updateuser = async (req, res) => {
-  const { fullname, email, password, address, phonenumber, age, role } = req.body;
+  const { fullname, email, password, address, phonenumber, age, role ,imagePath} = req.body;
   try {
      console.log("id=>",req.params.id)
     const users = await UserModel.findById(req.params.id);
       console.log("user=>",users)
     if (!users) return res.status(404).send('User Not found');
 
-    await UserModel.findByIdAndUpdate(req.params.id, { fullname, email, password, address, phonenumber, age, role });
+    await UserModel.findByIdAndUpdate(req.params.id, { fullname, email, password, address, phonenumber, age, role,imagePath });
     res.status(201).send('User updated successfully');
   } catch (error) {
     res.status(500).send('Error updating user');

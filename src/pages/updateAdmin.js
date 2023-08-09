@@ -12,33 +12,38 @@ function UpdateAdmin() {
   const [phonenumber, setPhonenumber]=useState('');
   const [showUpdateForm, setShowUpdateForm] = useState(false);  
   const [updateSuccess, setUpdateSuccess] = useState(false);
-
-  const handleCancel = () => {
+  const [imageName, setImageName] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
+  const handleImageChange = (event) => {
+        const selectedImage = event.target.files[0];
+        setProfileImage(selectedImage);
+        setImageName(selectedImage.name)
+  };
+const handleCancel = () => {
     window.location.reload();
   };
   // Event handlers to capture changes in the form inputs
-  const handleFullNameChange = (event) => {
+const handleFullNameChange = (event) => {
     setFullName(event.target.value);
   };
 const handlePhoneChange=(event)=>{
   setPhonenumber(event.target.value)
 };
-  const handleEmailChange = (event) => {
+const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-  const handleAgeChange = (event) => {
+const handleAgeChange = (event) => {
     setAge(event.target.value);
   };
 
-  const handleAddressChange = (event) => {
+const handleAddressChange = (event) => {
     setAddress(event.target.value);
   };
 
   // Function to handle form submission
-   const  handleSubmit =  (event) => {
+  const  handleSubmit =  (event) => {
     event.preventDefault();
-
     // Prepare the data to be sent to the backend server
     const updatedData = {
       fullname,
@@ -46,18 +51,57 @@ const handlePhoneChange=(event)=>{
       age,
       address,
       phonenumber,
-      role:'admin'
+      role: 'admin',  
     };
-
-    const token = localStorage.getItem('token');
+  
+    if (profileImage) {
+      const formData = new FormData();
+      formData.append('profileImage', profileImage);
+  
+      axios.post('http://localhost:8000/upload', formData)
+        .then((imageResponse) => {
+          updatedData.imagePath = imageName;
+          console.log("datagointoupdate",updatedData);
+          // Continue with updating user data
+          axios.put(`http://localhost:8000/user/${id}`, updatedData)
+            .then((response) => {
+              console.log(response.data); // Handle success
+              setUpdateSuccess(true);
+              setTimeout(() => {
+                setUpdateSuccess(false);
+              }, 3000);
+            })
+            .catch((error) => {
+              console.error('Error updating profile:', error);
+            });
+        })
+        .catch((error) => {
+          console.error('Error uploading image:', error);
+        });
+    } else {
+      // If no image selected, only update user data
+      axios.put(`http://localhost:8000/user/${id}`, updatedData)
+        .then((response) => {
+          console.log(response.data); // Handle success
+          setUpdateSuccess(true);
+          setTimeout(() => {
+            setUpdateSuccess(false);
+          }, 3000);
+        })
+        .catch((error) => {
+          console.error('Error updating profile:', error);
+        });
+    };
+  
+  const token = localStorage.getItem('token');
   
     // Decode the token to get user information
-    const decodedToken = jwt_decode(token);
+  const decodedToken = jwt_decode(token);
     
     // Extract the user ID from the decoded token
-    const id = decodedToken.id;
+  const id = decodedToken.id;
 
-    axios
+  axios
       .put(`http://localhost:8000/user/${id}`, updatedData)
       .then((response) => {
         console.log(response.data); // Handle success
@@ -122,19 +166,25 @@ useEffect(() => {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   value={fullname}
                   onChange={handleFullNameChange}
+                  required
+                  pattern=".*\S+.*" // At least one non-space character
+                  title="Full Name is required" // Custom error message
                 />
+
               </div>
               <div className="mb-2">
                 <label htmlFor="email" className="block text-white font-size:13 font-semibold mb-2">
                   Email
                 </label>
                 <input
-                  type="email"
-                  id="email"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  value={email}
-                  onChange={handleEmailChange}
+                          type="email"
+                          id="email"
+                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          value={email}
+                          onChange={handleEmailChange}
+                          required // Add the required attribute
                 />
+
               </div>
              
               <div className="mb-2">
@@ -142,37 +192,57 @@ useEffect(() => {
                   Age
                 </label>
                 <input
-                  type="number"
-                  id="age"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  value={age}
-                  onChange={handleAgeChange}
-                />
+                        type="number"
+                        id="age"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        value={age}
+                        onChange={handleAgeChange}
+                        required // Add the required attribute
+              />
+
               </div>
               <div className="mb-2">
                 <label htmlFor="phonenumber" className="block text-white font-size:13 font-semibold mb-2">
                   PhoneNumber
                 </label>
                 <input
-                  type="number"
-                  id="phonenumber"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  value={phonenumber}
-                  onChange={handlePhoneChange}
-                />
+                        type="number"
+                        id="phonenumber"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        value={phonenumber}
+                        onChange={handlePhoneChange}
+                        required // Add the required attribute
+                  />
+
               </div>
               <div className="mb-2">
                 <label htmlFor="address" className="block text-white font-size:13 font-semibold mb-2">
                   Address
                 </label>
                 <input
-                  type="text"
-                  id="address"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  value={address}
-                  onChange={handleAddressChange}
-                />
+                        type="text"
+                        id="address"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        value={address}
+                        onChange={handleAddressChange}
+                        required // Add the required attribute
+                      />
+
               </div>
+
+                      <div className="mb-2">
+                  <label htmlFor="profileImage" className="block text-white font-size:13 font-semibold mb-2">
+                    Profile Image
+                  </label>
+                  <input
+                    type="file"
+                    id="profileImage"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
+                </div>
+             
+
               <div className="  justify-between space-x-6 space-y-3 ">
                 <button
                   type="submit"
