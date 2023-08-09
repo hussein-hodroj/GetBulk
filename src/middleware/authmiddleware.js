@@ -13,10 +13,10 @@ export const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = await UserModel.findById(decoded.id).select('-password'); // Change Select() to select()
 
-      if (req.user.role !== 'admin') {
-        res.status(401);
-        throw new Error('Not authorized');
-      }
+      // if (req.user.role !== 'admin') {
+      //   res.status(401);
+      //   throw new Error('Not authorized');
+      // }
 
       next();
     } catch (error) {

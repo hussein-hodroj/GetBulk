@@ -48,16 +48,9 @@ function Product() {
      <Dashboard/>
      <div className="h-full w-full ml-56 mt-14 mb-10 ">
       <div className="p-6 gap-4">
-            <div className=" flex justify-end  ">
-              <button
-                onClick={() => setShow(true)}
-                className="bg-yellow-500 text-white font-bold py-2 px-4 rounded"
-              >
-                Add product
-              </button>
-             
-            </div> 
-             <div className="flex justify-start mb-4 ">
+        <div className = "flex justify-between">
+           
+             <div className="flex justify-start mb-3">
             <input
                 type="text"
                 placeholder="Search by name"
@@ -65,7 +58,17 @@ function Product() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <p className="text-black ms-4 mb-2">{filteredProducts.length} products found</p>
+              <p className="text-white font-bold border rounded py-2 px-2 bg-yellow-500 ms-4">{filteredProducts.length} products found</p>
+              </div>
+               <div className=" flex justify-end mb-3 mr-4">
+              <button
+                onClick={() => setShow(true)}
+                className="bg-yellow-500 text-white font-bold py-2 px-3  rounded"
+              >
+                Add product
+              </button>
+             
+            </div> 
               </div>
             
             <table className="table flex items-center justify-center font-bold bg-zinc-800 text-white text-center w-full">
