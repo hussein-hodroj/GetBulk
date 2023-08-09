@@ -14,6 +14,7 @@ import scheduleRouter from './src/routes/schedules.js';
 import workoutTypeRouter from './src/routes/workouts.js';
 import forgotPasswordRouter from './src/routes/forgotPasswordRoute.js';
 import resetPasswordRouter from './src/routes/resetPasswordRoute.js';
+import { getAllProducts } from './src/controller/products.js';
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ mongoose
   .connect(process.env.MONGODB_URL, connectionOptions)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log(err));
+
 
 // Start the server
 const PORT = process.env.PORT || 8000;
