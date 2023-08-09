@@ -1,27 +1,40 @@
+import React, { createContext, useState, useEffect } from 'react';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-
-// Create the context
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  //products state
   const [products, setProducts] = useState([]);
-  //fetch products
-  useEffect(() => {
-    const  fetchProducts =  async () =>{
-      const response = await  fetch ('https://fakestoreapi.com/products');
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/product/');
       const data = await response.json();
       setProducts(data);
-    };
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/category/');
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  useEffect(() => {
     fetchProducts();
-  }, [])
+    fetchCategories();
+  }, []);
 
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider value={{ products, categories, selectedCategory, setSelectedCategory }}>
       {children}
     </ProductContext.Provider>
   );
 };
-
-export default ProductProvider;
