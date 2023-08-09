@@ -64,9 +64,9 @@ export const getUser = async (req, res) => {
 export const updateuser = async (req, res) => {
   const { fullname, email, password, address, phonenumber, age, role } = req.body;
   try {
-
+     console.log("id=>",req.params.id)
     const users = await UserModel.findById(req.params.id);
-
+      console.log("user=>",users)
     if (!users) return res.status(404).send('User Not found');
 
     await UserModel.findByIdAndUpdate(req.params.id, { fullname, email, password, address, phonenumber, age, role });

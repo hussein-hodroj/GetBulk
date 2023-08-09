@@ -16,6 +16,8 @@ import { ProductProvider } from './pages/ProductContext.js';
 import { CartProvider } from './pages/CartContext.js';
 import SidebarProvider from './pages/SidebarContext.js';
 import Sidebar from './pages/Sidebar.js';
+import UpdateAdmin from './pages/updateAdmin.js';
+
 
 function Layout() {
   return (
@@ -34,6 +36,7 @@ function Layout() {
             <Route index element={<Hero />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/update-admin/:userId" component={<UpdateAdmin/>} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:userId/:token" element={<ResetPassword />} />
             <Route path="/Hero" element={<Hero />} />
@@ -42,6 +45,8 @@ function Layout() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
+            <Route path='/UpdateAdmin' element={<UpdateAdmin />} />
+            {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
           </Routes>
           <Sidebar />
           </CartProvider>

@@ -33,6 +33,7 @@ app.use('/public',publicWorkoutRouter);
 app.use('/workout', workoutTypeRouter);
 app.use('/',forgotPasswordRouter);
 app.use('/',resetPasswordRouter);
+
 // MongoDB Connection
 const connectionOptions = {
   useNewUrlParser: true,
