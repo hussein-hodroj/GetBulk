@@ -10,6 +10,7 @@ import Hero from './pages/Hero.jsx';
 import MainLayout from './pages/MainLayout.jsx';
 
 
+
 import Home from './pages/Home.js';
 import ProductDetails from './pages/ProductDetails.js';
 import { ProductProvider } from './pages/ProductContext.js'; 
@@ -17,6 +18,7 @@ import { CartProvider } from './pages/CartContext.js';
 import SidebarProvider from './pages/SidebarContext.js';
 import Sidebar from './pages/Sidebar.js';
 import UpdateAdmin from './pages/updateAdmin.js';
+import FeedbackAdmin from './pages/FeedbackAdmin.js';
 
 
 function Layout() {
@@ -46,6 +48,8 @@ function Layout() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path='/UpdateAdmin' element={<UpdateAdmin />} />
+            <Route path="/FeedbackAdmin" element={<FeedbackAdmin />} />
+
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
           </Routes>
           <Sidebar />

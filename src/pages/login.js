@@ -51,7 +51,6 @@ const validateForm = () => {
       .then(result => {
         console.log("result=>",result)
         navigate('/dashboard')
-        alert('Login success');
         
       })
       .catch((error) => {
