@@ -8,6 +8,6 @@ router.get('/', getAllFeedback);
 router.get('/:id', getFeedback);
 router.post('/createfeedback', createfeedback);
 router.post('/updatefeedback', updatefeedback);
-router.post('/deletefeedback', deletefeedback);
+router.delete('/delete/:id', deletefeedback);
 
 export default router;

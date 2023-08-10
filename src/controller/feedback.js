@@ -22,11 +22,38 @@ export const getFeedback = async (req, res) => {
 
   export const getAllFeedback = async (req, res) => {
     try {
-      const feedbacks = await FeedbackModel.find()
-
-    
-        
-      res.status(200).json(feedbacks);
+      const feedbacks = await FeedbackModel.find();
+  
+      if (!feedbacks || feedbacks.length === 0) {
+        return res.status(404).json('Feedbacks Not Found');
+      }
+  
+      const feedbacksWithNames = await Promise.all(
+        feedbacks.map(async (feedback) => {
+          const user = await UserModel.findById(feedback.users);
+          const trainer = await UserModel.findById(feedback.trainers);
+  
+          if (!user || !trainer) {
+            return null; // Skip this feedback if user or trainer not found
+          }
+  
+          const name = user.fullname;
+          const trainername = trainer.fullname;
+          const feedbackContent = feedback.feedback; // Access the feedback directly
+  
+          return {
+            user: name,
+            trainer: trainername,
+            feedbackContent: feedbackContent,
+            // Add other feedback properties here if needed
+          };
+        })
+      );
+  
+      // Filter out null values (feedbacks with missing user/trainer)
+      const validFeedbacks = feedbacksWithNames.filter((feedback) => feedback !== null);
+  
+      res.status(200).json(validFeedbacks);
     } catch (error) {
       console.error('Error retrieving feedbacks:', error);
       res.status(500).send('Error retrieving feedbacks');
@@ -59,12 +86,13 @@ export const updatefeedback = async (req,res) => {
       }
 };
 
-export const  deletefeedback = async(req,res) => {
-    const {_id} = req.body;
-    try{
-        await FeedbackModel.findByIdAndDelete(_id);
-        res.send ('feedback deleted successfuly');
-    }catch (error) {
-        res.status(500).send('Error deleting feedback');
-      }
-}
+export const deletefeedback = async (req, res) => {
+const { id } = req.params;
+  try {
+    const feedback = await FeedbackModel.findByIdAndDelete(id);
+    res.status(200).send('feedback deleted successfully');
+  } catch (error) {
+    console.error('Error deleting feedback:', error);
+    res.status(500).send('Error deleting feedback');
+  }
+};
