@@ -72,14 +72,7 @@ export const CartProvider = ({ children }) => {
   };
 
   
-  useEffect(() => {
-    fetch('/api/products') 
-      .then(response => response.json())
-      .then(data => {
-        setProducts(data);
-      })
-      .catch(error => console.error('Error fetching products:', error));
-  }, []);
+  
 
   return (
     <CartContext.Provider
