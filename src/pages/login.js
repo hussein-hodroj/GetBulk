@@ -49,7 +49,7 @@ const validateForm = () => {
     axios
       .post('http://localhost:8000/user/login', {email, password})
       .then(result => {
-        console.log(result)
+        console.log("result=>",result)
         navigate('/dashboard')
         alert('Login success');
         
