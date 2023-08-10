@@ -1,33 +1,34 @@
 import mongoose from "mongoose";
 
-
 const orderSchema = new mongoose.Schema({
-
-    productid: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'product', 
+    productName: {
+        type: String,
         required: true
     },
-    sale: {
+    total: {
         type: Number,
         required: true,
     },
-    price: {
-        type: Number,
+    customerName: {
+        type: String,
         required: true,
     },
-    category: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'category',
+    customerPhoneNumber: {
+        type: String,
         required: true,
     },
-    users: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'user', 
-        required: true
+    customerEmail: {
+        type: String,
+        required: true,
     },
-
-
+    customerAddress: {
+        type: String,
+        required: true,
+    },
+    status: {
+        type: String,
+        default: 'inprogress',
+    },
 });
 
 const OrderModel = mongoose.model('Order', orderSchema);

@@ -10,9 +10,11 @@ const Product = ({ product, categories }) => {
   const category = categories.find(c => c._id === product.category);
   const categoryName = category ? category.name : 'Uncategorized';
 
+  const truncatedName = name.length > 20 ? name.substring(0, 17) + '...' : name;
+
   return (
     <div>
-      <div className=' h-[300px] mb-4 relative overflow-hidden group transition'>
+      <div className='h-[300px] mb-4 relative overflow-hidden group transition'>
         <div className='w-full h-full flex justify-center items-center'>
           {/* image */}
           <div className='w-full h-full mx-auto flex justify-center items-center'>
@@ -46,7 +48,9 @@ const Product = ({ product, categories }) => {
       <div>
         <div className='text-sm capitalize text-white mb-1'>{categoryName}</div>
         <Link to={`/product/${_id}`}>
-          <h2 className='font-semibold text-yellow-500 mb-1'>{name}</h2>
+          <h2 className='font-semibold text-yellow-500 mb-1' title={name}>
+            {truncatedName}
+          </h2>
         </Link>
         <div className='font-semibold text-red-500'>$ {price}</div>
       </div>
