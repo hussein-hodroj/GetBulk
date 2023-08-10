@@ -1,11 +1,7 @@
-
-
-
-
-
 import React, { useState,useEffect  } from 'react';
 import axios from 'axios'; 
 import jwt_decode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 import Style from './style.css';
 
 
@@ -14,51 +10,31 @@ const [activeLink, setActiveLink] = useState('')
 const [userImage, setUserImage] = useState(''); // State for user's uploaded image
 const [userName, setUserName] = useState('Admin');
 const [updateSuccess, setUpdateSuccess] = useState(false);
+const [userData, setUserData] = useState(null); // State to store user data
 
 
 const handleSidebarItemClick = (link) => {
   setActiveLink(link);
 };
 
-
 const token = localStorage.getItem('token');
-  
-    // Decode the token to get user information
   const decodedToken = jwt_decode(token);
-    
-    // Extract the user ID from the decoded token
   const id = decodedToken.id;
-
-  axios
-      .put(`http://localhost:8000/user/${id}`)
-      .then((response) => {
-        console.log(response.data); // Handle success
-        setUpdateSuccess(true);
-        setTimeout(() => {
-          setUpdateSuccess(false);
-        }, 3000);
-      })
-      .catch((error) => {
-        console.error('Error updating profile:', error);
-      });
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const id = localStorage.getItem('userId'); // Retrieve the user ID
   
-  // Decode the token to get user information
-  const decodedToken = jwt_decode(token);
-  
-  // Extract the user ID from the decoded token
-  const userId = decodedToken.id;
-  console.log("decodedToken=>",userId);
+  console.log("decodedToken=>",id);
     // Fetch user information (replace with your actual API endpoint)
     axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint
       .then((response) => {
         const userData = response.data;
-        console.log("das",response.data)
+        
         if (userData) {
           setUserName(userData.fullname); // Update user's name
           setUserImage(userData.imagePath); // Update user's image
+          setUserData(userData);
         }
       })
       .catch((error) => {
@@ -172,6 +148,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               </div>
             </li>
             <li>
+              
               <a href="/updateAdmin" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>

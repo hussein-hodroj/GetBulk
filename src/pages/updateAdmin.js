@@ -2,68 +2,79 @@ import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
-import { useLocation } from 'react-router-dom'
+
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function UpdateAdmin() {
   const [fullname, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [address, setAddress] = useState('');
-  const [phonenumber, setPhonenumber]=useState('');
-  const [showUpdateForm, setShowUpdateForm] = useState(false);  
+  const [phonenumber, setPhonenumber] = useState('');
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [imageName, setImageName] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
+  
   const handleImageChange = (event) => {
-        const selectedImage = event.target.files[0];
-        setProfileImage(selectedImage);
-        setImageName(selectedImage.name)
+    const selectedImage = event.target.files[0];
+    setProfileImage(selectedImage);
+    setImageName(selectedImage.name);
   };
-const handleCancel = () => {
+
+  const handleCancel = () => {
     window.location.reload();
   };
-  // Event handlers to capture changes in the form inputs
-const handleFullNameChange = (event) => {
+
+  const handleFullNameChange = (event) => {
     setFullName(event.target.value);
   };
-const handlePhoneChange=(event)=>{
-  setPhonenumber(event.target.value)
-};
-const handleEmailChange = (event) => {
+
+  const handlePhoneChange = (event) => {
+    setPhonenumber(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-const handleAgeChange = (event) => {
+  const handleAgeChange = (event) => {
     setAge(event.target.value);
   };
+  const token = localStorage.getItem('token');
+  const decodedToken = jwt_decode(token);
+  const id = decodedToken.id;
 
-const handleAddressChange = (event) => {
+  const handleAddressChange = (event) => {
     setAddress(event.target.value);
   };
+  console.log("UpdateAdmin ID:",id)
 
-  // Function to handle form submission
-  const  handleSubmit =  (event) => {
+  
+  const handleSubmit = (event) => {
     event.preventDefault();
-    // Prepare the data to be sent to the backend server
     const updatedData = {
       fullname,
       email,
       age,
       address,
       phonenumber,
-      role: 'admin',  
+      role: 'admin',
     };
   
     if (profileImage) {
       const formData = new FormData();
       formData.append('profileImage', profileImage);
   
-      axios.post('http://localhost:8000/upload', formData)
+      axios
+        .post('http://localhost:8000/upload', formData)
         .then((imageResponse) => {
           updatedData.imagePath = imageName;
-          console.log("datagointoupdate",updatedData);
+          
           // Continue with updating user data
-          axios.put(`http://localhost:8000/user/${id}`, updatedData)
+          axios
+            .put(`http://localhost:8000/user/${id}`, updatedData)
             .then((response) => {
               console.log(response.data); // Handle success
               setUpdateSuccess(true);
@@ -79,9 +90,10 @@ const handleAddressChange = (event) => {
           console.error('Error uploading image:', error);
         });
     } else {
-      // If no image selected, only update user data
-      axios.put(`http://localhost:8000/user/${id}`, updatedData)
+      axios
+        .put(`http://localhost:8000/user/${id}`, updatedData)
         .then((response) => {
+          
           console.log(response.data); // Handle success
           setUpdateSuccess(true);
           setTimeout(() => {
@@ -91,64 +103,36 @@ const handleAddressChange = (event) => {
         .catch((error) => {
           console.error('Error updating profile:', error);
         });
-    };
-  
-  const token = localStorage.getItem('token');
-  
-    // Decode the token to get user information
-  const decodedToken = jwt_decode(token);
-    
-    // Extract the user ID from the decoded token
-  const id = decodedToken.id;
+    }
+  };
 
-  axios
-      .put(`http://localhost:8000/user/${id}`, updatedData)
+ 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(token);
+    const userId = decodedToken.id;
+
+    axios
+      .get(`http://localhost:8000/user/${id}`)
       .then((response) => {
-        console.log(response.data); // Handle success
-        setUpdateSuccess(true);
-        setTimeout(() => {
-          setUpdateSuccess(false);
-        }, 3000);
+        const userData = response.data;
+        
+        if (userData) {
+          setFullName(userData.fullname);
+          setEmail(userData.email);
+          setAge(userData.age);
+          setAddress(userData.address);
+          setPhonenumber(userData.phonenumber);
+        }
       })
       .catch((error) => {
-        console.error('Error updating profile:', error);
+        console.error('Error fetching user data:', error);
       });
-};
-
-useEffect(() => {
-  // Get the token from local storage
-  const token = localStorage.getItem('token');
-  
-  // Decode the token to get user information
-  const decodedToken = jwt_decode(token);
-  
-  // Extract the user ID from the decoded token
-  const userId = decodedToken.id;
-  console.log("decodedToken=>",userId);
-  // Fetch user data based on the user ID
-
-   axios
-    .get(`http://localhost:8000/user/${userId}`)
-    .then((response) => {
-      const userData = response.data;
-      if (userData) {
-        setFullName(userData.fullname);
-        setEmail(userData.email);
-        setAge(userData.age);
-        setAddress(userData.address);
-        setPhonenumber(userData.phonenumber);
-      }
-    })
-    .catch((error) => {
-      console.error('Error fetching user data:', error);
-    });
-}, []);
-
+  }, [id]);
 
   return (
     <div>
       
-
       <div className="flex ">
         <Dashboard />
         <div className="h-full w-full ml-56 mt-20 mb-5 ">

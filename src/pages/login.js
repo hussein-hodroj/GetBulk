@@ -50,6 +50,8 @@ const validateForm = () => {
       .post('http://localhost:8000/user/login', {email, password})
       .then(result => {
         console.log("result=>",result)
+        const userId = result.data._id; // Assuming your API response contains user ID
+        localStorage.setItem('userId', userId);
         navigate('/dashboard')
         alert('Login success');
         
