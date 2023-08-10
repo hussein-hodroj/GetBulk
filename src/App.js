@@ -18,7 +18,7 @@ import { CartProvider } from './pages/CartContext.js';
 import SidebarProvider from './pages/SidebarContext.js';
 import Sidebar from './pages/Sidebar.js';
 import UpdateAdmin from './pages/updateAdmin.js';
-import FeedbackAdmin from './pages/FeedbackAdmin.js';
+import FeedbackAdmin from './pages/adminFeedback.jsx';
 
 
 function Layout() {
@@ -48,7 +48,7 @@ function Layout() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path='/UpdateAdmin' element={<UpdateAdmin />} />
-            <Route path="/FeedbackAdmin" element={<FeedbackAdmin />} />
+            <Route path="/adminFeedback" element={<FeedbackAdmin />} />
 
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
           </Routes>

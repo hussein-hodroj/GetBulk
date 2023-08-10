@@ -87,9 +87,14 @@ export const updatefeedback = async (req,res) => {
 };
 
 export const deletefeedback = async (req, res) => {
-const { id } = req.params;
+  const { id } = req.params;
+
   try {
-    const feedback = await FeedbackModel.findByIdAndDelete(id);
+
+   const userFeedback =  await FeedbackModel.findByIdAndDelete(id);
+
+   if(!userFeedback) return res.status(404).json('feedback Not Found');
+
     res.status(200).send('feedback deleted successfully');
   } catch (error) {
     console.error('Error deleting feedback:', error);
