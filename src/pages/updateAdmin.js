@@ -44,8 +44,8 @@ function UpdateAdmin() {
   };
   const token = localStorage.getItem('token');
   const decodedToken = jwt_decode(token);
-  const id = decodedToken.id;
-
+  // const id = decodedToken.id;
+  const id = localStorage.getItem('userId');
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
   };
