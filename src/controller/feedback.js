@@ -24,44 +24,41 @@ export const getFeedback = async (req, res) => {
     try {
       const feedbacks = await FeedbackModel.find();
   
-      if (!feedbacks || feedbacks.length === 0) {
-        return res.status(404).json('Feedbacks Not Found');
-      }
+      if (!feedbacks) return res.status(404).json('Feedbacks not found');
   
-      const feedbacksWithNames = await Promise.all(
+      // Create an array to hold user names for each feedback
+      const usersNames = await Promise.all(
         feedbacks.map(async (feedback) => {
-          const user = await UserModel.findById(feedback.users);
-          const trainer = await UserModel.findById(feedback.trainers);
-  
-          if (!user || !trainer) {
-            return null; // Skip this feedback if user or trainer not found
-          }
-  
-          const name = user.fullname;
-          const trainername = trainer.fullname;
-          const feedbackContent = feedback.feedback; // Access the feedback directly
-  
-          return {
-            user: name,
-            trainer: trainername,
-            feedbackContent: feedbackContent,
-            // Add other feedback properties here if needed
-          };
+          const users = await UserModel.findById(feedback.users);
+          return users ? users.fullname : 'Unknown user';
+        })
+      );
+      // Create an array to hold trainer names for each feedback
+      const trainersNames = await Promise.all(
+        feedbacks.map(async (feedback) => {
+          const trainers = await UserModel.findById(feedback.trainers);
+          return trainers ? trainers.fullname : 'Unknown trainer';
         })
       );
   
-      // Filter out null values (feedbacks with missing user/trainer)
-      const validFeedbacks = feedbacksWithNames.filter((feedback) => feedback !== null);
+      // Combine each feedback with its corresponding users and trainers name
+      const feedbacksWithUsersNames = feedbacks.map((feedback, index) => ({
+        ...feedback._doc,
+        uname: usersNames[index],
+        tname: trainersNames[index],
+      }));
   
-      res.status(200).json(validFeedbacks);
+      res.status(200).json(feedbacksWithUsersNames);
     } catch (error) {
       console.error('Error retrieving feedbacks:', error);
       res.status(500).send('Error retrieving feedbacks');
     }
   };
   
+  
+  
   export const createfeedback = async (req, res) => {
-    const { _id, feedback, users, trainers } = req.body;
+    const { feedback, users, trainers } = req.body;
     try {
       const newfeedback = new FeedbackModel({
         feedback,
