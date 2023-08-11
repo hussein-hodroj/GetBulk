@@ -7,6 +7,33 @@ import { sendEmail } from '../utils/sendEmail.js';
 import multer from 'multer';
 import fs from 'fs';
 
+
+export const addUser = async (req, res) => {
+  try {
+    const { fullname, email, address, age, phonenumber } = req.body;
+
+    // Create a new user instance
+    const newUser = new UserModel({
+      fullname,
+      email,
+      address,
+      age,
+      phonenumber,
+      role: 'user', // Set the default role to 'user'
+    });
+
+    // Save the user to the database
+    const savedUser = await newUser.save();
+
+    res.status(201).json(savedUser);
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+
 export const contact=async(req,res)=>{
   const {fullname,subject} = req.body;
   console.log(req.body);
@@ -182,4 +209,23 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { 
     expiresIn: '30d' });
 };
+
+export const getTrainers = async (req, res) => {
+  try {
+    const trainers = await UserModel.find({ role: UserRoles.TRAINER });
+    res.status(200).send(trainers);
+  } catch (error) {
+    res.status(500).send('Error retrieving trainers');
+  }
+};
+const deleteTrainer = async (trainerId) => {
+  try {
+    await axios.delete(`http://localhost:8000/trainers/${trainerId}`);
+    // Update the trainers state after successful deletion
+    setTrainers((prevTrainers) => prevTrainers.filter((trainer) => trainer._id !== trainerId));
+  } catch (error) {
+    console.error('Error deleting trainer:', error);
+  }
+};
+// Assuming you have a route to fetch trainers
 

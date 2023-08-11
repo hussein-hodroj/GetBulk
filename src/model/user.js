@@ -1,6 +1,6 @@
 // user.js (model)
 import mongoose from "mongoose";
-
+import{addUser} from '../controller/user.js';
 const UserRoles = {
   ADMIN: 'admin',
   USER: 'user',

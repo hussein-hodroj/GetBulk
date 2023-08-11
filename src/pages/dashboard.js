@@ -1,8 +1,6 @@
 import React, { useState,useEffect  } from 'react';
 import axios from 'axios'; 
 import jwt_decode from 'jwt-decode';
-import { Link } from 'react-router-dom';
-import Style from './style.css';
 
    
 function Dashboard() {
@@ -10,23 +8,23 @@ const [activeLink, setActiveLink] = useState('')
 const [userImage, setUserImage] = useState(''); // State for user's uploaded image
 const [userName, setUserName] = useState('Admin');
 const [updateSuccess, setUpdateSuccess] = useState(false);
-const [userData, setUserData] = useState(null); // State to store user data
-
+const [userData, setUserData] = useState(null); 
 
 const handleSidebarItemClick = (link) => {
   setActiveLink(link);
 };
 
-const token = localStorage.getItem('token');
-  const decodedToken = jwt_decode(token);
-  const id = decodedToken.id;
-
+// const token = localStorage.getItem('token');
+//   const decodedToken = jwt_decode(token);
+//   const id = decodedToken.id;
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const id = localStorage.getItem('userId'); // Retrieve the user ID
+    const decodedToken = jwt_decode(token);
+    const id = decodedToken.id;
   
   console.log("decodedToken=>",id);
-    // Fetch user information (replace with your actual API endpoint)
+   
     axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint
       .then((response) => {
         const userData = response.data;
@@ -97,12 +95,12 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             
             <li>
-              <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="trainers" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17l3 3 3-3M12 2v10"></path>
-</svg>                </span>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17l3 3 3-3M12 2v10"></path>
+                    </svg>                </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Trainers</span>
               </a>
             </li>
@@ -155,7 +153,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             <li>
               
-              <a href="/updateAdmin" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="updateAdmin" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </span>
