@@ -19,6 +19,7 @@ import SidebarProvider from './pages/SidebarContext.js';
 import Sidebar from './pages/Sidebar.js';
 import UpdateAdmin from './pages/updateAdmin.js';
 import FeedbackAdmin from './pages/adminFeedback.jsx';
+import Trainers from './pages/Trainers.js';
 import AdminOrder from './pages/adminOrder.js';
 
 
@@ -52,6 +53,8 @@ function Layout() {
             <Route path="/adminFeedback" element={<FeedbackAdmin />} />
             <Route path="/AdminOrder" element={<AdminOrder />} />
 
+
+            <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
           </Routes>
           <Sidebar />

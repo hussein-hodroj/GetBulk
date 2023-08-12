@@ -45,21 +45,19 @@ const validateForm = () => {
   validateForm();
 
   if (isValid) {
-
     axios
-      .post('http://localhost:8000/user/login', {email, password})
-      .then(result => {
-        console.log("result=>",result)
-        const userId = result.data._id; // Assuming your API response contains user ID
+      .post('http://localhost:8000/user/login', { email, password })
+      .then((response) => {
+        const { token, userId } = response.data;
+        localStorage.setItem('token', token);
         localStorage.setItem('userId', userId);
-        navigate('/dashboard')
-        
+        navigate('/dashboard');
       })
       .catch((error) => {
-        console.log(error);
+        console.log('Error logging in:', error);
       });
-  };
-  };
+  }
+};
 
       return (
 

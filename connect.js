@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import multer from 'multer'; 
 import dotenv from 'dotenv';
+import UserModel from './src/model/user.js';
 // Routes
 import usersRoutes from './src/routes/users.js';
 import feedbackRoutes from './src/routes/feedbacks.js';
@@ -63,4 +64,14 @@ app.post('/upload', upload.single('profileImage'), (req, res) => {
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
+});
+
+app.get('/trainers', async (req, res) => {
+  try {
+    const trainers = await UserModel.find({ role: 'trainer' });
+    res.json(trainers);
+  } catch (error) {
+    console.error('Error fetching trainers data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });

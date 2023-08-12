@@ -1,22 +1,23 @@
-import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
-
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 function UpdateAdmin() {
-  const [fullname, setFullName] = useState('');
+  
+  const { userId } = useParams();
+  const [userName, setUserName] = useState('Admin');
+  const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [address, setAddress] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [imageName, setImageName] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
-  
+  const [userData, setUserData] = useState(null);
+
   const handleImageChange = (event) => {
     const selectedImage = event.target.files[0];
     setProfileImage(selectedImage);
@@ -28,7 +29,7 @@ function UpdateAdmin() {
   };
 
   const handleFullNameChange = (event) => {
-    setFullName(event.target.value);
+    setFullname(event.target.value);
   };
 
   const handlePhoneChange = (event) => {
@@ -42,16 +43,34 @@ function UpdateAdmin() {
   const handleAgeChange = (event) => {
     setAge(event.target.value);
   };
-  const token = localStorage.getItem('token');
-  const decodedToken = jwt_decode(token);
-  const id = localStorage.getItem('userId');
-
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
   };
+  // const id = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+  const decodedToken = jwt_decode(token);
+  const id = decodedToken.id;
   console.log("UpdateAdmin ID:",id)
 
-  
+ useEffect(() => {
+    axios.get(`http://localhost:8000/user/${id}`)
+      .then((response) => {
+        const userData = response.data;
+        if (userData) {
+        setUserName(userData.username);
+        setFullname(userData.fullname);
+        setEmail(userData.email);
+        setPhonenumber(userData.phonenumber);
+        setAddress(userData.address);
+        setAge(userData.age);
+        // setUserData(userData);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
+  }, [userId]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const updatedData = {
@@ -107,28 +126,7 @@ function UpdateAdmin() {
   };
 
  
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const decodedToken = jwt_decode(token);
-    const userId = decodedToken.id;
-
-    axios
-      .get(`http://localhost:8000/user/${id}`)
-      .then((response) => {
-        const userData = response.data;
-        
-        if (userData) {
-          setFullName(userData.fullname);
-          setEmail(userData.email);
-          setAge(userData.age);
-          setAddress(userData.address);
-          setPhonenumber(userData.phonenumber);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-      });
-  }, [id]);
+  
 
   return (
     <div>

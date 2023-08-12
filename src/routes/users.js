@@ -12,5 +12,6 @@ router.put('/:id', updateuser);
 router.delete('/:id', deleteuser);
 router.post('/register',upload.single("imagePath"),registerUser);
 router.post('/login',loginUser);
+router.get('/trainers')
 
 export default router;
