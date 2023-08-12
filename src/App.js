@@ -20,6 +20,7 @@ import Sidebar from './pages/Sidebar.js';
 import UpdateAdmin from './pages/updateAdmin.js';
 import FeedbackAdmin from './pages/adminFeedback.jsx';
 import Trainers from './pages/Trainers.js';
+import AdminOrder from './pages/adminOrder.js';
 
 
 function Layout() {
@@ -50,6 +51,7 @@ function Layout() {
             <Route path="/products" element={<Products />} />
             <Route path='/UpdateAdmin' element={<UpdateAdmin />} />
             <Route path="/adminFeedback" element={<FeedbackAdmin />} />
+            <Route path="/AdminOrder" element={<AdminOrder />} />
 
 
             <Route path="/trainers" element={<Trainers />} />
