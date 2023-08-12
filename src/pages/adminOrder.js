@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaTimes, FaTrash } from 'react-icons/fa/index.esm.js'; 
 import axios from 'axios';
 import Dashboard from './dashboard.js';
 import './style.css'
@@ -44,7 +45,7 @@ function FeedbackAdmin() {
       <div className="p-6 gap-4">
         <div className = "flex justify-between">
            
-             <div className="flex justify-start mb-3">
+             <div className="flex justify-end mb-3">
             <input
                 type="text"
                 placeholder="Search by name"
@@ -87,8 +88,8 @@ function FeedbackAdmin() {
                       
                     <div className="flex items-center justify-center space-x-4">
   <div className="bg-yellow-600 rounded">
-    <button  className="text-white font-bold py-1 px-2" type="button"  
- onClick= {() => deleteOrder(order._id)} > Delete</button>
+    <div  className="text-white font-bold py-1 px-2" 
+ onClick= {() => deleteOrder(order._id)} > <FaTrash /></div>
 
 
       
