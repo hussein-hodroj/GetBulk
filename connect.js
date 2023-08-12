@@ -17,7 +17,7 @@ import workoutTypeRouter from './src/routes/workouts.js';
 import forgotPasswordRouter from './src/routes/forgotPasswordRoute.js';
 import resetPasswordRouter from './src/routes/resetPasswordRoute.js';
 import { getAllProducts } from './src/controller/products.js';
-
+import editPasswordRouter from './src/routes/editPasswordRouter.js';
 dotenv.config();
 
 const app = express();
@@ -37,7 +37,7 @@ app.use('/public',publicWorkoutRouter);
 app.use('/workout', workoutTypeRouter);
 app.use('/',forgotPasswordRouter);
 app.use('/',resetPasswordRouter);
-
+app.use('/',editPasswordRouter);
 // MongoDB Connection
 const connectionOptions = {
   useNewUrlParser: true,
