@@ -48,10 +48,17 @@ const validateForm = () => {
     axios
       .post('http://localhost:8000/user/login', { email, password })
       .then((response) => {
-        const { token, userId } = response.data;
+        const { token, userId, role } = response.data;
         localStorage.setItem('token', token);
         localStorage.setItem('userId', userId);
-        navigate('/dashboard');
+        localStorage.setItem('role', role);
+        if (role === 'admin') {
+          navigate('/dashboard'); 
+        } else if (role === 'trainer') {
+          navigate('/TrainerDashboard'); 
+        } else if (role === 'user') {
+          navigate('/UserDashboard'); 
+        }
       })
       .catch((error) => {
         console.log('Error logging in:', error);
@@ -120,7 +127,7 @@ const validateForm = () => {
   </button>
 </div>
 <div className="text-center mt-4">
-          <Link to="/forgettpassword" className="text-zinc-800 font-bold  underline">
+          <Link to="/forgot-password" className="text-zinc-800 font-bold  underline">
             Forgot Password?
           </Link>
         </div>

@@ -75,7 +75,6 @@ const handleSubmit = (e) => {
       })
       .then((response) => {
         console.log(response.data);
-        // {onClose}
         navigate('/login');
       })
       .catch((error) => {

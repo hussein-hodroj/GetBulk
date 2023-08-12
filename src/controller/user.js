@@ -218,14 +218,4 @@ export const getTrainers = async (req, res) => {
     res.status(500).send('Error retrieving trainers');
   }
 };
-const deleteTrainer = async (trainerId) => {
-  try {
-    await axios.delete(`http://localhost:8000/trainers/${trainerId}`);
-    // Update the trainers state after successful deletion
-    setTrainers((prevTrainers) => prevTrainers.filter((trainer) => trainer._id !== trainerId));
-  } catch (error) {
-    console.error('Error deleting trainer:', error);
-  }
-};
-// Assuming you have a route to fetch trainers
 

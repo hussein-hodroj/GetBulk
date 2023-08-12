@@ -21,6 +21,7 @@ import UpdateAdmin from './pages/updateAdmin.js';
 import FeedbackAdmin from './pages/adminFeedback.jsx';
 import Trainers from './pages/Trainers.js';
 import AdminOrder from './pages/adminOrder.js';
+import TrainerDashboard from './pages/TrainerDashboard.js'
 
 
 function Layout() {
@@ -52,6 +53,7 @@ function Layout() {
             <Route path='/UpdateAdmin' element={<UpdateAdmin />} />
             <Route path="/adminFeedback" element={<FeedbackAdmin />} />
             <Route path="/AdminOrder" element={<AdminOrder />} />
+            <Route path="/TrainerDashboard" element= {<TrainerDashboard />}/>
 
 
             <Route path="/trainers" element={<Trainers />} />
