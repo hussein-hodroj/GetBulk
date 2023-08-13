@@ -19,7 +19,7 @@ export const addUser = async (req, res) => {
       address,
       age,
       phonenumber,
-      role: 'user', // Set the default role to 'user'
+      role: 'trainer',
     });
 
     // Save the user to the database
@@ -218,4 +218,5 @@ export const getTrainers = async (req, res) => {
     res.status(500).send('Error retrieving trainers');
   }
 };
+
 
