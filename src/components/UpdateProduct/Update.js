@@ -88,7 +88,7 @@ function Update ({ open, productId }) {
         <button onClick = {() => open(false) } className="text-white">  X  </button>
         </div>
         <div className = "title">
-          <h1 className="text-yellow-500 font-bold"> Edit Product</h1>
+          <h1 className="text-yellow-500 font-bold"> Edit Product: </h1>
         </div>
         <div className = "body">
 

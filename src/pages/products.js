@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Popup from '../components/Popup/Popup.js';
 import UpdatePopup from '../components/UpdateProduct/Update.js';
+import DeleteProduct from '../components/DeleteProduct/DeleteProduct.js';
 import Dashboard from './dashboard.js';
+import { FaEdit, FaTrash } from 'react-icons/fa/index.esm.js'; 
+import './style.css';
+
 
 function Product() {
   
@@ -10,6 +14,7 @@ function Product() {
  
   const [show , setShow ] = useState(false);
   const [showUpdate , setShowUpdate ] = useState(false);
+  const [showDelete , setShowDelete ] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null); // Store selected product ID
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -22,17 +27,7 @@ function Product() {
   }, []);
 
 
-  const deleteProduct= (id) => {
-    axios.delete(`http://localhost:8000/product/${id}`)
-    .then((response) => {
-      console.log(response.data);
-      window.location.reload();
-
-    })
-    .catch((error) => {
-      console.log('Error while deleting the product:', error);
-    });
-     }; 
+  
 
      const filteredProducts = products.filter((product) =>
      product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -43,6 +38,7 @@ function Product() {
 <div>
 {show && <Popup close={setShow} />}
 {showUpdate && <UpdatePopup open={setShowUpdate} productId={selectedProductId} />}
+{showDelete && <DeleteProduct openDelete={setShowDelete} productId={selectedProductId} />}
 
  <div className='flex'>
      <Dashboard/>
@@ -71,7 +67,8 @@ function Product() {
             </div> 
               </div>
             
-            <table className="table flex items-center justify-center font-bold bg-zinc-800 text-white text-center w-full">
+            <table className="table flex items-center justify-center font-bold bg-zinc-800 text-center w-full"
+             style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
             <thead>
               <tr>
                 <th>Name</th>
@@ -83,8 +80,8 @@ function Product() {
               </tr>
             </thead>
             <tbody>
-                {filteredProducts.map((product) => (
-                  <tr key={product._id}>
+                {filteredProducts.map((product, index) => (
+                  <tr key={product._id}  className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
                     <td>{product.name}</td>
                     <td>{product.price}</td>
                     <td>{product.description}</td>
@@ -94,7 +91,7 @@ function Product() {
                         <img
                         src={`/uploads/usersImages/${product.imagePath}`}
 
-                          style={{ width: '100px', height: 'auto' }}
+                          style={{ width: '100px', height: '90px',display: 'block', margin: '0 auto'}}
                         />
                       )}
                     </td>
@@ -105,11 +102,11 @@ function Product() {
     <button  className="text-white font-bold py-1 px-2" type="button" onClick={() => {
                             setSelectedProductId(product._id); // Set the selected product ID
                             setShowUpdate(true); // Show the update modal
-                          }} >Edit</button>
+                          }} ><FaEdit className="w-5 h-5" /></button>
   </div>
   <div className="bg-yellow-500 rounded">
-    <button  className="text-white font-bold py-1 px-2" type="button"  
- onClick= {() => deleteProduct(product._id)} > Delete</button>
+    <button className="text-white font-bold py-1 px-2" type="button"  
+ onClick= {() => { setSelectedProductId(product._id); setShowDelete(true);}}> <FaTrash className="w-5 h-5" /></button>
 
 
       
