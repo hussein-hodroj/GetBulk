@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
+import DeleteFeedback from '../components/AdminFeedback/DeleteFeedback.js';
+import { FaTrash } from 'react-icons/fa/index.esm.js'; 
+import './style.css'
 
-function AdminFeedback() {
+
+
+function FeedbackAdmin() {
   
   const [feedbacks, setFeedbacks] = useState([]);
- 
+  const [show , setShow ] = useState(false);
+  const [selectedFeedbackId, setSelectedFeedbackId] = useState(null); // Store selected product ID
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -18,26 +24,16 @@ function AdminFeedback() {
   }, []);
 
 
-  const deleteFeedbacks = (id) => {
-    axios.delete(`http://localhost:8000/feedback/${id}`)
-    .then((response) => {
-      console.log(response.data);
-      window.location.reload();
-
-    })
-    .catch((error) => {
-      console.log('Error while deleting the feedback:', error);
-    });
-     }; 
+  
 
      const filteredFeedbacks = feedbacks.filter((feedback) =>
-     feedback.user.toLowerCase().includes(searchTerm.toLowerCase())
+     feedback.uname.toLowerCase().includes(searchTerm.toLowerCase())
    );
 
   return (
-   
-<div>
 
+<div>
+{show && <DeleteFeedback open={setShow} feedbackId={selectedFeedbackId} />}
 
  <div className='flex'>
      <Dashboard/>
@@ -55,9 +51,10 @@ function AdminFeedback() {
               />
               <p className="text-white font-bold border rounded py-2 px-2 bg-yellow-500 ms-4">{filteredFeedbacks.length} Feedbacks found</p>
               </div>
+              
               </div>
             
-            <table className="table flex items-center justify-center font-bold bg-zinc-800 text-white text-center w-full">
+            <table className="table flex items-center justify-center font-bold bg-zinc-800 text-center w-full"  style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
             <thead>
               <tr>
                 <th>User Name</th>
@@ -67,17 +64,20 @@ function AdminFeedback() {
               </tr>
             </thead>
             <tbody>
-                {filteredFeedbacks.map((feedback) => (
-                  <tr key={feedback._id}>
-                    <td>{feedback.user}</td>
-                    <td>{feedback.trainer}</td>
-                    <td>{feedback.feedbackContent}</td>
-                    <td> 
+            {filteredFeedbacks.map((feedback, index) => (
+                    <tr key={feedback._id}  className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
+                    <td>{feedback.uname}</td>
+                    <td>{feedback.tname}</td>
+                    <td>{feedback.feedback}</td>
+                    
+                    <td>
+                      
                     <div className="flex items-center justify-center space-x-4">
-  <div className="bg-yellow-500 rounded">
-    <button  className="text-white font-bold py-1 px-2" type="button"  
- onClick= {() => deleteFeedbacks(feedback._id)} > Delete</button>
-  
+                    <div className="bg-yellow-500 rounded">
+    <button  className="text-white font-bold py-1 px-2" onClick={() => {
+                            setSelectedFeedbackId(feedback._id); 
+                            setShow(true);
+                          }} ><FaTrash /></button>
   </div>
 </div>
 
@@ -99,7 +99,7 @@ function AdminFeedback() {
       );
 }
 
-export default AdminFeedback;
+export default FeedbackAdmin;
 
 
 

@@ -96,54 +96,48 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             
             <li>
-              <a href="trainers" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
-                <span className="inline-flex justify-center items-center ml-4">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17l3 3 3-3M12 2v10"></path>
-                    </svg>                </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Trainers</span>
-              </a>
-            </li>
-            <li>
             <a
-                href="products"
+                href="#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'Products' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
                 onClick={() => handleSidebarItemClick('Products')}
               >                
               <span className="inline-flex justify-center items-center ml-4">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h-2a2 2 0 01-2-2v-3c0-2.209 1.791-4 4-4s4 1.791 4 4v3a2 2 0 01-2 2z"></path>
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6h18v12H3z"></path>
-</svg>                </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Products</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    <circle cx="16" cy="8" r="2"></circle>
+    <circle cx="8" cy="16" r="2"></circle>
+</svg>
+            </span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Private Schedule</span>
               </a>
             </li>
             <li>
-              <a href="/AdminOrder" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h-2a2 2 0 01-2-2v-3c0-2.209 1.791-4 4-4s4 1.791 4 4v3a2 2 0 01-2 2z"></path>
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6h18v12H3z"></path>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 </svg>
+
                 </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Orders</span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Booking Confirm</span>
               </a>
             </li>
+           
             <li>
             <a
-                href="adminFeedback"
+                href="#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
-                  activeLink === 'adminFeedbaack' ? 'border-yellow-500' : 'border-transparent'
+                  activeLink === 'workouts' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
-                onClick={() => handleSidebarItemClick('Feedbacks')}
+                onClick={() => handleSidebarItemClick('Workouts')}
               >                 
               <span className="inline-flex justify-center items-center ml-4">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Feedbacks</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
+</svg>                </span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Workouts</span>
               </a>
             </li>
            
@@ -154,7 +148,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             <li>
               
-              <a href="updateAdmin" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </span>
@@ -162,7 +156,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               </a>
             </li>
             <li>
-              <a href="editpassword" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a4 4 0 11-8 0 4 4 0 018 0zM12 20a7 7 0 110-14 7 7 0 010 14z"></path>

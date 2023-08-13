@@ -72,7 +72,7 @@ function Popup ({ close }) {
         <button onClick = {() => close(false) } className="text-white">  X  </button>
         </div>
         <div className = "title">
-          <h1 className="text-yellow-500 font-bold"> Add Product</h1>
+          <h1 className="text-yellow-500 font-bold"> Add Product: </h1>
         </div>
         <div className = "body">
 
