@@ -63,8 +63,8 @@ function ForgotPassword() {
       }}
     >
       <div className="bg-transparent p-8 m-8 rounded-lg shadow-md w-96 transition-transform duration-200 transform hover:scale-105 hover:shadow-lg ">
-        <h4 className="text-2xl font-bold text-yellow-500 mb-4">Forgot Password?</h4>
-        <p className='text-yellow-500'>Don't worry. Resetting your password is easy, just tell us the email address you registered with GetBulk.</p>
+        <h2 className="text-3xl font-bold text-yellow-500 mb-8">Forgot Password?</h2>
+        <p className='text-orange-300 mb-8'>Don't worry. Resetting your password is easy, just tell us the email address you registered with GetBulk.</p>
         {showMessage && (
           <p className={`mb-4 ${messageType === 'success' ? 'text-green-500' : 'text-red-500'}`}>
             {message}
@@ -86,10 +86,11 @@ function ForgotPassword() {
             />
           </div>
           <div className="flex justify-center">
-            <button
-              type="submit"
-              className="text-yellow-500 py-2 px-6 rounded hover:bg-yellow-500 hover:text-black transition duration-200"
-            >
+          <button
+            type="submit"
+            className="py-2 px-6 rounded transition duration-200 
+                       bg-yellow-500 text-black hover:bg-yellow-600 "
+          >
               Send
             </button>
           </div>

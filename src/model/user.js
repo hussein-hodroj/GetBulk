@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   phonenumber: {
-    type: Number,
+    type: String,
   },
   age: {
     type: Number,
@@ -50,6 +50,7 @@ const UserSchema = new mongoose.Schema({
   },
   imagePath: {
     type: String,
+    default:null,
   },
   resetToken: {
     type: String,

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FaTrash } from 'react-icons/fa/index.esm.js';
+import { FaTrash,  FaEdit, FaCheck } from 'react-icons/fa/index.esm.js';
 import DeleteOrder from '../components/AdminOrder/DeleteOrder.js';
+import UpdateOrderStatus from '../components/AdminOrder/UpdateOrderStatus.js';
+import UpdateOrder from '../components/AdminOrder/UpdateOrder.js';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
 import './style.css'
@@ -9,6 +11,8 @@ function FeedbackAdmin() {
   
   const [orders, setOrders] = useState([]);
   const [show , setShow ] = useState(false);
+  const [orderStatus, setOrderStatus] = useState(false);
+  const [updateOrder, setUpdateOrder] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,7 +20,7 @@ function FeedbackAdmin() {
    
   useEffect(() => {
     axios
-      .get('http://localhost:8000/order/')
+      .get('http://localhost:8000/order/status')
       .then((response) => setOrders(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -32,6 +36,9 @@ function FeedbackAdmin() {
    
 <div>
 {show && <DeleteOrder openDelete={setShow} orderId={selectedOrderId} />}
+{orderStatus && <UpdateOrderStatus close={setOrderStatus} orderId={selectedOrderId} />}
+{updateOrder && <UpdateOrder closeUpdate = {setUpdateOrder} orderId = {selectedOrderId} setOrders={setOrders}/>}
+
 
  <div className='flex'>
      <Dashboard/>
@@ -81,13 +88,23 @@ function FeedbackAdmin() {
                     <td>
                       
                     <div className="flex items-center justify-center space-x-4">
-  <div className="bg-yellow-600 rounded">
-    <button  className="text-white font-bold py-1 px-2" 
- onClick= {() => { setSelectedOrderId(order._id); setShow(true);}} > <FaTrash /></button>
-
-
-      
+                    <div className="bg-yellow-600 rounded">
+    <button  className="text-white font-bold py-1 px-2" title="delivered"
+ onClick= {() => { setSelectedOrderId(order._id); setOrderStatus(true);}} > <FaCheck /></button>
   </div>
+
+  <div className="bg-yellow-600 rounded">
+    <button  className="text-white font-bold py-1 px-2" title="update"
+ onClick= {() => { setSelectedOrderId(order._id); setUpdateOrder(true);}} > <FaEdit /></button>
+  </div>
+
+  <div className="bg-yellow-600 rounded">
+    <button  className="text-white font-bold py-1 px-2"  title="delete"
+ onClick= {() => { setSelectedOrderId(order._id); setShow(true);}} > <FaTrash /></button>
+  </div>
+
+  
+
 </div>
 
                      </td>
