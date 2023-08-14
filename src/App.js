@@ -23,6 +23,7 @@ import Trainers from './pages/Trainers.js';
 import AdminOrder from './pages/adminOrder.js';
 import EditPassword from './pages/EditPassword.js';
 import TrainerDashboard from './pages/TrainerDashboard.js'
+import UpdateTrainer from './pages/UpdateTrainer.js';
 import EditPasswordTrainer from './pages/EditPasswordTrainer.js';
 
 
@@ -53,6 +54,7 @@ function Layout() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path='/UpdateAdmin' element={<UpdateAdmin />} />
+            <Route path='/UpdateTrainer' element={<UpdateTrainer />} />
             <Route path="/adminFeedback" element={<FeedbackAdmin />} />
             <Route path="/AdminOrder" element={<AdminOrder />} />
             <Route path="/TrainerDashboard" element= {<TrainerDashboard />}/>
