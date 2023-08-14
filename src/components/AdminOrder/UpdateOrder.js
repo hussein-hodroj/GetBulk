@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-function UpdateOrder ({closeUpdate, orderId }) {
+function UpdateOrder ({closeUpdate, orderId, setOrders }) {
   const [productName, setProductName] = useState('');
   const [total, setTotal] = useState('');
   const [customerName, setCustomerName] = useState('');
@@ -20,11 +20,11 @@ function UpdateOrder ({closeUpdate, orderId }) {
     const newErrors = {};
 
     // Check if the required fields are filled
-    if (!productName.trim()) newErrors.productName = 'Product Name is required';
-    if (!total.trim()) newErrors.total = 'Total is required';
+    if (!productName) newErrors.productName = 'Product Name is required';
+    if (!total) newErrors.total = 'Total is required';
     if (!customerName) newErrors.customerName = 'Customer Name is required';
     if (!customerPhoneNumber) newErrors.customerPhoneNumber = 'Customer PhoneNumber is required';
-    if (!customerEmail.trim()) newErrors.customerEmail = 'Customer Email is required';
+    if (!customerEmail) newErrors.customerEmail = 'Customer Email is required';
     if (!customerAddress) newErrors.customerAddress = 'Customer Address is required';
 
 
@@ -61,17 +61,20 @@ function UpdateOrder ({closeUpdate, orderId }) {
       formData.append('customerPhoneNumber', customerPhoneNumber);
       formData.append('customerEmail', customerEmail);
       formData.append('customerAddress', customerAddress);
-
+      
 
       axios
       .put(`http://localhost:8000/order/${orderId}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
       })
       .then((response) => {
         console.log(response.data);
-        navigate('/adminOrder');
+        setOrders(response.data)
+        
+      }).then(()=>{
+        closeUpdate(false)
       })
       .catch((error) => {
         console.log('Error while submitting the form:', error);
@@ -81,7 +84,7 @@ function UpdateOrder ({closeUpdate, orderId }) {
   };
   return (
     <div className = "modalBackground">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e)=>handleSubmit(e)}>
       <div className= "modalContainer">
         <div className = "titleCloseBtn">
         <button onClick = {() => closeUpdate(false) } className="text-white">  X  </button>

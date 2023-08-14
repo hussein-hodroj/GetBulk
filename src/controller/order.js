@@ -74,9 +74,10 @@ export const updateOrder = async (req, res) => {
         { productName, total, customerName, customerPhoneNumber, customerEmail, customerAddress },
         { new: true }
       );
-
+      
       if(!order) return res.status(404).json('order Not Found');
-      res.status(201).json(order);
+      const allOrders= await OrderModel.find({ status: 'inprogress' });
+      res.status(201).json(allOrders);
     } catch (error) {
       console.error('Error updating order:', error);
       res.status(500).send('Error updating order');

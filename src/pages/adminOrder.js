@@ -37,7 +37,7 @@ function FeedbackAdmin() {
 <div>
 {show && <DeleteOrder openDelete={setShow} orderId={selectedOrderId} />}
 {orderStatus && <UpdateOrderStatus close={setOrderStatus} orderId={selectedOrderId} />}
-{updateOrder && <UpdateOrder closeUpdate = {setUpdateOrder} orderId = {selectedOrderId} />}
+{updateOrder && <UpdateOrder closeUpdate = {setUpdateOrder} orderId = {selectedOrderId} setOrders={setOrders}/>}
 
 
  <div className='flex'>
