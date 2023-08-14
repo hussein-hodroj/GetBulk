@@ -5,6 +5,7 @@ import GroupClasses from "../asset/ClassGroup.jpg"
 import HeroLogin from "../asset/pexels-anush-gorak-1229356.jpg"
 import AboutUs from "../asset/AboutUs.jpg"
 import PublicWork from "../asset/WorkOut.jpg"
+import OpeningHours from "../asset/OpeningHours.png"
 
    
 const images ={
@@ -14,6 +15,7 @@ const images ={
     PersonalTrainer,
     HeroLogin,
     AboutUs,
-    PublicWork
+    PublicWork,
+    OpeningHours
 }
 export default images; 
