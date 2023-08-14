@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
+import { FaTimes, FaTrash } from 'react-icons/fa/index.esm.js'; 
+
 
 function Trainers() {
   const [trainers, setTrainers] = useState([]);
@@ -126,7 +128,7 @@ function Trainers() {
     </p>
   </div>
   <button
-    className="text-white hover:text-black bold border bg-yellow-500 hover:border-black rounded px-2 py-1"
+    className="text-white  bold border font-bold  bg-yellow-500 rounded px-2 py-1 transition-transform transform-gpu hover:scale-110"
     onClick={toggleAddUserModal}
   >
     Add Trainer
@@ -185,13 +187,13 @@ function Trainers() {
         {trainer. phonenumber}
       </td>
       
-      <td className="px-6 py-4 whitespace-nowrap border border-white">
-                    <button
-                      onClick={() => handleDeleteTrainer(trainer._id)}
-                      className="text-white hover:text-black border bg-yellow-500 hover:border-black rounded px-2 py-1"
-                    >
-                      Remove
-                    </button>
+      <td className="px-6 py-4 whitespace-nowrap border border-white flex items-center justify-center">
+              <button
+                    onClick={() => handleDeleteTrainer(trainer._id)}
+                    className="text-white  border bg-yellow-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 flex items-center justify-center"
+                  >
+                    <FaTrash className="mr-1" />
+        </button>
                   </td>
                 </tr>
               ))}
@@ -200,32 +202,48 @@ function Trainers() {
         </div>
       </div>
       {showDeleteModal && (
-        <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40 ">
-          <div className="bg-white p-4 rounded shadow-md ">
-          <p className="text-xl font-bold mb-2">Confirmation</p>
-            <p className="text-lg font-semibold mb-2">Are you sure you want to delete this Trainer?</p>
-            <div className="flex justify-end">
-              <button
-                className="bg-red-600 text-white px-4 py-2 rounded mr-2 hover:bg-red-800"
-                onClick={confirmDelete}
-              >
-                Yes
-              </button>
-              <button
-                className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
-                onClick={() => setShowDeleteModal(false)}
-              >
-                No
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+  <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40 ">
+    <div className="bg-zinc-800 p-4 rounded-xl w-96">
+      <div className="flex justify-end">
+        <button
+          className="text-yellow-500"
+          onClick={() => setShowDeleteModal(false)}
+        >
+          <FaTimes />
+        </button>
+      </div>
+      <p className="text-lg text-yellow-500 font-bold mb-2">Confirmation</p>
+      <p className="text-sm text-yellow-500 py-5 font-semibold mb-2">Are you sure you want to delete this Trainer?</p>
+      <div className="flex justify-end">
+        <button
+          className="bg-red-500 text-white px-4 py-1 mr-2 rounded-lg font-bold transition-transform transform-gpu hover:scale-110 "
+          onClick={() => setShowDeleteModal(false)}
+        >
+          Cancel
+        </button>
+        <button
+          className="bg-yellow-600 text-white px-4 py-1 rounded-lg font-bold transition-transform transform-gpu hover:scale-110 "
+          onClick={confirmDelete}
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+)}
        {showAddUserModal && (
      
      <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40">
      <div className="bg-zinc-800 p-7 rounded shadow-md">
        {errorMessage && <p className="text-red-600 mb-2">{errorMessage}</p>}
+       <div className="flex justify-end">
+        <button
+          className="text-yellow-500 " 
+          onClick={toggleAddUserModal}
+        >
+          <FaTimes />
+        </button>
+      </div>
        <p className="text-xl text-yellow-500 font-bold mb-5">Add Add Trainer</p>
        <div className="grid grid-cols-2 gap-4 mb-4">
          <div>
@@ -294,18 +312,20 @@ function Trainers() {
        </div>
        
        <div className="mt-8 flex justify-end">
-         <button
-           className="bg-yellow-500 text-white px-4 py-2 rounded mr-2 hover:bg-yellow-600"
-           onClick={handleAddUser}
-         >
-           Add
-         </button>
-         <button
-           className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+       <button
+           className="bg-red-500 text-white font-bold px-4 py-2  mr-2 rounded-lg transition-transform transform-gpu hover:scale-110"
            onClick={toggleAddUserModal}
          >
            Cancel
          </button>
+
+         <button
+           className="bg-yellow-500 text-white font-bold px-4 py-2 rounded-lg   transition-transform transform-gpu hover:scale-110"
+           onClick={handleAddUser}
+         >
+           Add
+         </button>
+         
        </div>
      </div>
    </div>
