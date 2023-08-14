@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import Dashboard from './dashboard.js';
+import TrainerDashboard from './TrainerDashboard.js';
 
-function EditPassword() {
+function EditPasswordTrainer() {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -53,7 +53,7 @@ function EditPassword() {
   };
   return (
     <div className='flex'>
-      <Dashboard />
+      <TrainerDashboard />
       <div className="h-full w-full ml-56 mt-20 mb-5">
         <div className="p-3 flex-auto pr-20 pt-8">
           <form onSubmit={handleSubmit} className="bg-zinc-800 p-5 rounded shadow-md">
@@ -116,4 +116,4 @@ function EditPassword() {
   );
 }
 
-export default EditPassword;
+export default EditPasswordTrainer;
