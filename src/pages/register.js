@@ -56,7 +56,7 @@ const validateForm = () => {
 
 
 const handleSubmit = (e) => {
-  
+  e.preventDefault();
   // Validate the form fields before submitting
   validateForm();
 
@@ -70,7 +70,6 @@ const handleSubmit = (e) => {
     formData.append('age', age);
     formData.append('role', role);
     formData.append('imagePath', imagePath);
-    e.preventDefault();
 
     axios
       .post('http://localhost:8000/user/register', formData, {
@@ -80,7 +79,6 @@ const handleSubmit = (e) => {
       })
       .then((response) => {
         console.log(response.data);
-        window.location.reload();
       }).then((response) => {
         navigate('/login')
       })
