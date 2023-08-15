@@ -61,14 +61,36 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
           </div>
           <ul className="flex items-center">
            
-            <li>
-              <a href="#" className="flex items-center mr-4 text-white hover:text-yellow-500">
-                <span className="inline-flex mr-1 text-white hover:text-yellow-500">
-                  <svg className="text-white hover:text-yellow-500 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                </span>
-                Logout
-              </a>
-            </li>
+          <li>
+  <a
+    href="#"
+    onClick={() => {
+      
+      localStorage.removeItem('token'); // Clear the token from localStorage
+      
+      window.location.href = '/'; 
+    }}
+    className="flex items-center mr-4 text-white hover:text-yellow-500"
+  >
+    <span className="inline-flex mr-1 text-white hover:text-yellow-500">
+      <svg
+        className="text-white hover:text-yellow-500 w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+        ></path>
+      </svg>
+    </span>
+    Logout
+  </a>
+</li>
           </ul>
         </div>
       </div>
@@ -77,7 +99,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
           <ul className="flex flex-col py-4 space-y-1">
             <li className="px-5 hidden md:block">
               <div className="flex flex-row items-center h-8">
-                <div className="text-sm text-white font-light tracking-wide text-gray-400 uppercase">Main</div>
+                <div className="text-sm  font-light tracking-wide text-gray-400 uppercase">Main</div>
               </div>
             </li>
             <li>
