@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Dashboard from './TrainerDashboard.js';
+import Dashboard from './UserDashboard.js';
 import { useParams } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
-function UpdateTrainer() {
+function UserUpdate() {
   
   const { userId } = useParams();
-  const [userName, setUserName] = useState('Admin');
+  const [userName, setUserName] = useState('user');
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
@@ -50,7 +50,7 @@ function UpdateTrainer() {
   const token = localStorage.getItem('token');
   const decodedToken = jwt_decode(token);
   const id = decodedToken.id;
-  console.log("UpdateTrainer ID:",id)
+  console.log("UpdateAdmin ID:",id)
 
  useEffect(() => {
     axios.get(`http://localhost:8000/user/${id}`)
@@ -63,7 +63,7 @@ function UpdateTrainer() {
         setPhonenumber(userData.phonenumber);
         setAddress(userData.address);
         setAge(userData.age);
-        // setUserData(userData);
+        
         }
       })
       .catch((error) => {
@@ -79,7 +79,7 @@ function UpdateTrainer() {
       age,
       address,
       phonenumber,
-      role: 'trainer',
+      role: 'user',
     };
   
     if (profileImage) {
@@ -255,4 +255,4 @@ function UpdateTrainer() {
   );
 }
 
-export default UpdateTrainer;
+export default UserUpdate;
