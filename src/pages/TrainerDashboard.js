@@ -15,10 +15,6 @@ const handleSidebarItemClick = (link) => {
   setActiveLink(link);
 };
 
-// const token = localStorage.getItem('token');
-//   const decodedToken = jwt_decode(token);
-//   const id = decodedToken.id;
-  
   useEffect(() => {
     const token = localStorage.getItem('token');
     const decodedToken = jwt_decode(token);
@@ -61,14 +57,46 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
           </div>
           <ul className="flex items-center">
            
-            <li>
+            {/* <li>
               <a href="#" className="flex items-center mr-4 text-white hover:text-yellow-500">
                 <span className="inline-flex mr-1 text-white hover:text-yellow-500">
                   <svg className="text-white hover:text-yellow-500 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                 </span>
                 Logout
               </a>
-            </li>
+            </li> */}
+
+<li>
+  <a
+    href="#"
+    onClick={() => {
+      
+      localStorage.removeItem('token'); 
+      
+      window.location.href = '/'; 
+    }}
+    className="flex items-center mr-4 text-white hover:text-yellow-500"
+  >
+    <span className="inline-flex mr-1 text-white hover:text-yellow-500">
+      <svg
+        className="text-white hover:text-yellow-500 w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+        ></path>
+      </svg>
+    </span>
+    Logout
+  </a>
+</li>
+
           </ul>
         </div>
       </div>
@@ -77,7 +105,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
           <ul className="flex flex-col py-4 space-y-1">
             <li className="px-5 hidden md:block">
               <div className="flex flex-row items-center h-8">
-                <div className="text-sm text-white font-light tracking-wide text-gray-400 uppercase">Main</div>
+                <div className="text-sm  font-light tracking-wide text-gray-400 uppercase">Main</div>
               </div>
             </li>
             <li>
@@ -104,8 +132,8 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
                 onClick={() => handleSidebarItemClick('Products')}
               >                
               <span className="inline-flex justify-center items-center ml-4">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
     <circle cx="16" cy="8" r="2"></circle>
     <circle cx="8" cy="16" r="2"></circle>
 </svg>
@@ -116,8 +144,8 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             <li>
               <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 </svg>
 
                 </span>
@@ -134,8 +162,8 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
                 onClick={() => handleSidebarItemClick('Workouts')}
               >                 
               <span className="inline-flex justify-center items-center ml-4">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
 </svg>                </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Workouts</span>
               </a>
