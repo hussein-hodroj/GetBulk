@@ -110,18 +110,21 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
     <circle cx="8" cy="16" r="2"></circle>
 </svg>
             </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Private Schedule</span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Workouts</span>
               </a>
             </li>
             <li>
               <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    <circle cx="16" cy="8" r="2"></circle>
+    <circle cx="8" cy="16" r="2"></circle>
+    <path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"></path>
 </svg>
 
                 </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Booking Confirm</span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Appointment</span>
               </a>
             </li>
            
@@ -135,9 +138,12 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               >                 
               <span className="inline-flex justify-center items-center ml-4">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
-</svg>                </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Workouts</span>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        <path d="M9 13l2 2 4-4"></path>
+        <path d="M15 2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6z"></path>
+    </svg>
+            </span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Feedback</span>
               </a>
             </li>
            
@@ -148,7 +154,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             <li>
               
-              <a href="UpdateTrainer" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </span>
@@ -156,7 +162,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               </a>
             </li>
             <li>
-              <a href="edit-password-trainer" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a4 4 0 11-8 0 4 4 0 018 0zM12 20a7 7 0 110-14 7 7 0 010 14z"></path>

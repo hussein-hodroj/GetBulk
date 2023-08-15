@@ -25,6 +25,8 @@ import EditPassword from './pages/EditPassword.js';
 import TrainerDashboard from './pages/TrainerDashboard.js'
 import UpdateTrainer from './pages/UpdateTrainer.js';
 import EditPasswordTrainer from './pages/EditPasswordTrainer.js';
+import UserDashboard from './pages/UserDashboard.js';
+
 
 
 function Layout() {
@@ -59,6 +61,8 @@ function Layout() {
             <Route path="/AdminOrder" element={<AdminOrder />} />
             <Route path="/TrainerDashboard" element= {<TrainerDashboard />}/>
             <Route path='/edit-password-trainer' element={<EditPasswordTrainer />} />
+            <Route path="/UserDashboard" element= {<UserDashboard />}/>
+
 
             <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
