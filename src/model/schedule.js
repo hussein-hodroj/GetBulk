@@ -7,22 +7,30 @@ const Status = {
 };
 const scheduleSchema = new mongoose.Schema({
 
-    users: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user', 
+        required: true
+        },
+    trainerId:{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'user', 
+        required: true 
     },
-    day:{
-       type:Number,
-       required: true, 
+    
+    date:{
+       type:String,
+       required: true
     },
-    Timeshedule: {
-        type: Number,
-        required: true,
+    Timeschedule: {
+        type: String,
+        required: true
     },
     status: {
         type: Number,
         enum: Object.values(Status),
-        required: true,
+        default: 0,
+
     }
 
 
