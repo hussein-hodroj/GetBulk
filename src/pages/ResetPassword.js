@@ -80,7 +80,7 @@ function ResetPassword() {
       }}
     >
       <div className="bg-transparent p-8 rounded-lg shadow-md w-96 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
-        <h4 className="text-2xl font-bold text-yellow-500 mb-4">Reset Password</h4>
+        <h4 className="text-3xl font-bold text-yellow-500 mb-4">Reset Password</h4>
         {showMessage && (
           <p className={`mb-4 ${messageType === 'success' ? 'text-green-500' : 'text-red-500'}`}>
             {message}
@@ -116,10 +116,11 @@ function ResetPassword() {
             />
           </div>
           <div className="flex justify-center">
-            <button
-              type="submit"
-              className="text-yellow-500 py-2 px-6 rounded hover:bg-yellow-500 hover:text-black transition duration-200"
-            >
+          <button
+            type="submit"
+            className="py-2 px-6 rounded transition duration-200 
+                       bg-yellow-500 text-black hover:bg-yellow-600 "
+          >
               Update
             </button>
           </div>
