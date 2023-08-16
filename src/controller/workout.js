@@ -1,19 +1,30 @@
-import workoutModel from '../model/workouttype.js';
-import publicModel from '../model/publicworkout.js';
+import workoutModel from '../model/workout.js';
+import UserModel from '../model/user.js'
+
+
+
 export const getAllWorkouts = async (req, res) => {
- await workoutModel.find()
-    .populate('publicworkout')
-    .then((workouts) => res.json(workouts))
-    .catch((err) => res.status(400).json('Error: ' + err));
+  try {
+    const AllWorkouts = await workoutModel.find();
+    res.status(200).json(AllWorkouts);
+  } catch (error) {
+    console.error('Error retrieving workouts:', error);
+    res.status(500).send('Internal server error');
+  }
 };
+
 export const createWorkout = async (req, res) => {
-  const { descriptionworkout, Time, type, week, publicworkout } = req.body;
+  const { descriptionworkout, Time, type, Day, imageworkout, gender, Duration, trainers, workoutplan  } = req.body;
   const newWorkout =  new workoutModel({
     descriptionworkout,
     Time,
     type,
-    week,
-    publicworkout,
+    Day,
+    imageworkout,
+    gender,
+    Duration,
+    trainers,
+    workoutplan,
   });
 
   await newWorkout
@@ -21,17 +32,23 @@ export const createWorkout = async (req, res) => {
     .then(() => res.json('Workout created!'))
     .catch((err) => res.status(400).json('Error: ' + err));
 };
+
+
+
 export const getWorkoutById = async (req, res) => {
- await  workoutModel.findById(req.params.id)
-    .populate('publicworkout')
-    .then((workout) => {
-      if (!workout) {
-        return res.status(404).json('Workout not found');
-      }
-      res.json(workout);
-    })
-    .catch((err) => res.status(400).json('Error: ' + err));
+  try {
+      const workout = req.params.id
+    const trainers = await UserModel.findById(workout);
+
+    if(!trainers) return res.status(404).json('workout Not Found');
+    res.status(200).json(trainers);
+  } catch (error) {
+    console.error('Error retrieving workout:', error);
+    res.status(500).send('Internal server error');
+  }
 };
+
+
 export const updateWorkout = async(req, res) => {
   await workoutModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((workout) => {
@@ -42,15 +59,22 @@ export const updateWorkout = async(req, res) => {
     })
     .catch((err) => res.status(400).json('Error: ' + err));
 };
-export const deleteWorkout = async(req, res) => {
- await  Workout.findByIdAndDelete(req.params.id)
-    .then((workout) => {
-      if (!workout) {
-        return res.status(404).json('Workout not found');
-      }
-      res.json('Workout deleted!');
-    })
-    .catch((err) => res.status(400).json('Error: ' + err));
+
+
+export const deleteWorkout = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+
+   const Workout =  await workoutModel.findByIdAndDelete(id);
+
+   if(!Workout) return res.status(404).json('Workout Not Found');
+
+    res.status(200).send('Workout deleted successfully');
+  } catch (error) {
+    console.error('Error deleting Workout:', error);
+    res.status(500).send('Internal server error');
+  }
 };
 
 
