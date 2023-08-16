@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Dashboard from './dashboard.js';
+import Dashboard from './UserDashboard.js';
 import { useParams } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
-function UpdateAdmin() {
+function UserUpdate() {
   
   const { userId } = useParams();
-  const [userName, setUserName] = useState('Admin');
+  const [userName, setUserName] = useState('user');
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
@@ -63,7 +63,7 @@ function UpdateAdmin() {
         setPhonenumber(userData.phonenumber);
         setAddress(userData.address);
         setAge(userData.age);
-        // setUserData(userData);
+        
         }
       })
       .catch((error) => {
@@ -79,7 +79,7 @@ function UpdateAdmin() {
       age,
       address,
       phonenumber,
-      role: 'admin',
+      role: 'user',
     };
   
     if (profileImage) {
@@ -255,4 +255,4 @@ function UpdateAdmin() {
   );
 }
 
-export default UpdateAdmin;
+export default UserUpdate;

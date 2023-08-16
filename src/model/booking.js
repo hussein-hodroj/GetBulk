@@ -12,7 +12,11 @@ const BookingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true
-  }
+  },
+  trainers:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true }
 });
 
 const BookingModel = mongoose.model('Booking', BookingSchema);

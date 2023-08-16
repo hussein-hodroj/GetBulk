@@ -19,7 +19,7 @@ export const addUser = async (req, res) => {
       address,
       age,
       phonenumber,
-      role: 'user', // Set the default role to 'user'
+      role: 'trainer',
     });
 
     // Save the user to the database
@@ -57,7 +57,11 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     try {
-      cb(null,file.originalname);
+      if (file) {
+        cb(null, file.originalname);
+      } else {
+        cb(null, null); // Set filename to null if no file
+      }
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -145,7 +149,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     phonenumber,
     age,
     role,
-    imagePath: req.file.originalname,
+    imagePath: req?.file?.originalname,
   });
 
   //const registereduser = {token:generateToken(newUser._id),...newUser}
@@ -161,7 +165,7 @@ export const registerUser = asyncHandler(async (req, res) => {
       phonenumber: newUser.phonenumber,
       age: newUser.age,
       role: newUser.role,
-      imagePath: newUser.imagePath,
+      imagePath: newUser.imagePath?newUser.imagePath:null,
       token: generateToken(newUser._id),
     });
 
@@ -218,4 +222,5 @@ export const getTrainers = async (req, res) => {
     res.status(500).send('Error retrieving trainers');
   }
 };
+
 

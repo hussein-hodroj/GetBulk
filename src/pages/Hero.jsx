@@ -82,6 +82,7 @@ useEffect(() => {
 
   return (
     <section className=" mx-auto px-5  mt-0 bg-black relative">
+      
       <div className="relative" id="Home">
         <Header/>
         <img
@@ -93,21 +94,22 @@ useEffect(() => {
           <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
             "Train like a beast, look like a beauty."
           </h1>
+          
           <div className="flex flex-col items-center md:items-start mt-8 md:mt-0">
             <div className="flex gap-4 mt-4 mr-24 ">
 
-              <a href='register' className="px-8 py-3 bg-yellow-500 text-black font-semibold rounded-md hover:bg-yellow-600 transition-colors duration-300">
-                SignUp
+              <a href='register' className="px-8 py-3 bg-yellow-500 font-bold text-black rounded-md transition-transform transform-gpu hover:scale-110">
+                Sign Up
               </a>
-              <a href='login' className="px-8 py-3 bg-yellow-500 text-black font-semibold rounded-md hover:bg-yellow-600 transition-colors duration-300">
-                SignIn
+              <a href='login' className="px-8 py-3 bg-yellow-500 font-bold text-black rounded-md transition-transform transform-gpu hover:scale-110">
+                Sign In
               </a>
             </div>
           </div>
         </div>
       </div>
-
-      <div className="flex flex-col lg:flex-row gap-8 mt-8" id="AboutUs">
+      <div id="AboutUs" ></div>
+      <div className="flex flex-col lg:flex-row gap-8 mt-8" >
   <div className="flex-1 flex items-center">
     <img
       className="w-full h-auto mx-auto p-4"
@@ -115,37 +117,65 @@ useEffect(() => {
       alt="About Us"
     />
   </div>
-  <div className="flex-1 flex flex-col justify-center">
+  <div className="flex-1 flex flex-col justify-center p-3">
     <h1 className="font-roboto text-3xl text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl">
       About Us
     </h1>
-    <p className="font-roboto text-xl text-yellow-500 md:text-2xl lg:text-xl xl:text-2xl mt-4 lg:mt-0">
+    <p className="py-7 font-roboto text-xl text-gray-100 md:text-2xl  lg:text-xl xl:text-2xl mt-4 lg:mt-0 text-justify ">
       At Get Bulk Gym, we are dedicated to helping you achieve your fitness goals and lead a healthier lifestyle. Our state-of-the-art facilities and experienced trainers ensure that you receive top-notch training tailored to your individual needs. Whether you're a fitness enthusiast or just starting your fitness journey, we welcome you to be a part of our supportive community and embark on a transformative fitness experience.
     </p>
   </div>
 </div>
 
+<div className="flex flex-col lg:flex-row gap-8">
+<div className="flex-1 flex flex-col justify-center p-3">
+  <h1 className="font-roboto text-3xl text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl text-center border-black p-5 mt-3">
+    Opening Hours
+  </h1>  
+  <p className="font-roboto text-xl text-gray-100 md:text-2xl  lg:text-xl xl:text-2xl mt-4 lg:mt-0 text-center mb-4">
+    Monday - Friday: 6:00 AM - 10:00 PM
+  </p>
+  <p className="font-roboto text-xl text-gray-100 md:text-2xl  lg:text-xl xl:text-2xl mt-4 lg:mt-0 text-center mb-4">
+    Saturday: 8:00 AM - 8:00 PM
+  </p>
+  <p className="font-roboto text-xl text-gray-100 md:text-2xl  lg:text-xl xl:text-2xl mt-4 lg:mt-0 text-center mb-4">
+    Sunday: 8:00 AM - 2:00 PM
+  </p>
+</div>
+  <div className="flex-1 flex items-center">
+    <img
+      className="w-80% h-80% mx-auto p-4"
+      src={images.OpeningHours}
+      alt="Opening Hours"
+    />
+  </div>
+  
+</div>
 
-      <h1 className="font-roboto text-3xl text-center font-bold text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl border-black p-5 mt-8" id='Service'> 
+<div className="mt-8"  id='Service'>
+  
+<h1 className="font-roboto text-3xl text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl text-center  border-black p-5 "> 
         Our Services
       </h1>
-      <div className="flex flex-col gap-6 mt-6 lg:gap-2 lg:flex-row">
+      <div className="flex flex-col gap-6 mt-6 lg:gap-2 lg:flex-row ">
         {services.map((service) => (
-          <div key={service.title} className="flex gap-4 items-center lg:items-start">
-            <img src={service.image} alt={service.title} className="w-16 h-16 mx-auto" />
-            <div className="flex flex-col">
-              <h3 className="font-semibold text-yellow-500 md:text-3xl lg:text-2xl xl:text-3xl text-center lg:text-left border-b-2 border-yellow-500 pb-2">
+          <div key={service.title} className="flex gap-4 items-center  lg:items-start">
+            <img src={service.image} alt={service.title} className="w-16 h-16 mx-auto rounded-full" />
+            <div className="flex flex-col ">
+              <h3 className="font-semibold text-yellow-400 md:text-3xl lg:text-2xl xl:text-3xl text-center lg:text-left border-b-2 border-yellow-500 pb-2">
                 {service.title}
               </h3>
-              <p className="text-yellow-500 lg:text-base lg:text-left">
+              <p className="text-gray-100 lg:text-base lg:text-left pt-3 text-justify">
                 {service.description}
               </p>
             </div>
           </div>
         ))}
       </div>
+</div>
+
       <div className="mt-8" id='ContactUs'>
-  <h1 className="font-roboto text-3xl text-center font-bold text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl border-black p-5">
+  <h1 className="font-roboto text-3xl text-center  text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl border-black p-5">
     Contact Us
   </h1>
   <div className="flex flex-col lg:flex-row gap-4 mt-4 justify-between">
@@ -167,7 +197,7 @@ useEffect(() => {
         className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 px-4 w-full"
         type="text"
         id="fullName" 
-        placeholder="Please enter your full `name"
+        placeholder="Please enter your full name"
         onChange={handleFullNameChange}
         required
       />
@@ -184,7 +214,7 @@ useEffect(() => {
       ></textarea>
       {subjectError && <p className="text-red-500 mt-2">{subjectError}</p>}
       <div className="lg:w-1/2 flex items-center justify-center">
-        <button className="px-8 py-3 bg-yellow-500 text-black font-semibold rounded-md hover:bg-yellow-600 transition-colors duration-300 mt-6 lg:mt-10" onClick={handlclickSubmit}>
+        <button className="px-8 py-3 bg-yellow-500 text-black font-bold rounded-md  transition-transform transform-gpu hover:scale-110 duration-300 mt-6 lg:mt-10" onClick={handlclickSubmit}>
           Submit
         </button>
       </div>

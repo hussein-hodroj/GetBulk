@@ -16,6 +16,10 @@ function Register() {
 const [errors, setErrors] = useState({});
 const [isValid, setIsValid] = useState(false);
 
+
+const onChangeFile=e=>{
+  setImagePath(e.target.files[0])
+}
 // Regular expression for email validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -75,7 +79,8 @@ const handleSubmit = (e) => {
       })
       .then((response) => {
         console.log(response.data);
-        navigate('/login');
+      }).then((response) => {
+        navigate('/login')
       })
       .catch((error) => {
         console.log(error);
@@ -96,7 +101,7 @@ const handleSubmit = (e) => {
     }}
   />
 </div>
-      <form className="bg-black shadow-md rounded-lg p-8" style={{width:"520px"}} onSubmit={handleSubmit}>
+      <form className="bg-black shadow-md rounded-lg p-8" style={{width:"520px"}} onSubmit={(e)=>handleSubmit(e)}>
         <div className="flex justify-evenly">
           <div className="mb-4">
             <label
@@ -247,7 +252,7 @@ const handleSubmit = (e) => {
             id="image"
             type="file"
             name="image"
-            onChange={(e) => setImagePath(e.target.files[0])}
+            onChange={onChangeFile}
           />
         </div>
 

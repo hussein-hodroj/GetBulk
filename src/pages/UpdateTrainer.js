@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Dashboard from './dashboard.js';
+import Dashboard from './TrainerDashboard.js';
 import { useParams } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
-function UpdateAdmin() {
+function UpdateTrainer() {
   
   const { userId } = useParams();
   const [userName, setUserName] = useState('Admin');
@@ -50,7 +50,7 @@ function UpdateAdmin() {
   const token = localStorage.getItem('token');
   const decodedToken = jwt_decode(token);
   const id = decodedToken.id;
-  console.log("UpdateAdmin ID:",id)
+  console.log("UpdateTrainer ID:",id)
 
  useEffect(() => {
     axios.get(`http://localhost:8000/user/${id}`)
@@ -79,7 +79,7 @@ function UpdateAdmin() {
       age,
       address,
       phonenumber,
-      role: 'admin',
+      role: 'trainer',
     };
   
     if (profileImage) {
@@ -255,4 +255,4 @@ function UpdateAdmin() {
   );
 }
 
-export default UpdateAdmin;
+export default UpdateTrainer;

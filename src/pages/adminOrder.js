@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FaTimes, FaTrash } from 'react-icons/fa/index.esm.js'; 
+import { FaTrash,  FaEdit, FaCheck } from 'react-icons/fa/index.esm.js';
+import DeleteOrder from '../components/AdminOrder/DeleteOrder.js';
+import UpdateOrderStatus from '../components/AdminOrder/UpdateOrderStatus.js';
+import UpdateOrder from '../components/AdminOrder/UpdateOrder.js';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
 import './style.css'
@@ -7,29 +10,23 @@ import './style.css'
 function FeedbackAdmin() {
   
   const [orders, setOrders] = useState([]);
+  const [show , setShow ] = useState(false);
+  const [orderStatus, setOrderStatus] = useState(false);
+  const [updateOrder, setUpdateOrder] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState('');
 
    
   useEffect(() => {
     axios
-      .get('http://localhost:8000/order/')
+      .get('http://localhost:8000/order/status')
       .then((response) => setOrders(response.data))
       .catch((error) => console.log(error));
   }, []);
 
 
-  const deleteOrder= (id) => {
-    axios.delete(`http://localhost:8000/order/${id}`)
-    .then((response) => {
-      console.log(response.data);
-      window.location.reload();
-
-    })
-    .catch((error) => {
-      console.log('Error while deleting the order:', error);
-    });
-     }; 
+  
 
      const filteredOrders = orders.filter((order) =>
      order.customerName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -38,6 +35,10 @@ function FeedbackAdmin() {
   return (
    
 <div>
+{show && <DeleteOrder openDelete={setShow} orderId={selectedOrderId} />}
+{orderStatus && <UpdateOrderStatus close={setOrderStatus} orderId={selectedOrderId} />}
+{updateOrder && <UpdateOrder closeUpdate = {setUpdateOrder} orderId = {selectedOrderId} setOrders={setOrders}/>}
+
 
  <div className='flex'>
      <Dashboard/>
@@ -62,14 +63,14 @@ function FeedbackAdmin() {
              style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
             <thead>
               <tr>
-                <th className="text-white">Customer Name</th>
-                <th className="text-white">Customer PhoneNumber </th>
-                <th className="text-white">Customer Email</th>
-                <th className="text-white">Customer Address</th>
-                <th className="text-white">Customer Order</th>
-                <th className="text-white">Total Price</th>
-                <th className="text-white">Status</th>
-                <th className="text-white">Action</th>
+                <th >Customer Name</th>
+                <th >Customer PhoneNumber </th>
+                <th >Customer Email</th>
+                <th >Customer Address</th>
+                <th >Customer Order</th>
+                <th >Total Price</th>
+                <th >Status</th>
+                <th >Action</th>
               </tr>
             </thead>
             <tbody>
@@ -87,13 +88,23 @@ function FeedbackAdmin() {
                     <td>
                       
                     <div className="flex items-center justify-center space-x-4">
-  <div className="bg-yellow-600 rounded">
-    <div  className="text-white font-bold py-1 px-2" 
- onClick= {() => deleteOrder(order._id)} > <FaTrash /></div>
-
-
-      
+                    <div className="bg-yellow-600 rounded">
+    <button  className="text-white font-bold py-1 px-2" title="delivered"
+ onClick= {() => { setSelectedOrderId(order._id); setOrderStatus(true);}} > <FaCheck /></button>
   </div>
+
+  <div className="bg-yellow-600 rounded">
+    <button  className="text-white font-bold py-1 px-2" title="update"
+ onClick= {() => { setSelectedOrderId(order._id); setUpdateOrder(true);}} > <FaEdit /></button>
+  </div>
+
+  <div className="bg-yellow-600 rounded">
+    <button  className="text-white font-bold py-1 px-2"  title="delete"
+ onClick= {() => { setSelectedOrderId(order._id); setShow(true);}} > <FaTrash /></button>
+  </div>
+
+  
+
 </div>
 
                      </td>
