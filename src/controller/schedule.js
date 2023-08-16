@@ -20,11 +20,6 @@ export const getAllschedule = async (req, res) => {
       return res.status(404).json({ error: 'Schedules not found' });
     }
 
-    // Create an array to hold user names for each schedule
-    const usersNamesPromises = schedules.map(async (schedule) => {
-      const user = await UserModel.findById(schedule.userId);
-      return user ? user.fullname : 'Unknown user';
-    });
 
     // Create an array to hold trainer names for each schedule
     const trainersNamesPromises = schedules.map(async (schedule) => {
@@ -33,13 +28,11 @@ export const getAllschedule = async (req, res) => {
     });
 
     // Use Promise.all to await all the promises
-    const usersNames = await Promise.all(usersNamesPromises);
     const trainersNames = await Promise.all(trainersNamesPromises);
 
     // Combine each schedule with its corresponding users and trainers names
     const schedulesWithNames = schedules.map((schedule, index) => ({
       ...schedule._doc,
-      uname: usersNames[index],
       tname: trainersNames[index],
     }));
 
@@ -51,10 +44,10 @@ export const getAllschedule = async (req, res) => {
 };
 
 export const createschedule = async (req, res) => {
-  const { userId, trainerId, date, Timeschedule } = req.body;
+  const { trainerId, date, Timeschedule } = req.body;
   try {
     const newSchedule = new ScheduleModel({
-      userId, 
+ 
       trainerId, 
       date, 
       Timeschedule, 
@@ -70,12 +63,11 @@ export const createschedule = async (req, res) => {
 export const updateschedule = async (req, res) => {
   try {
     const scheduleId = req.params.id; // Assuming you're passing the schedule ID as a URL parameter
-    const { userId, trainerId, date, Timeshedule, status } = req.body;
+    const { trainerId, date, Timeshedule, status } = req.body;
 
     const updatedSchedule = await ScheduleModel.findByIdAndUpdate(
       scheduleId,
       {
-        userId,
         trainerId,
         date,
         Timeshedule,
