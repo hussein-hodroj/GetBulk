@@ -98,8 +98,8 @@ function UpdateAdmin() {
               console.log(response.data); // Handle success
               setUpdateSuccess(true);
               setTimeout(() => {
-                setUpdateSuccess(false);
-              }, 3000);
+                window.location.reload();
+              }, 2000);
             })
             .catch((error) => {
               console.error('Error updating profile:', error);
@@ -116,8 +116,8 @@ function UpdateAdmin() {
           console.log(response.data); // Handle success
           setUpdateSuccess(true);
           setTimeout(() => {
-            setUpdateSuccess(false);
-          }, 3000);
+            window.location.reload();
+          }, 2000);
         })
         .catch((error) => {
           console.error('Error updating profile:', error);

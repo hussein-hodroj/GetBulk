@@ -18,6 +18,9 @@ import { CartProvider } from './pages/CartContext.js';
 import SidebarProvider from './pages/SidebarContext.js';
 import Sidebar from './pages/Sidebar.js';
 import UpdateAdmin from './pages/updateAdmin.js';
+
+ 
+
 import FeedbackAdmin from './pages/adminFeedback.jsx';
 import Trainers from './pages/Trainers.js';
 import AdminOrder from './pages/adminOrder.js';
@@ -26,8 +29,9 @@ import TrainerDashboard from './pages/TrainerDashboard.js'
 import UpdateTrainer from './pages/UpdateTrainer.js';
 import EditPasswordTrainer from './pages/EditPasswordTrainer.js';
 import UserDashboard from './pages/UserDashboard.js';
-import Reservations from './pages/Reservations.jsx';
+import UserUpdate from './pages/UserUpdate.js';
 
+import Reservations from './pages/Reservations.jsx';
 
 function Layout() {
   return (
@@ -57,6 +61,10 @@ function Layout() {
             <Route path="/products" element={<Products />} />
             <Route path='/UpdateAdmin' element={<UpdateAdmin />} />
             <Route path='/UpdateTrainer' element={<UpdateTrainer />} />
+            <Route path='/UserUpdate' element={<UserUpdate />}/>    
+
+
+
             <Route path="/adminFeedback" element={<FeedbackAdmin />} />
             <Route path="/AdminOrder" element={<AdminOrder />} />
             <Route path="/TrainerDashboard" element= {<TrainerDashboard />}/>
