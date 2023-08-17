@@ -63,14 +63,14 @@ export const createschedule = async (req, res) => {
 export const updateschedule = async (req, res) => {
   try {
     const scheduleId = req.params.id; // Assuming you're passing the schedule ID as a URL parameter
-    const { trainerId, date, Timeshedule, status } = req.body;
+    const { trainerId, date, Timeschedule, status } = req.body;
 
     const updatedSchedule = await ScheduleModel.findByIdAndUpdate(
       scheduleId,
       {
         trainerId,
         date,
-        Timeshedule,
+        Timeschedule,
         status,
       },
       { new: true } // To return the updated schedule
