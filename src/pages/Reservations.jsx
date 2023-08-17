@@ -46,25 +46,25 @@ function Reservations() {
           <button className="close-btn" onClick={handleClosePopup}>
             &times;
           </button>
-          <h2>{`${selectedEvent.uname}`}</h2>
-          <p>
-            <strong>Trainer:</strong> {selectedEvent.tname}
+          <h2 className="text-yellow-500"> {`${selectedEvent.uname}`}</h2>
+          <p >
+            <strong className="text-yellow-500">Trainer:</strong> {selectedEvent.tname }
           </p>
-          <p>
-            <strong>Date:</strong>{' '}
+          <p >
+            <strong className="text-yellow-500">Date:</strong>{' '}
             {moment(selectedEvent.formattedDate).format('YYYY-MM-DD')}
           </p>
-          <p>
-            <strong>Reservation Time:</strong> {selectedEvent.Timeschedule}
+          <p >
+            <strong className="text-yellow-500">Reservation Time:</strong> {selectedEvent.Timeschedule}
           </p>
-           <p>
-            <strong>Phone Number:</strong> {selectedEvent.uphonenumber}
+           <p >
+            <strong className="text-yellow-500">Phone Number:</strong> {selectedEvent.uphonenumber}
           </p>
-          <p>
-            <strong>Email:</strong> {selectedEvent.uemail}
+          <p >
+            <strong className="text-yellow-500">Email:</strong> {selectedEvent.uemail}
           </p>
-          <p>
-            <strong>Address:</strong> {selectedEvent.uaddress}
+          <p >
+            <strong className="text-yellow-500">Address:</strong> {selectedEvent.uaddress}
           </p>
           
         </div>
