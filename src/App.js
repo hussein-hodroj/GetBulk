@@ -34,6 +34,8 @@ import UserDashboard from './pages/UserDashboard.js';
 import UserUpdate from './pages/UserUpdate.js';
 
 import Reservations from './pages/Reservations.jsx';
+
+import EditPasswordUser from './pages/EditPasswordUser.js';
 import Schedules from './pages/Schedules.js';
 
 function Layout() {
@@ -74,7 +76,7 @@ function Layout() {
             <Route path='/edit-password-trainer' element={<EditPasswordTrainer />} />
             <Route path="/UserDashboard" element= {<UserDashboard />}/>
             <Route path="/Reservations" element= {<Reservations />}/>
-
+            <Route path='/edit-password-user' element={<EditPasswordUser />}/>
             <Route path="/Workouts" element= {<Workout />}/>
             <Route path="/schedules" element= {<Schedules />}/>
             <Route path="/trainers" element={<Trainers />} />
