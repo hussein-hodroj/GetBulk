@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', getAllFeedback);
 router.get('/:id', getFeedback);
 router.post('/createfeedback', createfeedback);
-router.post('/updatefeedback', updatefeedback);
+router.put('/updatefeedback/:id', updatefeedback);
 router.delete('/delete/:id', deletefeedback);
 
 export default router;

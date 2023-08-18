@@ -55,37 +55,26 @@ export const getFeedback = async (req, res) => {
     }
   };
   
-  
-  
-  export const createfeedback = async (req, res) => {
-    const { feedback, users, trainers } = req.body;
-    try {
-      const newfeedback = new FeedbackModel({
-        feedback,
-        users,
-        trainers
-      });
-      await newfeedback.save();
-      res.send('feedback created successfully');
-    } catch (error) {
-      console.error('Error creating feedback:', error);
-      res.status(500).send('Error creating feedback');
-    }
-  };
 
-export const updatefeedback = async (req,res) => {
-    const {_id, feedback, users, trainers} = req.body; 
-    try{
-        await FeedbackModel.findByIdAndUpdate (_id, {feedback, users, trainers});
-        res.send('feedback updated successfuly');
-    }catch (error) {
-        res.status(500).send('Error updating feedback');
-      }
+export const updatefeedback = async (req, res) => {
+  
+  const { _id, feedback, users, trainers } = req.body;
+  console.log(req.body); 
+  try {
+    console.log("Updating feedback:", _id, feedback, users, trainers); // Log the data before updating
+    await FeedbackModel.findByIdAndUpdate(_id, { feedback, users, trainers });
+    console.log("Feedback updated successfully");
+    res.send('feedback updated successfully');
+  } catch (error) {
+    console.error('Error updating feedback:', error);
+    res.status(500).send('Error updating feedback');
+  }
 };
+
 
 export const deletefeedback = async (req, res) => {
   const { id } = req.params;
-
+ console.log(id)
   try {
 
    const userFeedback =  await FeedbackModel.findByIdAndDelete(id);
@@ -98,3 +87,40 @@ export const deletefeedback = async (req, res) => {
     res.status(500).send('Error deleting feedback');
   }
 };
+export const createfeedback = async (req, res) => {
+  const { feedback, users, trainers } = req.body;
+  const fullname = trainers;
+  const Trainerid = await  UserModel.find({fullname});
+  const t=Trainerid[0]._id
+  
+  try {
+    const newfeedback = new FeedbackModel({
+      feedback,
+      users,
+      trainers:t,
+      trainername:trainers
+    });
+    
+    await newfeedback.save();
+    res.status(200).json(newfeedback); // Return the newly added feedback
+  } catch (error) {
+    console.error('Error creating feedback:', error);
+    res.status(500).send('Error creating feedback');
+  }
+};
+
+// export const createfeedback = async (req, res) => {
+//   const { feedback, users, trainers } = req.body;
+//   try {
+//     const newfeedback = new FeedbackModel({
+//       feedback,
+//       users,
+//       trainers
+//     });
+//     await newfeedback.save();
+//     res.send('feedback created successfully');
+//   } catch (error) {
+//     console.error('Error creating feedback:', error);
+//     res.status(500).send('Error creating feedback');
+//   }
+// };
