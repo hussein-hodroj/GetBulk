@@ -1,20 +1,16 @@
 import mongoose from 'mongoose';
 
 const transformSchema = new mongoose.Schema({
-  imageBeforeWork: {
+  imageBefore: {
     type: String,
-    // required: true,
-    default:null,
+    default: null,
   },
-  imageAfterWork: {
+  imageAfter: {
     type: String,
-    // required: true,
-    default:null,
+    default: null,
   },
-
-  descriptionTransform: { 
+  descriptionTransform: {
     type: String,
-    // required: true,
   },
 });
 

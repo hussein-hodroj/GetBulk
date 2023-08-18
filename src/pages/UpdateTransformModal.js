@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import Modal from 'react-modal';
 import axios from 'axios';
 
@@ -17,32 +18,39 @@ const customStyles = {
   },
 };
 
-const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform }) => {
+const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform, fetchAllTransforms }) => {
   const [updatedImageBefore, setUpdatedImageBefore] = useState(transform.imageBefore);
   const [updatedImageAfter, setUpdatedImageAfter] = useState(transform.imageAfter);
   const [updatedDescription, setUpdatedDescription] = useState(transform.descriptionTransform);
 
+  
+  useEffect(() => {
+    if (isOpen) {
+      setUpdatedImageBefore(transform.imageBefore);
+      setUpdatedImageAfter(transform.imageAfter);
+      setUpdatedDescription(transform.descriptionTransform);
+    }
+  }, [isOpen, transform]);
+
   const handleUpdate = async () => {
     try {
-      const updatedTransform = {
-        imageBefore: updatedImageBefore,
-        imageAfter: updatedImageAfter,
-        descriptionTransform: updatedDescription,
-      };
+      const formData = new FormData();
+      formData.append('imageBefore', updatedImageBefore);
+      formData.append('imageAfter', updatedImageAfter);
+      formData.append('descriptionTransform', updatedDescription);
 
-     
       await axios.put(
         `http://localhost:8000/transform/${transform._id}/updateTransform`,
-        updatedTransform
+        formData
       );
 
-      
       onUpdate();
       onClose();
     } catch (error) {
       console.error('Error updating transform:', error);
     }
   };
+  
   return (
     <Modal
       isOpen={isOpen}
@@ -50,21 +58,19 @@ const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform }) => {
       style={customStyles}
       contentLabel="Update Transform Modal"
     >
-      <h2 style={{ color: 'white' }}>Update Transform</h2>
+      <h2 className="text-yellow-500 font-bold text-xl mb-4">Update Transform</h2>
       <label style={{ color: 'white' }}>Image Before:</label>
-      <input
-        type="file"
-        value={updatedImageBefore}
-        onChange={(e) => setUpdatedImageBefore(e.target.value)}
-        className="w-full bg-white rounded p-2 mb-2"
-      />
-      <label style={{ color: 'white' }}>Image After:</label>
-      <input
-        type="file"
-        value={updatedImageAfter}
-        onChange={(e) => setUpdatedImageAfter(e.target.value)}
-        className="w-full bg-white rounded p-2 mb-2"
-      />
+<input
+  type="file"
+  onChange={(e) => setUpdatedImageBefore(e.target.files[0])}
+  className="w-full bg-white rounded p-2 mb-2"
+/>
+<label style={{ color: 'white' }}>Image After:</label>
+<input
+  type="file"
+  onChange={(e) => setUpdatedImageAfter(e.target.files[0])}
+  className="w-full bg-white rounded p-2 mb-2"
+/>
       <label style={{ color: 'white' }}>Description:</label>
       <textarea
         value={updatedDescription}
