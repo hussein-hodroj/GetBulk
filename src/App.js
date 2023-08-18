@@ -35,6 +35,7 @@ import UserUpdate from './pages/UserUpdate.js';
 
 import Reservations from './pages/Reservations.jsx';
 import Schedules from './pages/Schedules.js';
+import TransformPage from './pages/transform.js';
 
 function Layout() {
   return (
@@ -77,6 +78,8 @@ function Layout() {
 
             <Route path="/Workouts" element= {<Workout />}/>
             <Route path="/schedules" element= {<Schedules />}/>
+            
+            <Route path="/transforms" element= {<TransformPage />}/>
             <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
             <Route path='/editpassword' element={<EditPassword />} />
