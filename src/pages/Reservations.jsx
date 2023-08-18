@@ -10,15 +10,15 @@ const localizer = momentLocalizer(moment);
 
 function Reservations() {
     // const { reservations } = usePage().props
-    const [schedule, setSchedule] = useState([]);
+    const [booking, setBooking] = useState([]);
 
   
     const [selectedEvent, setSelectedEvent] = useState(null);
 
     useEffect(() => {
       axios
-        .get('http://localhost:8000/schedule/getAllschedule')
-        .then((response) => setSchedule(response.data))
+        .get('http://localhost:8000/booking/allbooking')
+        .then((response) => setBooking(response.data))
         .catch((error) => console.log(error));
     }, []);
 
@@ -46,29 +46,27 @@ function Reservations() {
           <button className="close-btn" onClick={handleClosePopup}>
             &times;
           </button>
-          <h2>{`${selectedEvent.uname}`}</h2>
-          <p>
-            <strong>Trainer:</strong> {selectedEvent.tname}
+          <h2 className="text-yellow-500"> {`${selectedEvent.uname}`}</h2>
+          <p >
+            <strong className="text-yellow-500">Trainer:</strong> {selectedEvent.tname }
           </p>
-          <p>
-            <strong>Date:</strong>{' '}
+          <p >
+            <strong className="text-yellow-500">Date:</strong>{' '}
             {moment(selectedEvent.formattedDate).format('YYYY-MM-DD')}
           </p>
-          <p>
-            <strong>Reservation Time:</strong> {selectedEvent.Timeschedule}
+          <p >
+            <strong className="text-yellow-500">Reservation Time:</strong> {selectedEvent.Timeschedule}
           </p>
-          {/* <p>
-            <strong>Phone Number:</strong> {selectedEvent.phone}
+           <p >
+            <strong className="text-yellow-500">Phone Number:</strong> {selectedEvent.uphonenumber}
           </p>
-          <p>
-            <strong>Birth Date:</strong> {selectedEvent.B_O_D}
+          <p >
+            <strong className="text-yellow-500">Email:</strong> {selectedEvent.uemail}
           </p>
-          <p>
-            <strong>Address:</strong> {selectedEvent.address}
+          <p >
+            <strong className="text-yellow-500">Address:</strong> {selectedEvent.uaddress}
           </p>
-          <p>
-            <strong>Issue:</strong> {selectedEvent.issue_description}
-          </p> */}
+          
         </div>
       </div>
       </div></div></div></div>
@@ -81,7 +79,7 @@ function Reservations() {
   function tileContent({ date, view }) {
     if (view === 'month') {
         const formattedDate = moment(date).format('D MMM');
-        const eventData = schedule.find(event => moment(event.date).format('D MMM') === formattedDate);
+        const eventData = booking.find(event => moment(event.date).format('D MMM') === formattedDate);
         return eventData ? eventData.someProperty : null;
     } else {
         return null;
@@ -99,7 +97,7 @@ function Reservations() {
         <div className='calendar_container'>
         <Calendar
   localizer={localizer}
-  events={schedule}
+  events={booking}
   startAccessor={(event) =>
     moment(`${event.date} ${event.Timeschedule}`).toDate()
   }

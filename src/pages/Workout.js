@@ -101,7 +101,7 @@ const handleShowExercises = (exercise) => {
           </button>
             
           </div>
-          <table className="table flex items-center justify-center font-bold bg-zinc-800 text-white text-center w-full mt-4 mb-4">
+          <table className="table flex items-center justify-center font-bold bg-zinc-800 text-center w-full"  style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
             <thead>
             <tr>
                 <th>Time in hour</th>
@@ -116,7 +116,8 @@ const handleShowExercises = (exercise) => {
             </thead>
             <tbody>
   {workouts.map(workout => (
-    <tr key={workout._id}>
+    <tr key={workout._id} className={workouts.indexOf(workout) % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
+
       <td className="py-2 px-4">{workout.Time}</td>
       <td>{workout.type}</td>
       <td>{workout.Day}</td>

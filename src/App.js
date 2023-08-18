@@ -38,6 +38,9 @@ import UserFeedback from './pages/UserFeedback.js';
 
 
 
+import EditPasswordUser from './pages/EditPasswordUser.js';
+import Schedules from './pages/Schedules.js';
+
 function Layout() {
   return (
     
@@ -79,7 +82,9 @@ function Layout() {
             <Route path="/Reservations" element= {<Reservations />}/>
             <Route path='/UserFeedback'element={<UserFeedback/>} />
 
+            <Route path='/edit-password-user' element={<EditPasswordUser />}/>
             <Route path="/Workouts" element= {<Workout />}/>
+            <Route path="/schedules" element= {<Schedules />}/>
             <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
             <Route path='/editpassword' element={<EditPassword />} />

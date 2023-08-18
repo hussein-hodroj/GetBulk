@@ -7,11 +7,6 @@ const Status = {
 };
 const scheduleSchema = new mongoose.Schema({
 
-    userId: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'user', 
-        required: true
-        },
     trainerId:{
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user', 
