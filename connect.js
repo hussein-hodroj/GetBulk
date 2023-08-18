@@ -17,6 +17,7 @@ import forgotPasswordRouter from './src/routes/forgotPasswordRoute.js';
 import resetPasswordRouter from './src/routes/resetPasswordRoute.js';
 import { getAllProducts } from './src/controller/products.js';
 import editPasswordRouter from './src/routes/editPasswordRouter.js';
+import transform from './src/routes/transform.js';
 dotenv.config();
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/order',orderRouter);
 app.use('/booking',bookingRouter);
 app.use('/schedule',scheduleRouter);
 app.use('/workout', workout);
+app.use('/transform', transform);
 app.use('/',forgotPasswordRouter);
 app.use('/',resetPasswordRouter);
 app.use('/',editPasswordRouter);

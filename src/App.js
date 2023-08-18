@@ -40,6 +40,7 @@ import UserFeedback from './pages/UserFeedback.js';
 
 import EditPasswordUser from './pages/EditPasswordUser.js';
 import Schedules from './pages/Schedules.js';
+import TransformPage from './pages/transform.js';
 
 function Layout() {
   return (
@@ -85,6 +86,8 @@ function Layout() {
             <Route path='/edit-password-user' element={<EditPasswordUser />}/>
             <Route path="/Workouts" element= {<Workout />}/>
             <Route path="/schedules" element= {<Schedules />}/>
+            
+            <Route path="/transforms" element= {<TransformPage />}/>
             <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
             <Route path='/editpassword' element={<EditPassword />} />
