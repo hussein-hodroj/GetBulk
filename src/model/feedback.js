@@ -11,8 +11,12 @@ const FeedbackSchema = new mongoose.Schema({
         ref: 'user', 
     },
     trainers:{
+        
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user', 
+    },
+    trainername:{
+        type: String,
     }
 
 });

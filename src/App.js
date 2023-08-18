@@ -34,6 +34,9 @@ import UserDashboard from './pages/UserDashboard.js';
 import UserUpdate from './pages/UserUpdate.js';
 
 import Reservations from './pages/Reservations.jsx';
+import UserFeedback from './pages/UserFeedback.js';
+
+
 
 function Layout() {
   return (
@@ -70,9 +73,11 @@ function Layout() {
             <Route path="/adminFeedback" element={<FeedbackAdmin />} />
             <Route path="/AdminOrder" element={<AdminOrder />} />
             <Route path="/TrainerDashboard" element= {<TrainerDashboard />}/>
+
             <Route path='/edit-password-trainer' element={<EditPasswordTrainer />} />
             <Route path="/UserDashboard" element= {<UserDashboard />}/>
             <Route path="/Reservations" element= {<Reservations />}/>
+            <Route path='/UserFeedback'element={<UserFeedback/>} />
 
             <Route path="/Workouts" element= {<Workout />}/>
             <Route path="/trainers" element={<Trainers />} />

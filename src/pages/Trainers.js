@@ -244,7 +244,7 @@ function Trainers() {
           <FaTimes />
         </button>
       </div>
-       <p className="text-xl text-yellow-500 font-bold mb-5">Add Add Trainer</p>
+       <p className="text-xl text-yellow-500 font-bold mb-5">Add Trainer</p>
        <div className="grid grid-cols-2 gap-4 mb-4">
          <div>
            <p className="text-yellow-500 font-semibold mb-2">Full Name</p>

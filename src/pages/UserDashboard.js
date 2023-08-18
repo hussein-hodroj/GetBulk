@@ -138,12 +138,12 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             <li>
               <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
                 <span className="inline-flex justify-center items-center ml-4">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-    <circle cx="16" cy="8" r="2"></circle>
-    <circle cx="8" cy="16" r="2"></circle>
-    <path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"></path>
-</svg>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            <circle cx="16" cy="8" r="2"></circle>
+            <circle cx="8" cy="16" r="2"></circle>
+            <path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"></path>
+        </svg>
 
                 </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Appointment</span>
@@ -152,7 +152,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
            
             <li>
             <a
-                href="#"
+                href="UserFeedback"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'workouts' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
