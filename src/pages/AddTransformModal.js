@@ -19,89 +19,110 @@ const customStyles = {
   },
 };
 
-const AddTransformModal = ({ isOpen, onAdd, onClose, fetchAllTransforms, setIsModalOpen  }) => {
+const AddTransformModal = ({ isOpen, onClose }) => {
   const [descriptionTransform, setDescriptionTransform] = useState('');
-  const [imageBeforeWork, setImageBeforeWork] = useState(null);
-  const [imageAfterWork, setImageAfterWork] = useState(null);
+  const [imageBefore, setImageBefore] = useState(null);
+  const [imageAfter, setImageAfter] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); 
 
-  const handleAddTransform = async () => {
+  const handleAddTransform = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData();
-    formData.append('descriptionTransform', descriptionTransform);
-    formData.append('imageBeforeWork', imageBeforeWork);
-    formData.append('imageAfterWork', imageAfterWork);
-  
+formData.append('descriptionTransform', descriptionTransform);
+formData.append('imageBefore', imageBefore);
+formData.append('imageAfter', imageAfter);
+
+
     try {
-      await axios.post('http://localhost:8000/transform/createtransform', formData);
-      fetchAllTransforms();
-      setIsModalOpen(false);
+      await axios.post('http://localhost:8000/transform/createtransform', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+     
+      onClose();
     } catch (error) {
       console.error('Error adding transform:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
-  
-  
-  
 
-  const onChangeFile=e=>{
-    setImageBeforeWork(e.target.files[0])
-  }
-  
-  const onChangeFileAfter=e=>{
-    setImageAfterWork(e.target.files[0])
-  }
-  
+  const onChangeFileBefore = (e) => {
+    setImageBefore(e.target.files[0]);
+  };
+
+  const onChangeFileAfter = (e) => {
+    setImageAfter(e.target.files[0]);
+  };
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
       <h2 className="text-yellow-500 font-bold text-xl mb-4">Add Transform</h2>
       <form onSubmit={handleAddTransform}>
+      
+      <div className="mb-4">
+        <label className="text-white">Image Before Work:</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onChangeFileBefore}
+          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
+          required 
+        />
+        {imageBefore && (
+          <div className="mt-2 flex justify-center">
+            <img
+              src={URL.createObjectURL(imageBefore)}
+              alt="Before"
+              className="rounded-full max-w-20 h-20"
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="mb-4">
+        <label className="text-white">Image After Work:</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onChangeFileAfter}
+          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
+          required 
+        />
+        {imageAfter && (
+          <div className="mt-2 flex justify-center">
+            <img
+              src={URL.createObjectURL(imageAfter)}
+              alt="After"
+              className="rounded-full max-w-20 h-20"
+            />
+          </div>
+        )}
+      </div>
         <div className="mb-4">
           <label className="text-white">Description:</label>
           <textarea
             value={descriptionTransform}
             onChange={(e) => setDescriptionTransform(e.target.value)}
             className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+            required 
           />
         </div>
 
-        <div className="mb-4">
-  <label className="text-white">Image Before Work:</label>
-  <input
-  type="file"
-  accept="image/*"
-  onChange={onChangeFile}
-  name="imageBeforeWork" // Ensure this matches the field name in the middleware
-  className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
-/>
-  {imageBeforeWork && (
-    <p className="mt-2">{imageBeforeWork.name}</p>
-  )}
-</div>
 
-<div className="mb-4">
-  <label className="text-white">Image After Work:</label>
-  <input
-  type="file"
-  accept="image/*"
-  onChange={onChangeFileAfter}
-  name="imageAfterWork" // Ensure this matches the field name in the middleware
-  className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
-/>
-  {imageAfterWork && (
-    <p className="mt-2">{imageAfterWork.name}</p>
-  )}
-</div>
-
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-end mt-4">
           <button
             className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400"
             type="submit"
+            disabled={isLoading} 
           >
-            Add
+            {isLoading ? 'Adding...' : 'Add'}
           </button>
           <button
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
             onClick={onClose}
+            disabled={isLoading} 
           >
             Cancel
           </button>
