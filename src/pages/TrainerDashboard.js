@@ -1,6 +1,8 @@
 import React, { useState,useEffect  } from 'react';
 import axios from 'axios'; 
 import jwt_decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
+
 
    
 function Dashboard() {
@@ -9,6 +11,7 @@ const [userImage, setUserImage] = useState(''); // State for user's uploaded ima
 const [userName, setUserName] = useState('Admin');
 const [updateSuccess, setUpdateSuccess] = useState(false);
 const [userData, setUserData] = useState(null); // State to store user data
+const navigate = useNavigate();
 
 
 const handleSidebarItemClick = (link) => {
@@ -30,6 +33,10 @@ const handleSidebarItemClick = (link) => {
           setUserName(userData.fullname); // Update user's name
           setUserImage(userData.imagePath); // Update user's image
           setUserData(userData);
+        }
+        if (userData.role !== 'admin' || userData.role !== 'trainer') {
+          // Redirect non-admin users to the login page
+          navigate('/login'); // Adjust the route to your login page
         }
       })
       .catch((error) => {
