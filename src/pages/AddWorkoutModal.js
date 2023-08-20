@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
 Modal.setAppElement('#root');
 
@@ -27,6 +29,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
   const [gender, setGender] = useState('');
   const [duration, setDuration] = useState('');
   const [workoutPlan, setWorkoutPlan] = useState('');
+  const [userData, setUserData] = useState('');
 
   const handleImageChange = (e) => {
     setSelectedImages((prevImages) => [...prevImages, ...Array.from(e.target.files)]);
@@ -35,6 +38,23 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
   const handleRemoveImage = (index) => {
     setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(token);
+    const id = decodedToken.id;
+
+    axios.get(`http://localhost:8000/user/${id}`)
+      .then((response) => {
+        const userData = response.data;
+
+        if (userData) {
+          setUserData(userData);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,12 +76,13 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
     const newWorkout = {
       descriptionworkout: description,
       Time: time,
-      type: type, 
-      Day: day, 
-      imageworkout: selectedImages.map((img) => img.name), 
-      gender: gender, 
+      type: type,
+      Day: day,
+      imageworkout: selectedImages.map((img) => img.name),
+      gender: gender,
       Duration: duration,
-      workoutplan: workoutPlan, 
+      workoutplan: workoutPlan,
+      trainers: userData._id, 
     };
 
     try {
@@ -81,6 +102,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
       console.error('Error adding workout:', error.response.data);
     }
   };
+ 
 
 
   return (
