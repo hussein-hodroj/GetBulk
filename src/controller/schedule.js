@@ -4,14 +4,15 @@ import ScheduleModel from '../model/schedule.js'
 export const getschedule = async (req, res) => {
   try {
     const schedules = await ScheduleModel.findById(req.params.id);
-    const username = await UserModel.findById(schedules.users);
+    const trainername = await UserModel.findById(schedules.users);
     console.log(schedules.users);
-    res.status(200).json(username);
+    res.status(200).json(trainername);
   } catch (error) {
     console.error('Error retrieving schedule:', error);
     res.status(500).send('Error retrieving schedule');
   }
 };
+
 export const getAllschedule = async (req, res) => {
   try {
     const schedules = await ScheduleModel.find();
@@ -20,28 +21,48 @@ export const getAllschedule = async (req, res) => {
       return res.status(404).json({ error: 'Schedules not found' });
     }
 
-
-    // Create an array to hold trainer names for each schedule
     const trainersNamesPromises = schedules.map(async (schedule) => {
-      const trainer = await UserModel.findById(schedule.trainerId);
-      return trainer ? trainer.fullname : 'Unknown trainer';
+      try {
+        const trainer = await UserModel.findById(schedule.trainerId);
+        const trainerData = trainer
+          ? {
+              tname: trainer.fullname,
+              temail: trainer.email,
+              tphonenumber: trainer.phonenumber,
+              taddress: trainer.address,
+            }
+          : {
+              tname: 'Unknown trainer',
+              temail: 'Unknown email',
+              tphonenumber: 'Unknown phone number',
+              taddress: 'Unknown address',
+            };
+
+        return {
+          ...schedule._doc,
+          ...trainerData,
+        };
+      } catch (error) {
+        console.error('Error retrieving trainer data:', error);
+        return {
+          ...schedule._doc,
+          tname: 'Unknown trainer',
+          temail: 'Unknown email',
+          tphonenumber: 'Unknown phone number',
+          taddress: 'Unknown address',
+        };
+      }
     });
 
-    // Use Promise.all to await all the promises
-    const trainersNames = await Promise.all(trainersNamesPromises);
+    const schedulesWithUserInfo = await Promise.all(trainersNamesPromises);
 
-    // Combine each schedule with its corresponding users and trainers names
-    const schedulesWithNames = schedules.map((schedule, index) => ({
-      ...schedule._doc,
-      tname: trainersNames[index],
-    }));
-
-    res.status(200).json(schedulesWithNames);
+    res.status(200).json(schedulesWithUserInfo);
   } catch (error) {
     console.error('Error retrieving schedules:', error);
     res.status(500).json({ error: 'Error retrieving schedules' });
   }
 };
+
 
 export const createschedule = async (req, res) => {
   const { trainerId, date, Timeschedule } = req.body;
@@ -101,5 +122,48 @@ export const deleteschedule = async (req, res) => {
   } catch (error) {
     console.error('Error deleting schedule:', error);
     res.status(500).json({ error: 'Error deleting schedule' });
+  }
+};
+
+export const getTrainerSchedule = async (req, res) => {
+  try {
+    const schedules = await ScheduleModel.find({
+      trainerId: req.params.trainerId,
+      status: 0 // Add this condition to filter by status
+    });
+
+    if (!schedules || schedules.length === 0) {
+      return res.status(404).json({ error: 'Schedules not found for this trainer' });
+    }
+
+    const schedulesWithUserInfoPromises = schedules.map(async (schedule) => {
+      const trainer = await UserModel.findById(schedule.trainerId);
+
+      const trainerData = trainer
+        ? {
+            tname: trainer.fullname,
+            temail: trainer.email,
+            tphonenumber: trainer.phonenumber,
+            taddress: trainer.address,
+          }
+        : {
+            tname: 'Unknown trainer',
+            temail: 'Unknown email',
+            tphonenumber: 'Unknown phone number',
+            taddress: 'Unknown address',
+          };
+
+      return {
+        ...schedule._doc,
+        ...trainerData,
+      };
+    });
+
+    const schedulesWithUserInfo = await Promise.all(schedulesWithUserInfoPromises);
+
+    res.status(200).json(schedulesWithUserInfo);
+  } catch (error) {
+    console.error('Error retrieving schedules:', error);
+    res.status(500).json({ error: 'Error retrieving schedules' });
   }
 };
