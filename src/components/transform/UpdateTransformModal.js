@@ -59,23 +59,23 @@ const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform, fetchAllTr
       contentLabel="Update Transform Modal"
     >
       <h2 className="text-yellow-500 font-bold text-xl mb-4">Update Transform</h2>
-      <label style={{ color: 'white' }}>Image Before:</label>
+      <label style={{ color: 'black' }}>Image Before:</label>
 <input
   type="file"
   onChange={(e) => setUpdatedImageBefore(e.target.files[0])}
-  className="w-full bg-white rounded p-2 mb-2"
+  className="w-full bg-white rounded p-2 mb-2  text-black"
 />
-<label style={{ color: 'white' }}>Image After:</label>
+<label style={{ color: 'black' }}>Image After:</label>
 <input
   type="file"
   onChange={(e) => setUpdatedImageAfter(e.target.files[0])}
-  className="w-full bg-white rounded p-2 mb-2"
+  className="w-full bg-white rounded p-2 mb-2 text-black"
 />
-      <label style={{ color: 'white' }}>Description:</label>
+      <label style={{ color: 'black' }}>Description:</label>
       <textarea
         value={updatedDescription}
         onChange={(e) => setUpdatedDescription(e.target.value)}
-        className="w-full bg-white rounded p-2 mb-2"
+        className="w-full bg-white rounded p-2 mb-2 text-black"
       />
       <div className="flex justify-end">
         <button

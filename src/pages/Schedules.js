@@ -3,9 +3,9 @@ import axios from 'axios';
 import {FaPlus, FaEdit, FaTrash } from 'react-icons/fa/index.esm.js';
 import Dashboard from './TrainerDashboard.js';
 import './style.css';
-import AddScheduleModal from './AddScheduleModal.js';
-import UpdateScheduleModal from './UpdateScheduleModal.js';
-import DeleteScheduleModal from './DeleteScheduleModal.js';
+import AddScheduleModal from '../components/schedules/AddScheduleModal.js';
+import UpdateScheduleModal from '../components/schedules/UpdateScheduleModal.js';
+import DeleteScheduleModal from '../components/schedules/DeleteScheduleModal.js';
 
 
 function Schedules() {

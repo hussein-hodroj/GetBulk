@@ -117,7 +117,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             />
           </div>
           <div className="w-1/2 pl-4">
@@ -129,7 +129,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
                 const value = parseInt(e.target.value, 10);
                 setTime(isNaN(value) || value < 0 ? 0 : value);
               }}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             />
           </div>
         </div>
@@ -139,7 +139,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -151,7 +151,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
             <select
               value={workoutPlan}
               onChange={(e) => setWorkoutPlan(e.target.value)}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             >
               <option value="">Select Workout Plan</option>
               <option value="threedaysplan"> 3 Days Plan</option>
@@ -167,7 +167,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             >
               <option value="">Select Type</option>
               <option value="beginner">Beginner</option>
@@ -181,7 +181,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
               type="text"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             />
           </div>
         </div>
@@ -191,7 +191,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
   <select
     value={day}
     onChange={(e) => setDay(e.target.value)}
-    className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+    className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
   >
     <option value="">Select Day</option>
     <option value="Monday">Monday</option>
@@ -210,7 +210,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
             type="file"
             accept="image/*"
             onChange={handleImageChange}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none text-black"
           />
           {selectedImages.length > 0 && (
            <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>

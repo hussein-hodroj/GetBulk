@@ -3,10 +3,10 @@ import axios from 'axios';
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa/index.esm.js';
 import Dashboard from './TrainerDashboard.js';
 import './style.css';
-import AddWorkoutModal from './AddWorkoutModal.js';
-import UpdateWorkoutModal from './UpdateWorkoutModal.js';
-import DeleteConfirmationModal from './DeleteConfirmationModal.js';
-import ExerciseModal from './ExerciseModal.js';
+import AddWorkoutModal from '../components/adminworkout/AddWorkoutModal.js';
+import UpdateWorkoutModal from '../components/adminworkout/UpdateWorkoutModal.js';
+import DeleteConfirmationModal from '../components/deleteconfirmation/DeleteConfirmationModal.js';
+import ExerciseModal from '../components/adminworkout/ExerciseModal.js';
 
 function Workout() {
   const [workouts, setWorkouts] = useState([]);

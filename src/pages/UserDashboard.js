@@ -22,31 +22,7 @@ const handleSidebarItemClick = (link) => {
 //   const decodedToken = jwt_decode(token);
 //   const id = decodedToken.id;
   
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const decodedToken = jwt_decode(token);
-    const id = decodedToken.id;
   
-  console.log("decodedToken=>",id);
-   
-    axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint
-      .then((response) => {
-        const userData = response.data;
-        
-        if (userData) {
-          setUserName(userData.fullname); // Update user's name
-          setUserImage(userData.imagePath); // Update user's image
-          setUserData(userData);
-        }
-        if (userData.role !== 'admin' || userData.role !== 'user') {
-          // Redirect non-admin users to the login page
-          navigate('/login'); // Adjust the route to your login page
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-      });
-  }, []);
 
 const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg';
   return (

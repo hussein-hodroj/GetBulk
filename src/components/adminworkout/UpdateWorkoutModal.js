@@ -115,7 +115,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
           />
         </div>
         <div className="w-1/2 pl-4">
@@ -127,7 +127,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
               const value = parseInt(e.target.value, 10);
               setTime(isNaN(value) || value < 0 ? 0 : value);
             }}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
           />
         </div>
       </div>
@@ -137,7 +137,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
           <select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
           >
             <option value="">Select Gender</option>
             <option value="male">Male</option>
@@ -149,7 +149,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
           <select
             value={workoutPlan}
             onChange={(e) => setWorkoutPlan(e.target.value)}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
           >
             <option value="">Select Workout Plan</option>
             <option value="threedaysplan"> 3 Days Plan</option>
@@ -165,7 +165,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
           >
             <option value="">Select Type</option>
             <option value="beginner">Beginner</option>
@@ -179,7 +179,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
               type="text"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             />
           </div>
       </div>
@@ -189,7 +189,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
   <select
     value={day}
     onChange={(e) => setDay(e.target.value)}
-    className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+    className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
   >
     <option value="">Select Day</option>
     <option value="Monday">Monday</option>

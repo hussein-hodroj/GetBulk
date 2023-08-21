@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './DeleteConfirmationModal.css';
+import '../deleteconfirmation/DeleteConfirmationModal.css';
 
-const DeleteScheduleModal = ({ isOpen, onCancel, onDelete }) => {
+const DeleteConfirmationModal = ({ isOpen, onCancel, onConfirm }) => {
   if (!isOpen) {
     return null;
   }
 
-  const handleDeleteClick = () => {
-    onDelete();
+  const handleConfirmClick = () => {
+    onConfirm();
   };
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <p>Are you sure you want to delete the schedule?</p>
+        <p className='text-black'>Are you sure you want to delete the transform?</p>
         <div className="modal-actions">
-          <button className="modal-btn modal-btn-yes" onClick={handleDeleteClick}>
+          <button className="modal-btn modal-btn-yes" onClick={handleConfirmClick}>
             Yes
           </button>
           <button className="modal-btn modal-btn-no" onClick={onCancel}>
@@ -28,10 +28,10 @@ const DeleteScheduleModal = ({ isOpen, onCancel, onDelete }) => {
   );
 };
 
-DeleteScheduleModal.propTypes = {
+DeleteConfirmationModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
 };
 
-export default DeleteScheduleModal;
+export default DeleteConfirmationModal;
