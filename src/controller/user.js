@@ -213,6 +213,15 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { 
     expiresIn: '30d' });
 };
+// export const getUsersTrainers = async (req, res) => {
+//   try {
+//     const users = await UserModel.find({ role: 'trainer' });
+//     return res.status(200).json(users);
+//   } catch (error) {
+//     return res.status(500).json({ error: 'An error occurred while fetching users.' });
+//   }
+// };
+
 
 export const getTrainers = async (req, res) => {
   try {
@@ -223,4 +232,65 @@ export const getTrainers = async (req, res) => {
   }
 };
 
+export const deleteAllUsers = async (req, res) => {
+  try {
+    await UserModel.deleteMany(); // Delete all documents from the collection
+    res.status(200).send('All users deleted successfully');
+  } catch (error) {
+    res.status(500).send('Error deleting all users');
+  }
+};
 
+
+export const createUser = asyncHandler(async (req, res) => {
+  const { fullname, email, password, address, phonenumber, age, role } = req.body;
+
+  // Validation
+  if (!fullname || !email || !password || !address || !phonenumber || !age || !role) {
+    return res.status(400).json("Please fill in all fields");
+  }
+
+  // Check if the user already exists
+  const userExists = await UserModel.findOne({ email });
+  if (userExists) {
+   return res.status(400).json("User already exists");
+  }
+
+  // Hash the password using bcrypt
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+  // Create user
+  const newUser = new UserModel({
+    fullname,
+    email,
+    password: hashedPassword,
+    address,
+    phonenumber,
+    age,
+    role,
+    imagePath: req?.file?.originalname,
+  });
+
+  //const registereduser = {token:generateToken(newUser._id),...newUser}
+  try {
+    await newUser.save()
+    // Respond with the newly created user data
+   
+    res.status(200).json({
+      _id: newUser._id,
+      fullname: newUser.fullname,
+      email: newUser.email,
+      address: newUser.address,
+      phonenumber: newUser.phonenumber,
+      age: newUser.age,
+      role: newUser.role,
+      imagePath: newUser.imagePath?newUser.imagePath:null,
+      token: generateToken(newUser._id),
+    });
+
+  } catch (error) {
+    res.status(500).json(error);
+    
+  }
+});
