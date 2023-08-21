@@ -34,7 +34,7 @@ const handleSidebarItemClick = (link) => {
           setUserImage(userData.imagePath); // Update user's image
           setUserData(userData);
         }
-        if (userData.role !== 'admin' || userData.role !== 'trainer') {
+        if (userData.role !== 'admin' && userData.role !== 'trainer') {
           // Redirect non-admin users to the login page
           navigate('/login'); // Adjust the route to your login page
         }
