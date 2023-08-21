@@ -18,8 +18,11 @@ const handleSidebarItemClick = (link) => {
   setActiveLink(link);
 };
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(token);
+    const id = decodedToken.id;
   
-
   console.log("decodedToken=>",id);
    
     axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint
@@ -31,15 +34,16 @@ const handleSidebarItemClick = (link) => {
           setUserImage(userData.imagePath); // Update user's image
           setUserData(userData);
         }
-        if (userData.role !== 'admin' && userData.role !== 'trainer') {
-          // Redirect non-admin users to the login page
-          navigate('/login'); // Adjust the route to your login page
-        }
+        if (userData.role !== 'admin' && userData.role !=='trainer') {
+            // Redirect non-admin users to the login page
+            navigate('/login'); // Adjust the route to your login page
+          }
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
       });
   }, []);
+ 
 
 const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg';
   return (
