@@ -73,6 +73,15 @@ const Header = () => {
                 About Us
               </a>
               <a
+                href="http://localhost:3000/#Transformations"
+                className={`href ${
+                  activeLink === 'Transformations' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
+                } transition-all duration-300 transform scale-100 hover:scale-110`}
+                onClick={() => handleLinkClick('Transformations')}
+              >
+                Transformations
+              </a>
+              <a
                 href="http://localhost:3000/#Service"
                 className={`href ${
                   activeLink === 'Service' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'

@@ -34,18 +34,42 @@ export const addUser = async (req, res) => {
 
 
 
-export const contact=async(req,res)=>{
-  const {fullname,subject} = req.body;
-  console.log(req.body);
- try {
-   if(!fullname) return res.status(404).json("fullname not found");
-   if(!subject) return res.status(404).json("Empty Message");
-  const contactemail=await sendEmail("h_r_s_1994@hotmail.com",fullname,subject)
-  res.status(200).json(contactemail);
- }
- catch(error){res.status(500).json(error);}
- }
+// export const contact=async(req,res)=>{
+//   const {fullname,subject,email} = req.body;
+//   console.log(req.body);
+//  try {
+//    if(!fullname) return res.status(404).json("fullname not found");
+//    if(!subject) return res.status(404).json("Empty Message");
+//    if(!email) return res.status(404).json("email not find");
+//   const contactemail=await sendEmail("h_r_s_1994@hotmail.com",fullname,email,subject)
+//   res.status(200).json(contactemail);
+//  }
+//  catch(error){res.status(500).json(error);}
+//  }
  
+export const contact = async (req, res) => {
+  const { fullname, subject, email } = req.body;
+  console.log(req.body);
+
+  try {
+    if (!fullname) return res.status(404).json("Full name not found");
+    if (!subject) return res.status(404).json("Empty message");
+    if (!email) return res.status(404).json("Email not found");
+
+    const message = `
+      Full Name: ${fullname}
+      Email: ${email}
+      Subject: ${subject}
+    `;
+
+    const contactEmail = await sendEmail("h_r_s_1994@hotmail.com", "Contact Form Submission", message);
+    res.status(200).json(contactEmail);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
