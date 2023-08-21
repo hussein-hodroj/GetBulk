@@ -41,8 +41,11 @@ import UserFeedback from './pages/UserFeedback.js';
 import EditPasswordUser from './pages/EditPasswordUser.js';
 import Schedules from './pages/Schedules.js';
 import TransformPage from './pages/transform.js';
+import UserWorkout from './pages/UserWorkout.js';
+import WorkoutSelection from './pages/WorkoutSelection.js';
 import UserAppointments from './pages/UserAppointments.jsx';
 import UserCalendar from './pages/UserCalendar.jsx';
+
 
 function Layout() {
   return (
@@ -90,6 +93,8 @@ function Layout() {
             <Route path="/schedules" element= {<Schedules />}/>
             
             <Route path="/transforms" element= {<TransformPage />}/>
+            <Route path="/UserWorkout" element= {<UserWorkout />}/>
+            <Route path="/workoutselection" element= {<WorkoutSelection />}/>
             <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
             <Route path='/editpassword' element={<EditPassword />} />
