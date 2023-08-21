@@ -137,7 +137,7 @@ function UpdateTrainer() {
           <div className="p-3 flex-auto pr-20 pt-8">
             <div className="flex justify-end mb-2 ml-240">
             </div>
-            <form onSubmit={handleSubmit} className="bg-zinc-800 p-5 rounded shadow-md">
+            <form onSubmit={handleSubmit} className="bg-zinc-600 p-5 rounded shadow-md">
               <div className="mb-2">
                 <label htmlFor="fullname" className="block text-white font-size:13 font-semibold mb-2">
                   Full Name

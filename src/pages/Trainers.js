@@ -123,7 +123,7 @@ function Trainers() {
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
-    <p className="px-4 py-2 rounded">
+    <p className=" px-4 py-2 rounded text-white font-bold border  bg-yellow-500 ms-4">
       Number of Users Found: {numFilteredTrainers}
     </p>
   </div>
@@ -145,6 +145,10 @@ function Trainers() {
           <table className="min-w-full divide-y  border border-black ">
             <thead className="bg-zinc-600 ">
               <tr>
+                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+                       #
+                </th>
+
                 <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
                   Name
                 </th>
@@ -171,6 +175,9 @@ function Trainers() {
       key={trainer._id}
       className={index % 2 === 0 ? 'bg-zinc-500' : 'bg-zinc-600'}
     >
+       <td className="px-6 py-4 whitespace-nowrap border Border-white">
+          {index + 1} 
+        </td>
       <td className="px-6 py-4 whitespace-nowrap border Border-white">
         {trainer.fullname}
       </td>
@@ -234,7 +241,7 @@ function Trainers() {
        {showAddUserModal && (
      
      <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40">
-     <div className="bg-zinc-800 p-7 rounded shadow-md">
+     <div className="bg-zinc-600 p-7 rounded shadow-md">
        {errorMessage && <p className="text-red-600 mb-2">{errorMessage}</p>}
        <div className="flex justify-end">
         <button
@@ -245,7 +252,7 @@ function Trainers() {
         </button>
       </div>
        <p className="text-xl text-yellow-500 font-bold mb-5">Add Trainer</p>
-       <div className="grid grid-cols-2 gap-4 mb-4">
+       <div className="grid grid-cols-2 gap-4 mb-4 text-black">
          <div>
            <p className="text-yellow-500 font-semibold mb-2">Full Name</p>
            <input
