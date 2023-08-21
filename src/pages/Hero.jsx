@@ -120,16 +120,16 @@ useEffect(() => {
           interval={3000}
         >
           <div>
-            <img src={images.AboutUs} alt="Gym profile" className="w-96 h-80 mt-25 mx-auto px-10" />
+            <img src={images.AboutUs} alt="Gym profile" className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
           <div>
-            <img src={images.slide1} alt="Slide"className="w-96 h-80 mt-25 mx-auto px-10" />
+            <img src={images.slide1} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
           <div>
-            <img src={images.slide2} alt="Slide"className="w-96 h-80 mt-25 mx-auto px-10" />
+            <img src={images.slide2} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
           <div>
-            <img src={images.slide3} alt="Slide"className="w-96 h-80 mt-25 mx-auto px-10" />
+            <img src={images.slide3} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
           
         </Carousel>
