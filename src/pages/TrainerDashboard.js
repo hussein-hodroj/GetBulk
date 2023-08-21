@@ -18,11 +18,8 @@ const handleSidebarItemClick = (link) => {
   setActiveLink(link);
 };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const decodedToken = jwt_decode(token);
-    const id = decodedToken.id;
   
+
   console.log("decodedToken=>",id);
    
     axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint

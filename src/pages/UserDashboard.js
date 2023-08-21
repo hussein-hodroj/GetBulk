@@ -23,11 +23,8 @@ const handleSidebarItemClick = (link) => {
 //   const decodedToken = jwt_decode(token);
 //   const id = decodedToken.id;
   
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const decodedToken = jwt_decode(token);
-    const id = decodedToken.id;
   
+
   console.log("decodedToken=>",id);
    
     axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint
@@ -48,6 +45,7 @@ const handleSidebarItemClick = (link) => {
         console.error('Error fetching user data:', error);
       });
   }, []);
+
 
   const navIsVisibilityHandler = () => {
     setNavIsVisible((curState) => !curState);

@@ -3,9 +3,9 @@ import axios from 'axios';
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa/index.esm.js';
 import Dashboard from './dashboard.js';
 import './TransformPage.css';
-import AddTransformModal from './AddTransformModal.js';
-import UpdateTransformModal from './UpdateTransformModal.js';
-import DeleteConfirmationModal from './DeleteConfirmationModal.js';
+import AddTransformModal from '../components/transform/AddTransformModal.js';
+import UpdateTransformModal from '../components/transform/UpdateTransformModal.js';
+import DeleteConfirmationModal from '../components/transform/DeleteTransformationModal.js';
 
 function TransformPage() {
   const [transforms, setTransforms] = useState([]);

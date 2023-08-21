@@ -5,7 +5,7 @@ import CartItem from './CartItem.js';
 import { SidebarContext } from './SidebarContext.js';
 import { CartContext } from './CartContext.js';
 import { ProductContext } from './ProductContext.js';
-import CheckoutModal from './ordermodal.js'; 
+import CheckoutModal from '../components/ordermodal/ordermodal.js'; 
 
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
