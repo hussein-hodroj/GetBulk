@@ -21,7 +21,7 @@ const CartItem = ({ cartItem }) => {
       <div className='w-full flex flex-col'>
         {/* title  */}
         <div className='flex justify-between mb-2'>
-          <Link to={`/product/${_id}`} className="text-sm uppercase font-medium max-w-[240px] text-primary hover:underline">{name}</Link>
+          <Link to={`/product/${_id}`} className="text-sm uppercase font-medium max-w-[240px] text-yellow-500 hover:underline">{name}</Link>
         {/* remove icon */}
         <div onClick={()=> removeFromCart(_id)} className='text-xl cursor-pointer'>
           <IoMdClose className='text-gray-500 hover:text-red-500 transition' />
@@ -31,18 +31,18 @@ const CartItem = ({ cartItem }) => {
           {/* qty */}
           <div className='flex flex-1 max-w-[100px] items-center h-full border text-primary font-medium'>
             {/* minus icon */}
-            <div onClick={()=> decreaseAmount(_id)} className='flex-1 flex justify-center items-center cursor-pointer h-full'>
+            <div onClick={()=> decreaseAmount(_id)} className='flex-1 flex justify-center items-center cursor-pointer h-full text-black'>
               <IoMdRemove />
             </div>
             {/* amount */}
             <div className='h-full flex justify-center items-center px-2'>{amount}</div>
             {/* plus icon */}
-            <div onClick={()=> increaseAmount(_id)} className='flex-1 h-full flex justify-center items-center cursor-pointer'>
+            <div onClick={()=> increaseAmount(_id)} className='flex-1 h-full flex justify-center items-center cursor-pointer text-black'>
               <IoMdAdd />
             </div>
           </div>
           {/* item price */}
-          <div className='flex-1 flex items-center justify-around'>$ {price}</div>
+          <div className='flex-1 flex items-center justify-around text-red-500 text-sm font-medium'>$ {price}</div>
            {/* final price */}
            {/* make the price at 2 decimals*/}
            <div className='flex-1 flex justify-end items-center text-primary font-medium'>{`$ ${parseFloat(price * amount).toFixed(2)}`}</div>

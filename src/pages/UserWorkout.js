@@ -41,7 +41,8 @@ const UserWorkout = () => {
       : '/uploads/usersImages/hussein.jpeg' 
   }
   alt=""
-  className="w-full h-[400px] object-cover transition-opacity duration-500 ease-in-out opacity-70 hover:opacity-100"
+  className="w-full h-[500px] p-12 transition-opacity duration-500 ease-in-out opacity-70 hover:opacity-100"
+  style={{ borderRadius: '80px' }}
 />
           <div className="absolute inset-0 text-white text-center">
             <div className="h-full flex flex-col justify-end">

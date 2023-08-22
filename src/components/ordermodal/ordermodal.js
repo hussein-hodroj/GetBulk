@@ -58,15 +58,15 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
 
   return (
     <div className={`${isOpen ? 'block' : 'hidden'} fixed inset-0 z-50 overflow-auto bg-gray-800 top-10 bg-opacity-50 flex justify-center items-center`}>
-      <div className="bg-gray-100 hover:bg-gray-200 transition p-4 w-[400px] rounded">
-        <h2 className="text-xl font-semibold mb-4">Checkout</h2>
+      <div className="bg-gray-300 hover:bg-gray-400 transition p-4 w-[400px] rounded">
+        <h2 className="text-3xl font-semibold mb-4 text-yellow-500">Checkout</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="fullName" className="block font-medium mb-1 text-yellow-500">Full Name</label>
+            <label htmlFor="fullName" className="block font-medium mb-1 text-black">Full Name</label>
             <input
               type="text"
               id="fullName"
-              className={`w-full border ${fullNameError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
+              className={`w-full border ${fullNameError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded  transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
@@ -75,7 +75,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             {fullNameError && <p className="text-red-500 text-sm mt-1">{fullNameError}</p>}
           </div>
           <div className="mb-4">
-            <label htmlFor="email" className="block font-medium mb-1 text-yellow-500">Email</label>
+            <label htmlFor="email" className="block font-medium mb-1 text-black">Email</label>
             <input
               type="email"
               id="email"
@@ -88,7 +88,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
           <div className="mb-4">
-            <label htmlFor="address" className="block font-medium mb-1 text-yellow-500">Address</label>
+            <label htmlFor="address" className="block font-medium mb-1 text-black">Address</label>
             <textarea
               id="address"
               className={`w-full border ${addressError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
@@ -100,7 +100,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             {addressError && <p className="text-red-500 text-sm mt-1">{addressError}</p>}
           </div>
           <div className="mb-4">
-            <label htmlFor="phoneNumber" className="block font-medium mb-1 text-yellow-500">Phone Number</label>
+            <label htmlFor="phoneNumber" className="block font-medium mb-1 text-black">Phone Number</label>
             <input
               type="tel"
               id="phoneNumber"
@@ -114,25 +114,25 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
           </div>
           <div className="mb-4">
           {/* ... Other form fields */}
-          <label htmlFor="selectedProducts" className="block font-medium mb-1 text-yellow-500">
+          <label htmlFor="selectedProducts" className="block font-medium mb-1 text-black">
             Selected Products
           </label>
           <input
             type="text"
             id="selectedProducts"
-            className="w-full border bg-gray-100 px-3 py-2 rounded"
+            className="w-full border bg-gray-100 px-3 py-2 rounded text-black"
             readOnly
             value={selectedProducts.map(product => product.product.name).join(', ')}
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="total" className="block font-medium mb-1 text-yellow-500">
+          <label htmlFor="total" className="block font-medium mb-1 text-black">
             Total
           </label>
           <input
             type="text"
             id="total"
-            className="w-full border bg-gray-100 px-3 py-2 rounded"
+            className="w-full border bg-gray-100 px-3 py-2 rounded text-black"
             readOnly
             value={`$ ${parseFloat(total).toFixed(2)}`}
           />
