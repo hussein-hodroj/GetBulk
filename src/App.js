@@ -94,7 +94,7 @@ function Layout() {
             
             <Route path="/transforms" element= {<TransformPage />}/>
             <Route path="/UserWorkout" element= {<UserWorkout />}/>
-            <Route path="/workoutselection" element= {<WorkoutSelection />}/>
+            <Route path="/workoutselection/:trainerId" element= {<WorkoutSelection />}/>
             <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
             <Route path='/editpassword' element={<EditPassword />} />
