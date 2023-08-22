@@ -3,6 +3,8 @@ import { images } from '../constants/index.js';
 import axios from 'axios';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const services = [
   {
@@ -31,6 +33,19 @@ const Hero = () => {
   const [fullnameError, setFullNameError] = useState('');
   const [subjectError, setSubjectError] = useState('');
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    // Validate email and update emailError if needed
+    if (!newEmail.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i)) {
+      setEmailError('Please enter a valid email address');
+    } else {
+      setEmailError('');
+    }
+  };
 
   const handleFullNameChange = (event) => {
   const value=event.target.value;
@@ -49,20 +64,27 @@ const Hero = () => {
     setFullNameError('Full name is required');
     return;
   }
-
+  if(!email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i)) {
+    setEmailError('Please enter a valid email address');
+  } else {
+    setEmailError('');
+  }
   if (subject.trim() === '') {
     setSubjectError('Subject is required');
     return;
   }
+  
 
   try {
     await axios.post('http://localhost:8000/user/contact', {
       fullname: fullname,
       subject: subject,
+      email:email,
     });
     setIsEmailSent(true); // Set the state to true when the email is sent successfully
     setFullName(''); // Reset form fields after successful email submission
     setSubject('');
+    setEmail('')
   } catch (error) {
     console.error('Error:', error);
   }
@@ -82,14 +104,35 @@ useEffect(() => {
 
   return (
     <section className=" mx-auto px-5  mt-0 bg-black relative">
-      
-      <div className="relative" id="Home">
+    
+      <div className="relative " id="Home" >
         <Header/>
-        <img
+        {/* <img
           className="w-full h-auto mx-auto p-4"
           src={images.AboutUs}
           alt="Gym profile"
-        />
+        /> */}
+        <Carousel
+          autoPlay
+          infiniteLoop
+          showStatus={false}
+          showThumbs={false}
+          interval={3000}
+        >
+          <div>
+            <img src={images.AboutUs} alt="Gym profile" className="w-96 h-88 mt-25 mx-auto px-10" />
+          </div>
+          <div>
+            <img src={images.slide1} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
+          </div>
+          <div>
+            <img src={images.slide2} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
+          </div>
+          <div>
+            <img src={images.slide3} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
+          </div>
+          
+        </Carousel>
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center  ">
           <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
             "Train like a beast, look like a beauty."
@@ -151,75 +194,95 @@ useEffect(() => {
   </div>
   
 </div>
+<div className='mt-1'  id='Transformations'>
 
+</div>
 <div className="mt-8"  id='Service'>
   
-<h1 className="font-roboto text-3xl text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl text-center  border-black p-5 "> 
-        Our Services
-      </h1>
-      <div className="flex flex-col gap-6 mt-6 lg:gap-2 lg:flex-row ">
-        {services.map((service) => (
-          <div key={service.title} className="flex gap-4 items-center  lg:items-start">
-            <img src={service.image} alt={service.title} className="w-16 h-16 mx-auto rounded-full" />
-            <div className="flex flex-col ">
-              <h3 className="font-semibold text-yellow-400 md:text-3xl lg:text-2xl xl:text-3xl text-center lg:text-left border-b-2 border-yellow-500 pb-2">
-                {service.title}
-              </h3>
-              <p className="text-gray-100 lg:text-base lg:text-left pt-3 text-justify">
-                {service.description}
-              </p>
-            </div>
-          </div>
-        ))}
+<h1 className="font-roboto text-3xl text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl text-center border-black p-5 "> 
+  Our Services
+</h1>
+<div className="flex flex-col gap-6 px-2 mt-6 lg:gap-2 lg:flex-row ">
+  {services.map((service) => (
+    <div key={service.title} className="grid grid-cols-2 gap-3 items-center">
+      <div className="flex flex-col px-1">
+        <h3 className="font-semibold text-yellow-400 md:text-3xl lg:text-2xl xl:text-3xl text-center lg:text-left border-b-2 border-yellow-500 pb-2">
+          {service.title}
+        </h3>
       </div>
+      <div className="flex justify-center">
+        <img src={service.image} alt={service.title} className="w-16 h-16 rounded-full mr-32" />
+      </div>
+      <p className="text-gray-100 lg:text-base lg:text-left col-span-2 pt-3 text-justify ">
+        {service.description}
+      </p>
+    </div>
+  ))}
 </div>
 
-      <div className="mt-8" id='ContactUs'>
-  <h1 className="font-roboto text-3xl text-center  text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl border-black p-5">
+</div>
+
+
+<div className="mt-3" id='ContactUs'>
+ 
+  <div className="flex gap-8">
+    <div className="flex-1 flex items-center">
+      <img
+        className="w-72   h-72 mx-auto p-4 text-yellow-600 mt-10"
+        src={images.contactus2}
+        alt="Contact Us"
+      />
+    </div>
+    <div className="lg:w-1/2 flex flex-col items-start mt-12">
+    <h1 className="font-roboto text-3xl text-center text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl border-black pb-5">
     Contact Us
   </h1>
-  <div className="flex flex-col lg:flex-row gap-4 mt-4 justify-between">
-    <div className="flex flex-col items-center lg:items-start lg:w-1/2 py-5 mx-5">
-      <p className='text-yellow-500 font-roboto text-xl'>Phone Number</p>
-      <div className="flex items-center">
-        <i className="fas fa-phone text-yellow-500 text-xl"></i>
-        <p className="text-yellow-500 font-roboto text-xl ml-2">+961 70-497 758</p>
-      </div>
-      <p className='text-yellow-500 font-roboto text-xl mt-5'>Email Address</p>
-      <div className="flex items-center">
-        <i className="fas fa-envelope text-yellow-500 text-xl"></i>
-        <p className="text-yellow-500 font-roboto text-xl ml-2">GetBulk@gym.com</p>
-      </div>
-    </div>
-    <div className="flex flex-col items-start lg:w-1/2">
-      <label className="font-roboto text-yellow-500 text-xl " htmlFor="fullName">Full Name</label>
-      <input
-        className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 px-4 w-full"
-        type="text"
-        id="fullName" 
-        placeholder="Please enter your full name"
-        onChange={handleFullNameChange}
-        required
-      />
-      {fullnameError && <p className="text-red-500 mt-2">{fullnameError}</p>}
-      <label className="font-roboto text-yellow-500 text-xl mt-4" htmlFor="subject">Subject</label>
+  <div className="flex gap-4 ">
+  <div className="flex flex-col max-w-full">
+    <label className="font-roboto text-yellow-500 text-xl mt-4 mb-4" htmlFor="fullName">Full Name</label>
+    <input
+      className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 mx-1 w-full max-w-full pr-12 px-4"
+      type="text"
+      id="fullName" 
+      placeholder="Please Enter your Name"
+      onChange={handleFullNameChange}
+      required
+    />
+    {fullnameError && <p className="text-red-500 mt-2">{fullnameError}</p>}
+  </div>
+  
+  <div className="flex flex-col max-w-full">
+    <label className="font-roboto text-yellow-500 text-xl mt-4 mb-4 mx-10" htmlFor="email">Email</label>
+    <input
+      className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 mx-10 w-full max-w-full px-4"
+      type="email"
+      id="email"
+      placeholder="Please Enter your Email"
+      onChange={handleEmailChange}
+      required
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+      title="Please enter a valid email address"
+    />
+    {emailError && <p className="text-red-500 mt-2 mx-10">{emailError}</p>}
+  </div>
+</div>
+
+      <label className="font-roboto text-yellow-500 text-xl mt-7 mb-3" htmlFor="subject">Subject:</label>
       <textarea
         className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 px-4 w-full h-24"
         id="subject"
         placeholder="Enter your message here"
         onChange={handleSubjectChange}
         required
-      
-
       ></textarea>
+   
       {subjectError && <p className="text-red-500 mt-2">{subjectError}</p>}
-      <div className="lg:w-1/2 flex items-center justify-center">
-        <button className="px-8 py-3 bg-yellow-500 text-black font-bold rounded-md  transition-transform transform-gpu hover:scale-110 duration-300 mt-6 lg:mt-10" onClick={handlclickSubmit}>
+      <div className="lg:w-1/2 flex items-center justify-right">
+        <button className="px-8 py-3 bg-yellow-500 text-black font-bold  rounded-md transition-transform transform-gpu hover:scale-110 duration-300 mt-6 lg:mt-10" onClick={handlclickSubmit}>
           Submit
         </button>
       </div>
     </div>
-   
 
   </div>
   {isEmailSent && (

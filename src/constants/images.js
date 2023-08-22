@@ -7,6 +7,12 @@ import AboutUs from "../asset/AboutUs.jpg"
 import PublicWork from "../asset/WorkOut.jpg"
 import OpeningHours from "../asset/OpeningHours.png"
 
+import contactus2 from "../asset/contact-us2.png"
+import slide1 from "../asset/slide1.jpg"
+import slide2 from "../asset/slide2.jpg"
+import slide3 from "../asset/slide3.jpg"
+
+
    
 const images ={
     Logo,
@@ -16,6 +22,12 @@ const images ={
     HeroLogin,
     AboutUs,
     PublicWork,
-    OpeningHours
+    OpeningHours,
+  
+    contactus2,
+    slide1,
+    slide2,
+    slide3
+
 }
 export default images; 
