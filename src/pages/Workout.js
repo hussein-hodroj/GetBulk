@@ -104,6 +104,7 @@ const handleShowExercises = (exercise) => {
           <table className="table flex items-center justify-center font-bold bg-zinc-800 text-center w-full"  style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
             <thead>
             <tr>
+                 <th>#</th>
                 <th>Time in hour</th>
                 <th>Type</th>
                 <th>Day</th>
@@ -115,10 +116,11 @@ const handleShowExercises = (exercise) => {
               </tr>
             </thead>
             <tbody>
-  {workouts.map(workout => (
+  {workouts.map((workout, index) => (
     <tr key={workout._id} className={workouts.indexOf(workout) % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
-
+<td className="py-2 px-4">{index + 1}</td>
       <td className="py-2 px-4">{workout.Time}</td>
+      
       <td>{workout.type}</td>
       <td>{workout.Day}</td>
       <td>{workout.gender}</td>

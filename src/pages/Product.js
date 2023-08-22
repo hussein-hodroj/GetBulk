@@ -12,6 +12,11 @@ const Product = ({ product, categories }) => {
 
   const truncatedName = name.length > 20 ? name.substring(0, 17) + '...' : name;
 
+  const scrollToTopAndNavigate = () => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+    window.location.href = `/product/${_id}`; // Navigate to the product details page
+  };
+
   return (
     <div>
       <div className='h-[300px] mb-4 relative overflow-hidden group transition'>
@@ -23,8 +28,8 @@ const Product = ({ product, categories }) => {
             >
               <img
                 className='w-full h-full object-cover'
-                src={`/uploads/usersImages/${product.imagePath}`}
-                alt={product.name}
+                src={`/uploads/usersImages/${imagePath}`}
+                alt={name}
               />
             </div>
           </div>
@@ -36,23 +41,23 @@ const Product = ({ product, categories }) => {
               <BsPlus className='text-3xl' />
             </div>
           </button>
-          <Link
-            to={`/product/${_id}`}
+          <div
+            onClick={scrollToTopAndNavigate}
             className='w-12 h-12 bg-yellow-500 flex justify-center items-center text-black drop-shadow-xl rounded-full hover:rounded-lg transition-all'
           >
             <BsEyeFill className='group-hover:text-red-500' />
-          </Link>
+          </div>
         </div>
       </div>
       {/*category & title & price */}
       <div>
-        <div className='text-sm capitalize text-white mb-1'>{categoryName}</div>
+        <div className='text-xl capitalize text-white mb-1'> category : {categoryName}</div>
         <Link to={`/product/${_id}`}>
-          <h2 className='font-semibold text-yellow-500 mb-1' title={name}>
+          <h2 className='font-semibold text-2xl text-yellow-500 mb-1' title={name}>
             {truncatedName}
           </h2>
         </Link>
-        <div className='font-semibold text-red-500'>$ {price}</div>
+        <div className='font-semibold text-xl text-red-500'>$ {price}</div>
       </div>
     </div>
   );

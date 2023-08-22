@@ -17,14 +17,15 @@ const ExerciseModal = ({ isOpen, onClose, exercise }) => {
       right: 'auto',
       bottom: 'auto',
       transform: 'translate(-50%, -50%)',
-      maxWidth: '390px', 
+      maxWidth: '400px', 
       width: '100%', 
       maxHeight: '90vh', 
       backgroundColor: 'black',
       border: '2px solid black',
       borderRadius: '8px',
       padding: '30px',
-      marginTop: '45px',
+      marginTop: '27px',
+      marginBottom:'50px',
     },
     closeButton: {
       alignSelf: 'flex-end',
@@ -35,12 +36,16 @@ const ExerciseModal = ({ isOpen, onClose, exercise }) => {
       borderRadius: '4px',
       cursor: 'pointer',
     },
+    description: {
+      maxHeight: '200px',  
+      overflowY: 'auto',   
+    },
   };
 
   const imageStyles = {
     maxWidth: '100%', 
     height: '60%', 
-    width: '100%',
+    width: '90%',
     borderRadius: '8px', 
     marginBottom: '10px', 
   };
@@ -50,7 +55,7 @@ const ExerciseModal = ({ isOpen, onClose, exercise }) => {
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
       {exercise && (
         <div>
-          <h2 className="text-yellow-500 font-bold text-xl mb-4 mt-40">Exercise Details</h2>
+          <h2 className="text-yellow-500 font-bold text-xl mb-4 mt-20">Exercise Details</h2>
           <Carousel showArrows={true} showThumbs={false}>
             {exercise.imageworkout.map((imageName, index) => (
               <div key={index} className="carousel-image-container">
@@ -63,9 +68,9 @@ const ExerciseModal = ({ isOpen, onClose, exercise }) => {
               </div>
             ))}
           </Carousel>
-          <div className="mb-4">
+          <div className="mb-4" >
             <h3 className="text-yellow-500 font-bold text-xl mb-4">Description:</h3>
-            <p className="text-white">{exercise.descriptionworkout}</p>
+            <p className="text-white" style={customStyles.description}>{exercise.descriptionworkout}</p>
           </div>
         </div>
       )}
