@@ -69,8 +69,8 @@ console.log("decodedToken=>",id);
 
 const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg';
   return (
-    <section>
-    <header className={`fixed top-0 left-0 right-0 mx-auto px-10 flex items-center justify-between bg-transparent z-50 backdrop-blur-lg`}>
+    <section className="bg-zinc-800"> 
+    <header className={`bg-zinc-800 fixed top-0 left-0 right-0 mx-auto px-10 flex items-center justify-between bg-transparent z-50 backdrop-blur-lg`}>
       <div className="flex items-center">
         <img src={images.Logo} alt="Logo" className="w-16 h-16" />
         <h1 className="font-semibold text-xl ml-2 text-yellow-500">Get Bulk</h1>

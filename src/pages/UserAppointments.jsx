@@ -24,7 +24,7 @@ function PrivateTrainers() {
         <UserDashboard />
         <div className="h-full w-full ml-56 mt-40 mb-10 card-container">
           {trainers.map((trainer) => (
-            <Link to={`/UserCalendar/${trainer._id}`} key={trainer._id}>
+            <Link to={`/workoutselection/${trainer._id}`} key={trainer._id}>
             <div className="card">
               <div className="front">
                 {trainer.imagePath && (
