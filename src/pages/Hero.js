@@ -1,24 +1,59 @@
-//import images
 import WomanImg from '../img/mm.png';
-//import Link 
-import {Link} from 'react-router-dom';
-import React, { useContext, useEffect, useState } from 'react';
-//sidebar context
+import { Link } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
 import { SidebarContext } from './SidebarContext.js';
-//cart context
 import { CartContext } from './CartContext.js';
-//import icons 
 import { BsBag } from 'react-icons/bs/index.esm.js';
 import Header from './Header.jsx';
-
+import axios from 'axios';
+import Footer from './Footer.jsx';
+import { FaWhatsapp } from 'react-icons/fa/index.esm.js';
 
 
 const Hero = () => {
- //header state
- const { isOpen , setIsOpen } = useContext(SidebarContext);
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { itemAmount } = useContext(CartContext);
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [categories, setCategories] = useState([]);
 
+  const [selectedCategoryName, setSelectedCategoryName] = useState('');
+
+
+  useEffect(() => {
+    
+    axios.get('http://localhost:8000/category/')
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        console.log('Error fetching categories:', error);
+      });
+  }, []);
+
+  const images = categories.map(category => {
+    return { name: category.name, source: `/uploads/usersImages/${category.categoryimage}` };
+  });
+
+  const handleNext = () => {
+    const newIndex = (currentImageIndex + 1) % images.length;
+    setCurrentImageIndex(newIndex);
+    setSelectedCategoryName(images[newIndex].name);
+  };
+  
+  const handlePrevious = () => {
+    const newIndex = (currentImageIndex - 1 + images.length) % images.length;
+    setCurrentImageIndex(newIndex);
+    setSelectedCategoryName(images[newIndex].name);
+  };
+  
+  const handleWhatsAppClick = () => {
+    const chatSection = document.getElementById('chat-section'); 
+    if (chatSection) {
+      chatSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+ 
   return(
     <div>
 
@@ -61,10 +96,52 @@ const Hero = () => {
       </div>
     </div>
     </section>
+    <section className="flex items-center justify-center bg-black text-yellow-500 text-[40px] ">
+  <h2 className="text-center text-yellow-500 mb-28">Our Categories</h2>
+</section>
+    <div className="flex items-center justify-center  bg-black">
+        <button onClick={handlePrevious} className="mr-4">
+          Previous
+        </button>
+        <div className="flex space-x-2 mb-20">
+        {images.map((image, index) => (
+  <div
+    key={index}
+    className={`relative mb-40 mr-6 bg-black w-[200px] h-[400px] ${
+      index === currentImageIndex ? 'opacity-100' : 'opacity-50'
+    } transition-opacity duration-300 `}
+  >
+    <img src={image.source} alt={image.name} className="w-full h-full mb-8 " />
+    <Link
+      to="/Homeprodu"
+      className="block text-[18px] text-center text-white hover:text-white hover:bg-yellow-500 transition-all duration-300 rounded-full py-2 px-4 border border-white"
+    >
+      {image.name}
+    </Link>
+    
+  </div>
+))}
+</div>
+
+
+
+        <button onClick={handleNext} className="ml-4">
+          Next
+        </button>
+      </div>
+
+      
+        <div
+          onClick={() => window.open('https://wa.me/03638693', '_blank')}
+          className='cursor-pointer  flex fixed right-4 bottom-4 z-20 transition-all duration-300 transform hover:-translate-y-1'
+        >
+          <FaWhatsapp className='text-5xl text-green-500' />
+        </div>
+      
+
+      <Footer/>
     </div>
-
-
-    );
+  );
 };
 
 export default Hero;
