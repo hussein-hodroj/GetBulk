@@ -131,88 +131,88 @@ function UserUpdate() {
   return (
     <div>
       
-      <div className="flex ">
+      <div className="bg-black min-h-screen flex items-center justify-center">
         <Dashboard />
-        <div className="h-full w-full ml-56 mt-20 mb-5 ">
-          <div className="p-3 flex-auto pr-20 pt-8">
+        <div className="h-3/5 w-3/5 mt-20 mb-5 ">
+          <div className="p-3 flex-auto pr-20 pt-8 ml-16 ">
             <div className="flex justify-end mb-2 ml-240"></div>
-            <form onSubmit={handleSubmit} className="bg-zinc-600 p-5 rounded shadow-md">
-              <div className="mb-2">
-                <label htmlFor="fullname" className="block text-white font-size:13 font-semibold mb-2">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="fullname"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  value={fullname}
-                  onChange={handleFullNameChange}
-                  required
-                  pattern=".*\S+.*" // At least one non-space character
-                  title="Full Name is required" // Custom error message
-                />
-
-              </div>
-              <div className="mb-2">
-                <label htmlFor="email" className="block text-white font-size:13 font-semibold mb-2">
-                  Email
-                </label>
-                <input
-                          type="email"
-                          id="email"
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          value={email}
-                          onChange={handleEmailChange}
-                          required // Add the required attribute
-                />
-
-              </div>
-             
-              <div className="mb-2">
-                <label htmlFor="age" className="block text-white font-size:13 font-semibold mb-2">
-                  Age
-                </label>
-                <input
-                        type="number"
-                        id="age"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        value={age}
-                        onChange={handleAgeChange}
-                        required // Add the required attribute
-              />
-
-              </div>
-              <div className="mb-2">
-                <label htmlFor="phonenumber" className="block text-white font-size:13 font-semibold mb-2">
-                  PhoneNumber
-                </label>
-                <input
-                        type="number"
-                        id="phonenumber"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        value={phonenumber}
-                        onChange={handlePhoneChange}
-                        required // Add the required attribute
+            <form onSubmit={handleSubmit} className="bg-black p-5 rounded shadow-md border-yellow-500 border-2 shadow-yellow-400">
+              <div className="mb-2 flex space-x-8">
+                <div className="w-1/2">
+                  <label htmlFor="fullname" className="block text-yellow-500 text- font-bold  mb-4 ">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="fullname"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                    value={fullname}
+                    onChange={handleFullNameChange}
+                    required
+                    pattern=".*\S+.*"
+                    title="Full Name is required"
                   />
-
+                </div>
+                <div className="w-1/2">
+                  <label htmlFor="email" className="block text-yellow-500 text- font-bold  mb-4 ">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                    value={email}
+                    onChange={handleEmailChange}
+                    required
+                  />
+                </div>
               </div>
-              <div className="mb-2">
-                <label htmlFor="address" className="block text-white font-size:13 font-semibold mb-2">
-                  Address
-                </label>
-                <input
-                        type="text"
-                        id="address"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        value={address}
-                        onChange={handleAddressChange}
-                        required // Add the required attribute
-                      />
-
+              
+              <div className="mb-2  flex space-x-8">
+                <div className="w-1/2">
+                  <label htmlFor="age" className="block text-yellow-500 text- font-bold  mb-4 ">
+                    Age
+                  </label>
+                  <input
+                    type="number"
+                    id="age"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                    value={age}
+                    onChange={handleAgeChange}
+                    required
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label htmlFor="phonenumber" className="block text-yellow-500 text- font-bold  mb-4 ">
+                    Phone Number
+                  </label>
+                  <input
+                    type="number"
+                    id="phonenumber"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                    value={phonenumber}
+                    onChange={handlePhoneChange}
+                    required
+                  />
+                </div>
               </div>
-
-                      <div className="mb-2">
-                  <label htmlFor="profileImage" className="block text-white font-size:13 font-semibold mb-2">
+              
+              <div className="mb-2  flex space-x-8">
+                <div className="w-1/2">
+                  <label htmlFor="address" className="block text-yellow-500 text- font-bold  mb-4">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    id="address"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+                    value={address}
+                    onChange={handleAddressChange}
+                    required
+                  />
+                </div>
+                <div className="w-1/2 space-x-5">
+                  <label htmlFor="profileImage" className="block text-yellow-500 text- font-bold  mb-4 ml-4">
                     Profile Image
                   </label>
                   <input
@@ -222,29 +222,33 @@ function UserUpdate() {
                     onChange={handleImageChange}
                   />
                 </div>
-             
-
-              <div className="  justify-between space-x-6 space-y-3 ">
+              </div>
+              
+              <div className="flex justify-end space-x-8">
                 <button
                   type="submit"
-                  className="bg-yellow-400 hover:bg-yellow-500 hover:text-black text-white font-semibold py-2 px-6  rounded focus:outline-none focus:shadow-outline "
+                  className="bg-yellow-400 hover:bg-yellow-500 hover:text-black h-10 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline "
                 >
-                  Update  
+                  Update
                 </button>
                 <button
-        type="button"
-        onClick={handleCancel}
-        className="bg-red-700 hover:bg-red-800 hover:text-black text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
-      >
-        Cancel
-      </button>
-      {updateSuccess && (
-  <p className="text-yellow-500 font-bold mt-3">
-    Data has been updated successfully!
-  </p>
-)}
+                  type="button"
+                  onClick={handleCancel}
+                  className="bg-red-700 hover:bg-red-800 hover:text-black h-10 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Cancel
+                </button>
+              </div>
+              
+              <div>
+                {updateSuccess && (
+                  <p className="text-green-500 font-bold mt-3">
+                    Data has been updated successfully!
+                  </p>
+                )}
               </div>
             </form>
+
             
 
           </div>

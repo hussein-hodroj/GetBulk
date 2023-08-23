@@ -15,9 +15,9 @@ const [userData, setUserData] = useState(null); // State to store user data
 const navigate = useNavigate();
 const [navIsVisible, setNavIsVisible] = useState(false);
 
-const handleSidebarItemClick = (link) => {
-  setActiveLink(link);
-};
+// const handleSidebarItemClick = (link) => {
+//   setActiveLink(link);
+// };
 
 // const token = localStorage.getItem('token');
 //   const decodedToken = jwt_decode(token);
@@ -103,17 +103,36 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               navIsVisible ? 'flex' : 'hidden'
             } flex-col gap-y-5 lg:flex-row gap-x-5 font-semibold`}
           >
-            <a
-              href="http://localhost:3000/UserDashboard"
+              <a
+              href="http://localhost:3000/"
               className={`href ${
-                activeLink === 'UserDashboard' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
+                activeLink === 'HomePage' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
+              } transition-all duration-300 transform scale-100 hover:scale-110`}
+              onClick={() => handleLinkClick('HomePage')}
+            >
+              HomePage
+            </a>
+            <a
+               href="http://localhost:3000/UserDashboard#"
+               className={`href ${
+                 activeLink === 'UserDashboard' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
               } transition-all duration-300 transform scale-100 hover:scale-110`}
               onClick={() => handleLinkClick('UserDashboard')}
             >
               Dashboard
             </a>
+          
             <a
-              href="http://localhost:3000/UserFeedback"
+              href="http://localhost:3000/UserAppointments#"
+              className={`href ${
+                activeLink === 'UserAppointments' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
+              } transition-all duration-300 transform scale-100 hover:scale-110`}
+              onClick={() => handleLinkClick('UserAppointments')}
+            >
+              Trainers
+            </a>
+            <a
+              href="http://localhost:3000/UserFeedback#"
               className={`href ${
                 activeLink === 'UserFeedback' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
               } transition-all duration-300 transform scale-100 hover:scale-110`}
@@ -122,7 +141,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               Feedback
             </a>
             <a
-              href="http://localhost:3000/UserUpdate"
+              href="http://localhost:3000/UserUpdate#"
               className={`href ${
                 activeLink === 'UserUpdate' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
               } transition-all duration-300 transform scale-100 hover:scale-110`}
@@ -131,7 +150,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
              Update Profile
             </a>
             <a
-              href="http://localhost:3000/edit-password-user"
+              href="http://localhost:3000/edit-password-user#"
               className={`href ${
                 activeLink === 'edit-password-user' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
               } transition-all duration-300 transform scale-100 hover:scale-110`}
@@ -139,15 +158,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             >
              Edit Password
             </a> 
-            <a
-              href="http://localhost:3000/UserAppointments"
-              className={`href ${
-                activeLink === 'UserAppointments' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
-              } transition-all duration-300 transform scale-100 hover:scale-110`}
-              onClick={() => handleLinkClick('UserAppointments')}
-            >
-              Trainers
-            </a>
+          
           </nav>
         </header>
       </div>

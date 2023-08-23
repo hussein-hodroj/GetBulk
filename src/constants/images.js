@@ -11,7 +11,9 @@ import contactus2 from "../asset/contact-us2.png"
 import slide1 from "../asset/slide1.jpg"
 import slide2 from "../asset/slide2.jpg"
 import slide3 from "../asset/slide3.jpg"
-
+import slide4 from "../asset/slide4.jpg"
+import slide5 from "../asset/slider5.jpg"
+import slide6 from "../asset/slider6.jpg"
 
    
 const images ={
@@ -23,11 +25,14 @@ const images ={
     AboutUs,
     PublicWork,
     OpeningHours,
-  
     contactus2,
     slide1,
     slide2,
-    slide3
+    slide3,
+    slide4,
+    slide5,
+    slide6,
+   
 
 }
 export default images; 

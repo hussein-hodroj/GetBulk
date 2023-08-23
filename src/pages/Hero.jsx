@@ -121,16 +121,31 @@ useEffect(() => {
           interval={3000}
         >
           <div>
-            <img src={images.AboutUs} alt="Gym profile" className="w-96 h-88 mt-25 mx-auto px-10" />
+            <img src={images.AboutUs} alt="Slider" className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
+
           <div>
-            <img src={images.slide1} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <img src={images.slide1} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
+
           <div>
-            <img src={images.slide2} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <img src={images.slide2} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
+
           <div>
-            <img src={images.slide3} alt="Slide"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <img src={images.slide3} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+          </div>
+
+          <div>
+            <img src={images.slide4} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+          </div>
+
+          <div>
+            <img src={images.slide5} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+          </div>
+
+           <div>
+            <img src={images.slide6} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
           </div>
           
         </Carousel>
@@ -214,7 +229,7 @@ useEffect(() => {
       <div className="flex justify-center">
         <img src={service.image} alt={service.title} className="w-16 h-16 rounded-full mr-32" />
       </div>
-      <p className="text-gray-100 lg:text-base lg:text-left col-span-2 pt-3 text-justify ">
+      <p className="text-gray-100 lg:text-base lg:text-left col-span-2 pt-3 text-justify">
         {service.description}
       </p>
     </div>
@@ -224,7 +239,7 @@ useEffect(() => {
 </div>
 
 
-<div className="mt-3" id='ContactUs'>
+<div className="mt-10" id='ContactUs'>
  
   <div className="flex gap-8">
     <div className="flex-1 flex items-center">
@@ -240,7 +255,7 @@ useEffect(() => {
   </h1>
   <div className="flex gap-4 ">
   <div className="flex flex-col max-w-full">
-    <label className="font-roboto text-yellow-500 text-xl mt-4 mb-4" htmlFor="fullName">Full Name</label>
+    <label className="font-roboto text-yellow-500 text-2xl font-semibold  mt-4 mb-4" htmlFor="fullName">Full Name:</label>
     <input
       className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 mx-1 w-full max-w-full pr-12 px-4"
       type="text"
@@ -253,9 +268,9 @@ useEffect(() => {
   </div>
   
   <div className="flex flex-col max-w-full">
-    <label className="font-roboto text-yellow-500 text-xl mt-4 mb-4 mx-10" htmlFor="email">Email</label>
+    <label className="font-roboto text-yellow-500 text-2xl font-semibold  mt-4 mb-4 mx-10" htmlFor="email">Email:</label>
     <input
-      className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 mx-10 w-full max-w-full px-4"
+      className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 mx-11 w-full max-w-full px-4"
       type="email"
       id="email"
       placeholder="Please Enter your Email"
@@ -268,9 +283,9 @@ useEffect(() => {
   </div>
 </div>
 
-      <label className="font-roboto text-yellow-500 text-xl mt-7 mb-3" htmlFor="subject">Subject:</label>
+      <label className="font-roboto text-yellow-500 text-2xl font-semibold mt-7 mb-3" htmlFor="subject">Subject:</label>
       <textarea
-        className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 px-4 w-full h-24"
+        className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 px-4 w-full h-18"
         id="subject"
         placeholder="Enter your message here"
         onChange={handleSubjectChange}
