@@ -45,7 +45,11 @@ import UserWorkout from './pages/UserWorkout.js';
 import WorkoutSelection from './pages/WorkoutSelection.js';
 import UserAppointments from './pages/UserAppointments.jsx';
 import UserCalendar from './pages/UserCalendar.jsx';
+
+import CarouselSlider from './pages/CarouselSlider.js';
+
 import Heroprodu from './pages/Hero.js';
+
 
 
 function Layout() {
@@ -102,7 +106,7 @@ function Layout() {
             <Route path='/editpassword' element={<EditPassword />} />
             <Route path='/UserAppointments' element={<UserAppointments/>}/>
             <Route path = '/UserCalendar/:trainerId' element = {<UserCalendar/>}/>
-
+            <Route path='/transformation' element={<CarouselSlider/>}/>
           </Routes>
           <Sidebar />
           </CartProvider>

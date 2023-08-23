@@ -5,6 +5,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import CarouselSlider from './CarouselSlider.js';
 
 const services = [
   {
@@ -210,7 +211,7 @@ useEffect(() => {
   
 </div>
 <div className='mt-1'  id='Transformations'>
-
+<CarouselSlider />
 </div>
 <div className="mt-8"  id='Service'>
   
