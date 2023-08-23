@@ -167,3 +167,18 @@ export const getTrainerSchedule = async (req, res) => {
     res.status(500).json({ error: 'Error retrieving schedules' });
   }
 };
+
+export const updateStatus = async (req, res) => {
+  try {
+    const { scheduleIds } = req.body;
+
+    await Schedule.updateMany(
+      { _id: { $in: scheduleIds } },
+      { $set: { status: 1 } } // Set the status to ACTIVE (1)
+    );
+
+    res.status(200).json({ message: 'Schedule statuses updated successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating schedule statuses.' });
+  }
+};

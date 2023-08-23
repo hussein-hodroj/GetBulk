@@ -4,11 +4,12 @@ import '../AdminFeedback/DeleteFeedback.css';
 
 function DeleteProduct({ openDelete, productId }) {
     const handleSubmit = (e) => {
+          e.preventDefault();
         axios.delete(`http://localhost:8000/product/${productId}`)
         .then((response) => {
-          console.log(response.data);
-          window.location.reload();
-    
+          console.log(response.data);    
+        }).then(() => {
+          openDelete(false);
         })
         .catch((error) => {
           console.log('Error while deleting the feedback:', error);
@@ -18,7 +19,7 @@ function DeleteProduct({ openDelete, productId }) {
 
   return (
     <div className = "modalBackgroundDeleteFeedback">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e)=>handleSubmit(e)}>
       <div className= "modalContainerDeleteFeedback">
         <div className = "CloseBtnDeleteFeedback  flex justify-between">
         <h1 className="text-yellow-500 font-bold "> Delete Product: </h1>
