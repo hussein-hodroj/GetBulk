@@ -1,14 +1,4 @@
-.w-full {
-    width: 100%;
-  }
-  
-  
-  .h-auto {
-    height: auto;
-  }
-  .object-cover {
-    object-fit: cover;
-  }
+
 
 .flip-card {
     perspective: 1000px;

@@ -6,9 +6,9 @@ function UpdateStatus({ close, orderId }) {
     const handleSubmit = (e) => {
         axios.put(`http://localhost:8000/order/status/${orderId}`)
         .then((response) => {
-          console.log(response.data);
-          window.location.reload();
-    
+          console.log(response.data);    
+        }).then(()=>{
+          close(false)
         })
         .catch((error) => {
           console.log('Error while deleting the feedback:', error);
@@ -18,7 +18,7 @@ function UpdateStatus({ close, orderId }) {
 
   return (
     <div className = "modalBackgroundDeleteFeedback">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e)=>handleSubmit(e)}>
       <div className= "modalContainerDeleteFeedback">
         <div className = "CloseBtnDeleteFeedback  flex justify-between">
         <h1 className="text-yellow-500 font-bold "> Update Order Status: </h1>
