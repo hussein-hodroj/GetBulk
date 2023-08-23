@@ -27,10 +27,10 @@ export const getAllCategories = async (req, res) => {
   };
   
   export const createCategory = async (req, res) => {
-    const { name } = req.body;
+    const { name, categoryimage } = req.body;
   
     try {
-      const newCategory = new CategoryModel({ name });
+      const newCategory = new CategoryModel({ name, categoryimage });
 
       await newCategory.save();
       res.status(200).send('Category created successfully');
@@ -42,13 +42,13 @@ export const getAllCategories = async (req, res) => {
   
   export const updateCategory = async (req, res) => {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, categoryimage } = req.body;
   
     try {
 
       const Updatecategory = await CategoryModel.findByIdAndUpdate(
         id,
-        { name },
+        { name, categoryimage },
         { new: true }
       );
 

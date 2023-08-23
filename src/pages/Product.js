@@ -5,6 +5,8 @@ import { CartContext } from './CartContext.js';
 
 const Product = ({ product, categories }) => {
   const { addToCart } = useContext(CartContext);
+ 
+
   const { _id, imagePath, name, price } = product;
 
   const category = categories.find(c => c._id === product.category);
@@ -13,9 +15,11 @@ const Product = ({ product, categories }) => {
   const truncatedName = name.length > 20 ? name.substring(0, 17) + '...' : name;
 
   const scrollToTopAndNavigate = () => {
-    window.scrollTo(0, 0); // Scroll to the top of the page
-    window.location.href = `/product/${_id}`; // Navigate to the product details page
+    window.scrollTo(0, 0); 
+    window.location.href = `/product/${_id}`; 
   };
+
+  
 
   return (
     <div>

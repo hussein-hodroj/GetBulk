@@ -44,7 +44,7 @@ const ProductDetails = () => {
   return (
     <div className='bg-black text-white'>
       <div className='sticky top-0 bg-black mx-auto flex items-center justify-between pt-20 z-10'>
-        <Link to={'/produ'}>
+        <Link to={'/Homeprodu'}>
           <div className="ml-20 mr-10">
             <svg className='w-12 h-12 fill-current text-yellow-500' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M12 2L2 12h3v8h14v-8h3L12 2zm0 2.83L19.17 12H4.83L12 4.83z"/>
