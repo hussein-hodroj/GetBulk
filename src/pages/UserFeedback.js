@@ -114,48 +114,6 @@ function UserFeedback() {
   };
 
 
-  // const handleUpdateUser = () => {
-  //   if (!selectedFeedbackData) {
-  //     console.error('No feedback data selected for update.');
-  //     return;
-  //   }
-  //   const updatedFeedback = {
-  //     _id: selectedFeedbackData._id,
-  //     trainers: selectedTrainer,
-  //     feedback: feedbackText,
-  //     users: selectedFeedbackData.users, 
-  //   }; 
-  //   axios
-  //   .put(`http://localhost:8000/feedback/updatefeedback`, updatedFeedback)
-     
-  //     .then((response) => {
-  //       console.log('Feedback updated successfully:', response.data);
-  
-  //       // Update the feedbackList with the updated feedback data
-  //       const updatedList = feedbackList.map((feedback) => {
-  //         if (feedback._id === selectedFeedbackData._id) {
-  //           return {
-  //             ...feedback,
-  //             trainername: selectedTrainer,
-  //             feedback: feedbackText,
-  //           };
-  //         }
-  //         return feedback;
-  //       });
-  
-  //       setFeedbackList(updatedList);
-  
-  //       // Clear the form and close the modal
-  //       setSelectedTrainer('');
-  //       setFeedbackText('');
-  //       setShowUpdateModal(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error updating feedback:', error);
-  //     });
-  // };
-  
-
   const handleUpdateUser = () => {
     if (!selectedFeedbackData) {
       console.error('No feedback data selected for update.');
@@ -224,12 +182,12 @@ function UserFeedback() {
   
 
   return (
-    <div>
-      <div className="flex">
+    <div className='bg-black min-h-screen  '>
+      <div className="flex ">
         <Dashboard />
-        <div className="h-full w-full ml-56 mt-14 mb-10">
+        <div className="h-4/5 w-4/5  mx-32 mt-14 mb-10 ">
           <div className="p-6 gap-4">
-            <div className="flex">
+            <div className="flex mt-16">
             <button
                 className="text-white bold border font-bold bg-yellow-500 rounded px-2 py-1 transition-transform transform-gpu hover:scale-110"
                 onClick={toggleAddModal}
@@ -240,7 +198,7 @@ function UserFeedback() {
             </div>
             {showAddModal && (
                 <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40">
-                  <div className="bg-zinc-800 p-7 rounded shadow-md w-96">
+                  <div className="bg-zinc-800 p-7 rounded shadow-md w-96 ">
                     {errorMessage && <p className="text-red-600 mb-2">{errorMessage}</p>}
                     <div className="flex justify-end" aria-hidden="true">
                       <button className="text-yellow-500" onClick={toggleAddModal}>
@@ -248,54 +206,35 @@ function UserFeedback() {
                       </button>
                     </div>
                     <p className="text-2xl text-yellow-500 font-bold mb-5">New Feedback</p>
-                    {/* <div className="mb-3">
-                      <label className="text-yellow-500 font-semibold mb-2 block">Username</label>
-                    <span className="text-yellow-500 font-bold mb-3"> {userName}</span>
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="text-yellow-500 font-semibold mb-2 block">Trainer Name</label>
-                      <select
-                        value={selectedTrainer}
-                        onChange={handleTrainerSelect}
-                        className="px-6 py-2 w-full rounded-xl border Border-white"
-                      >
-                        <option value="">Select a Trainer</option>
-                        {trainers.map((trainer) => (
-                          <option key={trainer._id} value={trainer.fullname}>
-                            {trainer.fullname}
-                          </option>
-                        ))}
-                      </select>
-                    </div> */}
+                   
                     <div className="mb-3 flex">
-  <div className="mr-4">
-    <label className="text-yellow-500 text-xl font-semibold mb-4 block mr-8">Username: </label>
-    <span className="text-yellow-500  text-lg">{userName}</span>
-  </div>
-  <div>
-    <label className="text-yellow-500 text-xl font-semibold mb-4 block ">Trainer's Name:</label>
-    <select
-      value={selectedTrainer}
-      onChange={handleTrainerSelect}
-      className="px-6 py-2 w-full rounded-lg border Border-white"
-    >
-      <option value="">Select a Trainer</option>
-      {trainers.map((trainer) => (
-        <option key={trainer._id} value={trainer.fullname}>
-          {trainer.fullname}
-        </option>
-      ))}
-    </select>
-  </div>
-</div>
+                        <div className="mr-4">
+                          <label className="text-yellow-500 text-xl font-semibold mb-4 block mr-8">Username: </label>
+                          <span className="text-yellow-500  text-lg">{userName}</span>
+                        </div>
+                        <div>
+                          <label className="text-yellow-500 text-xl font-semibold mb-4 block ">Trainer's Name:</label>
+                          <select
+                            value={selectedTrainer}
+                            onChange={handleTrainerSelect}
+                            className="px-6 py-2 w-full rounded-lg border Border-white text-black font-semibold"
+                          >
+                            <option value="">Select a Trainer</option>
+                            {trainers.map((trainer) => (
+                              <option key={trainer._id} value={trainer.fullname}>
+                                {trainer.fullname}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
 
                     <div className="mb-3">
                       <label className="text-yellow-500 text-xl font-semibold mb-2 block">Feedback</label>
                       <textarea
                         value={feedbackText}
                         onChange={handleFeedbackTextChange}
-                        className="w-full rounded-lg p-2 border Border-white"
+                        className="w-full rounded-lg p-2 border Border-white text-black"
                       />
                     </div>
                     <div className="flex justify-end">
@@ -323,8 +262,8 @@ function UserFeedback() {
               </div>
             </div>
             <table className="min-w-full divide-y border border-black">
-              <thead className="bg-zinc-600 ">
-                <tr className="bg-zinc-600 ">
+              <thead className="bg-zinc-600  ">
+                <tr className="bg-zinc-600 mt-9 ">
                   <th
                     scope="col"
                     className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border"
