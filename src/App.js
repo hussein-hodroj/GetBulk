@@ -43,7 +43,6 @@ import Schedules from './pages/Schedules.js';
 import TransformPage from './pages/transform.js';
 import UserWorkout from './pages/UserWorkout.js';
 import WorkoutSelection from './pages/WorkoutSelection.js';
-import UserAppointments from './pages/UserAppointments.jsx';
 import UserCalendar from './pages/UserCalendar.jsx';
 
 import CarouselSlider from './pages/CarouselSlider.js';
@@ -104,7 +103,6 @@ function Layout() {
             <Route path="/trainers" element={<Trainers />} />
             {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
             <Route path='/editpassword' element={<EditPassword />} />
-            <Route path='/UserAppointments' element={<UserAppointments/>}/>
             <Route path = '/UserCalendar/:trainerId' element = {<UserCalendar/>}/>
             <Route path='/transformation' element={<CarouselSlider/>}/>
             <Route path='/WorkoutDescription/:trainerId/:workoutId' element={<WorkoutDescription/>}/>
