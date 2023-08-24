@@ -89,7 +89,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
             type="text"
             id="trainer"
             value={userName}
-            className="w-full bg-white rounded p-2"
+            className="w-full bg-white text-black rounded p-2"
           />
         </div>
         <div className="mb-4">
@@ -101,7 +101,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
             id="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full bg-white rounded p-2"
+            className="w-full bg-white text-black  rounded p-2"
             required
           />
         </div>
@@ -115,7 +115,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
             id="timeSchedule"
             value={timeSchedule}
             onChange={(e) => setTimeSchedule(e.target.value)}
-            className="w-full bg-white rounded p-2"
+            className="w-full bg-white text-black  rounded p-2"
             required
           />
         </div>

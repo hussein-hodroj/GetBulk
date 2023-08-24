@@ -83,8 +83,8 @@ const Hero = () => {
           <div className='w-20 h-[5px] bg-yellow-500 mr-3 '></div>New Products
         </div>
         {/*title */}
-        <h1 className='text-[70px] leading-[1.1] font-light mb-4 text-white'>Power in every bite <br />
-        <span className='text-[40px] leading-[1.1] font-light mb-4 text-white'>Food your body craves for</span>
+        <h1 className='text-[70px] leading-[1.1] font-light mb-4 text-white font-serif'>Power in every bite <br />
+        <span className='text-[40px] leading-[1.1] font-light mb-4 text-white font-serif'>Food your body craves for</span>
         </h1>
         {/* <Link to={'/'} className='self-start uppercase font-semibold border-b-2 border-primary text-white'>
           Discover More
@@ -97,10 +97,10 @@ const Hero = () => {
     </div>
     </section>
     <section className="flex items-center justify-center bg-black text-yellow-500 text-[40px] ">
-  <h2 className="text-center text-yellow-500 mb-28">Our Categories</h2>
+  <h2 className="text-center text-yellow-500 mb-28 font-serif">Our Categories</h2>
 </section>
     <div className="flex items-center justify-center  bg-black">
-        <button onClick={handlePrevious} className="mr-4">
+        <button onClick={handlePrevious} className="mr-8  hover:text-yellow-500">
           Previous
         </button>
         <div className="flex space-x-2 mb-20">
@@ -114,7 +114,7 @@ const Hero = () => {
     <img src={image.source} alt={image.name} className="w-full h-full mb-8 " />
     <Link
       to="/Homeprodu"
-      className="block text-[18px] text-center text-white hover:text-white hover:bg-yellow-500 transition-all duration-300 rounded-full py-2 px-4 border border-white"
+      className="block text-[18px] text-center text-white hover:text-white hover:bg-yellow-500 transition-all duration-300 rounded-full py-2 border border-white"
     >
       {image.name}
     </Link>
@@ -125,7 +125,7 @@ const Hero = () => {
 
 
 
-        <button onClick={handleNext} className="ml-4">
+        <button onClick={handleNext} className="ml-8 hover:text-yellow-500">
           Next
         </button>
       </div>
