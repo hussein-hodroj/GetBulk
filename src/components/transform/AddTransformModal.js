@@ -82,7 +82,7 @@ formData.append('imageAfter', imageAfter);
       </div>
 
       <div className="mb-4">
-        <label className="text-black">Image After Work:</label>
+        <label className="text-white ">Image After Work:</label>
         <input
           type="file"
           accept="image/*"
@@ -101,7 +101,7 @@ formData.append('imageAfter', imageAfter);
         )}
       </div>
         <div className="mb-4">
-          <label className="text-black">Description:</label>
+          <label className="text-white ">Description:</label>
           <textarea
             value={descriptionTransform}
             onChange={(e) => setDescriptionTransform(e.target.value)}

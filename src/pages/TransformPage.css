@@ -1,13 +1,17 @@
-/* TransformPage.css */
+:root {
+  --yellow-color: #F6D21D; 
+}
+
+
 .transform-page {
   display: flex;
   flex-direction: column;
-  margin-left: 10%;
   margin-top: 7%;
   align-items: flex-start;
   width: 100%;
   padding-left: 20px;
   height: auto;
+  background-color: black;
 }
 
 .labels {
@@ -29,13 +33,16 @@
   justify-content: flex-start;
   width: 100%;
   height: 600px;
+ 
 }
 
 .transform-card {
   flex: 0 0 calc(45% - 20px);
   background-color: rgb(0, 0, 0);
   padding: 20px;
-  border-radius: 8px;
+  margin-right: 50px;
+  border: 2px solid #F6D21D; 
+  border-radius: 8px; 
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
@@ -44,8 +51,29 @@
   display: flex;
   flex-direction: column;
   height: 70%;
+  position: relative; 
+  transition: transform 0.3s ease-in-out;
+}
+.transform-card:hover {
+  transform: scale(1.05); 
 }
 
+.transform-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); 
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out; 
+  pointer-events: none; 
+}
+
+.transform-card:hover::before {
+  opacity: 1; 
+}
 
 
 .description-content {
@@ -57,7 +85,7 @@
     margin-top: 10px;
     padding-right: 10px;
     resize: vertical;
-    border: yellow;
+    border: #F6D21D;
     background-color: transparent;
     color: white;
     font-size: 15px;
@@ -97,3 +125,12 @@
   display: flex;
   justify-content: flex-end;
 }
+.add-button {
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.add-button:hover {
+  border-color: var(--yellow-color);
+}
+

@@ -8,6 +8,7 @@ import { BsBag } from 'react-icons/bs/index.esm.js';
 import Product from './Product.js';
 import { FaWhatsapp } from 'react-icons/fa/index.esm.js';
 import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
 
 
@@ -180,6 +181,8 @@ const Home = () => {
       </section>
      
     </div>
+
+    <Footer/>
     </div>
   );
 };

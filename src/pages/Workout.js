@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa/index.esm.js';
+import { FaPlus, FaEdit, FaTrash, FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa/index.esm.js';
 import Dashboard from './TrainerDashboard.js';
 import './style.css';
 import AddWorkoutModal from '../components/adminworkout/AddWorkoutModal.js';
@@ -14,6 +14,10 @@ function Workout() {
   const [addModalIsOpen, setAddModalIsOpen] = useState(false);
   const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const workoutsPerPage = 10;
+  const [searchInput, setSearchInput] = useState('');
+
 
   useEffect(() => {
     fetchWorkouts();
@@ -81,7 +85,39 @@ const handleShowExercises = (exercise) => {
 };
 
   
+const handlePreviousPage = () => {
+  if (currentPage > 1) {
+    setCurrentPage(currentPage - 1);
+  }
+};
 
+const handleNextPage = () => {
+  const totalPages = Math.ceil(filteredWorkouts.length / workoutsPerPage);
+  if (currentPage < totalPages) {
+    setCurrentPage(currentPage + 1);
+  }
+};
+
+const indexOfLastWorkout = currentPage * workoutsPerPage;
+const indexOfFirstWorkout = indexOfLastWorkout - workoutsPerPage;
+
+
+const filteredWorkouts = workouts.filter((workout) => {
+  const searchString =
+    workout.type.toLowerCase() +
+    workout.Day.toLowerCase() +
+    workout.gender.toLowerCase() +
+    workout.Duration.toLowerCase() +
+    workout.workoutplan.toLowerCase();
+
+  return searchString.includes(searchInput.toLowerCase());
+});
+
+const currentWorkouts = filteredWorkouts.slice(indexOfFirstWorkout, indexOfLastWorkout);
+
+const handleSearchInputChange = (event) => {
+  setSearchInput(event.target.value);
+};
   
 
   return (
@@ -92,6 +128,17 @@ const handleShowExercises = (exercise) => {
         <div className="p-6 gap-4">
 
           <div className="flex justify-between items-center mb-4">
+
+          <div className="flex items-center rounded-md bg-gray-100 p-2">
+          <input
+                type="text"
+                placeholder="Search..."
+                className="bg-transparent border-none focus:outline-none text-gray-500"
+                value={searchInput}
+                onChange={handleSearchInputChange}
+              />
+              <FaSearch className="ml-2 text-gray-500" />
+            </div>
          
           <button
             className="flex justify-between items-center px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-black ml-auto"
@@ -116,7 +163,7 @@ const handleShowExercises = (exercise) => {
               </tr>
             </thead>
             <tbody>
-  {workouts.map((workout, index) => (
+            {currentWorkouts.map((workout, index) => (
     <tr key={workout._id} className={workouts.indexOf(workout) % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
 <td className="py-2 px-4">{index + 1}</td>
       <td className="py-2 px-4">{workout.Time}</td>
@@ -128,10 +175,10 @@ const handleShowExercises = (exercise) => {
       <td>{workout.workoutplan}</td>
       <td>
         <button
-          className="px-4 py-2 bg-yellow-500 text-white rounded-lg mr-2 hover:bg-yellow-600"
+          className="px-4 py-2 bg-yellow-500 text-white rounded-lg mr-2 my-2 hover:bg-yellow-600"
           onClick={() => handleShowExercises(workout)}
         >
-          Show Exercises
+          Exercises
         </button>
       </td>
       <td className="px-4 py-2">
@@ -155,6 +202,27 @@ const handleShowExercises = (exercise) => {
   ))}
 </tbody>
           </table>
+          <div className="flex justify-center mt-4">
+          <div className="flex items-center ml-auto">
+              <button
+                className="px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600"
+                onClick={handlePreviousPage}
+              >
+                <FaArrowLeft />
+              </button>
+              <p className="text-md text-yellow-500 ml-4 mr-4">
+                Page {currentPage} of {Math.ceil(filteredWorkouts.length / workoutsPerPage)}
+              </p>
+              <button
+                className="px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600"
+                onClick={handleNextPage}
+              >
+                <FaArrowRight />
+              </button>
+            </div>
+          </div>
+          
+          
         </div>
       </div>
       <AddWorkoutModal

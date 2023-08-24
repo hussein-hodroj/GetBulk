@@ -68,7 +68,7 @@ const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSc
     type="text"
     value={selectedSchedule ? selectedSchedule.tname : ''}
     readOnly
-    className="w-full bg-white rounded p-2"
+    className="w-full bg-white text-black  rounded p-2"
   />
         </div>
         <div className="mb-4">
@@ -80,7 +80,7 @@ const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSc
             id="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full bg-white rounded p-2"
+            className="w-full bg-white text-black  rounded p-2"
             required
           />
         </div>
@@ -93,7 +93,7 @@ const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSc
             id="timeSchedule"
             value={timeSchedule}
             onChange={(e) => setTimeSchedule(e.target.value)}
-            className="w-full bg-white rounded p-2"
+            className="w-full bg-white text-black  rounded p-2"
             required
           />
         </div>
