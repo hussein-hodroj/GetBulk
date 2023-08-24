@@ -8,7 +8,6 @@ import jwt_decode from 'jwt-decode';
 function UserCalendar() {
   const [schedule, setSchedule] = useState([]);
   const [userId, setUserId] = useState('');
-  const [booking, setBooking] = useState([]);
   const [trainerInfo, setTrainerInfo] = useState({});
   const { trainerId } = useParams(); // Get the trainerId from the URL parameter
   const [selectedSchedules, setSelectedSchedules] = useState([]);
@@ -40,7 +39,7 @@ function UserCalendar() {
         const userData = response.data;
         
         if (userData) {
-          setUserId(userData.id); // Update user's id
+          setUserId(id); // Update user's id
        
         }
       })
@@ -54,22 +53,23 @@ function UserCalendar() {
     e.preventDefault();
   
     // Collect selected schedule IDs
-    const selectedSchedules = schedule.filter((event) => event.selected);
+
   
-    if (selectedSchedules.length === 0) {
-      console.log("No schedules selected.");
-      return;
-    }
+    // if (selectedSchedules.length> 0) {
+    //   console.log("No schedules selected.");
+    //   return;
+    // }
   
     // Create booking
     const bookingData = {
-      userId: userId,
-      trainerId: trainerId,
       selectedSchedules: selectedSchedules.map((event) => ({
+        userId: userId, // Assuming userId is accessible in this scope
+        trainerId: trainerId,
         date: event.date,
-        Timeschedule: event.Timeschedule,
+        time: event.time,
       })),
     };
+    
   
     axios
       .post("http://localhost:8000/booking/createbooking", bookingData, {
@@ -79,16 +79,23 @@ function UserCalendar() {
       })
       .then((response) => {
         console.log("Booking created:", response.data);
-  
+        
         // Update schedule statuses
-        const updatedScheduleIds = selectedSchedules.map((event) => event.id);
+        const events = {
+          selectedSchedules: selectedSchedules.map((event) => ({
+           id:event.eventId
+          })),
+        };
   
         axios
-          .put("http://localhost:8000/schedule/updateStatus", {
-            scheduleIds: updatedScheduleIds,
-          })
+          .put("http://localhost:8000/schedule/updateStatus", 
+            events,{ headers: {
+              "Content-Type": "application/json",
+            },}
+          )
           .then((response) => {
             console.log("Schedule statuses updated:", response.data);
+            window.location.reload();
           })
           .catch((error) => {
             console.log("Error updating schedule statuses:", error);
@@ -99,12 +106,23 @@ function UserCalendar() {
       });
   };
   
-  const handleCheckboxChange = (eventId) => {
-    if (selectedSchedules.includes(eventId)) {
-      setSelectedSchedules(selectedSchedules.filter((id) => id !== eventId));
-    } else {
-      setSelectedSchedules([...selectedSchedules, eventId]);
-    }
+  const handleCheckboxChange = (time,date,eventId) => {
+    let updatedSchedule = selectedSchedules; // Create a copy of the selectedSchedules array
+
+  const existingSlotIndex = updatedSchedule.findIndex(
+    (slot) => slot.time === time && slot.date === date
+  );
+
+  if (existingSlotIndex !== -1) {
+    // If the slot exists in the array, remove it
+    updatedSchedule.splice(existingSlotIndex, 1);
+  } else {
+    // If the slot doesn't exist, add it
+    updatedSchedule.push({ eventId:eventId,trainer: trainerId,userId:userId, time: time, date: date });
+  }
+
+  setSelectedSchedules(updatedSchedule);
+    console.log(selectedSchedules)
   };
 
   return (
@@ -142,34 +160,64 @@ function UserCalendar() {
               <h1 className="title_home text-yellow-500">Appointment</h1>
               <div className="schedule-list ">
               <form onSubmit={handleSubmit}>
-        {schedule.map((event) => (
-          <div key={event.id} className="schedule-item">
-            <div className="schedule flex justify-start">
-              <p className="text-black text-white font-bold mr-4">
-                <span className="text-yellow-500"> Date:</span>{" "}
-                <span className="text-white">{event.date}</span>
-              </p>
-              <p className="text-black text-white font-bold">
-                <span className="text-yellow-500">Time:</span>{" "}
-                <span className="text-white">{event.Timeschedule}</span>
-              </p>
+                
+              <table className="table flex items-center justify-center font-bold bg-zinc-800 text-center w-full">
+                  <thead>
+                    <tr>
+                       <th scope="col" className="px-6 py-3 text-center bold font-medium text-white uppercase tracking-wider Border-white border">
 
-              <input
-                type="checkbox"
-                className="schedule-checkbox ml-4"
-                onChange={() => handleCheckboxChange(event.id)}
-                checked={selectedSchedules.includes(event.id)}
-              />
-            </div>
-          </div>
-        ))}
-        <div className="flex justify-end items-end">
+                  #</th>
+                                             <th scope="col" className="px-6 py-3 text-center bold font-medium text-white uppercase tracking-wider Border-white border">
+Date</th>
+                                             <th scope="col" className="px-6 py-3 text-center bold font-medium text-white uppercase tracking-wider Border-white border">
+Time</th>
+                                             <th scope="col" className="px-6 py-3 text-center bold font-medium text-white uppercase tracking-wider Border-white border">
+Select</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {schedule.map((event, index) => (
+                      <tr key={index} className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
+                                                   <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                                                   {index+1}
+</td>
+                                                                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+{event.date}</td>
+                                                                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+{event.Timeschedule}</td>
+                                                                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+
+                          <input
+                            type="checkbox"
+                            className="schedule-checkbox"
+                            onChange={() => handleCheckboxChange(event.Timeschedule, event.date, event._id)}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+        <div className="flex justify-between">
+           <div className="justify-start items-start">
+          <Link to={`/workoutselection/${trainerId}`}>
+          <button
+            type="button"
+            className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 mt-2 mb-2 font-bold"
+          >
+            Back
+          </button>
+          </Link>
+        </div>
+
+        <div className="justify-end items-end">
           <button
             type="submit"
             className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 mt-2 mb-2 font-bold"
           >
             Submit
           </button>
+        </div>
+       
         </div>
       </form>
               </div>

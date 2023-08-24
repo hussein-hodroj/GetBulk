@@ -164,15 +164,26 @@ const WorkoutSelection = () => {
                   <td>{workout.Day}</td>
                   <td>{workout.Time}</td>
                   <td>
+                              <Link to={`/WorkoutDescription/${trainerId}/${workout._id}`}>
         <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg mr-2 hover:bg-yellow-500 mt-2 mb-2">
           Workout
         </button>
-       
+       </Link>
       </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <div className="justify-start items-start">
+          <Link to={`/UserWorkout`}>
+          <button
+            type="button"
+            className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 mt-2 mb-2 font-bold"
+          >
+            Back
+          </button>
+          </Link>
+        </div>
           <div className="pagination flex items-center justify-center mt-4">
   <button
     onClick={() => setCurrentPage(currentPage - 1)}

@@ -8,20 +8,14 @@ import { images } from '../constants/index.js';
    
 function Dashboard() {
 const [activeLink, setActiveLink] = useState('')
-const [userImage, setUserImage] = useState(''); // State for user's uploaded image
+const [userImage, setUserImage] = useState(''); 
 const [userName, setUserName] = useState('Admin');
 const [updateSuccess, setUpdateSuccess] = useState(false);
-const [userData, setUserData] = useState(null); // State to store user data
+const [userData, setUserData] = useState(null); 
 const navigate = useNavigate();
 const [navIsVisible, setNavIsVisible] = useState(false);
 
-// const handleSidebarItemClick = (link) => {
-//   setActiveLink(link);
-// };
 
-// const token = localStorage.getItem('token');
-//   const decodedToken = jwt_decode(token);
-//   const id = decodedToken.id;
   
   
 
@@ -32,18 +26,18 @@ useEffect(() => {
 
 console.log("decodedToken=>",id);
  
-  axios.get(`http://localhost:8000/user/${id}`) // Adjust the API endpoint
+  axios.get(`http://localhost:8000/user/${id}`) 
     .then((response) => {
       const userData = response.data;
       
       if (userData) {
-        setUserName(userData.fullname); // Update user's name
-        setUserImage(userData.imagePath); // Update user's image
+        setUserName(userData.fullname); 
+        setUserImage(userData.imagePath); 
         setUserData(userData);
       }
       if (userData.role !== 'admin' && userData.role !=='user') {
-          // Redirect non-admin users to the login page
-          navigate('/login'); // Adjust the route to your login page
+          
+          navigate('/login'); 
         }
     })
     .catch((error) => {
@@ -75,7 +69,6 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
         <img src={images.Logo} alt="Logo" className="w-16 h-16" />
         <h1 className="font-semibold text-xl ml-2 text-yellow-500">Get Bulk</h1>
       </div>
-      {/* Menu Icon (Positioned at the top right corner) */}
       <div className="lg:hidden absolute top-0 right-0 m-4">
         {navIsVisible ? (
           <AiOutlineClose
@@ -91,7 +84,6 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
           />
         )}
       </div>
-      {/* Navigation Links */}
       <div
         className={`${
           navIsVisible ? 'right-0' : '-right-full'
@@ -123,11 +115,11 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </a>
           
             <a
-              href="http://localhost:3000/UserAppointments#"
+              href="http://localhost:3000/UserWorkout#"
               className={`href ${
-                activeLink === 'UserAppointments' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
+                activeLink === 'UserWorkout' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
               } transition-all duration-300 transform scale-100 hover:scale-110`}
-              onClick={() => handleLinkClick('UserAppointments')}
+              onClick={() => handleLinkClick('UserWorkout')}
             >
               Trainers
             </a>
