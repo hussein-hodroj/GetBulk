@@ -69,15 +69,18 @@ export const getbooking = async (req, res) => {
   };
 
   export const createbooking = async (req, res) => {
-    const { userId, trainerId, date, Timeschedule } = req.body;
+    const { selectedSchedules } = req.body;
   try {
+    for (const schedule of selectedSchedules) {
     const newBooking = new BookingModel({
-      userId, 
-      trainerId, 
-      date, 
-      Timeschedule, 
+      userId:schedule.userId, 
+      trainerId:schedule.trainerId, 
+      date:schedule.date, 
+      Timeschedule:schedule.time, 
     })
+
     await newBooking.save();
+  }
     res.send('Booking created successfully');
   } catch (error) {
     console.error('Error creating Booking:', error);
