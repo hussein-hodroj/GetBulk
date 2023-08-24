@@ -104,11 +104,12 @@ const indexOfFirstWorkout = indexOfLastWorkout - workoutsPerPage;
 
 const filteredWorkouts = workouts.filter((workout) => {
   const searchString =
-    workout.type.toLowerCase() +
-    workout.Day.toLowerCase() +
-    workout.gender.toLowerCase() +
-    workout.Duration.toLowerCase() +
-    workout.workoutplan.toLowerCase();
+  (workout.type ? workout.type.toLowerCase() : '') +
+  (workout.Day ? workout.Day.toLowerCase() : '') +
+  (workout.gender ? workout.gender.toLowerCase() : '') +
+  (workout.Duration ? workout.Duration.toLowerCase() : '') +
+  (workout.workoutplan ? workout.workoutplan.toLowerCase() : '');
+
 
   return searchString.includes(searchInput.toLowerCase());
 });

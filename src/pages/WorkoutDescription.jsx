@@ -6,8 +6,9 @@ import UserDashboard from './UserDashboard.js';
 
 function WorkoutDescription() {
   const [trainerInfo, setTrainerInfo] = useState({});
-  const { trainerId } = useParams(); // Get the trainerId from the URL parameter
-
+  const { trainerId } = useParams(); 
+  const [workouts, setWorkouts] = useState([]);
+  const { workoutId } = useParams();
   
   useEffect(() => {
     
@@ -17,7 +18,11 @@ function WorkoutDescription() {
       .catch((error) => console.log(error));
   }, [trainerId]);
 
-
+useEffect(() =>{
+    axios.get(`http://localhost:8000/workout/${workoutId}/getByid`)
+    .then((response) => setWorkouts(response.data))
+    .catch((error) => console.log(error));
+}, [workoutId]);
   
 
   return (
@@ -52,6 +57,25 @@ function WorkoutDescription() {
                   </div>
                 </div>
               </div>
+                    <div className="flex justify-evenly">
+
+                        <div className="image">
+{workouts.imageworkout && (
+                    <img
+                      src={`/uploads/usersImages/${workouts.imageworkout}`}
+                    
+                      style={{ width: '200px', height: '180px' }}
+                      className="border border-yellow-500 rounded"
+                    />
+                  )}
+                        </div>
+                        <div className="description">
+                        <p className="text-2xl font-bold mb-2">
+                    <span className="text-yellow-500"> Workout: </span> <span className="text-white">{workouts.descriptionworkout}</span>
+                    </p>
+                        </div>
+                    </div>
+
               </div>
               </div>
               </div>
