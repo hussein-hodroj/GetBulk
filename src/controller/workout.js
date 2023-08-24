@@ -36,15 +36,18 @@ export const createWorkout = async (req, res) => {
 
 
 export const getWorkoutById = async (req, res) => {
-  try {
-      const workout = req.params.id
-    const trainers = await UserModel.findById(workout);
+  const workoutId = req.params.id; // Get the workoutId from the request parameters
 
-    if(!trainers) return res.status(404).json('workout Not Found');
-    res.status(200).json(trainers);
+  try {
+    const workout = await workoutModel.findById(workoutId);
+
+    if (!workout) {
+      return res.status(404).json({ message: 'workout not found' });
+    }
+
+    res.status(200).json(workout);
   } catch (error) {
-    console.error('Error retrieving workout:', error);
-    res.status(500).send('Internal server error');
+    res.status(500).json({ message: 'Error retrieving workout', error: error.message });
   }
 };
 
