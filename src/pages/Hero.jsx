@@ -201,40 +201,44 @@ useEffect(() => {
     Sunday: 8:00 AM - 2:00 PM
   </p>
 </div>
-  <div className="flex-1 flex items-center">
+  <div className="flex-1 flex items-center" >
     <img
       className="w-80% h-80% mx-auto p-4"
       src={images.OpeningHours}
       alt="Opening Hours"
     />
   </div>
-  
+  <div className='mt-96' id='Transformations'></div>
 </div>
-<div className='mt-1'  id='Transformations'>
+<div className='' >
 <CarouselSlider />
 </div>
-<div className="mt-8"  id='Service'>
+<div id='Service'className='mb-36'></div>
+<div className=""  id='Service'>
   
 <h1 className="font-roboto text-3xl text-yellow-500 md:text-5xl lg:text-4xl xl:text-5xl text-center border-black p-5 "> 
   Our Services
 </h1>
-<div className="flex flex-col gap-6 px-2 mt-6 lg:gap-2 lg:flex-row ">
+
+<div className="flex flex-col gap-6 px-6 mt-6 lg:gap-2 lg:flex-row service-grid">
   {services.map((service) => (
-    <div key={service.title} className="grid grid-cols-2 gap-3 items-center">
-      <div className="flex flex-col px-1">
-        <h3 className="font-semibold text-yellow-400 md:text-3xl lg:text-2xl xl:text-3xl text-center lg:text-left border-b-2 border-yellow-500 pb-2">
+    <div key={service.title} className="border border-yellow-500 shadow-lg shadow-yellow-300  p-6 rounded-lg flex lg:flex-col w-full lg:w-[400px]">
+      <div className="flex items-center mb-4">
+        <img src={service.image} alt={service.title} className="w-16 h-16 rounded-full mr-4" />
+        <h3 className="font-semibold text-yellow-400 text-xl md:text-3xl lg:text-2xl xl:text-3xl text-center lg:text-left border-b-2 border-yellow-500 pb-3">
           {service.title}
         </h3>
       </div>
-      <div className="flex justify-center">
-        <img src={service.image} alt={service.title} className="w-16 h-16 rounded-full mr-32" />
-      </div>
-      <p className="text-gray-100 lg:text-base lg:text-left col-span-2 pt-3 text-justify">
+      <p className="text-gray-100 text-base md:text-xl lg:text-lg xl:text-xl mt-4 lg:mt-0 text-justify ">
         {service.description}
       </p>
     </div>
   ))}
 </div>
+
+
+
+
 
 </div>
 

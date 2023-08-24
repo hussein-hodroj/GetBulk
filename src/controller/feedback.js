@@ -108,19 +108,13 @@ export const createfeedback = async (req, res) => {
     res.status(500).send('Error creating feedback');
   }
 };
+ 
 
-// export const createfeedback = async (req, res) => {
-//   const { feedback, users, trainers } = req.body;
-//   try {
-//     const newfeedback = new FeedbackModel({
-//       feedback,
-//       users,
-//       trainers
-//     });
-//     await newfeedback.save();
-//     res.send('feedback created successfully');
-//   } catch (error) {
-//     console.error('Error creating feedback:', error);
-//     res.status(500).send('Error creating feedback');
-//   }
-// };
+export const FeedackUser = async (req, res) => {
+  try {
+    const feedbackList = await FeedbackModel.find({ users: req.params.id });
+    res.status(200).json(feedbackList);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
