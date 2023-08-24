@@ -50,7 +50,7 @@ const CarouselSlider = () => {
           className="mt-6"
         >
           {transforms.map((transform, index) => (
-            <div key={transform._id} className="w-full p-4 mx-auto">
+            <div key={transform._id} className="w-full p-4 mx-auto ">
               <div className="mb-4 rounded-lg p-6 shadow-lg bg-transparent">
                 <div className="flex items-center justify-center">
                   <div
@@ -95,9 +95,9 @@ const CarouselSlider = () => {
                   </div>
                 </div>
               </div>
-              <div className="">
-                <h1 className="text-3xl text-yellow-500 font-semibold">Client Success Story</h1>
-                <p className="text-2xl text-white text-center p-4">
+              <div className="overflow-y-auto max-h-[300px]">
+                <h1 className="text-3xl text-yellow-500 font-semibold mb-2">Client Success Story</h1>
+                <p className="text-2xl text-white text-center ">
                   {transform.descriptionTransform}
                 </p>
               </div>

@@ -23,7 +23,7 @@ function UserFeedback() {
   const [selectedTrainerName, setSelectedTrainerName] = useState(''); 
   const [selectedFeedbackText, setSelectedFeedbackText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
   useEffect(() => {
     const token = localStorage.getItem('token');
     const decodedToken = jwt_decode(token);
@@ -37,6 +37,8 @@ function UserFeedback() {
       if (userData) {
         setUserName(userData.fullname);
         setUserData(userData);
+        const feedbackResponse = await axios.get(`http://localhost:8000/feedback/user/${id}`);
+        setFeedbackList(feedbackResponse.data);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
