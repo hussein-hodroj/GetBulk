@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import FeedbackModel from '../model/feedback.js';
 import { getFeedback, createfeedback, updatefeedback, deletefeedback, getAllFeedback,FeedackUser } from '../controller/feedback.js';
 
 const router = Router();

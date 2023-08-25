@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
 import './Popup.css';
 
-function Popup ({ close }) {
+function Popup ({ close, setProducts }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [imagePath, setImagePath] = useState(null);
-  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
 
   const [errors, setErrors] = useState({});
@@ -49,6 +47,7 @@ function Popup ({ close }) {
       })
       .then((response) => {
         console.log(response.data);
+        setProducts(response.data)
       }).then(()=>{
         close(false)
       })

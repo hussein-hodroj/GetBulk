@@ -7,7 +7,6 @@ import Products from './pages/products.js';
 import ForgotPassword from './pages/ForgotPassword.js';
 import ResetPassword from './pages/ResetPassword.js';
 import Hero from './pages/Hero.jsx';
-import MainLayout from './pages/MainLayout.jsx';
 
 
 

@@ -58,8 +58,8 @@ function Product() {
   return (
    
 <div>
-{show && <Popup close={setShow} />}
-{showUpdate && <UpdatePopup open={setShowUpdate} productId={selectedProductId} />}
+{show && <Popup close={setShow} setProducts={setProducts} />}
+{showUpdate && <UpdatePopup open={setShowUpdate} productId={selectedProductId} setProducts={setProducts} />}
 {showDelete && <DeleteProduct openDelete={setShowDelete} productId={selectedProductId} />}
 
  <div className='flex'>

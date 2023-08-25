@@ -10,7 +10,6 @@ function Dashboard() {
 const [activeLink, setActiveLink] = useState('')
 const [userImage, setUserImage] = useState(''); 
 const [userName, setUserName] = useState('Admin');
-const [updateSuccess, setUpdateSuccess] = useState(false);
 const [userData, setUserData] = useState(null); 
 const navigate = useNavigate();
 const [navIsVisible, setNavIsVisible] = useState(false);

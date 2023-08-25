@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate, Link } from 'react-router-dom';
 
 function UpdateOrder ({closeUpdate, orderId, setOrders }) {
   const [productName, setProductName] = useState('');
@@ -9,8 +8,7 @@ function UpdateOrder ({closeUpdate, orderId, setOrders }) {
   const [customerPhoneNumber, setCustomerPhoneNumber] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerAddress, setCustomerAddress] = useState('');
-  const navigate = useNavigate();
-    const {id} = useParams();
+  
 
 
   const [errors, setErrors] = useState({});

@@ -7,7 +7,7 @@ function DeleteProduct({ openDelete, productId }) {
           e.preventDefault();
         axios.delete(`http://localhost:8000/product/${productId}`)
         .then((response) => {
-          console.log(response.data);    
+          console.log(response.data); 
         }).then(() => {
           openDelete(false);
         })
