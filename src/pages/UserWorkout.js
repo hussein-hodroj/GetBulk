@@ -87,12 +87,7 @@ const UserWorkout = () => {
                   </div>
                   <h2 className="text-white">Name: {trainer.fullname}</h2>
                   <span className="text-white">{trainer.email}</span>
-                  <div className="social-icon">
-                    <a href="#"><i className="fab fa-facebook"></i></a>
-                    <a href="#"><i className="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i className="fab fa-instagram"></i></a>
-                    <a href="#"><i className="fab fa-pinterest"></i></a>
-                  </div>
+                 
                 </div>
               </div>
             </div>
