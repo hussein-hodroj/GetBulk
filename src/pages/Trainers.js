@@ -102,10 +102,10 @@ function Trainers() {
   const filteredTrainers = trainers.filter((trainer) => {
     const searchTermLower = searchTerm.toLowerCase();
     return (
-      trainer.fullname.toLowerCase().includes(searchTermLower) ||
-      trainer.email.toLowerCase().includes(searchTermLower) ||
+      (trainer.fullname && trainer.fullname.toLowerCase().includes(searchTermLower)) ||
+      (trainer.email && trainer.email.toLowerCase().includes(searchTermLower)) ||
       (trainer.phonenumber && trainer.phonenumber.toString().includes(searchTermLower)) ||
-      trainer.address.toLowerCase().includes(searchTermLower)
+      (trainer.address && trainer.address.toLowerCase().includes(searchTermLower))
     );
   });
   const handlePaginationChange = (page) => {
