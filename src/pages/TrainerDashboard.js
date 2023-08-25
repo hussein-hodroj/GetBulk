@@ -9,7 +9,6 @@ function Dashboard() {
 const [activeLink, setActiveLink] = useState('')
 const [userImage, setUserImage] = useState(''); // State for user's uploaded image
 const [userName, setUserName] = useState('Admin');
-const [updateSuccess, setUpdateSuccess] = useState(false);
 const [userData, setUserData] = useState(null); // State to store user data
 const navigate = useNavigate();
 

@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate, Link } from 'react-router-dom';
 import './Update.css';
 
-function Update ({ open, productId }) {
+function Update ({ open, productId, setProducts }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [imagePath, setImagePath] = useState(null);
-  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const {id} = useParams();
 
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -72,6 +69,7 @@ function Update ({ open, productId }) {
       })
       .then((response) => {
         console.log(response.data);
+        setProducts(response.data);
       }).then(()=>{
         open(false);
       })

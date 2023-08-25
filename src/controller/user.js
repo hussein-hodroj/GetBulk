@@ -5,7 +5,6 @@ import bcrypt from 'bcryptjs';
 import asyncHandler from 'express-async-handler';
 import { sendEmail } from '../utils/sendEmail.js';
 import multer from 'multer';
-import fs from 'fs';
 
 
 export const addUser = async (req, res) => {

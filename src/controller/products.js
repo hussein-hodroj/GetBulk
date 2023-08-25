@@ -1,8 +1,7 @@
 import ProductModel from "../model/product.js";
 import CategoryModel from "../model/category.js";
 import multer from 'multer';
-import fs from 'fs';
-import path from 'path';
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
