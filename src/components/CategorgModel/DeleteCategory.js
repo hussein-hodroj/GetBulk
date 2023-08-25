@@ -41,13 +41,13 @@ const DeleteCategory = ({ openDelete, categoryId, onDelete }) => {
 
       <div className="flex justify-between">
         <button
-          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400"
+          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 hover:scale-105"
           onClick={handleDelete}
         >
           Delete
         </button>
         <button
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:scale-105"
           onClick={() => openDelete(false)}
         >
           Cancel

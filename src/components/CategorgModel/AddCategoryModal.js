@@ -21,7 +21,7 @@ const customStyles = {
 
 const AddCategoryModal = ({ isOpen, onClose, onAddCategory }) => {
     const [categoryName, setCategoryName] = useState('');
-    const [categoryImage, setCategoryImage] = useState(null); // State for image
+    const [categoryimage, setCategoryImage] = useState(null); // State for image
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -33,7 +33,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAddCategory }) => {
   
       const formData = new FormData();
       formData.append('name', categoryName);
-      formData.append('categoryImage', categoryImage); // Append image to FormData
+      formData.append('categoryimage', categoryimage); // Append image to FormData
   
       try {
         await axios.post('http://localhost:8000/category', formData, {
@@ -75,13 +75,13 @@ const AddCategoryModal = ({ isOpen, onClose, onAddCategory }) => {
   
           <div className="flex justify-between mt-4">
             <button
-              className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400"
+              className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 hover:scale-105"
               type="submit"
             >
               Add
             </button>
             <button
-              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:scale-105"
               onClick={onClose}
             >
               Cancel

@@ -38,7 +38,7 @@ const UpdateCategory = ({ open, categoryId, onUpdate }) => {
 
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('categoryImage', image); // Append image to FormData
+    formData.append('categoryimage', image); // Append image to FormData
 
     axios
     .put(`http://localhost:8000/category/${categoryId}`, formData, {
@@ -78,13 +78,13 @@ const UpdateCategory = ({ open, categoryId, onUpdate }) => {
 
         <div className="flex justify-between mt-4">
           <button
-            className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400"
+            className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 hover:scale-105"
             type="submit"
           >
             Save
           </button>
           <button
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:scale-105"
             onClick={() => open(false)}
           >
             Cancel
