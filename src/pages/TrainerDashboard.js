@@ -117,7 +117,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             <li>
             <a
-                href="dashboard"
+                href="http://localhost:3000/TrainerDashboard#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'Dashboard' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
@@ -132,7 +132,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             
             <li>
             <a
-                href="Reservations"
+                href="http://localhost:3000/Reservations#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'Products' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
@@ -140,20 +140,27 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               >                
               <span className="inline-flex justify-center items-center ml-4">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-    <circle cx="16" cy="8" r="2"></circle>
-    <circle cx="8" cy="16" r="2"></circle>
-</svg>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                <circle cx="16" cy="8" r="2"></circle>
+                <circle cx="8" cy="16" r="2"></circle>
+            </svg>
             </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Private Schedule</span>
               </a>
             </li>
             <li>
-              <a href="schedules" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
-                <span className="inline-flex justify-center items-center ml-4">
+              <a href="http://localhost:3000/schedules#" 
+              
+              className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
+                activeLink === 'Schedule' ? 'border-yellow-500' : 'border-transparent'
+              } dark:hover:border-gray-800 pr-6`}
+              onClick={() => handleSidebarItemClick('Schedule')}
+            >
+              
+              <span className="inline-flex justify-center items-center ml-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-</svg>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
                 </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Manage Schedule</span>
               </a>
@@ -161,16 +168,16 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
            
             <li>
             <a
-                href="workouts"
+                href="http://localhost:3000/workouts#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
-                  activeLink === 'workouts' ? 'border-yellow-500' : 'border-transparent'
+                  activeLink === 'Workout' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
-                onClick={() => handleSidebarItemClick('Workouts')}
-              >                 
+                onClick={() => handleSidebarItemClick('Workout')}
+              >               
               <span className="inline-flex justify-center items-center ml-4">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
-</svg>                </span>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
+              </svg>                </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Workouts</span>
               </a>
             </li>
@@ -182,7 +189,13 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             <li>
               
-              <a href="UpdateTrainer" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
+              <a href="http://localhost:3000/UpdateTrainer#"
+
+                className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
+                  activeLink === 'Update' ? 'border-yellow-500' : 'border-transparent'
+                } dark:hover:border-gray-800 pr-6`}
+                onClick={() => handleSidebarItemClick('Update')}
+                >
                 <span className="inline-flex justify-center items-center ml-4">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </span>
@@ -190,12 +203,19 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               </a>
             </li>
             <li>
-              <a href="edit-password-trainer" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 dark:hover:border-gray-800 pr-6">
-                <span className="inline-flex justify-center items-center ml-4">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a4 4 0 11-8 0 4 4 0 018 0zM12 20a7 7 0 110-14 7 7 0 010 14z"></path>
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 15v2a2 2 0 002 2h2a2 2 0 002-2v-2m-1-5V7a2 2 0 012-2h2a2 2 0 012 2v3m0 2.5v4"></path>
-</svg>
+              <a href="http://localhost:3000/edit-password-trainer#" 
+             
+             className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
+              activeLink === 'Edite' ? 'border-yellow-500' : 'border-transparent'
+            } dark:hover:border-gray-800 pr-6`}
+            onClick={() => handleSidebarItemClick('Edite')}
+            >
+             
+             <span className="inline-flex justify-center items-center ml-4">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a4 4 0 11-8 0 4 4 0 018 0zM12 20a7 7 0 110-14 7 7 0 010 14z"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 15v2a2 2 0 002 2h2a2 2 0 002-2v-2m-1-5V7a2 2 0 012-2h2a2 2 0 012 2v3m0 2.5v4"></path>
+              </svg>
                 </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Edit Password</span>
               </a>
