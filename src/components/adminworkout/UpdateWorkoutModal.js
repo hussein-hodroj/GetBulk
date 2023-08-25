@@ -6,12 +6,13 @@ Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
-    top: '50%',
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '500px',
+    maxWidth: '550px',
+    maxHeight: '650px',
     backgroundColor: 'black',
     border: '2px solid black',
     borderRadius: '8px',
@@ -20,7 +21,7 @@ const customStyles = {
 };
 
 const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWorkout, updateWorkoutsList }) => {
-  const [description, setDescription] = useState('');
+  const [descriptions, setDescriptions] = useState([]);
   const [time, setTime] = useState(0);
   const [type, setType] = useState('');
   const [day, setDay] = useState('');
@@ -30,40 +31,40 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
   const [workoutPlan, setWorkoutPlan] = useState('');
 
   useEffect(() => {
-    if (selectedWorkout) {
-      setDescription(selectedWorkout.descriptionworkout);
+    if (selectedWorkout && selectedWorkout.imageworkout) {
+      setDescriptions(selectedWorkout.descriptionworkout);
       setTime(selectedWorkout.Time);
       setType(selectedWorkout.type);
       setDay(selectedWorkout.Day);
       setGender(selectedWorkout.gender);
       setDuration(selectedWorkout.Duration);
       setWorkoutPlan(selectedWorkout.workoutplan);
-
+  
       const imageUrls = selectedWorkout.imageworkout.map((imgName) => ({
         name: imgName,
         url: `/uploads/usersImages/${imgName}`,
       }));
-
+  
       setSelectedImages(imageUrls);
     }
   }, [selectedWorkout]);
+  
 
   const handleImageChange = (e) => {
     const newImages = Array.from(e.target.files).map((file) => ({
       name: file.name,
-      url: URL.createObjectURL(file), // Create Blob URL for new images
+      url: URL.createObjectURL(file),
       file: file,
     }));
-  
+
     setSelectedImages((prevImages) => [...prevImages, ...newImages]);
   };
-  
+
   const handleRemoveImage = (index) => {
     const removedImage = selectedImages[index];
     setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
-    URL.revokeObjectURL(removedImage.url); // Revoke Blob URL
+    URL.revokeObjectURL(removedImage.url);
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,7 +79,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
     });
 
     const updatedWorkout = {
-      descriptionworkout: description,
+      descriptionworkout: descriptions,
       Time: time,
       type,
       Day: day,
@@ -93,32 +94,66 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
         `http://localhost:8000/workout/${selectedWorkout._id}/update`,
         updatedWorkout
       );
-    
+
       handleUpdateWorkout(response.data);
       updateWorkoutsList();
       onClose();
     } catch (error) {
       console.error('Error updating workout:', error.response.data);
     } finally {
-      // Revoke object URLs for removed images
       selectedImages.forEach((img) => URL.revokeObjectURL(img.url));
     }
   };
+
+  const handleAddDescription = () => {
+    setDescriptions([...descriptions, ""]);
+  };
+
+  const handleDescriptionChange = (index, value) => {
+    const newDescriptions = [...descriptions];
+    newDescriptions[index] = value;
+    setDescriptions(newDescriptions);
+  };
+
+  const handleRemoveDescription = (index) => {
+    const newDescriptions = [...descriptions];
+    newDescriptions.splice(index, 1);
+    setDescriptions(newDescriptions);
+  };
+
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-    <h2 className="text-yellow-500 font-bold text-xl mb-4">Update Workout</h2>
+    <h2 className="text-yellow-500 font-bold text-xl mt-4 mb-4">Update Workout</h2>
     <form onSubmit={handleSubmit}>
       <div className="flex justify-between mb-4">
-        <div className="w-1/2">
-          <label className="text-white mb-1">Description:</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
-          />
-        </div>
-        <div className="w-1/2 pl-4">
+      <div className="w-full">
+            <label className="text-white mb-1 mr-4">Descriptions:</label>
+            {descriptions.map((desc, index) => (
+              <div key={index} className="flex space-x-2 items-center mb-2">
+                <textarea
+                  value={desc}
+                  onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                  className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full h-[50px] text-black resize-none"
+                />
+                <button
+                  onClick={() => handleRemoveDescription(index)}
+                  className="text-yellow-500"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+  type="button"
+  onClick={handleAddDescription}
+  className="text-yellow-500 mt-2 border border-yellow-500 rounded px-3 py-1"
+>
+  Add Description
+</button>
+          </div>
+        
+      </div>
+      <div className="w-full">
           <label className="text-white mb-1">Time / in hour :</label>
           <input
             type="number"
@@ -130,7 +165,6 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
             className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
           />
         </div>
-      </div>
       <div className="flex justify-between mb-4">
         <div className="w-1/2">
           <label className="text-white mb-1">Gender:</label>
@@ -202,30 +236,31 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
   </select>
 </div>
 <div className="w-1/2 pl-4 mb-4">
-            <label className="text-white">Image:</label>
+             <label className="text-white">Images:</label>
             <div className="relative">
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
                 className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
+                multiple
               />
-           {selectedImages.length > 0 && (
-  <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
-    <label className="text-white">Selected Images:</label>
-    {selectedImages.map((img, index) => (
-      <div key={index} className="flex items-center mt-2">
-        <img
-          src={img.url}
-          alt={`Selected Image ${index + 1}`}
-          className="h-10 w-10 rounded-full"
-        />
-        <button onClick={() => handleRemoveImage(index)} className="text-white ml-2">
-          Remove
-        </button>
-      </div>
-    ))}
-  </div>
+              {selectedImages.length > 0 && (
+                <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                  <label className="text-white">Selected Images:</label>
+                  {selectedImages.map((img, index) => (
+                    <div key={index} className="flex items-center mt-2">
+                      <img
+                        src={img.url}
+                        alt={`Selected Image ${index + 1}`}
+                        className="h-10 w-10 rounded-full"
+                      />
+                      <button onClick={() => handleRemoveImage(index)} className="text-yellow-500 ml-2">
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
 )}
 
             </div>

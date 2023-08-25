@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Dashboard from './UserDashboard.js';
 import { useLocation, Link, useParams } from 'react-router-dom'; // Import useHistory
+import { FaArrowLeft, FaArrowRight} from 'react-icons/fa/index.esm.js';
 
 const WorkoutSelection = () => {
   const [filteredWorkouts, setFilteredWorkouts] = useState([]);
@@ -45,6 +46,7 @@ const WorkoutSelection = () => {
         const matchesType = type ? workout.type === type : true;
         const matchesGender = gender ? workout.gender === gender : true;
         const matchesWorkoutPlan = workoutPlan ? workout.workoutplan === workoutPlan : true;
+       
 
         return matchesTrainer && matchesType && matchesGender && matchesWorkoutPlan;
       }));
@@ -66,6 +68,25 @@ const WorkoutSelection = () => {
   //     return `/workoutselection/${selectedTrainerId}`;
   //   }
   // };
+
+  
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    const totalPages = Math.ceil(filteredWorkouts.length / rowsPerPage);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const indexOfLastWorkout = currentPage * rowsPerPage;
+  const indexOfFirstWorkout = indexOfLastWorkout - rowsPerPage;
+  const currentDisplayedWorkouts = filteredWorkouts.slice(indexOfFirstWorkout, indexOfLastWorkout);
+
   return (
     <div className='flex justify-center items-center bg-black'>
     <Dashboard />
@@ -174,36 +195,38 @@ const WorkoutSelection = () => {
               ))}
             </tbody>
           </table>
-          <div className="justify-start items-start">
-          <Link to={`/UserWorkout`}>
-          <button
-            type="button"
-            className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 mt-2 mb-2 font-bold"
-          >
-            Back
-          </button>
-          </Link>
+          
+          <div className="pagination flex items-center justify-between mt-4">
+            <div className="justify-start flex-start">
+              <Link to={`/UserWorkout`}>
+                <button
+                  type="button"
+                  className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 mt-2 mb-2 font-bold"
+                >
+                  Back
+                </button>
+              </Link>
+            </div>
+            <div className="flex items-center ml-auto">
+              <button
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1 || displayedWorkouts.length === 0}
+                className="bg-yellow-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-yellow-500"
+              >
+                <FaArrowLeft />
+              </button>
+              <p className="text-md text-yellow-500 ml-4 mr-4">
+              Page {currentPage} of {Math.ceil(filteredWorkouts.length / rowsPerPage)}
+            </p>
+              <button
+                onClick={handleNextPage}
+                disabled={endIndex >= displayedWorkouts.length}
+                className="bg-yellow-600 text-white px-4 py-2 rounded-lg ml-2 hover:bg-yellow-500"
+              >
+                <FaArrowRight />
+              </button>
+              </div>
         </div>
-          <div className="pagination flex items-center justify-center mt-4">
-  <button
-    onClick={() => setCurrentPage(currentPage - 1)}
-    disabled={currentPage === 1 || filteredWorkouts.length === 0}
-
-    className="bg-yellow-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-yellow-500"
-    style={{ marginRight: '100px' }}
-  >
-    Previous
-  </button>
-  <button
-    onClick={() => setCurrentPage(currentPage + 1)}
-    disabled={endIndex >= filteredWorkouts.length}
-
-    className="bg-yellow-600 text-white px-4 py-2 rounded-lg ml-2 hover:bg-yellow-500"
-    style={{ marginLeft: '100px' }}
-  >
-    Next
-  </button>
-</div>
 </div>
         </div>
       </div>

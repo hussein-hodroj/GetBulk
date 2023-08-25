@@ -1,6 +1,22 @@
 import workoutModel from '../model/workout.js';
 import UserModel from '../model/user.js'
 
+import multer from 'multer';
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/usersImages/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+export const configureUpload = () => {
+  return multer({ storage: storage }).array('imageworkout', 10);
+};
+
+ 
 
 
 export const getAllWorkouts = async (req, res) => {
@@ -14,29 +30,40 @@ export const getAllWorkouts = async (req, res) => {
 };
 
 export const createWorkout = async (req, res) => {
-  const { descriptionworkout, Time, type, Day, imageworkout, gender, Duration, trainers, workoutplan  } = req.body;
-  const newWorkout =  new workoutModel({
-    descriptionworkout,
-    Time,
-    type,
-    Day,
-    imageworkout,
-    gender,
-    Duration,
-    trainers,
-    workoutplan,
-  });
+  try {
+    const { descriptionworkout, Time, type, Day, gender, Duration, trainers, workoutplan  } = req.body;
+    const imageworkoutFilenames = req.files.map(file => file.originalname);
 
-  await newWorkout
-    .save()
-    .then(() => res.json('Workout created!'))
-    .catch((err) => res.status(400).json('Error: ' + err));
+    const newWorkout = new workoutModel({
+      descriptionworkout,
+      Time,
+      type,
+      Day,
+      imageworkout: imageworkoutFilenames,
+      gender,
+      Duration,
+      trainers,
+      workoutplan,
+    });
+
+    await newWorkout.save();
+    res.json('Workout created!');
+  } catch (error) {
+    console.error('Error creating workout:', error);
+    res.status(400).json('Error: ' + error);
+  }
 };
 
 
 
+
+
+
+
+
+
 export const getWorkoutById = async (req, res) => {
-  const workoutId = req.params.id; // Get the workoutId from the request parameters
+  const workoutId = req.params.id; 
 
   try {
     const workout = await workoutModel.findById(workoutId);

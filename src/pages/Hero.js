@@ -1,4 +1,4 @@
-import WomanImg from '../img/mm.png';
+import WomanImg from '../asset/mm.png';
 import { Link } from 'react-router-dom';
 import React, { useContext, useState, useEffect } from 'react';
 import { SidebarContext } from './SidebarContext.js';
