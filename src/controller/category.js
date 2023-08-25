@@ -1,78 +1,105 @@
 import CategoryModel from "../model/category.js";
+import multer from 'multer';
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      try {
+        cb(null,"public/uploads/usersImages/")
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    },
+    filename: (req, file, cb) => {
+      try {
+        if (file) {
+          cb(null, file.originalname);
+        } else {
+          cb(null, null); // Set filename to null if no file
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    }
+  });
+  export const upload = multer({ storage: storage });
 
 export const getAllCategories = async (req, res) => {
     try {
-      const categories = await CategoryModel.find();
-      res.status(200).json(categories);
+        const categories = await CategoryModel.find();
+        res.status(200).json(categories);
     } catch (error) {
-      console.error('Error retrieving categories:', error);
-      res.status(500).send('Error retrieving categories');
+        console.error('Error retrieving categories:', error);
+        res.status(500).send('Error retrieving categories');
     }
-  };
+};
 
-
-  export const getCategory = async (req, res) => {
+export const getCategory = async (req, res) => {
     try {
-      const category = await CategoryModel.findById(req.params.id);
+        const category = await CategoryModel.findById(req.params.id);
 
+        if (!category) return res.status(404).json('Category Not Found');
 
-      if(!category) return res.status(404).json('Category Not Found');
-
-      res.status(200).json(category);
+        res.status(200).json(category);
     } catch (error) {
-      console.error('Error retrieving categories:', error);
-      res.status(500).send('Error retrieving categories');
+        console.error('Error retrieving category:', error);
+        res.status(500).send('Error retrieving category');
     }
-  };
-  
-  export const createCategory = async (req, res) => {
-    const { name, categoryimage } = req.body;
-  
+};
+
+export const createCategory = async (req, res) => {
+    const { name } = req.body;
+
     try {
-      const newCategory = new CategoryModel({ name, categoryimage });
+        const newCategory = new CategoryModel({ 
+            name,
+            categoryimage: req?.file?.originalname
+        });
 
-      await newCategory.save();
-      res.status(200).send('Category created successfully');
+        await newCategory.save();
+        
+        res.status(200).json({
+            _id: newCategory._id,
+            name: newCategory.name,
+            categoryimage: newCategory.categoryimage ? newCategory.categoryimage : null
+        });
     } catch (error) {
-      console.error('Error creating category:', error);
-      res.status(500).send('Error creating category');
+        console.error('Error creating category:', error);
+        res.status(500).send('Error creating category');
     }
-  };
-  
-  export const updateCategory = async (req, res) => {
+};
+
+export const updateCategory = async (req, res) => {
     const { id } = req.params;
     const { name, categoryimage } = req.body;
-  
+
     try {
 
-      const Updatecategory = await CategoryModel.findByIdAndUpdate(
-        id,
-        { name, categoryimage },
-        { new: true }
-      );
+        const updatedCategory = await CategoryModel.findByIdAndUpdate(
+            id,
+            {name, categoryimage: req.file.originalname},
+            { new: true }
+        );
 
-      if(!Updatecategory) return res.status(404).json('Category Not Found');
+        if (!updatedCategory) return res.status(404).json('Category Not Found');
 
-      res.status(201).json(Updatecategory);
+        res.status(201).json(updatedCategory);
     } catch (error) {
-      console.error('Error updating category:', error);
-      res.status(500).send('Error updating category');
+        console.error('Error updating category:', error);
+        res.status(500).send('Error updating category');
     }
-  };
-  
-  export const deleteCategory = async (req, res) => {
+};
+
+export const deleteCategory = async (req, res) => {
     const { id } = req.params;
-  
+
     try {
-     
+        const category = await CategoryModel.findByIdAndDelete(id);
 
-      const category =  await CategoryModel.findByIdAndDelete(id);
+        if (!category) return res.status(404).json('Category Not Found');
 
-    if(!category) return res.status(404).json('Category Not Found');
-      res.status(200).send('Category deleted successfully');
+        res.status(200).send('Category deleted successfully');
     } catch (error) {
-      console.error('Error deleting category:', error);
-      res.status(500).send('Error deleting category');
+        console.error('Error deleting category:', error);
+        res.status(500).send('Error deleting category');
     }
-  };
+};
