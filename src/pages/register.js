@@ -114,7 +114,7 @@ const handleSubmit = (e) => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full mr-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="fullName"
+              // id="fullName"
               type="text"
               name="fullName"
               value={fullname}
@@ -133,7 +133,7 @@ const handleSubmit = (e) => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full ml-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
+              // id="email"
               type="email"
               name="email"
               value={email}
@@ -172,7 +172,7 @@ const handleSubmit = (e) => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full ml-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="address"
+              // id="address"
               type="text"
               name="address"
               value={address}
@@ -237,8 +237,9 @@ const handleSubmit = (e) => {
               name="role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
+            
             >
-            <option value="" disabled selected > Please Select Your Role </option>    
+            <option value="" disabled > Please Select Your Role </option>    
             <option value="user">User</option>         
             <option value="trainer">Trainer</option>
             </select>

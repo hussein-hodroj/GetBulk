@@ -93,7 +93,7 @@ const validateForm = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
+              // id="email"
               type="email"
               name="email"
               value={email}
@@ -111,7 +111,7 @@ const validateForm = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
+              // id="password"
               type="password"
               name="password"
               value={password}
