@@ -4,16 +4,17 @@ import UpdateCategory from '../components/CategorgModel/UpdateCategory.js';
 import DeleteCategory from '../components/CategorgModel/DeleteCategory.js';
 import AddCategoryModal from '../components/CategorgModel/AddCategoryModal.js';
 import Dashboard from './dashboard.js';
-import { FaEdit, FaTrash } from 'react-icons/fa/index.esm.js'; 
-
+import { FaEdit, FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
 
 function Category() {
   const [categories, setCategories] = useState([]);
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); // New state for the Add Category modal
+  const [showPopup, setShowPopup] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const categoriesPerPage = 10;
 
   useEffect(() => {
     fetchCategories();
@@ -31,7 +32,6 @@ function Category() {
   );
 
   const handleDeleteCategory = (deletedCategoryId) => {
-    
     setCategories(categories.filter(category => category._id !== deletedCategoryId));
     setShowDelete(false); 
   };
@@ -45,6 +45,26 @@ function Category() {
     fetchCategories();
     setShowPopup(false);
   };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    const totalPages = Math.ceil(filteredCategories.length / categoriesPerPage);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
+  const currentCategories = filteredCategories.slice(
+    indexOfFirstCategory,
+    indexOfLastCategory
+  );
   return (
     <div>
       {showUpdate && (
@@ -145,6 +165,25 @@ function Category() {
                 ))}
               </tbody>
             </table>
+            <div className='flex justify-center mt-4'>
+        <div className='flex items-center ml-auto'>
+          <button
+            className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+            onClick={handlePreviousPage}
+          >
+            <FaArrowLeft />
+          </button>
+          <p className='text-md text-yellow-500 ml-4 mr-4'>
+            Page {currentPage} of {Math.ceil(filteredCategories.length / categoriesPerPage)}
+          </p>
+          <button
+            className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600'
+            onClick={handleNextPage}
+          >
+            <FaArrowRight />
+          </button>
+        </div>
+      </div>
           </div>
         </div>
       </div>
