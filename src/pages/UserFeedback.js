@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Dashboard from './UserDashboard.js';
-import { FaTimes, FaTrash,FaEdit } from 'react-icons/fa/index.esm.js';
+import { FaTimes, FaTrash,FaEdit,FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
 import jwt_decode from 'jwt-decode';
 
 function UserFeedback() {
@@ -22,7 +22,8 @@ function UserFeedback() {
   const [userData, setUserData] = useState(null);
   const [selectedTrainerName, setSelectedTrainerName] = useState(''); 
   const [selectedFeedbackText, setSelectedFeedbackText] = useState('');
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   useEffect(() => {
     const token = localStorage.getItem('token');
     const decodedToken = jwt_decode(token);
@@ -36,6 +37,8 @@ function UserFeedback() {
       if (userData) {
         setUserName(userData.fullname);
         setUserData(userData);
+        const feedbackResponse = await axios.get(`http://localhost:8000/feedback/user/${id}`);
+        setFeedbackList(feedbackResponse.data);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -264,6 +267,9 @@ function UserFeedback() {
             <table className="min-w-full divide-y border border-black">
               <thead className="bg-zinc-600  ">
                 <tr className="bg-zinc-600 mt-9 ">
+                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+                       #
+                </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border"
@@ -292,11 +298,14 @@ function UserFeedback() {
                 </tr>
               </thead>
               <tbody className="text-white font-semibold">
-                      {feedbackList.map((feedback, index) => (
+                      {feedbackList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((feedback, index) => (
                           <tr
                           key={index}
                           className={index % 2 === 0 ? 'bg-zinc-500' : 'bg-zinc-600'}
                         >
+                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                      {index + 1+(currentPage - 1) * itemsPerPage} 
+                    </td>
                           <td className="px-6 py-4 whitespace-nowrap border Border-white text-white font-semibold ">
                             {userName}
                           </td>
@@ -379,7 +388,7 @@ function UserFeedback() {
 
 
 
-                                <button className="text-yellow-500 font-bold px-4 py-2 border ml-5 border-yellow-500 transition-transform transform-gpu hover:scale-110" type="button"  
+                                <button className="text-red-500 font-bold px-4 py-2 border ml-5 border-red-500 transition-transform transform-gpu hover:scale-110" type="button"  
                                         onClick={() => { setSelectedFeedback(feedback._id); setShowDeleteModal(true); }}>
                                         <FaTrash className="w-5 h-5" />
                                 </button>
@@ -415,8 +424,27 @@ function UserFeedback() {
                         </tr>
                       ))}
                     </tbody>
-
+                  
             </table>
+            <div className="flex items-center justify-end mt-4">
+                              <button
+                                className="bg-yellow-500 text-white px-4 py-1 rounded-lg mr-2"
+                                onClick={() => setCurrentPage(currentPage - 1)}
+                                disabled={currentPage === 1}
+                              >
+                                <FaArrowLeft className="mr-1" /> 
+                              </button>
+                              <span className="text-yellow-500 font-semibold">
+                                Page {currentPage} of {Math.ceil(feedbackList.length / itemsPerPage)}
+                              </span>
+                              <button
+                                className="bg-yellow-500 text-white px-4 py-1 rounded-lg ml-2"
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                                disabled={currentPage * itemsPerPage >= feedbackList.length}
+                              >
+                                 <FaArrowRight className="ml-1" />
+                              </button>
+                            </div>
           </div>
         </div>
       </div>

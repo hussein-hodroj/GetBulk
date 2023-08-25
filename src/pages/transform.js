@@ -54,22 +54,25 @@ function TransformPage() {
   };
 
   return (
-    <div className='flex'>
+    <div className='flex bg-black h-full'>
     <Dashboard />
-    <div className="h-full w-full ml-56 mt-14 mb-10">
-      <div className="p-6 gap-4">
+    <div className="h-full w-full ml-56 mt-14 mb-10 bg-black">
+      <div className="p-6 gap-4 bg-black">
         <div className="flex justify-between items-center mb-4">
           <button
-            className="flex justify-between items-center px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-black ml-auto"
+            className="flex justify-between items-center px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-black ml-auto add-button"
             onClick={() => setIsModalOpen(true)}  
           >
             <FaPlus /> Add Transform
           </button>
         </div>
-        <div className='transform-page'>
-          <div className="transform-list">
+        <p className="text-yellow-500 text-xl mr-20 text-center font-serif">
+    Record your trainee's progress by adding before and after workout photos.
+  </p>
+        <div className='transform-page h-full'>
+          <div className="transform-list ml-8 h-full">
             {transforms.map(transform => (
-              <div key={transform._id} className="transform-card">
+              <div key={transform._id} className="transform-card ">
                 <div className="labels">
                   <label className="label">Image Before</label>
                   <label className="label">Image After</label>

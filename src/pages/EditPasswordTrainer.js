@@ -56,7 +56,7 @@ function EditPasswordTrainer() {
       <TrainerDashboard />
       <div className="h-full w-full ml-56 mt-20 mb-5">
         <div className="p-3 flex-auto pr-20 pt-8">
-          <form onSubmit={handleSubmit} className="bg-zinc-800 p-5 rounded shadow-md">
+          <form onSubmit={handleSubmit} className="bg-zinc-600 p-5 rounded shadow-md">
             <div className="mb-4">
               <label htmlFor="oldPassword" className="block text-white font-semibold mb-4">
                 Old Password

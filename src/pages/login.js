@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import Header from './Header.jsx';
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -74,6 +76,7 @@ const validateForm = () => {
            
         
          }}>
+          <Header/>
         
    <form className="shadow-md rounded-lg p-8" style={{
     width:"520px", 

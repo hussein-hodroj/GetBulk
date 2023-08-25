@@ -6,6 +6,8 @@ import { ProductContext } from './ProductContext.js';
 import { BsBag } from 'react-icons/bs/index.esm.js';
 import Product from './Product.js'; 
 import { FaWhatsapp } from 'react-icons/fa/index.esm.js';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
 
 const findRelatedProducts = (products, category) => {
@@ -42,6 +44,9 @@ const ProductDetails = () => {
   
 
   return (
+    <div>
+       <Header/>
+    
     <div className='bg-black text-white'>
       <div className='sticky top-0 bg-black mx-auto flex items-center justify-between pt-20 z-10'>
         <Link to={'/Homeprodu'}>
@@ -99,6 +104,8 @@ const ProductDetails = () => {
 </div>
 
 
+    </div>
+    <Footer/>
     </div>
   );
 };

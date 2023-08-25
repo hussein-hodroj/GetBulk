@@ -318,3 +318,19 @@ export const createUser = asyncHandler(async (req, res) => {
     
   }
 });
+
+export const getTrainerById = asyncHandler(async (req, res) => {
+  const trainerId = req.params.id; // Get the trainerId from the request parameters
+
+  try {
+    const trainer = await UserModel.findById(trainerId);
+
+    if (!trainer) {
+      return res.status(404).json({ message: 'Trainer not found' });
+    }
+
+    res.status(200).json(trainer);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving trainer', error: error.message });
+  }
+});

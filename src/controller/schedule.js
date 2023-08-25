@@ -167,3 +167,19 @@ export const getTrainerSchedule = async (req, res) => {
     res.status(500).json({ error: 'Error retrieving schedules' });
   }
 };
+
+export const updateStatus = async (req, res) => {
+  try {
+    const { selectedSchedules } = req.body;
+    for (const event of selectedSchedules) {
+      await ScheduleModel.findByIdAndUpdate(
+        event.id, // Use event.id to update the specific event
+        { $set: { status: 1 } }, // Set the status to ACTIVE (1)
+        { new: true } // This ensures the updated document is returned
+      );
+    }
+    res.status(200).json({ message: 'Schedule statuses updated successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating schedule statuses.' });
+  }
+};

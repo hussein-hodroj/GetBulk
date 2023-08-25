@@ -66,7 +66,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             <input
               type="text"
               id="fullName"
-              className={`w-full border ${fullNameError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded  transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
+              className={`w-full border ${fullNameError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded text-black  transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
@@ -79,7 +79,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             <input
               type="email"
               id="email"
-              className={`w-full border ${emailError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
+              className={`w-full border ${emailError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded text-black transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -91,7 +91,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             <label htmlFor="address" className="block font-medium mb-1 text-black">Address</label>
             <textarea
               id="address"
-              className={`w-full border ${addressError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
+              className={`w-full border ${addressError ? 'border-red-500' : 'border-gray-300'} px-3 text-black py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required
@@ -104,7 +104,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             <input
               type="tel"
               id="phoneNumber"
-              className={`w-full border ${phoneNumberError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
+              className={`w-full text-black border ${phoneNumberError ? 'border-red-500' : 'border-gray-300'} px-3 py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               required

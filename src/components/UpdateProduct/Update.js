@@ -20,9 +20,9 @@ function Update ({ open, productId }) {
     const newErrors = {};
 
     // Check if the required fields are filled
-    if (!name.trim()) newErrors.name = 'Name is required';
-    if (!price.trim()) newErrors.price = 'Price is required';
-    if (!description.trim()) newErrors.description = 'Description is required';
+    if (!name) newErrors.name = 'Name is required';
+    if (!price) newErrors.price = 'Price is required';
+    if (!description) newErrors.description = 'Description is required';
     if (!category) newErrors.category = 'Category is required';
 
     setErrors(newErrors);
@@ -72,7 +72,8 @@ function Update ({ open, productId }) {
       })
       .then((response) => {
         console.log(response.data);
-        navigate('/products');
+      }).then(()=>{
+        open(false);
       })
       .catch((error) => {
         console.log('Error while submitting the form:', error);
@@ -82,7 +83,7 @@ function Update ({ open, productId }) {
   };
   return (
     <div className = "modalBackground">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e)=>handleSubmit(e)}>
       <div className= "modalContainer">
         <div className = "titleCloseBtn">
         <button onClick = {() => open(false) } className="text-white">  X  </button>

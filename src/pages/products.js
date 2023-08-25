@@ -4,7 +4,7 @@ import Popup from '../components/Popup/Popup.js';
 import UpdatePopup from '../components/UpdateProduct/Update.js';
 import DeleteProduct from '../components/DeleteProduct/DeleteProduct.js';
 import Dashboard from './dashboard.js';
-import { FaEdit, FaTrash } from 'react-icons/fa/index.esm.js'; 
+import { FaEdit, FaTrash,  FaArrowLeft, FaArrowRight  } from 'react-icons/fa/index.esm.js'; 
 import './style.css';
 
 
@@ -17,6 +17,8 @@ function Product() {
   const [showDelete , setShowDelete ] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null); // Store selected product ID
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const productPerPage = 10;
 
    
   useEffect(() => {
@@ -32,6 +34,26 @@ function Product() {
      const filteredProducts = products.filter((product) =>
      product.name.toLowerCase().includes(searchTerm.toLowerCase())
    );
+
+   const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    const totalPages = Math.ceil(filteredProducts.length / productPerPage);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   return (
    
@@ -50,7 +72,7 @@ function Product() {
             <input
                 type="text"
                 placeholder="Search by name"
-                className="ml-4 p-1 rounded border border-gray-300"
+                className="ml-4 p-1 rounded border border-gray-300 text-black"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -71,40 +93,58 @@ function Product() {
              style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Image</th>
-                <th>Action</th>
+                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+
+                  #</th>
+                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+Name</th>
+                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+Price</th>
+                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+Description</th>
+                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+Category</th>
+                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+Image</th>
+                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+Action</th>
               </tr>
             </thead>
             <tbody>
-                {filteredProducts.map((product, index) => (
+                {currentProducts.map((product, index) => (
                   <tr key={product._id}  className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
-                    <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td>{product.description}</td>
-                    <td>{product.cname}</td>
-                    <td>
+                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                           {(currentPage - 1) * productPerPage + index + 1}
+</td>
+                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+{product.name}</td>
+                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+{product.price}</td>
+                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+{product.description}</td>
+                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+{product.cname}</td>
+                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+
                       {product.imagePath && (
                         <img
                         src={`/uploads/usersImages/${product.imagePath}`}
 
-                          style={{ width: '100px', height: '90px',display: 'block', margin: '0 auto'}}
+                          style={{ width: '100px', height: '90px',display: 'block', margin: '2 auto'}}
                         />
                       )}
                     </td>
-                    <td>
+                    <td className="px-6 py-4 whitespace-nowrap border Border-white">
+
                       
-                    <div className="flex items-center justify-center space-x-4">
+                    <div className="flex items-center justify-center space-x-4 m-2">
   <div className="bg-yellow-500 rounded">
     <button  className="text-white font-bold py-1 px-2" type="button" onClick={() => {
                             setSelectedProductId(product._id); // Set the selected product ID
                             setShowUpdate(true); // Show the update modal
                           }} ><FaEdit className="w-5 h-5" /></button>
   </div>
-  <div className="bg-yellow-500 rounded">
+  <div className="bg-red-500 rounded">
     <button className="text-white font-bold py-1 px-2" type="button"  
  onClick= {() => { setSelectedProductId(product._id); setShowDelete(true);}}> <FaTrash className="w-5 h-5" /></button>
 
@@ -118,7 +158,25 @@ function Product() {
                 ))}
               </tbody>
           </table>
-         
+          <div className='flex justify-center mt-4'>
+              <div className='flex items-center ml-auto'>
+                <button
+                  className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+                  onClick={handlePreviousPage}
+                >
+                  <FaArrowLeft />
+                </button>
+                <p className='text-md text-yellow-500 ml-4 mr-4'>
+                  Page {currentPage} of {Math.ceil(filteredProducts.length / productPerPage)}
+                </p>
+                <button
+                  className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+                  onClick={handleNextPage}
+                >
+                  <FaArrowRight />
+                </button>
+              </div>
+            </div>
 
           </div>
         </div>

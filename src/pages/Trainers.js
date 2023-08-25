@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
-import { FaTimes, FaTrash } from 'react-icons/fa/index.esm.js'; 
+import { FaTimes, FaTrash,FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js'; 
+
 
 
 function Trainers() {
@@ -22,7 +23,9 @@ function Trainers() {
     phonenumber: '',
     password:"",
   });
-
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     // Fetch trainers data
@@ -105,8 +108,15 @@ function Trainers() {
       trainer.address.toLowerCase().includes(searchTermLower)
     );
   });
-  
+  const handlePaginationChange = (page) => {
+    setCurrentPage(page);
+  };
   const numFilteredTrainers = filteredTrainers.length;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredTrainers.slice(indexOfFirstItem, indexOfLastItem);
+
+  
 
   return (
     <div className='flex'>
@@ -119,7 +129,7 @@ function Trainers() {
     <input
       type="text"
       placeholder="Search by name or phone"
-      className="px-4 py-2 border rounded"
+      className="px-4 py-2 border rounded text-black"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
@@ -134,9 +144,7 @@ function Trainers() {
     Add Trainer
   </button>
 </div>
-
-
-                     
+                
           <div className="flex justify-between">
             <div className="flex justify-start mb-3">
               
@@ -170,42 +178,62 @@ function Trainers() {
               </tr>
             </thead>
             <tbody className='text-white font-semibold'>
-  {filteredTrainers.map((trainer, index) => (
-    <tr
-      key={trainer._id}
-      className={index % 2 === 0 ? 'bg-zinc-500' : 'bg-zinc-600'}
-    >
-       <td className="px-6 py-4 whitespace-nowrap border Border-white">
-          {index + 1} 
-        </td>
-      <td className="px-6 py-4 whitespace-nowrap border Border-white">
-        {trainer.fullname}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap border border-white">
-        {trainer.email}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap border border-white">
-        {trainer.address}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap border border-white">
-        {trainer.age}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap border border-white">
-        {trainer. phonenumber}
-      </td>
-      
-      <td className="px-6 py-4 whitespace-nowrap border border-white flex items-center justify-center">
-              <button
-                    onClick={() => handleDeleteTrainer(trainer._id)}
-                    className="text-white  border bg-yellow-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 flex items-center justify-center"
-                  >
-                    <FaTrash className="mr-1" />
-        </button>
+              {currentItems.map((trainer, index) => (
+                <tr
+                  key={trainer._id}
+                  className={index % 2 === 0 ? 'bg-zinc-500' : 'bg-zinc-600'}
+                >
+                  <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                      {index + 1+(currentPage - 1) * itemsPerPage} 
+                    </td>
+                  <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                    {trainer.fullname}
                   </td>
-                </tr>
-              ))}
+                  <td className="px-6 py-4 whitespace-nowrap border border-white">
+                    {trainer.email}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap border border-white">
+                    {trainer.address}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap border border-white">
+                    {trainer.age}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap border border-white">
+                    {trainer. phonenumber}
+                  </td>
+                  
+                  <td className="px-6 py-4 whitespace-nowrap border border-white flex items-center justify-center">
+                          <button
+                                onClick={() => handleDeleteTrainer(trainer._id)}
+                                className="text-white  border bg-red-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 flex items-center justify-center"
+                              >
+                                <FaTrash className="mr-1" />
+                    </button>
+                              </td>
+                            </tr>
+                          ))}
             </tbody>
           </table>
+          <div className="flex items-center justify-end mt-4">
+                <button
+                  className="bg-yellow-500 text-white px-4 py-1 rounded-lg mr-2"
+                  onClick={() => handlePaginationChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  <FaArrowLeft className="mr-1" /> 
+                </button>
+                <span className="text-yellow-500 font-semibold">
+                  Page {currentPage} of {Math.ceil(filteredTrainers.length / itemsPerPage)}
+                </span>
+                <button
+                  className="bg-yellow-500 text-white px-4 py-1 rounded-lg ml-2"
+                  onClick={() => handlePaginationChange(currentPage + 1)}
+                  disabled={indexOfLastItem >= filteredTrainers.length}
+                >
+                  <FaArrowRight className="ml-1" />
+                </button>
+              </div>
+
         </div>
       </div>
       {showDeleteModal && (

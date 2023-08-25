@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-
+import Header from './Header.jsx';
+ 
 function Register() {
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
@@ -90,6 +91,7 @@ const handleSubmit = (e) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
+    <Header/>
      <div className=" shadow-md rounded-lg p-8">
   <img
     src="./assets/images/register.jpg"
