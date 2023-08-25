@@ -110,10 +110,16 @@ const ExerciseModal = ({ isOpen, onClose, exercise }) => {
             ))}
           </Carousel>
           <div className="mb-2">
-            <h3 className="text-yellow-500 font-bold text-xl mb-2">Description:</h3>
-            <p className="text-white" style={customStyles.description}>
-              {exercise.descriptionworkout}
-            </p>
+            <h3 className="text-yellow-500 font-bold text-xl mb-2">Descriptions:</h3>
+            <Carousel showArrows={true} showThumbs={false}>
+              {exercise.descriptionworkout.map((description, index) => (
+                <div key={index} className="carousel-description">
+                  <p className="text-white" style={customStyles.description}>
+                    {description}
+                  </p>
+                </div>
+              ))}
+            </Carousel>
           </div>
         </div>
       )}

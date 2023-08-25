@@ -7,12 +7,13 @@ Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
-    top: '50%',
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '500px', 
+    maxWidth: '550px',
+    maxHeight: '650px',
     backgroundColor: 'black', 
     border: '2px solid black', 
     borderRadius: '8px', 
@@ -21,7 +22,7 @@ const customStyles = {
 };
 
 const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
-  const [description, setDescription] = useState('');
+  const [descriptions, setDescriptions] = useState([]);
   const [time, setTime] = useState(0);
   const [type, setType] = useState('');
   const [day, setDay] = useState('');
@@ -31,19 +32,24 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
   const [workoutPlan, setWorkoutPlan] = useState('');
   const [userData, setUserData] = useState('');
 
+
   const handleImageChange = (e) => {
-    setSelectedImages((prevImages) => [...prevImages, ...Array.from(e.target.files)]);
+    setSelectedImages([...selectedImages, ...e.target.files]);
   };
+  
 
   const handleRemoveImage = (index) => {
     setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
+  
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     const decodedToken = jwt_decode(token);
     const id = decodedToken.id;
 
-    axios.get(`http://localhost:8000/user/${id}`)
+    axios
+      .get(`http://localhost:8000/user/${id}`)
       .then((response) => {
         const userData = response.data;
 
@@ -58,37 +64,35 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate fields here and handle empty values appropriately
-    if (!description || !time || !type || !day || !gender || !duration || !workoutPlan) {
-      console.error('Please fill in all the fields.');
+  
+    if (!descriptions.length || !time || !type || !day || !gender || !duration || !workoutPlan || selectedImages.length === 0) {
+      console.error('Please fill in all the fields and select at least one image.');
       return;
     }
-
-    const formData = new FormData();
-    selectedImages.forEach((image, i) => {
-      formData.append(`image-${i}`, image);
+  
+    const formData = new FormData(e.target);
+  
+    selectedImages.forEach((image, index) => {
+      formData.append('imageworkout', image);
     });
-
-    // Extract image names from selectedImages array
-    const imageNames = selectedImages.map((img) => img.name);
-
+  
     const newWorkout = {
-      descriptionworkout: description,
-      Time: time,
+      descriptionworkout: descriptions.join('\n'), 
+      Time: parseFloat(time),     
       type: type,
       Day: day,
-      imageworkout: selectedImages.map((img) => img.name),
       gender: gender,
       Duration: duration,
       workoutplan: workoutPlan,
-      trainers: userData._id, 
+      trainers: userData._id,
     };
-
+  
+    formData.append('workoutData', JSON.stringify(newWorkout));
+  
     try {
-      await onAdd(newWorkout);
-
-      setDescription('');
+      await onAdd(formData, newWorkout);
+  
+      setDescriptions((prevDescriptions) => [...prevDescriptions, ...descriptions]);
       setTime(0);
       setType('');
       setDay('');
@@ -96,48 +100,84 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
       setGender('');
       setDuration('');
       setWorkoutPlan('');
-
+  
       onClose();
     } catch (error) {
       console.error('Error adding workout:', error.response.data);
     }
   };
- 
+
+  const handleAddDescription = () => {
+    setDescriptions((prevDescriptions) => [...prevDescriptions, ""]);
+  };
+
+  const handleDescriptionChange = (index, value) => {
+    const newDescriptions = [...descriptions];
+    newDescriptions[index] = value;
+    setDescriptions(newDescriptions);
+  };
+
+  const handleRemoveDescription = (index) => {
+    const newDescriptions = descriptions.filter((_, i) => i !== index);
+    setDescriptions(newDescriptions);
+  };
+  
 
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <h2 className="text-yellow-500 font-bold text-xl mb-4">Add Workout</h2>
+      <h2 className="text-yellow-500 font-bold text-xl mb-4 ">Add Workout</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between mb-4">
-          <div className="w-1/2">
-            <label className="text-white mb-10">Description:</label>
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
-            />
-          </div>
-          <div className="w-1/2 pl-4">
-          <label className="text-white mb-1">Time / in hour :</label>
-            <input
-              type="number"
-              value={time}
-              onChange={(e) => {
-                const value = parseInt(e.target.value, 10);
-                setTime(isNaN(value) || value < 0 ? 0 : value);
-              }}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
-            />
+        <div className="w-full">
+        <label className="text-white mb-2">Descriptions:</label>
+            <div>
+              {descriptions.map((desc, index) => (
+                <div key={index} className="flex space-x-2 items-center mb-2">
+                  <textarea
+                    value={desc}
+                    onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                    name="descriptionworkout"
+                    className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full h-[40px] text-black resize-none"
+                  />
+                  <button
+                    onClick={() => handleRemoveDescription(index)}
+                    className="text-yellow-500 "
+                    name="descriptionworkout"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button
+  type="button"
+  onClick={handleAddDescription}
+  className="text-yellow-500 mt-2 border border-yellow-500 rounded px-3 py-1"
+>
+  Add Description
+</button>
+
           </div>
         </div>
+
+        <div className="w-full">
+          <label className="text-white">Time / in hours:</label>
+    <input
+      type="number"
+      value={time}  
+      name="Time"
+      onChange={(e) => setTime(Math.max(0, parseInt(e.target.value)))}
+      className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
+    />
+          </div>
         <div className="flex justify-between mb-4">
           <div className="w-1/2">
             <label className="text-white">Gender:</label>
             <select
               value={gender}
+              name="gender"
               onChange={(e) => setGender(e.target.value)}
               className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             >
@@ -147,10 +187,12 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
             </select>
           </div>
           <div className="w-1/2 pl-4">
-            <label className="text-white">Workout Plan:</label>
+          <label className="text-white">Workout Plan:</label>
             <select
               value={workoutPlan}
+              name="workoutplan"
               onChange={(e) => setWorkoutPlan(e.target.value)}
+
               className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             >
               <option value="">Select Workout Plan</option>
@@ -166,6 +208,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
             <label className="text-white">Type:</label>
             <select
               value={type}
+              name="type"
               onChange={(e) => setType(e.target.value)}
               className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             >
@@ -176,10 +219,11 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
             </select>
           </div>
           <div className="w-1/2 pl-4">
-            <label className="text-white">Duration:</label>
+          <label className="text-white">Duration:</label>
             <input
               type="text"
               value={duration}
+              name="Duration"
               onChange={(e) => setDuration(e.target.value)}
               className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             />
@@ -187,12 +231,13 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
         </div>
         <div className="flex justify-between mb-4">
         <div className="w-1/2">
-  <label className="text-white">Day:</label>
-  <select
-    value={day}
-    onChange={(e) => setDay(e.target.value)}
-    className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
-  >
+        <label className="text-white">Day:</label>
+        <select
+      value={day} 
+      onChange={(e) => setDay(e.target.value)}
+      name="Day"
+      className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
+    >
     <option value="">Select Day</option>
     <option value="Monday">Monday</option>
     <option value="Tuesday">Tuesday</option>
@@ -203,43 +248,38 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
     <option value="Sunday">Sunday</option>
   </select>
 </div>
-          <div className="w-1/2 pl-4 mb-4">
+        <div className="w-1/2 pl-4 mb-4">
           <label className="text-white">Image:</label>
         <div className="relative">
           <input
             type="file"
             accept="image/*"
+            name="imageworkout" 
             onChange={handleImageChange}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none text-black"
+            multiple
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
           />
           {selectedImages.length > 0 && (
-           <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
-              {selectedImages.map((img, index) => {
-  console.log('Image:', img);
-  console.log('Type:', typeof img);
-  
-  return (
-    <div key={index} className="flex space-x-2 items-center">
-      <img
-        src={URL.createObjectURL(img)}
-        alt={`Selected Image ${index + 1}`}
-        className="h-10 w-10 rounded-full"
-      />
-      <button
-        onClick={() => handleRemoveImage(index)}
-        className="text-white"
-      >
-        Remove
-      </button>
-    </div>
-  );
-})}
-
-            </div>
-          )}
+  <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+    {selectedImages.map((img, index) => (
+      <div key={index} className="flex space-x-2 items-center">
+        <img
+          src={URL.createObjectURL(img)}
+          alt=""
+          className="h-10 w-10 rounded-full"
+        />
+        <button
+          onClick={() => handleRemoveImage(index)}
+          className="text-yellow-500"
+        >
+          Remove
+        </button>
+      </div>
+    ))}
+  </div>
+)}
         </div>
       </div>
-
 
         </div>
         <div className="flex justify-between mt-4">

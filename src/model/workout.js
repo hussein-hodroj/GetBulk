@@ -28,9 +28,9 @@ const Day = {
 
 const workoutSchema = new mongoose.Schema({
 
-    descriptionworkout: {
+    descriptionworkout: [{  
         type: String,
-    },
+    }],
     Time: {
         type: Number,
     },
@@ -44,7 +44,8 @@ const workoutSchema = new mongoose.Schema({
     },
     imageworkout: [{
         type: String,
-      }],
+    }],
+    
     gender: {
         type: String,
         enum: Object.values(Gender),

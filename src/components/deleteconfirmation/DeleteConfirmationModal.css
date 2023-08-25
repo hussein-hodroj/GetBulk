@@ -9,12 +9,13 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
+    color: #F6D21D;
     align-items: center;
   }
   
   .modal-content {
-    color: black;
-    background-color: white;
+    background-color: black;
+    color: #e4e4e4;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -35,8 +36,8 @@
   }
   
   .modal-btn-yes {
-    background-color: rgba(239, 239, 34, 0.952);
-    color: black;
+    background-color: #F6D21D;
+    color: white;
   }
   
   .modal-btn-no {
