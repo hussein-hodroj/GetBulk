@@ -139,8 +139,8 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
                 onClick={() => handleSidebarItemClick('Products')}
               >                
               <span className="inline-flex justify-center items-center ml-4">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 <circle cx="16" cy="8" r="2"></circle>
                 <circle cx="8" cy="16" r="2"></circle>
             </svg>
@@ -158,8 +158,8 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             >
               
               <span className="inline-flex justify-center items-center ml-4">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
                 </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Manage Schedule</span>
@@ -175,8 +175,8 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
                 onClick={() => handleSidebarItemClick('Workout')}
               >               
               <span className="inline-flex justify-center items-center ml-4">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 4v6H6a2 2 0 00-2 2v6a2 2 0 002 2h3v6a2 2 0 002 2h6a2 2 0 002-2v-6h3a2 2 0 002-2v-6a2 2 0 00-2-2h-3V4a2 2 0 00-2-2H6a2 2 0 00-2 2z"></path>
               </svg>                </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Workouts</span>
               </a>
