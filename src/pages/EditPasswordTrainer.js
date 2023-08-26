@@ -99,7 +99,7 @@ function EditPasswordTrainer() {
             <div className="mt-4 flex justify-end">
               <button
                 type="submit"
-                className="bg-yellow-400 hover:bg-yellow-500 hover:text-black text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+                className="bg-yellow-400 hover:bg-yellow-500 hover:text-black text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline hover:scale-105"
               >
                 Update Password
               </button>

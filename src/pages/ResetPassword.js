@@ -79,8 +79,8 @@ function ResetPassword() {
         backgroundSize: 'cover',
       }}
     >
-      <div className="bg-transparent p-8 rounded-lg shadow-md w-96 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
-        <h4 className="text-3xl font-bold text-yellow-500 mb-4">Reset Password</h4>
+      <div className="bg-transparent p-8 rounded-lg shadow-md w-96 transform transition-transform duration-200 border border-yellow-400 hover:shadow-lg">
+        <h4 className="text-3xl font-bold text-yellow-500 mb-8">Reset Password</h4>
         {showMessage && (
           <p className={`mb-4 ${messageType === 'success' ? 'text-green-500' : 'text-red-500'}`}>
             {message}
@@ -96,7 +96,7 @@ function ResetPassword() {
               placeholder="Enter New Password"
               autoComplete="off"
               name="password"
-              className="w-full px-3 py-2 rounded border-2 border-black-500 focus:outline-none focus:border-yellow-300"
+              className="w-full px-3 py-2 rounded border-2 border-black-500 focus:outline-none focus:border-yellow-300 hover:scale-105"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -110,16 +110,16 @@ function ResetPassword() {
               placeholder="Confirm New Password"
               autoComplete="off"
               name="confirmPassword"
-              className="w-full px-3 py-2 rounded border-2 border-black-500 focus:outline-none focus:border-yellow-300"
+              className="w-full px-3 py-2 rounded border-2 border-black-500 focus:outline-none focus:border-yellow-300 hover:scale-105"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-8">
           <button
             type="submit"
             className="py-2 px-6 rounded transition duration-200 
-                       bg-yellow-500 text-black hover:bg-yellow-600 "
+                       bg-yellow-500 text-black hover:bg-yellow-600 hover:scale-105"
           >
               Update
             </button>

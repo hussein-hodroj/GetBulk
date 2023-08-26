@@ -168,7 +168,7 @@ function Category() {
             <div className='flex justify-center mt-4'>
         <div className='flex items-center ml-auto'>
           <button
-            className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+            className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600 hover:scale-105'
             onClick={handlePreviousPage}
           >
             <FaArrowLeft />
@@ -177,7 +177,7 @@ function Category() {
             Page {currentPage} of {Math.ceil(filteredCategories.length / categoriesPerPage)}
           </p>
           <button
-            className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600'
+            className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600 hover:scale-105'
             onClick={handleNextPage}
           >
             <FaArrowRight />
