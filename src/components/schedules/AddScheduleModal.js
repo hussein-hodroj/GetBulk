@@ -25,6 +25,9 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
   const [userName, setUserName] = useState('Admin');
   const [date, setDate] = useState('');
   const [timeSchedule, setTimeSchedule] = useState('');
+  const [dateError, setDateError] = useState('');
+  const [timeError, setTimeError] = useState('');
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -53,29 +56,37 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    setDateError('');
+    setTimeError('');
+
+    if (!date) {
+      setDateError('Date is required.');
+    }
+    if (!timeSchedule) {
+      setTimeError('Time is required.');
+    }
+
     if (!date || !timeSchedule) {
-      console.error('Please fill in all the fields.');
       return;
     }
-  
+
     const newSchedule = {
       date,
       Timeschedule: timeSchedule,
-      trainerId: userData._id,  
+      trainerId: userData._id,
     };
-  
+
     try {
       await onAdd(newSchedule);
       setDate('');
       setTimeSchedule('');
-  
+
       onClose();
     } catch (error) {
-      console.error('Error adding schedule:', error); 
+      console.error('Error adding schedule:', error);
     }
   };
-  
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
@@ -90,6 +101,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
             id="trainer"
             value={userName}
             className="w-full bg-white text-black rounded p-2"
+            readOnly
           />
         </div>
         <div className="mb-4">
@@ -101,9 +113,10 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
             id="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full bg-white text-black  rounded p-2"
-            required
+            className="w-full bg-white text-black rounded p-2"
+           
           />
+          {dateError && <p className="text-red-500">{dateError}</p>}
         </div>
 
         <div className="mb-4">
@@ -115,9 +128,10 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
             id="timeSchedule"
             value={timeSchedule}
             onChange={(e) => setTimeSchedule(e.target.value)}
-            className="w-full bg-white text-black  rounded p-2"
-            required
+            className="w-full bg-white text-black rounded p-2"
+            
           />
+          {timeError && <p className="text-red-500">{timeError}</p>}
         </div>
         <button
           type="submit"

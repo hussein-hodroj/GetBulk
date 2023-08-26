@@ -51,6 +51,7 @@ import Heroprodu from './pages/Hero.js';
 import Category from './pages/Category.js';
 
 import WorkoutDescription from './pages/WorkoutDescription.jsx';
+import BookingUser from './pages/bookinguser.js';
 
 
 
@@ -99,6 +100,7 @@ function Layout() {
             <Route path='/edit-password-user' element={<EditPasswordUser />}/>
             <Route path="/Workouts" element= {<Workout />}/>
             <Route path="/schedules" element= {<Schedules />}/>
+            <Route path="/bookinguser/:trainerId" element= {<BookingUser />}/>
             
             <Route path="/transforms" element= {<TransformPage />}/>
             <Route path="/UserWorkout" element= {<UserWorkout />}/>

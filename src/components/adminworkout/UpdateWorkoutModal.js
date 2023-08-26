@@ -29,6 +29,16 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
   const [gender, setGender] = useState('');
   const [duration, setDuration] = useState('');
   const [workoutPlan, setWorkoutPlan] = useState('');
+  const [errors, setErrors] = useState({
+    descriptions: '',
+    time: '',
+    type: '',
+    day: '',
+    gender: '',
+    duration: '',
+    workoutPlan: '',
+    images: '',
+  });
 
   useEffect(() => {
     if (selectedWorkout && selectedWorkout.imageworkout) {
@@ -69,15 +79,73 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setErrors({
+      descriptions: '',
+      time: '',
+      type: '',
+      day: '',
+      gender: '',
+      duration: '',
+      workoutPlan: '',
+      images: '',
+    });
+
+    let hasErrors = false;
+    const newErrors = {};
+
+    if (descriptions.length === 0) {
+      newErrors.descriptions = 'At least one description is required.';
+      hasErrors = true;
+    }
+
+    if (!time) {
+      newErrors.time = 'Time is required.';
+      hasErrors = true;
+    }
+
+    if (!type) {
+      newErrors.type = 'Type is required.';
+      hasErrors = true;
+    }
+
+    if (!day) {
+      newErrors.day = 'Day is required.';
+      hasErrors = true;
+    }
+
+    if (!gender) {
+      newErrors.gender = 'Gender is required.';
+      hasErrors = true;
+    }
+
+    if (!duration) {
+      newErrors.duration = 'Duration is required.';
+      hasErrors = true;
+    }
+
+    if (!workoutPlan) {
+      newErrors.workoutPlan = 'Workout plan is required.';
+      hasErrors = true;
+    }
+
+    if (selectedImages.length === 0) {
+      newErrors.images = 'At least one image is required.';
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      setErrors(newErrors);
+      return;
+    }
     if (!selectedWorkout) {
       return;
     }
-
+  
     const formData = new FormData();
     selectedImages.forEach(image => {
       formData.append('images', image.file);
     });
-
+  
     const updatedWorkout = {
       descriptionworkout: descriptions,
       Time: time,
@@ -88,7 +156,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
       Duration: duration,
       workoutplan: workoutPlan,
     };
-
+  
     try {
       const response = await axios.put(
         `http://localhost:8000/workout/${selectedWorkout._id}/update`,
@@ -96,7 +164,11 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
       );
 
       handleUpdateWorkout(response.data);
+  
+      
       updateWorkoutsList();
+  
+   
       onClose();
     } catch (error) {
       console.error('Error updating workout:', error.response.data);
@@ -104,6 +176,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
       selectedImages.forEach((img) => URL.revokeObjectURL(img.url));
     }
   };
+  
 
   const handleAddDescription = () => {
     setDescriptions([...descriptions, ""]);
@@ -120,6 +193,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
     newDescriptions.splice(index, 1);
     setDescriptions(newDescriptions);
   };
+  
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
@@ -150,6 +224,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
 >
   Add Description
 </button>
+{errors.descriptions && <p className="text-red-500">{errors.descriptions}</p>}
           </div>
         
       </div>
@@ -164,6 +239,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
             }}
             className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
           />
+          {errors.time && <p className="text-red-500">{errors.time}</p>}
         </div>
       <div className="flex justify-between mb-4">
         <div className="w-1/2">
@@ -177,6 +253,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+          {errors.gender && <p className="text-red-500">{errors.gender}</p>}
         </div>
         <div className="w-1/2 pl-4">
           <label className="text-white mb-1">Workout Plan:</label>
@@ -191,6 +268,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
               <option value="fivedaysplan"> 5 Days Plan</option>
               <option value="sixdaysplan"> 6 Days Plan</option>
           </select>
+          {errors.workoutPlan && <p className="text-red-500">{errors.workoutPlan}</p>}
         </div>
       </div>
       <div className="flex justify-between mb-4">
@@ -206,6 +284,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
             <option value="intermediate">Intermediate</option>
             <option value="advance">Advance</option>
           </select>
+          {errors.type && <p className="text-red-500">{errors.type}</p>}
         </div>
         <div className="w-1/2 pl-4">
             <label className="text-white">Duration:</label>
@@ -215,6 +294,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
               onChange={(e) => setDuration(e.target.value)}
               className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
             />
+             {errors.duration && <p className="text-red-500">{errors.duration}</p>}
           </div>
       </div>
       <div className="flex justify-between mb-4">
@@ -234,6 +314,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
     <option value="Saturday">Saturday</option>
     <option value="Sunday">Sunday</option>
   </select>
+  {errors.day && <p className="text-red-500">{errors.day}</p>}
 </div>
 <div className="w-1/2 pl-4 mb-4">
              <label className="text-white">Images:</label>
@@ -245,6 +326,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
                 className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
                 multiple
               />
+               {errors.images && <p className="text-red-500">{errors.images}</p>}
               {selectedImages.length > 0 && (
                 <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
                   <label className="text-white">Selected Images:</label>

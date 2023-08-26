@@ -18,12 +18,11 @@ const WorkoutSelection = () => {
   const [trainerInfo, setTrainerInfo] = useState({});
 
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 5;
+  const rowsPerPage = 3;
 
   
   const startIndex = (currentPage - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-
+  const endIndex = Math.min(startIndex + rowsPerPage, filteredWorkouts.length);
   const displayedWorkouts = filteredWorkouts.slice(startIndex, endIndex);
   // const [isScheduling, setIsScheduling] = useState(true); // Track scheduling state
   // const buttonText = isScheduling ? 'Schedule' : 'Workout'; // Button text based on state
@@ -82,6 +81,7 @@ const WorkoutSelection = () => {
       setCurrentPage(currentPage + 1);
     }
   };
+  
 
   const indexOfLastWorkout = currentPage * rowsPerPage;
   const indexOfFirstWorkout = indexOfLastWorkout - rowsPerPage;
@@ -159,42 +159,53 @@ const WorkoutSelection = () => {
               Schedule
             </button>
           </Link>
+
+          <Link to={`/bookinguser/${trainerId}`} >
+            <button
+              type="button"
+              className="px-4 py-2 bg-yellow-600 text-white rounded-lg mr-12 hover:bg-yellow-500 mt-2 mb-2 font-bold"
+            >
+              Booking
+            </button>
+          </Link>
        
 
         </div>
           <div className="filtered-workouts mt-6 mr-12">
           <h2 className="text-yellow-500 mb-4">Filtered Workouts</h2>
           <table className="table flex items-center justify-center font-bold bg-zinc-800 text-center w-full"  style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Gender</th>
-                <th>Workout Plan</th>
-                <th> Day </th>
-                <th> Time </th>
-                <th> Description </th>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Type</th>
+              <th>Gender</th>
+              <th>Workout Plan</th>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayedWorkouts.map((workout, index) => (
+              <tr key={workout._id}>
+                <td className="py-2 px-4">{startIndex + index + 1}</td>
+                <td>{workout.type}</td>
+                <td>{workout.gender}</td>
+                <td>{workout.workoutplan}</td>
+                <td>{workout.Day}</td>
+                <td>{workout.Time}</td>
+                <td>
+                  <Link to={`/WorkoutDescription/${trainerId}/${workout._id}`}>
+                    <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg mr-2 hover:bg-yellow-500 mt-2 mb-2">
+                      Workout
+                    </button>
+                  </Link>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-            {displayedWorkouts.map(workout => (
+            ))}
+          </tbody>
+        </table>
 
-                <tr key={workout._id}>
-                  <td>{workout.type}</td>
-                  <td>{workout.gender}</td>
-                  <td>{workout.workoutplan}</td>
-                  <td>{workout.Day}</td>
-                  <td>{workout.Time}</td>
-                  <td>
-                              <Link to={`/WorkoutDescription/${trainerId}/${workout._id}`}>
-        <button className="px-4 py-2 bg-yellow-600 text-white rounded-lg mr-2 hover:bg-yellow-500 mt-2 mb-2">
-          Workout
-        </button>
-       </Link>
-      </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
           
           <div className="pagination flex items-center justify-between mt-4">
             <div className="justify-start flex-start">
@@ -208,24 +219,24 @@ const WorkoutSelection = () => {
               </Link>
             </div>
             <div className="flex items-center ml-auto">
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1 || displayedWorkouts.length === 0}
-                className="bg-yellow-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-yellow-500"
-              >
-                <FaArrowLeft />
-              </button>
-              <p className="text-md text-yellow-500 ml-4 mr-4">
+            <button
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1 || displayedWorkouts.length === 0}
+              className="bg-yellow-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-yellow-500"
+            >
+              <FaArrowLeft />
+            </button>
+            <p className="text-md text-yellow-500 ml-4 mr-4">
               Page {currentPage} of {Math.ceil(filteredWorkouts.length / rowsPerPage)}
             </p>
-              <button
-                onClick={handleNextPage}
-                disabled={endIndex >= displayedWorkouts.length}
-                className="bg-yellow-600 text-white px-4 py-2 rounded-lg ml-2 hover:bg-yellow-500"
-              >
-                <FaArrowRight />
-              </button>
-              </div>
+            <button
+              onClick={handleNextPage}
+              disabled={endIndex >= filteredWorkouts.length}
+              className="bg-yellow-600 text-white px-4 py-2 rounded-lg ml-2 hover:bg-yellow-500"
+            >
+              <FaArrowRight />
+            </button>
+          </div>
         </div>
 </div>
         </div>

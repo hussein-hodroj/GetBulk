@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import { FaPlus, FaEdit, FaTrash, FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa/index.esm.js';
 import Dashboard from './TrainerDashboard.js';
 import './style.css';
@@ -20,13 +21,19 @@ function Workout() {
 
 
   useEffect(() => {
-    fetchWorkouts();
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.id;
+      fetchWorkouts(userId);
+    }
   }, []);
 
-  const fetchWorkouts = async () => {
+  const fetchWorkouts = async (userId) => {
     try {
-      const response = await axios.get('http://localhost:8000/workout/getwork');
-      setWorkouts(response.data);
+      const response = await axios.get(`http://localhost:8000/workout/getwork`);
+      const userWorkouts = response.data.filter(workout => workout.trainers.includes(userId));
+      setWorkouts(userWorkouts);
     } catch (error) {
       console.error('Error fetching workouts:', error);
     }
@@ -48,12 +55,13 @@ function Workout() {
         `http://localhost:8000/workout/${selectedWorkout._id}/update`,
         updatedWorkout
       );
-      fetchWorkouts();
+      fetchWorkouts(); 
       setUpdateModalIsOpen(false);
     } catch (error) {
       console.error('Error updating workout:', error.response.data);
     }
   };
+  
 
   const handleDeleteWorkout = async () => {
     if (!selectedWorkout) {
