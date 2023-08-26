@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import UserDashboard from './UserDashboard.js';
 import jwt_decode from 'jwt-decode';
+import {  FaArrowLeft, FaArrowRight  } from 'react-icons/fa/index.esm.js'; 
 
 
 function UserCalendar() {
@@ -11,7 +12,8 @@ function UserCalendar() {
   const [trainerInfo, setTrainerInfo] = useState({});
   const { trainerId } = useParams(); // Get the trainerId from the URL parameter
   const [selectedSchedules, setSelectedSchedules] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const calendarPerPage = 1;
   
   useEffect(() => {
     axios
@@ -125,6 +127,25 @@ function UserCalendar() {
     console.log(selectedSchedules)
   };
 
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    const totalPages = Math.ceil(schedule.length / calendarPerPage);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const indexOfLastSchedule = currentPage * calendarPerPage;
+  const indexOfFirstSchedule = indexOfLastSchedule - calendarPerPage;
+  const currentSchedules = schedule.slice(
+    indexOfFirstSchedule,
+    indexOfLastSchedule
+  );
   return (
     <div>
       <div className="flex justify-center items-center bg-black">
@@ -176,10 +197,10 @@ Select</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {schedule.map((event, index) => (
+                    {currentSchedules.map((event, index) => (
                       <tr key={index} className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
                                                    <td className="px-6 py-4 whitespace-nowrap border Border-white">
-                                                   {index+1}
+                                                   {(currentPage - 1) * calendarPerPage + index + 1}
 </td>
                                                                            <td className="px-6 py-4 whitespace-nowrap border Border-white">
 {event.date}</td>
@@ -208,7 +229,31 @@ Select</th>
           </button>
           </Link>
         </div>
-
+        <div className='flex justify-center mt-4'>
+              <div className='flex items-center ml-auto'>
+              <button
+  className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+  onClick={(e) => {
+    e.preventDefault();
+    handlePreviousPage();
+  }}
+>
+  <FaArrowLeft />
+</button>
+<p className='text-md text-yellow-500 ml-4 mr-4'>
+  Page {currentPage} of {Math.ceil(schedule.length / calendarPerPage)}
+</p>
+<button
+  className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600'
+  onClick={(e) => {
+    e.preventDefault();
+    handleNextPage();
+  }}
+>
+  <FaArrowRight />
+</button>
+              </div>
+            </div>
         <div className="justify-end items-end">
           <button
             type="submit"
