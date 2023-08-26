@@ -22,6 +22,9 @@ const customStyles = {
 const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSchedule, updateSchedulesList }) => {
   const [date, setDate] = useState('');
   const [timeSchedule, setTimeSchedule] = useState('');
+  const [dateError, setDateError] = useState('');
+const [timeError, setTimeError] = useState('');
+
 
   useEffect(() => {
     if (selectedSchedule) {
@@ -30,17 +33,28 @@ const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSc
     }
   }, [selectedSchedule]);
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  if (!selectedSchedule) {
-    return;
-  }
-
-  const updatedSchedule = {
-    date,
-    Timeschedule: timeSchedule,
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    setDateError('');
+    setTimeError('');
+  
+    if (!date) {
+      setDateError('Date is required.');
+    }
+    if (!timeSchedule) {
+      setTimeError('Time is required.');
+    }
+  
+    if (!date || !timeSchedule) {
+      return;
+    }
+  
+    const updatedSchedule = {
+      date,
+      Timeschedule: timeSchedule,
+    };
+  
 
   console.log('Updated Schedule:', updatedSchedule); // Log the updated schedule here
 
@@ -72,31 +86,34 @@ const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSc
   />
         </div>
         <div className="mb-4">
-          <label htmlFor="date" className="block text-white font-medium mb-1">
-            Date
-          </label>
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-full bg-white text-black  rounded p-2"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="timeSchedule" className="block text-white font-medium mb-1">
-            Time Schedule
-          </label>
-          <input
-            type="time"
-            id="timeSchedule"
-            value={timeSchedule}
-            onChange={(e) => setTimeSchedule(e.target.value)}
-            className="w-full bg-white text-black  rounded p-2"
-            required
-          />
-        </div>
+  <label htmlFor="date" className="block text-white font-medium mb-1">
+    Date
+  </label>
+  <input
+    type="date"
+    id="date"
+    value={date}
+    onChange={(e) => setDate(e.target.value)}
+    className="w-full bg-white text-black rounded p-2"
+    
+  />
+  {dateError && <p className="text-red-500">{dateError}</p>}
+</div>
+<div className="mb-4">
+  <label htmlFor="timeSchedule" className="block text-white font-medium mb-1">
+    Time Schedule
+  </label>
+  <input
+    type="time"
+    id="timeSchedule"
+    value={timeSchedule}
+    onChange={(e) => setTimeSchedule(e.target.value)}
+    className="w-full bg-white text-black rounded p-2"
+  
+  />
+  {timeError && <p className="text-red-500">{timeError}</p>}
+</div>
+
         <button
           type="submit"
           className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"

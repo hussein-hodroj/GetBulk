@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import {FaPlus, FaEdit, FaTrash, FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa/index.esm.js';
 import Dashboard from './TrainerDashboard.js';
 import './style.css';
@@ -18,18 +19,28 @@ function Schedules() {
     const schedulesPerPage = 10; 
     const [searchInput, setSearchInput] = useState('');
 
-  useEffect(() => {
-    fetchSchedules();
-  }, []);
-
-  const fetchSchedules = async () => {
-    try {
-      const response = await axios.get('http://localhost:8000/schedule/getAllschedule');
-      setSchedules(response.data);
-    } catch (error) {
-      console.error('Error fetching schedules:', error);
-    }
-  };
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decodedToken = jwt_decode(token);
+        const userId = decodedToken.id;
+        fetchSchedules(userId); 
+      }
+    }, []);
+    
+    
+    const fetchSchedules = async (userId) => {
+      try {
+        const response = await axios.get(`http://localhost:8000/schedule/getAllschedule`);
+        const userSchedules = response.data.filter(schedule => schedule.trainerId.includes(userId));
+        setSchedules(userSchedules);
+      } catch (error) {
+        console.error('Error fetching schedules:', error);
+      }
+    };
+    
+    
+  
   const handleAddSchedule = async (newSchedule) => {
     try {
       await axios.post('http://localhost:8000/schedule/createschedule', newSchedule);
