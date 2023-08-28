@@ -11,10 +11,11 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '550px',
+    width: '70%',
+    maxWidth: '600px',
     maxHeight: '650px',
-    backgroundColor: 'black',
-    border: '2px solid black',
+    backgroundColor: '#52525b',
+    border: '2px solid #52525b',
     borderRadius: '8px',
     padding: '20px',
   },
@@ -166,7 +167,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
       handleUpdateWorkout(response.data);
   
       
-      updateWorkoutsList();
+      handleUpdateWorkout(updatedWorkout);
   
    
       onClose();
@@ -197,7 +198,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-    <h2 className="text-yellow-500 font-bold text-xl mt-4 mb-4">Update Workout</h2>
+    <h2 className="text-yellow-500 font-bold text-2xl mb-12 mt-4">Update Workout</h2>
     <form onSubmit={handleSubmit}>
       <div className="flex justify-between mb-4">
       <div className="w-full">
@@ -228,8 +229,8 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
           </div>
         
       </div>
-      <div className="w-full">
-          <label className="text-white mb-1">Time / in hour :</label>
+      <div className="w-full mb-8">
+          <label className="text-white mb-4">Time / in hour :</label>
           <input
             type="number"
             value={time}
@@ -241,7 +242,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
           />
           {errors.time && <p className="text-red-500">{errors.time}</p>}
         </div>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-8">
         <div className="w-1/2">
           <label className="text-white mb-1">Gender:</label>
           <select
@@ -271,7 +272,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
           {errors.workoutPlan && <p className="text-red-500">{errors.workoutPlan}</p>}
         </div>
       </div>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-8">
         <div className="w-1/2">
           <label className="text-white mb-1">Type:</label>
           <select
@@ -297,7 +298,7 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
              {errors.duration && <p className="text-red-500">{errors.duration}</p>}
           </div>
       </div>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-8">
       <div className="w-1/2">
   <label className="text-white">Day:</label>
   <select
@@ -333,10 +334,11 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
                   {selectedImages.map((img, index) => (
                     <div key={index} className="flex items-center mt-2">
                       <img
-                        src={img.url}
-                        alt={`Selected Image ${index + 1}`}
-                        className="h-10 w-10 rounded-full"
-                      />
+                      src={img.url}
+                      alt={`Selected ${index + 1}`}
+                      className="h-10 w-10 rounded-full"
+                    />
+
                       <button onClick={() => handleRemoveImage(index)} className="text-yellow-500 ml-2">
                         Remove
                       </button>
@@ -349,9 +351,9 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
 </div>
         
       </div>
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-end mt-4">
         <button
-          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400"
+          className="px-4 py-2 bg-yellow-500 text-white rounded-lg mr-4 hover:bg-yellow-400"
           type="submit"
         >
           Update

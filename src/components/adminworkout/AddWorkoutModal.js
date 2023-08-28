@@ -12,10 +12,11 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '550px',
+    width: '70%',
+    maxWidth: '700px',
     maxHeight: '650px',
-    backgroundColor: 'black', 
-    border: '2px solid black', 
+    backgroundColor: '#52525b', 
+    border: '2px solid #52525b', 
     borderRadius: '8px', 
     padding: '20px',
   },
@@ -208,13 +209,13 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <h2 className="text-yellow-500 font-bold text-xl mb-4 ">Add Workout</h2>
+      <h2 className="text-yellow-500 font-bold text-2xl mb-12">Add Workout</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="w-full">
           <label className="text-white mb-2">Descriptions:</label>
           {descriptions.map((desc, index) => (
-            <div key={index} className="flex space-x-2 items-center mb-2">
+            <div key={index} className="flex space-x-2 items-center mb-4">
               <textarea
                 value={desc}
                 onChange={(e) => {
@@ -240,7 +241,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
           <button
             type="button"
             onClick={() => setDescriptions([...descriptions, ''])}
-            className="text-yellow-500 mt-2 border border-yellow-500 rounded px-3 py-1"
+            className="text-yellow-500 mt-2 border border-yellow-500 rounded px-3 py-1 mb-4 ml-4"
           >
             Add Description
           </button>
@@ -248,7 +249,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
         </div>
 
         <div className="w-full">
-          <label className="text-white">Time / in hours:</label>
+          <label className="text-white ">Time / in hours:</label>
           <input
             type="number"
             value={time}
@@ -257,7 +258,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
               setTime(Math.max(0, parseInt(e.target.value)));
               setErrors({ ...errors, time: '' });
             }}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black mb-4"
           />
           {errors.time && <p className="text-red-500">{errors.time}</p>}
         </div>
@@ -272,7 +273,7 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
                 setGender(e.target.value);
                 setErrors({ ...errors, gender: '' });
               }}
-              className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
+              className="border-yellow-500 focus:border-yellow-500 mb-4 px-2 py-1 rounded-lg w-full text-black"
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -397,9 +398,9 @@ const AddWorkoutModal = ({ isOpen, onClose, onAdd }) => {
           </div>
         </div>
 
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-end mt-4">
           <button
-            className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400"
+            className="px-4 py-2 bg-yellow-500 mr-4 text-white rounded-lg hover:bg-yellow-400"
             type="submit"
           >
             Add

@@ -18,6 +18,7 @@ function Workout() {
   const [currentPage, setCurrentPage] = useState(1);
   const workoutsPerPage = 10;
   const [searchInput, setSearchInput] = useState('');
+  const [userId, setUserId] = useState(null);
 
 
   useEffect(() => {
@@ -25,19 +26,23 @@ function Workout() {
     if (token) {
       const decodedToken = jwt_decode(token);
       const userId = decodedToken.id;
+      setUserId(userId);
       fetchWorkouts(userId);
     }
   }, []);
 
   const fetchWorkouts = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:8000/workout/getwork`);
+      const response = await axios.get(`http://localhost:8000/workout/getwork`, {
+        params: { userId }, 
+      });
       const userWorkouts = response.data.filter(workout => workout.trainers.includes(userId));
       setWorkouts(userWorkouts);
     } catch (error) {
       console.error('Error fetching workouts:', error);
     }
   };
+  
 
   const handleAddWorkout = async (newWorkout) => {
     try {
@@ -55,8 +60,9 @@ function Workout() {
         `http://localhost:8000/workout/${selectedWorkout._id}/update`,
         updatedWorkout
       );
-      fetchWorkouts(); 
+      fetchWorkouts(userId);
       setUpdateModalIsOpen(false);
+      
     } catch (error) {
       console.error('Error updating workout:', error.response.data);
     }
@@ -71,7 +77,7 @@ function Workout() {
   
     try {
       await axios.delete(`http://localhost:8000/workout/${selectedWorkout._id}/delete`);
-      fetchWorkouts();
+      fetchWorkouts(userId);
       setDeleteModalIsOpen(false);
       setSelectedWorkout(null); 
     } catch (error) {
@@ -127,6 +133,8 @@ const currentWorkouts = filteredWorkouts.slice(indexOfFirstWorkout, indexOfLastW
 const handleSearchInputChange = (event) => {
   setSearchInput(event.target.value);
 };
+
+
   
 
   return (

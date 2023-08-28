@@ -4,6 +4,12 @@ import Dashboard from './UserDashboard.js';
 import { useLocation, Link, useParams } from 'react-router-dom'; // Import useHistory
 import { FaArrowLeft, FaArrowRight} from 'react-icons/fa/index.esm.js';
 
+
+const selectBoxStyle = {
+  width: '200px',
+};
+
+
 const WorkoutSelection = () => {
   const [filteredWorkouts, setFilteredWorkouts] = useState([]);
   const [selectedTrainerId, setSelectedTrainerId] = useState(null);
@@ -118,12 +124,13 @@ const WorkoutSelection = () => {
       </div>
     </div>
       <div className="workout-selection-modal mr-4 ml-16 h-full items-center justify-center mt-20 text-white bg-black">
-        <h2 className="text-yellow-500">Select Workout</h2>
+        <h2 className="text-white-500 font-bold text-2xl mb-8">Select Workout</h2>
         <div className="flex justify-between">
         <select
           value={type}
           onChange={(e) => setType(e.target.value)}
           className="border-2 border-yellow-500 bg-black text-white p-2 my-2"
+          style={selectBoxStyle}
         >
           <option value="">Select Type</option>
           <option value="beginner">Beginner</option>
@@ -134,6 +141,7 @@ const WorkoutSelection = () => {
           value={gender}
           onChange={(e) => setGender(e.target.value)}
           className="border-2 border-yellow-500 bg-black text-white p-2 my-2"
+          style={selectBoxStyle}
         >
           <option value="">Select Gender</option>
           <option value="male">Male</option>
@@ -143,6 +151,7 @@ const WorkoutSelection = () => {
           value={workoutPlan}
           onChange={(e) => setWorkoutPlan(e.target.value)}
           className="border-2 border-yellow-500 bg-black text-white p-2 my-2"
+          style={selectBoxStyle}
         >
           <option value="">Select Workout Plan</option>
           <option value="threedaysplan">3 Days Plan</option>
@@ -172,7 +181,7 @@ const WorkoutSelection = () => {
 
         </div>
           <div className="filtered-workouts mt-6 mr-12">
-          <h2 className="text-yellow-500 mb-4">Filtered Workouts</h2>
+          <h2 className="text-yellow-500 font-bold text-2xl mb-8">Filtered Workouts</h2>
           <table className="table flex items-center justify-center font-bold bg-zinc-800 text-center w-full"  style={{ backgroundColor: "#555555" , color: "whitesmoke" }}>
           <thead>
             <tr>
@@ -187,7 +196,7 @@ const WorkoutSelection = () => {
           </thead>
           <tbody>
             {displayedWorkouts.map((workout, index) => (
-              <tr key={workout._id}>
+              <tr key={workout._id} className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
                 <td className="py-2 px-4">{startIndex + index + 1}</td>
                 <td>{workout.type}</td>
                 <td>{workout.gender}</td>

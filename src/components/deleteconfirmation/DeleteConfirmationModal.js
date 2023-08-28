@@ -20,8 +20,8 @@ const DeleteConfirmationModal = ({ isOpen, onCancel, onConfirm }) => {
         </div>
         <p className="font-bold text-yellow-500 mb-12">Are you sure you want to delete the workout?</p>
         <div className="modal-actions">
-          <button className="modal-btn modal-btn-yes " onClick={handleConfirmClick}>Yes</button>
-          <button className="modal-btn modal-btn-no" onClick={onCancel}>No</button>
+          <button className="modal-btn modal-btn-yes " onClick={handleConfirmClick}>Delete</button>
+          <button className="modal-btn modal-btn-no" onClick={onCancel}>Cancel</button>
         </div>
       </div>
     </div>
