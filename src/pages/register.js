@@ -10,7 +10,7 @@ function Register() {
   const [address, setAddress] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
   const [age, setAge] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('user');
   const [imagePath, setImagePath] = useState(null); // Use null as the initial state for the image
   const navigate = useNavigate()
 // Validation state variables
@@ -38,7 +38,6 @@ const validateForm = () => {
   if (!address.trim()) newErrors.address = 'Address is required';
   if (!phonenumber.trim()) newErrors.phonenumber = 'Phone number is required';
   if (!age.trim()) newErrors.age = 'Age is required';
-  if (!role) newErrors.role = 'Role is required';
 
   // Check email format using regex
   if (email.trim() && !emailRegex.test(email)) {
@@ -110,7 +109,7 @@ const handleSubmit = (e) => {
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="fullName"
             >
-              Full Name
+              Full Name *
             </label>
             <input
               className="shadow appearance-none border rounded w-full mr-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -129,7 +128,7 @@ const handleSubmit = (e) => {
               className="block text-yellow-500 text-sm font-bold ml-2 mb-2"
               htmlFor="email"
             >
-              Email
+              Email *
             </label>
             <input
               className="shadow appearance-none border rounded w-full ml-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -149,7 +148,7 @@ const handleSubmit = (e) => {
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="password"
             >
-              Password
+              Password *
             </label>
             <input
               className="shadow appearance-none border rounded w-full mr-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -168,7 +167,7 @@ const handleSubmit = (e) => {
               className="block text-yellow-500 text-sm font-bold ml-2 mb-2"
               htmlFor="address"
             >
-              Address
+              Address *
             </label>
             <input
               className="shadow appearance-none border rounded w-full ml-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -190,7 +189,7 @@ const handleSubmit = (e) => {
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="phonenumber"
             >
-              PhoneNumber
+              PhoneNumber *
             </label>
             <input
               className="shadow appearance-none border rounded w-full mr-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -209,7 +208,7 @@ const handleSubmit = (e) => {
               className="block text-yellow-500 text-sm font-bold ml-2 mb-2"
               htmlFor="age"
             >
-              Age
+              Age *
             </label>
             <input
               className="shadow appearance-none border rounded w-full ml-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -224,7 +223,7 @@ const handleSubmit = (e) => {
 
           </div>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="role"
@@ -245,7 +244,7 @@ const handleSubmit = (e) => {
             </select>
             {errors.role && <p className="text-red-500 text-sm">{errors.role}</p>}
 
-          </div>
+          </div> */}
           <div className="mb-4">
           <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="image">
             Image

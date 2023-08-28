@@ -87,7 +87,7 @@ function Update ({ open, productId, setProducts }) {
         <button onClick = {() => open(false) } className="text-white">  X  </button>
         </div>
         <div className = "title">
-          <h1 className="text-yellow-500 font-bold"> Edit Product: </h1>
+          <h1 className="text-yellow-500 font-bold flex justify-start align-start"> Edit Product: </h1>
         </div>
         <div className = "body">
 
@@ -130,7 +130,7 @@ function Update ({ open, productId, setProducts }) {
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="category"> Category </label>
             <select
-              className="shadow  mb-2 border rounded  py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow w-64 mb-2 border rounded  py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="category"
               type="text"
               name="category"
@@ -149,13 +149,26 @@ function Update ({ open, productId, setProducts }) {
 
                </div>       
                 <div className="mb-2">
-             <label
+                <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="image">
+            Image
+          </label>
+          <input
+            className="shadow  border w-64 rounded py-2 px-3 text-yellow-500 leading-tight focus:outline-none focus:shadow-outline"
+            id="image"
+            type="file"
+            name="image"
+            onChange={(e) => setImagePath(e.target.files[0])}
+          />  
+             
+              </div>        
+              </div>
+              <div className="mb-2">
+              <label
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="description"> Description </label>
-            <input
-              className="shadow w-64 mb-2 border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <textarea
+              className="shadow w-full mb-2 border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="description"
-              type="text"
               name="description"
               value={description}
               placeholder="Enter product's description"
@@ -163,19 +176,6 @@ function Update ({ open, productId, setProducts }) {
               />   
             {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
 
-              </div>        
-              </div>
-              <div className="mb-2">
-          <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="image">
-            Image
-          </label>
-          <input
-            className="shadow  border w-full rounded py-2 px-3 text-yellow-500 leading-tight focus:outline-none focus:shadow-outline"
-            id="image"
-            type="file"
-            name="image"
-            onChange={(e) => setImagePath(e.target.files[0])}
-          />  
         </div>
               </div>
              

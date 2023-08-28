@@ -123,3 +123,61 @@ export const deletebooking = async (req, res ) => {
     .then(()=> res.send("deleted successfully"))
     .catch((err)=> console.log(err))
 }
+
+export const getBookingsByTrainerId = async (req, res) => {
+  try {
+    const { trainerId } = req.params; // Assuming you're passing the trainerId as a parameter
+
+    const bookings = await BookingModel.find({ trainerId });
+
+    if (!bookings || bookings.length === 0) {
+      return res.status(404).json({ error: 'Bookings not found for this trainer' });
+    }
+
+    const bookingsWithUserInfoPromises = bookings.map(async (booking) => {
+      const user = await UserModel.findById(booking.userId);
+      const trainer = await UserModel.findById(trainerId);
+
+      const userData = user
+        ? {
+            uname: user.fullname,
+            uemail: user.email,
+            uphonenumber: user.phonenumber,
+            uaddress: user.address,
+          }
+        : {
+            uname: 'Unknown user',
+            uemail: 'Unknown email',
+            uphonenumber: 'Unknown phone number',
+            uaddress: 'Unknown address',
+          };
+
+      const trainerData = trainer
+        ? {
+            tname: trainer.fullname,
+            temail: trainer.email,
+            tphonenumber: trainer.phonenumber,
+            taddress: trainer.address,
+          }
+        : {
+            tname: 'Unknown trainer',
+            temail: 'Unknown email',
+            tphonenumber: 'Unknown phone number',
+            taddress: 'Unknown address',
+          };
+
+      return {
+        ...booking._doc,
+        ...userData,
+        ...trainerData,
+      };
+    });
+
+    const bookingsWithUserInfo = await Promise.all(bookingsWithUserInfoPromises);
+
+    res.status(200).json(bookingsWithUserInfo);
+  } catch (error) {
+    console.error('Error retrieving bookings by trainerId:', error);
+    res.status(500).json({ error: 'Error retrieving bookings by trainerId' });
+  }
+};

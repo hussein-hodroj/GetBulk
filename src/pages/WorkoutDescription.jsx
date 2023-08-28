@@ -9,7 +9,7 @@ function WorkoutDescription() {
   const [workouts, setWorkouts] = useState([]);
   const { workoutId } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 1; // You can adjust this value as needed
+  const itemsPerPage = 5; // You can adjust this value as needed
 
   useEffect(() => {
     axios

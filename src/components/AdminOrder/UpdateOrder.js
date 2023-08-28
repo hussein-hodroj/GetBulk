@@ -88,7 +88,7 @@ function UpdateOrder ({closeUpdate, orderId, setOrders }) {
         <button onClick = {() => closeUpdate(false) } className="text-white">  X  </button>
         </div>
         <div className = "title">
-          <h1 className="text-yellow-500 font-bold"> Edit Order: </h1>
+          <h1 className="text-yellow-500 font-bold flex justify-start items-start"> Edit Order: </h1>
         </div>
         <div className = "body">
 
