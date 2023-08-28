@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
-import { FaTimes, FaTrash,FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js'; 
+import bcrypt from 'bcryptjs';
+import { FaTimes, FaTrash,FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa/index.esm.js'; 
 
 
 
@@ -54,10 +55,16 @@ function Trainers() {
   const handleAddUser = async () => {
     console.log('Adding user:', newUserDetails);
     try {
+      const saltRounds = 10; // Number of salt rounds for hashing
+      const hashedPassword = await bcrypt.hash(newUserDetails.password, saltRounds);
+      const newUser = {
+        ...newUserDetails,
+        password: hashedPassword
+      };
       const response = await axios.post('http://localhost:8000/user/addUser', newUserDetails);
-      const newUser = response.data;
+      const addedUser  = response.data;
       
-      setTrainers(prevTrainers => [...prevTrainers, newUser]);
+      setTrainers(prevTrainers => [...prevTrainers, addedUser ]);
       setShowAddUserModal(false);
       setNewUserDetails({
         fullname: '',
@@ -78,6 +85,40 @@ function Trainers() {
       }
     }
   };
+
+  // const handleAddUser = async () => {
+  //   console.log('Adding user:', newUserDetails);
+  //   try {
+  //     const saltRounds = 10; // Number of salt rounds for hashing
+  //     const hashedPassword = await bcrypt.hash(newUserDetails.password, saltRounds);
+  //     const newUser = {
+  //       ...newUserDetails,
+  //       password: hashedPassword
+  //     };
+  //     const response = await axios.post('http://localhost:8000/user/addUser', newUserDetails);
+  //     const addedUser  = response.data;
+      
+  //     setTrainers(prevTrainers => [...prevTrainers, addedUser ]);
+  //     setShowAddUserModal(false);
+  //     setNewUserDetails({
+  //       fullname: '',
+  //       email: '',
+  //       password: '',
+  //       address: '',
+  //       phonenumber:'',
+  //       age: '',
+  //       role: 'trainer'
+       
+  //     });
+  //     setErrorMessage(''); // Clear any previous error message
+  //   } catch (error) {
+  //     if (error.response && error.response.data && error.response.data.message) {
+  //       setErrorMessage(error.response.data.message);
+  //     } else {
+  //       setErrorMessage('Error adding user');
+  //     }
+  //   }
+  // };
   
 
   const handleDeleteTrainer = (trainerId) => {
@@ -116,8 +157,6 @@ function Trainers() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredTrainers.slice(indexOfFirstItem, indexOfLastItem);
 
-  
-
   return (
     <div className='flex'>
       <Dashboard />
@@ -125,7 +164,8 @@ function Trainers() {
         <div className="p-6 gap-4">
 
         <div className="flex justify-between mb-3">
-  <div className="flex">
+  <div className="flex justify-start mb-3 ">
+    <FaSearch className="search-icon text-zinc-500 ms-4 mt-2 mr-3" size={25}/>
     <input
       type="text"
       placeholder="Search by name or phone"
@@ -150,14 +190,14 @@ function Trainers() {
               
             </div>
           </div>
-          <table className="min-w-full divide-y  border border-black ">
+          <table className="min-w-full divide-y  ">
             <thead className="bg-zinc-600 ">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+                <th scope="col" className="px-6 py-3 text-left bold font-medium items-center text-white uppercase tracking-wider Border-white border">
                        #
                 </th>
 
-                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+                <th scope="col" className="px-6 py-3 text-left bold font-medium  text-white uppercase tracking-wider Border-white border">
                   Name
                 </th>
                 <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">

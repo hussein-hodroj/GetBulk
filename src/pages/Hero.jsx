@@ -120,39 +120,97 @@ useEffect(() => {
           showThumbs={false}
           interval={3000}
         >
-          <div>
+          {/* <div>
             <img src={images.AboutUs} alt="Slider" className="w-96 h-88 mt-25 mx-auto px-10" />
+            <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
+            "Train like a beast, look like a beauty.12"
+          </h1>
           </div>
 
           <div>
             <img src={images.slide1} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
+            "Train like a beast, look like a beauty.343"
+          </h1>
           </div>
 
           <div>
             <img src={images.slide2} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
+            "Train like a beast, look like a beauty.3434"
+          </h1>
           </div>
 
           <div>
             <img src={images.slide3} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
+            "Train like a beast, look like a beauty.34343"
+          </h1>
           </div>
 
           <div>
             <img src={images.slide4} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
+            "Train like a beast, look like a beauty434."
+          </h1>
           </div>
 
           <div>
             <img src={images.slide5} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
+            "Train like a beast, look like a beauty434334."
+          </h1>
           </div>
 
            <div>
             <img src={images.slide6} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10" />
+            <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
+            "Train like a beast, look like a beauty.334"
+          </h1>
+          </div> */}
+            <div className="relative">
+            <img src={images.AboutUs} alt="Slider" className="w-96 h-88 mt-25 mx-auto px-10 opacity-70" />
+            <h1 className=" absolute font-roboto font-bold   text-yellow-500 inset-0 flex  pt-96 items-center justify-center pr-50 bg-black bg-opacity-5 text-xl md:text-3xl lg:text-xl xl:text-3xl mt-30 ">
+              "Train like a beast, look like a beauty"
+            </h1>
+          </div>
+
+          <div className="relative">
+            <img src={images.slide1} alt="Slider" className="w-96 h-88 mt-25 mx-auto px-10 opacity-70" />
+            <h1 className="absolute font-roboto font-bold   text-yellow-500 pt-96  inset-0 flex  items-center justify-center bg-black bg-opacity-5 text-xl md:text-3xl lg:text-xl xl:text-3xl">
+              "The only bad workout is the one that didn't happen"
+            </h1>
+          </div>
+
+          <div className="relative">
+            <img src={images.slide2} alt="Slider" className="w-96 h-88 mt-25 mx-auto px-10 opacity-70" />
+            <h1 className="absolute font-roboto font-bold   text-yellow-500 inset-0 pt-96  flex items-center justify-center bg-black bg-opacity-5 text-xl md:text-3xl lg:text-xl xl:text-3xl">
+              "Stronger every rep, closer to my goal"
+            </h1>
+          </div>
+          <div className="relative">
+          <img src={images.slide3} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10 opacity-70" />
+          <h1 className="absolute font-roboto font-bold   text-yellow-500 inset-0 flex  pt-96 items-center justify-center pb-20 bg-black bg-opacity-5 text-xl md:text-3xl lg:text-xl xl:text-3xl">
+          "Push yourself because no one else will do it for you"
+          </h1>
+          </div>
+          <div className="relative">
+          <img src={images.slide4} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10 opacity-70" />
+          <h1 className="absolute font-roboto font-bold   text-yellow-500 inset-0 flex  pt-96 pr-10 items-center justify-center  bg-black bg-opacity-5 text-xl md:text-3xl lg:text-xl xl:text-3xl">
+          "Strive for progress, not perfection"
+          </h1>
+          </div>
+
+            <div className="relative">
+          <img src={images.slide5} alt="Slider"className="w-96 h-88 mt-25 mx-auto px-10 opacity-70" />
+          <h1 className="absolute font-roboto font-bold   text-yellow-500 inset-0 flex  pt-96 items-center justify-center pr-20 bg-black bg-opacity-5 text-xl md:text-3xl lg:text-xl xl:text-3xl">
+          "Sweat now, shine later"
+          </h1>
           </div>
           
         </Carousel>
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center  ">
-          <h1 className="font-roboto text-xl text-yellow-500 md:text-3xl lg:text-xl xl:text-3xl mr-24 ">
-            "Train like a beast, look like a beauty."
-          </h1>
+        <div className="absolute font-roboto text-yellow-500 top-0 left-0 w-full h-full flex flex-col justify-center items-center  ">
+        
           
           <div className="flex flex-col items-center md:items-start mt-8 md:mt-0">
             <div className="flex gap-4 mt-4 mr-24 ">
@@ -259,7 +317,7 @@ useEffect(() => {
   </h1>
   <div className="flex gap-4 ">
   <div className="flex flex-col max-w-full">
-    <label className="font-roboto text-yellow-500 text-2xl font-semibold  mt-4 mb-4" htmlFor="fullName">Full Name:</label>
+    <label className="font-roboto text-white text-2xl font-semibold  mt-4 mb-4" htmlFor="fullName">Full Name:</label>
     <input
       className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 mx-1 w-full max-w-full pr-12 px-4"
       type="text"
@@ -272,7 +330,7 @@ useEffect(() => {
   </div>
   
   <div className="flex flex-col max-w-full">
-    <label className="font-roboto text-yellow-500 text-2xl font-semibold  mt-4 mb-4 mx-10" htmlFor="email">Email:</label>
+    <label className="font-roboto text-white text-2xl font-semibold  mt-4 mb-4 mx-10" htmlFor="email">Email:</label>
     <input
       className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 mx-11 w-full max-w-full px-4"
       type="email"
@@ -287,7 +345,7 @@ useEffect(() => {
   </div>
 </div>
 
-      <label className="font-roboto text-yellow-500 text-2xl font-semibold mt-7 mb-3" htmlFor="subject">Subject:</label>
+      <label className="font-roboto text-white text-2xl font-semibold mt-7 mb-3" htmlFor="subject">Subject:</label>
       <textarea
         className="border-b-2 border-yellow-500 bg-transparent text-yellow-500 py-2 px-4 w-full h-18"
         id="subject"

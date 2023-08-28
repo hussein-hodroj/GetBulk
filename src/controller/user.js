@@ -5,29 +5,78 @@ import bcrypt from 'bcryptjs';
 import asyncHandler from 'express-async-handler';
 import { sendEmail } from '../utils/sendEmail.js';
 import multer from 'multer';
+import nodemailer from 'nodemailer';
 
+
+
+
+// export const addUser = async (req, res) => {
+//   const { fullname, email, address, age, phonenumber ,password} = req.body;
+//   try {
+//     const hashedPassword = await bcrypt.hash(password, 10);
+    
+//     // Create a new user instance
+//     const newUser = new UserModel({
+//       fullname,
+//       email,
+//       address,
+//       age,
+//       phonenumber,
+//       password: hashedPassword,
+//       role: 'trainer',
+//     });
+
+//     // Save the user to the database
+//     const savedUser = await newUser.save();
+
+//     res.status(201).json(savedUser);
+//   } catch (error) {
+//     console.error('Error registering user:', error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// };
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'get.bulk.leb@gmail.com', 
+    pass: 'ixktrbmlrnmtunpm', 
+  },
+});
 
 export const addUser = async (req, res) => {
-  try {
-    const { fullname, email, address, age, phonenumber } = req.body;
+  const { fullname, email, address, age, phonenumber, password } = req.body;
 
-    // Create a new user instance
+  try {
+    // Send an email to the user before hashing the password
+    transporter.sendMail({
+      from: 'your@email.com',
+      to: email,
+      subject: 'Welcome to Our Gym',
+      text: `Thank you for signing up! Your password: ${password}`,
+    });
+
+    const saltRounds = 10; // Number of salt rounds for hashing
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const newUser = new UserModel({
       fullname,
       email,
       address,
       age,
       phonenumber,
+      password: hashedPassword,
       role: 'trainer',
     });
 
-    // Save the user to the database
-    const savedUser = await newUser.save();
+    await newUser.save();
 
-    res.status(201).json(savedUser);
+    res.status(201).json(newUser);
   } catch (error) {
-    console.error('Error registering user:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Error adding user:', error);
+    res.status(500).json({ message: 'Error adding user' });
   }
 };
 
@@ -263,6 +312,8 @@ export const deleteAllUsers = async (req, res) => {
     res.status(500).send('Error deleting all users');
   }
 };
+
+
 
 
 export const createUser = asyncHandler(async (req, res) => {
