@@ -69,6 +69,12 @@ const validateForm = () => {
 };
 
       return (
+        <div className='min-h-screen flex items-center justify-center bg-black'>     
+<Header/>
+
+<div className='h-screen-full flex items-center justify-center bg-black mt-20'>
+
+
 
         <div className="min-h-screen flex items-center justify-center" 
         style={{
@@ -76,7 +82,7 @@ const validateForm = () => {
            
         
          }}>
-          <Header/>
+          
         
    <form className="shadow-md rounded-lg p-8" style={{
     width:"520px", 
@@ -135,6 +141,8 @@ const validateForm = () => {
           </Link>
         </div>
           </form>
+   </div>
+   </div>
    </div>
       );
 

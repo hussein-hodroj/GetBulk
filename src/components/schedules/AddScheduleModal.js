@@ -12,9 +12,9 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
+    width: '70%',
     maxWidth: '500px',
-    backgroundColor: 'black',
-    border: '2px solid black',
+    backgroundColor: '#52525b',
     borderRadius: '8px',
     padding: '20px',
   },
@@ -90,10 +90,10 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <h2 className="text-yellow-500 font-bold text-xl mb-4">Add Schedule</h2>
+      <h2 className="text-yellow-500 font-bold text-xl mb-12">Add Schedule</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="trainer" className="block text-white font-medium mb-1">
+          <label htmlFor="trainer" className="block text-white font-medium mb-4">
             Trainer
           </label>
           <input
@@ -105,7 +105,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="date" className="block text-white font-medium mb-1">
+          <label htmlFor="date" className="block text-white font-medium mb-4">
             Date
           </label>
           <input
@@ -120,7 +120,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="timeSchedule" className="block text-white font-medium mb-1">
+          <label htmlFor="timeSchedule" className="block text-white font-medium mb-4">
             Time Schedule
           </label>
           <input
@@ -128,11 +128,12 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
             id="timeSchedule"
             value={timeSchedule}
             onChange={(e) => setTimeSchedule(e.target.value)}
-            className="w-full bg-white text-black rounded p-2"
+            className="w-full bg-white text-black rounded p-2 mb-8"
             
           />
           {timeError && <p className="text-red-500">{timeError}</p>}
         </div>
+        <div className="flex justify-end">
         <button
           type="submit"
           className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
@@ -146,6 +147,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
         >
           Cancel
         </button>
+        </div>
       </form>
     </Modal>
   );

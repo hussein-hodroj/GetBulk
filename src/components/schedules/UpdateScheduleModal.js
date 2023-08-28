@@ -11,15 +11,16 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
+    width: '70%',
     maxWidth: '500px',
-    backgroundColor: 'black',
-    border: '2px solid black',
+    backgroundColor: '#52525b',
+    border: '2px solid #52525b',
     borderRadius: '8px',
     padding: '20px',
   },
 };
 
-const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSchedule, updateSchedulesList }) => {
+const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSchedule }) => {
   const [date, setDate] = useState('');
   const [timeSchedule, setTimeSchedule] = useState('');
   const [dateError, setDateError] = useState('');
@@ -56,14 +57,14 @@ const [timeError, setTimeError] = useState('');
     };
   
 
-  console.log('Updated Schedule:', updatedSchedule); // Log the updated schedule here
+  console.log('Updated Schedule:', updatedSchedule);
 
   try {
     await axios.post(
       `http://localhost:8000/schedule/updateschedule/${selectedSchedule._id}`,
       updatedSchedule
     );
-    updateSchedulesList();
+    handleUpdateSchedule(updatedSchedule);
     onClose();
   } catch (error) {
     console.error('Error updating schedule:', error.response.data);
@@ -72,10 +73,10 @@ const [timeError, setTimeError] = useState('');
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <h2 className="text-yellow-500 font-bold text-xl mb-4">Update Schedule</h2>
+      <h2 className="text-yellow-500 font-bold text-2xl mb-12">Update Schedule</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-        <label htmlFor="trainer" className="block text-white font-medium mb-1">
+        <label htmlFor="trainer" className="block text-white font-medium mb-4">
     Trainer
   </label>
   <input
@@ -86,7 +87,7 @@ const [timeError, setTimeError] = useState('');
   />
         </div>
         <div className="mb-4">
-  <label htmlFor="date" className="block text-white font-medium mb-1">
+  <label htmlFor="date" className="block text-white font-medium mb-4">
     Date
   </label>
   <input
@@ -100,7 +101,7 @@ const [timeError, setTimeError] = useState('');
   {dateError && <p className="text-red-500">{dateError}</p>}
 </div>
 <div className="mb-4">
-  <label htmlFor="timeSchedule" className="block text-white font-medium mb-1">
+  <label htmlFor="timeSchedule" className="block text-white font-medium mb-4">
     Time Schedule
   </label>
   <input
@@ -108,12 +109,12 @@ const [timeError, setTimeError] = useState('');
     id="timeSchedule"
     value={timeSchedule}
     onChange={(e) => setTimeSchedule(e.target.value)}
-    className="w-full bg-white text-black rounded p-2"
+    className="w-full bg-white text-black rounded p-2 mb-8"
   
   />
   {timeError && <p className="text-red-500">{timeError}</p>}
 </div>
-
+<div className="flex justify-end">
         <button
           type="submit"
           className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
@@ -127,6 +128,7 @@ const [timeError, setTimeError] = useState('');
         >
           Cancel
         </button>
+        </div>
       </form>
     </Modal>
   );

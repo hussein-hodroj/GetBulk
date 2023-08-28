@@ -14,7 +14,7 @@
   }
   
   .modal-content {
-    background-color: black;
+    background-color: rgb(44, 42, 42);
     color: #e4e4e4;
     padding: 20px;
     border-radius: 8px;
@@ -23,7 +23,7 @@
   
   .modal-actions {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin-top: 20px;
   }
   

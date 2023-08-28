@@ -10,9 +10,10 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '500px',
-    backgroundColor: 'black',
-    border: '2px solid black',
+    width: '80%',
+    maxWidth: '550px',
+    backgroundColor: '#52525b',
+    border: '2px solid #52525b',
     borderRadius: '8px',
     padding: '20px',
   },
@@ -58,24 +59,24 @@ const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform, fetchAllTr
       style={customStyles}
       contentLabel="Update Transform Modal"
     >
-      <h2 className="text-yellow-500 font-bold text-xl mb-4">Update Transform</h2>
+      <h2 className="text-yellow-500 font-bold text-2xl mb-12">Update Transform</h2>
       <label style={{ color: 'white' }}>Image Before:</label>
 <input
   type="file"
   onChange={(e) => setUpdatedImageBefore(e.target.files[0])}
-  className="w-full bg-white rounded p-2 mb-2  text-black"
+  className="w-full bg-white rounded p-2 mb-8  text-black"
 />
 <label style={{ color: 'white' }}>Image After:</label>
 <input
   type="file"
   onChange={(e) => setUpdatedImageAfter(e.target.files[0])}
-  className="w-full bg-white rounded p-2 mb-2 text-black"
+  className="w-full bg-white rounded p-2 mb-2 mb-8 text-black"
 />
       <label style={{ color: 'white' }}>Description:</label>
       <textarea
         value={updatedDescription}
         onChange={(e) => setUpdatedDescription(e.target.value)}
-        className="w-full bg-white rounded p-2 mb-2 text-black"
+        className="w-full bg-white rounded p-2 mb-8 text-black"
       />
       <div className="flex justify-end">
         <button

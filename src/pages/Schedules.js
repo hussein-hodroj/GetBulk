@@ -18,12 +18,15 @@ function Schedules() {
     const [currentPage, setCurrentPage] = useState(1);
     const schedulesPerPage = 10; 
     const [searchInput, setSearchInput] = useState('');
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
       const token = localStorage.getItem('token');
       if (token) {
         const decodedToken = jwt_decode(token);
         const userId = decodedToken.id;
+        console.log('Decoded userId:', userId);
+        setUserId(userId);
         fetchSchedules(userId); 
       }
     }, []);
@@ -31,8 +34,12 @@ function Schedules() {
     
     const fetchSchedules = async (userId) => {
       try {
-        const response = await axios.get(`http://localhost:8000/schedule/getAllschedule`);
+        const response = await axios.get(`http://localhost:8000/schedule/getAllschedule/` , {
+          params: { userId }, 
+        });
+        
         const userSchedules = response.data.filter(schedule => schedule.trainerId.includes(userId));
+        console.log('Fetched Schedules:', userSchedules);
         setSchedules(userSchedules);
       } catch (error) {
         console.error('Error fetching schedules:', error);
@@ -44,7 +51,7 @@ function Schedules() {
   const handleAddSchedule = async (newSchedule) => {
     try {
       await axios.post('http://localhost:8000/schedule/createschedule', newSchedule);
-      fetchSchedules();
+      fetchSchedules(userId);
       setAddModalIsOpen(false);
     } catch (error) {
       console.error('Error adding schedule:', error.response.data);
@@ -57,7 +64,7 @@ function Schedules() {
         `http://localhost:8000/schedule/updateschedule/${selectedSchedule._id}`,
         updatedSchedule
       );
-      fetchSchedules();
+      fetchSchedules(userId); 
       setUpdateModalIsOpen(false);
     } catch (error) {
       console.error('Error updating schedule:', error.response.data);
@@ -72,7 +79,7 @@ function Schedules() {
 
     try {
       await axios.post(`http://localhost:8000/schedule/deleteschedule/${selectedSchedule._id}`);
-      fetchSchedules();
+      fetchSchedules(userId); 
       setDeleteModalIsOpen(false);
       setSelectedSchedule(null);
     } catch (error) {
@@ -214,13 +221,14 @@ function Schedules() {
       isOpen={updateModalIsOpen}
       onClose={() => setUpdateModalIsOpen(false)}
       handleUpdateSchedule={handleUpdateSchedule}
-      selectedSchedule={selectedSchedule} 
+      selectedSchedule={selectedSchedule}
       updateSchedulesList={fetchSchedules}
     />
        <DeleteScheduleModal
         isOpen={deleteModalIsOpen}
         onCancel={() => setDeleteModalIsOpen(false)}
         onDelete={handleDeleteSchedule}
+        updateSchedulesList={fetchSchedules}
       />
     </div>
   );

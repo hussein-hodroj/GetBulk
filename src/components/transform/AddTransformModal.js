@@ -11,9 +11,10 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
+    width: '70%',
     maxWidth: '500px',
-    backgroundColor: 'black',
-    border: '2px solid black',
+    backgroundColor: '#52525b',
+    border: '2px solid #52525b',
     borderRadius: '8px',
     padding: '20px',
   },
@@ -58,7 +59,7 @@ formData.append('imageAfter', imageAfter);
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <h2 className="text-yellow-500 font-bold text-xl mb-4">Add Transform</h2>
+      <h2 className="text-yellow-500 font-bold text-2xl mb-12">Add Transform</h2>
       <form onSubmit={handleAddTransform}>
       
       <div className="mb-4">
@@ -67,7 +68,7 @@ formData.append('imageAfter', imageAfter);
           type="file"
           accept="image/*"
           onChange={onChangeFileBefore}
-          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
+          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none mb-4"
           required 
         />
         {imageBefore && (
@@ -87,7 +88,7 @@ formData.append('imageAfter', imageAfter);
           type="file"
           accept="image/*"
           onChange={onChangeFileAfter}
-          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none"
+          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full border-2 focus:outline-none mb-4"
           required 
         />
         {imageAfter && (
@@ -105,7 +106,7 @@ formData.append('imageAfter', imageAfter);
           <textarea
             value={descriptionTransform}
             onChange={(e) => setDescriptionTransform(e.target.value)}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black mb-4"
             required 
           />
         </div>
