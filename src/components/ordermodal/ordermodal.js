@@ -14,6 +14,9 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
 
   const [isValid, setIsValid] = useState(false);
 
+  const [showThankYouMessage, setShowThankYouMessage] = useState(false);
+
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -32,9 +35,9 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     validateForm();
-
+  
     if (isValid) {
       const orderData = {
         productName: selectedProducts.map(product => product.product.name).join(', '),
@@ -44,25 +47,47 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
         customerAddress: address,
         customerPhoneNumber: phoneNumber,
       };
-
+  
       try {
         const response = await axios.post('http://localhost:8000/order/', orderData);
         console.log('Order created:', response.data);
-        handleClose();
+  
+       
+        setFullName('');
+        setEmail('');
+        setAddress('');
+        setPhoneNumber('');
+  
+       
+        setShowThankYouMessage(true);
+  
+        
+        setTimeout(() => {
+          setShowThankYouMessage(false);
+          handleClose();
+        }, 5000); 
       } catch (error) {
         console.log('Error creating order:', error);
       }
     }
   };
+  
+  
 
 
   return (
-    <div className={`${isOpen ? 'block' : 'hidden'} fixed inset-0 z-50 overflow-auto bg-gray-800 top-10 bg-opacity-50 flex justify-center items-center`}>
-      <div className="bg-gray-300 hover:bg-gray-400 transition p-4 w-[400px] rounded">
-        <h2 className="text-3xl font-semibold mb-4 text-yellow-500">Checkout</h2>
+    <div className={`${isOpen ? 'block' : 'hidden'} fixed inset-0 z-50 overflow-auto top-12 bg-opacity-50 flex justify-center items-center`}>
+      <div className="bg-zinc-600 p-4 w-[500px] rounded">
+        
+        {showThankYouMessage ? (
+  <div className="text-center mb-4 text-yellow-500 font-bold text-[30px]">
+    <p>Thank you for your order! </p> 
+    <p> we hope you like our products </p></div>
+) : (
         <form onSubmit={handleSubmit}>
+          <h2 className="text-3xl font-bold mb-4 text-yellow-500">Checkout</h2>
           <div className="mb-4">
-            <label htmlFor="fullName" className="block font-medium mb-1 text-black">Full Name</label>
+            <label htmlFor="fullName" className="block font-medium mb-1 text-white">Full Name</label>
             <input
               type="text"
               id="fullName"
@@ -75,7 +100,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             {fullNameError && <p className="text-red-500 text-sm mt-1">{fullNameError}</p>}
           </div>
           <div className="mb-4">
-            <label htmlFor="email" className="block font-medium mb-1 text-black">Email</label>
+            <label htmlFor="email" className="block font-medium mb-1 text-white">Email</label>
             <input
               type="email"
               id="email"
@@ -88,7 +113,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
           <div className="mb-4">
-            <label htmlFor="address" className="block font-medium mb-1 text-black">Address</label>
+            <label htmlFor="address" className="block font-medium mb-1 text-white">Address</label>
             <textarea
               id="address"
               className={`w-full border ${addressError ? 'border-red-500' : 'border-gray-300'} px-3 text-black py-2 rounded transition placeholder-gray-300 focus:outline-none focus:border-yellow-500`}
@@ -100,7 +125,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             {addressError && <p className="text-red-500 text-sm mt-1">{addressError}</p>}
           </div>
           <div className="mb-4">
-            <label htmlFor="phoneNumber" className="block font-medium mb-1 text-black">Phone Number</label>
+            <label htmlFor="phoneNumber" className="block font-medium mb-1 text-white">Phone Number</label>
             <input
               type="tel"
               id="phoneNumber"
@@ -113,8 +138,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             {phoneNumberError && <p className="text-red-500 text-sm mt-1">{phoneNumberError}</p>}
           </div>
           <div className="mb-4">
-          {/* ... Other form fields */}
-          <label htmlFor="selectedProducts" className="block font-medium mb-1 text-black">
+          <label htmlFor="selectedProducts" className="block font-medium mb-1 text-white">
             Selected Products
           </label>
           <input
@@ -126,7 +150,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="total" className="block font-medium mb-1 text-black">
+          <label htmlFor="total" className="block font-medium mb-1 text-white">
             Total
           </label>
           <input
@@ -139,10 +163,11 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
         </div>
         
           <div className="flex justify-end space-x-4">
-            <button type="submit" className="bg-yellow-500 hover:bg-black text-white px-4 py-2 transition-colors rounded">Submit</button>
-            <button onClick={handleClose} className="bg-gray-500 hover:bg-black text-white px-4 py-2 transition-colors rounded">Close</button>
+            <button type="submit" className="bg-yellow-500 hover:bg-yellow-400 text-white px-4 py-2 transition-colors rounded">Submit</button>
+            <button onClick={handleClose} className="bg-red-500 hover:bg-red-400 text-white px-4 py-2 transition-colors rounded">Close</button>
           </div>
         </form>
+        )}
       </div>
     </div>
   );

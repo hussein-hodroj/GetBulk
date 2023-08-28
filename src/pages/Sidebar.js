@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'; // Import useState
+import React, { useContext, useState } from 'react'; 
 import { Link } from 'react-router-dom';
 import { FaTimes, FaTrash } from 'react-icons/fa/index.esm.js'; 
 import CartItem from './CartItem.js';
@@ -12,7 +12,8 @@ const Sidebar = () => {
   const { cart, clearCart, total, itemAmount } = useContext(CartContext);
   const { products } = useContext(ProductContext);
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // Add useState here
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [showThankYouMessage, setShowThankYouMessage] = useState(false);
 
   const handleCheckoutClick = () => {
     setIsModalOpen(true);
