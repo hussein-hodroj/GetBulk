@@ -162,6 +162,24 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               </a>
             </li>
             <li>
+            <a
+                href="category#"
+                className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
+                  activeLink === 'Category' ? 'border-yellow-500' : 'border-transparent'
+                } dark:hover:border-gray-800 pr-6`}
+                onClick={() => handleSidebarItemClick('Category')}
+              >                
+              <span className="inline-flex justify-center items-center ml-4">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 15l-1 4h12l-1-4"></path>
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 10l2-6H6l2 6"></path>
+  <path d="M2 15l3-3 4 4L22 4M21 12l-4 4"></path>
+</svg>
+                </span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Category</span>
+              </a>
+            </li>
+            <li>
               <a href="/AdminOrder#" 
                className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                 activeLink === 'AdminOrder' ? 'border-yellow-500' : 'border-transparent'
@@ -175,20 +193,6 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
                 </svg>
                                 </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Orders</span>
-              </a>
-            </li>
-            <li>
-            <a
-                href="adminFeedback#"
-                className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
-                  activeLink === 'FeedBack' ? 'border-yellow-500' : 'border-transparent'
-                } dark:hover:border-gray-800 pr-6`}
-                onClick={() => handleSidebarItemClick('FeedBack')}
-              >                 
-              <span className="inline-flex justify-center items-center ml-4">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Feedbacks</span>
               </a>
             </li>
             <li>
@@ -207,23 +211,22 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Transforms</span>
               </a>
             </li>
+           
             <li>
             <a
-                href="category#"
+                href="adminFeedback#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
-                  activeLink === 'Category' ? 'border-yellow-500' : 'border-transparent'
+                  activeLink === 'FeedBack' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
-                onClick={() => handleSidebarItemClick('Category')}
-              >                
+                onClick={() => handleSidebarItemClick('FeedBack')}
+              >                 
               <span className="inline-flex justify-center items-center ml-4">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h-2a2 2 0 01-2-2v-3c0-2.209 1.791-4 4-4s4 1.791 4 4v3a2 2 0 01-2 2z"></path>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6h18v12H3z"></path>
-                  </svg>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                 </span>
-                <span className="ml-2 text-sm text-white tracking-wide truncate">Category</span>
+                <span className="ml-2 text-sm text-white tracking-wide truncate">Feedbacks</span>
               </a>
             </li>
+            
            
             <li className="px-5 hidden md:block">
               <div className="flex flex-row items-center mt-5 h-8">

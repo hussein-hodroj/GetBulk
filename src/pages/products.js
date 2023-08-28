@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Popup from '../components/Popup/Popup.js';
+import Popup from '../components/Popup/Popup.jsx';
 import UpdatePopup from '../components/UpdateProduct/Update.js';
 import DeleteProduct from '../components/DeleteProduct/DeleteProduct.js';
 import Dashboard from './dashboard.js';
-import { FaEdit, FaTrash,  FaArrowLeft, FaArrowRight  } from 'react-icons/fa/index.esm.js'; 
+import {  FaPlus, FaEdit, FaTrash,  FaArrowLeft, FaArrowRight, FaSearch  } from 'react-icons/fa/index.esm.js'; 
 import './style.css';
 
 
@@ -69,6 +69,8 @@ function Product() {
         <div className = "flex justify-between">
            
              <div className="flex justify-start mb-3">
+                            <FaSearch className="search-icon text-zinc-500 ms-4 mt-2" size={25}/>
+
             <input
                 type="text"
                 placeholder="Search by name"
@@ -76,14 +78,13 @@ function Product() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <p className="text-white font-bold border rounded py-2 px-2 bg-yellow-500 ms-4">{filteredProducts.length} products found</p>
               </div>
                <div className=" flex justify-end mb-3 mr-4">
               <button
                 onClick={() => setShow(true)}
-                className="bg-yellow-500 text-white font-bold py-2 px-3  rounded"
+                className="bg-yellow-500 flex justify-between items-center text-white font-bold py-2 px-3 hover:bg-yellow-600 rounded"
               >
-                Add product
+              <FaPlus className="mr-2"/> Add product 
               </button>
              
             </div> 
@@ -99,7 +100,7 @@ function Product() {
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Name</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
-Price</th>
+Price $</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Description</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
@@ -124,27 +125,32 @@ Action</th>
 {product.description}</td>
                            <td className="px-6 py-4 whitespace-nowrap border Border-white">
 {product.cname}</td>
-                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                           <td className="px-6 py-4 text-center flex justify-center items-center  whitespace-nowrap border Border-white">
 
                       {product.imagePath && (
                         <img
                         src={`/uploads/usersImages/${product.imagePath}`}
 
-                          style={{ width: '100px', height: '90px',display: 'block', margin: '2 auto'}}
-                        />
+                        style={{
+                          width: '100px',
+                          height: '90px',
+                          display: 'block',
+                          transition: 'transform 0.3s ease', 
+                        }}
+                        className="hover:scale-110"                        />
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border Border-white">
 
                       
                     <div className="flex items-center justify-center space-x-4 m-2">
-  <div className="bg-yellow-500 rounded">
+  <div className="bg-yellow-500 rounded hover:bg-yellow-600">
     <button  className="text-white font-bold py-1 px-2" type="button" onClick={() => {
                             setSelectedProductId(product._id); // Set the selected product ID
                             setShowUpdate(true); // Show the update modal
                           }} ><FaEdit className="w-5 h-5" /></button>
   </div>
-  <div className="bg-red-500 rounded">
+  <div className="bg-red-500 rounded hover:bg-red-600">
     <button className="text-white font-bold py-1 px-2" type="button"  
  onClick= {() => { setSelectedProductId(product._id); setShowDelete(true);}}> <FaTrash className="w-5 h-5" /></button>
 
@@ -170,7 +176,7 @@ Action</th>
                   Page {currentPage} of {Math.ceil(filteredProducts.length / productPerPage)}
                 </p>
                 <button
-                  className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+                  className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600'
                   onClick={handleNextPage}
                 >
                   <FaArrowRight />

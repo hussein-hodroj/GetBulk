@@ -29,7 +29,7 @@ function DeleteProduct({ openDelete, productId }) {
         </div>
         <div className = "bodyDeleteFeedback">
 
-                <h1 className="font-bold text-yellow-500">Are you sure you want to delete this ?</h1>
+                <h1 className="font-bold text-yellow-500 flex justify-start align-start">Are you sure you want to delete this ?</h1>
    
               </div>
              

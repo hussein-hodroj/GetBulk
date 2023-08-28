@@ -28,7 +28,7 @@ function UpdateStatus({ close, orderId }) {
         </div>
         <div className = "bodyDeleteFeedback">
 
-                <h1 className="font-bold text-yellow-500">Are you sure that this order has been delivered ?</h1>
+                <h1 className="font-bold text-yellow-500 flex justify-start items-start">Are you sure that this order has been delivered ?</h1>
    
               </div>
              

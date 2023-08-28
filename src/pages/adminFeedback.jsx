@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
 import DeleteFeedback from '../components/AdminFeedback/DeleteFeedback.js';
-import { FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
+import {FaSearch, FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
 import './style.css';
 
 function FeedbackAdmin() {
@@ -56,6 +56,8 @@ function FeedbackAdmin() {
           <div className='p-6 gap-4'>
             <div className='flex justify-between'>
               <div className='flex justify-start mb-3'>
+              <FaSearch className="search-icon text-zinc-500 ms-4 mt-1" size={25}/>
+
                 <input
                   type='text'
                   placeholder='Search by name'
@@ -63,9 +65,7 @@ function FeedbackAdmin() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <p className='text-white font-bold border rounded py-2 px-2 bg-yellow-500 ms-4'>
-                  {filteredFeedbacks.length} Feedbacks found
-                </p>
+                
               </div>
             </div>
             <table
@@ -103,7 +103,7 @@ function FeedbackAdmin() {
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap border Border-white'>
                       <div className='flex items-center justify-center space-x-4'>
-                        <div className='bg-red-500 rounded'>
+                        <div className='bg-red-500 rounded hover:bg-red-600'>
                           <button
                             className='text-white font-bold py-1 px-2'
                             onClick={() => {
@@ -132,7 +132,7 @@ function FeedbackAdmin() {
                   Page {currentPage} of {Math.ceil(filteredFeedbacks.length / feedbackPerPage)}
                 </p>
                 <button
-                  className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+                  className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600'
                   onClick={handleNextPage}
                 >
                   <FaArrowRight />

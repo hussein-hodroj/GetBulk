@@ -13,7 +13,9 @@ function UserCalendar() {
   const { trainerId } = useParams(); // Get the trainerId from the URL parameter
   const [selectedSchedules, setSelectedSchedules] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const calendarPerPage = 1;
+  const calendarPerPage = 5;
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
   
   useEffect(() => {
     axios
@@ -97,6 +99,10 @@ function UserCalendar() {
           )
           .then((response) => {
             console.log("Schedule statuses updated:", response.data);
+            setShowSuccessAlert(true);
+            setTimeout(() => {
+              setShowSuccessAlert(false);
+            }, 3000);
             window.location.reload();
           })
           .catch((error) => {
@@ -210,7 +216,15 @@ Select</th>
 
                           <input
                             type="checkbox"
-                            className="schedule-checkbox"
+                            className="schedule-checkbox "
+                            style={{width: "30px",
+                            height: "30px", 
+                           
+                            border: "2px solid #ccc", 
+                            borderRadius: "4px",  
+                           
+                          }}
+                          
                             onChange={() => handleCheckboxChange(event.Timeschedule, event.date, event._id)}
                           />
                         </td>
@@ -264,6 +278,11 @@ Select</th>
         </div>
        
         </div>
+        {showSuccessAlert && (
+          <div className="success-alert mt-4 w-64 h-6 bg-yellow-500 flex justify-center items-center font-bold rounded">
+            Booking added successfully!
+          </div>
+        )}
       </form>
               </div>
             </div>

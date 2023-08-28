@@ -94,15 +94,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               navIsVisible ? 'flex' : 'hidden'
             } flex-col gap-y-5 lg:flex-row gap-x-5 font-semibold`}
           >
-              <a
-              href="http://localhost:3000/"
-              className={`href ${
-                activeLink === 'HomePage' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
-              } transition-all duration-300 transform scale-100 hover:scale-110`}
-              onClick={() => handleLinkClick('HomePage')}
-            >
-              HomePage
-            </a>
+             
             <a
                href="http://localhost:3000/UserDashboard#"
                className={`href ${
@@ -149,7 +141,20 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             >
              Edit Password
             </a> 
-          
+            <li>
+            <a
+    href="#"
+    onClick={() => {
+      localStorage.removeItem('token'); 
+      window.location.href = '/';
+    }}
+    className={`href ${
+      activeLink === 'logout' ? 'text-yellow-500 underline' : 'hover:text-yellow-500 hover:underline'
+    } transition-all duration-300 transform scale-100 hover:scale-110`}
+  >
+    Logout
+  </a>
+</li>
           </nav>
         </header>
       </div>

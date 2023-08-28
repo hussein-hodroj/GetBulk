@@ -6,21 +6,46 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import TrainerDashboard from './TrainerDashboard.js';
+import jwt_decode from 'jwt-decode';
+
+
 const localizer = momentLocalizer(moment);
+
 
 function Reservations() {
     // const { reservations } = usePage().props
     const [booking, setBooking] = useState([]);
+    const [trainerId, setTrainerId] = useState('');
 
   
     const [selectedEvent, setSelectedEvent] = useState(null);
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      const decodedToken = jwt_decode(token);
+      const id = decodedToken.id;
+    
+    console.log("decodedToken=>",id);
+     
+      axios.get(`http://localhost:8000/user/trainers/${id}`) // Adjust the API endpoint
+        .then((response) => {
+          const userData = response.data;
+          
+          if (userData) {
+            setTrainerId(id); // Update user's id
+         
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching user data:', error);
+        });
+    }, []);
 
     useEffect(() => {
       axios
-        .get('http://localhost:8000/booking/allbooking')
+        .get(`http://localhost:8000/booking/${trainerId}`)
         .then((response) => setBooking(response.data))
         .catch((error) => console.log(error));
-    }, []);
+    }, [trainerId]);
 
   function handleEventSelect(event) {
     setSelectedEvent(event);
@@ -46,7 +71,7 @@ function Reservations() {
           <button className="close-btn" onClick={handleClosePopup}>
             &times;
           </button>
-          <h2 className="text-yellow-500"> {`${selectedEvent.uname}`}</h2>
+          <h2 className="text-yellow-500"> {`${selectedEvent.uname}`}</h2>  <br/>
           <p >
             <strong className="text-yellow-500">Trainer:</strong> {selectedEvent.tname }
           </p>
@@ -75,7 +100,7 @@ function Reservations() {
 
   
    
-
+ 
   function tileContent({ date, view }) {
     if (view === 'month') {
         const formattedDate = moment(date).format('D MMM');

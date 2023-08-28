@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Dashboard from './UserDashboard.js';
 import axios from 'axios';
 import './cards.css';
-import {  FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js'; 
+import {FaSearch,  FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js'; 
 
 
 const UserWorkout = () => {
@@ -11,6 +11,7 @@ const UserWorkout = () => {
   const [trainers, setTrainers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const trainersPerPage = 3;
+  const [searchTerm, setSearchTerm] = useState('');
 
 
   useEffect(() => {
@@ -31,11 +32,20 @@ const UserWorkout = () => {
       .catch(error => {
         console.error('Error fetching trainers:', error);
       });
+
+           
        
   }, []);
+  
+  const filteredTrainers = trainers.filter((trainer) =>
+  trainer.fullname && trainer.fullname.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
   const indexOfLastTrainer = currentPage * trainersPerPage;
   const indexOfFirstTrainer = indexOfLastTrainer - trainersPerPage;
-  const currentTrainers = trainers.slice(indexOfFirstTrainer, indexOfLastTrainer);
+  const currentTrainers = filteredTrainers.slice(indexOfFirstTrainer, indexOfLastTrainer);
+
+  
 
   return (
     <div className='flex  justify-center items-center'>
@@ -94,7 +104,16 @@ const UserWorkout = () => {
             </Link>
           ))}
         </div>
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-between mt-4">
+        <FaSearch className="search-icon text-zinc-500 ms-4 "  style={{ marginTop: '0.2rem' }} size={25}/>
+
+<input
+    type="text"
+    placeholder="Search by name"
+    className="ml-4 p-1 rounded border border-gray-300 text-black"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
   <div className="flex items-center ml-auto">
     <button
       className="px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600"

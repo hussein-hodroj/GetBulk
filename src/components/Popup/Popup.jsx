@@ -9,6 +9,7 @@ function Popup ({ close, setProducts }) {
   const [category, setCategory] = useState('');
   const [imagePath, setImagePath] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -28,7 +29,7 @@ function Popup ({ close, setProducts }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate the form fields before submitting
+    
     validateForm();
 
     if (isValid) {
@@ -47,9 +48,12 @@ function Popup ({ close, setProducts }) {
       })
       .then((response) => {
         console.log(response.data);
-        setProducts(response.data)
-      }).then(()=>{
-        close(false)
+        setProducts(response.data);
+        close(false);
+        setShowSuccessAlert(true);
+        setTimeout(() => {
+          setShowSuccessAlert(false);
+        }, 3000);
       })
       .catch((error) => {
         console.log('Error while submitting the form:', error);
@@ -72,7 +76,7 @@ function Popup ({ close, setProducts }) {
         <button onClick = {() => close(false) } className="text-white">  X  </button>
         </div>
         <div className = "title">
-          <h1 className="text-yellow-500 font-bold"> Add Product: </h1>
+          <h1 className="text-yellow-500 font-bold flex justify-start align-start"> Add Product: </h1>
         </div>
         <div className = "body">
 
@@ -115,16 +119,15 @@ function Popup ({ close, setProducts }) {
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="category"> Category </label>
             <select
-              className="shadow  mb-2 border rounded  py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow w-64 mb-2 border rounded  py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="category"
               type="text"
               name="category"
               value={category}
-              placeholder="Enter product's category" 
               onChange={(e) => setCategory(e.target.value)}
               >
 
-                 <option value="" disabled selected > Please select product's category </option>    
+                 <option value="" disabled selected > Select </option>    
                  {categories.map((c) => (
         <option key={c._id} value={c._id}>
           {c.name}
@@ -135,33 +138,33 @@ function Popup ({ close, setProducts }) {
 
                </div>       
                 <div className="mb-2">
-             <label
+                  <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="image">
+            Image
+          </label>
+          <input
+            className="shadow  border w-64 rounded py-2 px-3 text-yellow-500 leading-tight focus:outline-none focus:shadow-outline"
+            id="image"
+            type="file"
+            name="image"
+            onChange={(e) => setImagePath(e.target.files[0])}
+          />  
+             
+
+              </div>        
+              </div>
+              <div className="mb-2">
+              <label
               className="block text-yellow-500 text-sm font-bold mb-2"
               htmlFor="description"> Description </label>
-            <input
-              className="shadow w-64 mb-2 border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <textarea
+              className="shadow w-full mb-2 border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="description"
-              type="text"
               name="description"
               value={description}
               placeholder="Enter product's description"
               onChange={(e) => setDescription(e.target.value)}
               />   
             {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
-
-              </div>        
-              </div>
-              <div className="mb-2">
-          <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="image">
-            Image
-          </label>
-          <input
-            className="shadow  border w-full rounded py-2 px-3 text-yellow-500 leading-tight focus:outline-none focus:shadow-outline"
-            id="image"
-            type="file"
-            name="image"
-            onChange={(e) => setImagePath(e.target.files[0])}
-          />  
         </div>
               </div>
              
@@ -173,6 +176,11 @@ function Popup ({ close, setProducts }) {
           </div>
 
       </div>
+      {showSuccessAlert && (
+          <div className="success-alert">
+            Product added successfully!
+          </div>
+        )}
       </form>
 
     </div>

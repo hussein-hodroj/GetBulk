@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaTrash,  FaEdit, FaCheck, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
+import {FaSearch, FaTrash,  FaEdit, FaCheck, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
 import DeleteOrder from '../components/AdminOrder/DeleteOrder.js';
 import UpdateOrderStatus from '../components/AdminOrder/UpdateOrderStatus.js';
 import UpdateOrder from '../components/AdminOrder/UpdateOrder.js';
@@ -66,6 +66,8 @@ function FeedbackAdmin() {
         <div className = "flex justify-between">
            
              <div className="flex justify-end mb-3">
+               <FaSearch className="search-icon text-zinc-500 ms-4 mt-1" size={25}/>
+
             <input
                 type="text"
                 placeholder="Search by name"
@@ -73,7 +75,6 @@ function FeedbackAdmin() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <p className="text-white font-bold border rounded py-2 px-2 bg-yellow-600 ms-4">{filteredOrders.length} Orders found</p>
               </div>
               
               </div>
@@ -127,17 +128,17 @@ Action</th>
 
                       
                     <div className="flex items-center justify-center space-x-4">
-                    <div className="bg-yellow-600 rounded">
+                    <div className="bg-yellow-500 rounded hover:bg-yellow-600">
     <button  className="text-white font-bold py-1 px-2" title="delivered"
  onClick= {() => { setSelectedOrderId(order._id); setOrderStatus(true);}} > <FaCheck /></button>
   </div>
 
-  <div className="bg-yellow-600 rounded">
+  <div className="bg-yellow-500 rounded hover:bg-yellow-600">
     <button  className="text-white font-bold py-1 px-2" title="update"
  onClick= {() => { setSelectedOrderId(order._id); setUpdateOrder(true);}} > <FaEdit /></button>
   </div>
 
-  <div className="bg-red-600 rounded">
+  <div className="bg-red-500 rounded hover:bg-red-600">
     <button  className="text-white font-bold py-1 px-2"  title="delete"
  onClick= {() => { setSelectedOrderId(order._id); setShow(true);}} > <FaTrash /></button>
   </div>
@@ -163,7 +164,7 @@ Action</th>
                   Page {currentPage} of {Math.ceil(filteredOrders.length / ordersPerPage)}
                 </p>
                 <button
-                  className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600'
+                  className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600'
                   onClick={handleNextPage}
                 >
                   <FaArrowRight />
