@@ -99,12 +99,14 @@ function Product() {
                   #</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Name</th>
-                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+                               <th scope="col" className="px-6 py-3 text-left whitespace-nowrap bold font-medium text-white uppercase tracking-wider Border-white border">
 Price $</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Description</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Category</th>
+<th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+Quantity</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Image</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
@@ -125,6 +127,8 @@ Action</th>
 {product.description}</td>
                            <td className="px-6 py-4 whitespace-nowrap border Border-white">
 {product.cname}</td>
+<td className="px-6 py-4 whitespace-nowrap border Border-white">
+{product.quantity}</td>
                            <td className="px-6 py-4 text-center flex justify-center items-center  whitespace-nowrap border Border-white">
 
                       {product.imagePath && (
