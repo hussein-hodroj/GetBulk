@@ -40,26 +40,24 @@ function Reservations() {
         });
     }, []);
 
-    function eventStyleGetter(event, start, end, isSelected) {
+    function eventPropGetter(event, start, end, isSelected) {
       // Customize the event's background color based on your requirements
-      const backgroundColor = event.customColor || 'yellow';
   
-      return {
-        style: {
-          backgroundColor,
+      
+       var style=  {
+          backgroundColor:'yellow',
           borderRadius: '5px',
           opacity: 0.8,
           color: 'white',
           border: 'none',
           display: 'block',
-        },
-      };
+        }; 
+       return{
+        style : style
+       }
     }
-    const eventData = [
-  {
-    customColor: 'yellow', 
-  },
-];
+   
+
     useEffect(() => {
       axios
         .get(`http://localhost:8000/booking/${trainerId}`)
@@ -161,7 +159,8 @@ function Reservations() {
   popup={true}
   onSelectEvent={handleEventSelect}
   views={['month', 'week', 'day', 'agenda']}
-  eventStyleGetter={eventStyleGetter}
+  eventPropGetter={(booking)=>{return{style:{backgroundColor:'yellow', color: 'black',
+}}}}
 
 />
 

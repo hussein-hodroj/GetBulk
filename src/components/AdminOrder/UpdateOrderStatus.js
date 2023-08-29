@@ -2,11 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import '../AdminFeedback/DeleteFeedback.css';
 
-function UpdateStatus({ close, orderId }) {
+function UpdateStatus({ close, orderId, setOrders }) {
     const handleSubmit = (e) => {
         axios.put(`http://localhost:8000/order/status/${orderId}`)
         .then((response) => {
-          console.log(response.data);    
+         setOrders(response.data)   
         }).then(()=>{
           close(false)
         })

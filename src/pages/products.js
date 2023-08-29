@@ -31,9 +31,13 @@ function Product() {
 
   
 
-     const filteredProducts = products.filter((product) =>
-     product.name.toLowerCase().includes(searchTerm.toLowerCase())
-   );
+  const filteredProducts = products.filter((product) => {
+    const searchTermLower = searchTerm.toLowerCase();
+    return (
+      (product.name && product.name.toLowerCase().includes(searchTermLower)) 
+      
+    );
+  });
 
    const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -42,7 +46,7 @@ function Product() {
   };
 
   const handleNextPage = () => {
-    const totalPages = Math.ceil(filteredProducts.length / productPerPage);
+    const totalPages = Math.ceil(filteredProducts?.length / productPerPage);
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
@@ -50,7 +54,7 @@ function Product() {
 
   const indexOfLastProduct = currentPage * productPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-  const currentProducts = filteredProducts.slice(
+  const currentProducts = filteredProducts?.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -58,9 +62,9 @@ function Product() {
   return (
    
 <div>
-{show && <Popup close={setShow} setProducts={setProducts} />}
+{show && <Popup close={setShow} setProducts={setProducts} products={products}/>}
 {showUpdate && <UpdatePopup open={setShowUpdate} productId={selectedProductId} setProducts={setProducts} />}
-{showDelete && <DeleteProduct openDelete={setShowDelete} productId={selectedProductId} />}
+{showDelete && <DeleteProduct openDelete={setShowDelete} productId={selectedProductId} setProduct={setProducts}/>}
 
  <div className='flex'>
      <Dashboard/>
@@ -114,20 +118,20 @@ Action</th>
               </tr>
             </thead>
             <tbody>
-                {currentProducts.map((product, index) => (
+                {currentProducts?.map((product, index) => (
                   <tr key={product._id}  className={index % 2 === 0 ? 'table-row-even' : 'table-row-odd'}>
                            <td className="px-6 py-4 whitespace-nowrap border Border-white">
                            {(currentPage - 1) * productPerPage + index + 1}
 </td>
-                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                           <td className="px-6 py-4  border Border-white">
 {product.name}</td>
-                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                           <td className="px-6 py-4  border Border-white">
 {product.price}</td>
-                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                           <td className="px-6 py-4  border Border-white">
 {product.description}</td>
-                           <td className="px-6 py-4 whitespace-nowrap border Border-white">
+                           <td className="px-6 py-4  border Border-white">
 {product.cname}</td>
-<td className="px-6 py-4 whitespace-nowrap border Border-white">
+<td className="px-6 py-4  border Border-white">
 {product.quantity}</td>
                            <td className="px-6 py-4 text-center flex justify-center items-center  whitespace-nowrap border Border-white">
 

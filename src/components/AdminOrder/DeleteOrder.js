@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import '../AdminFeedback/DeleteFeedback.css';
 
-function DeleteProduct({ openDelete, orderId }) {
+function DeleteOrder({ openDelete, orderId }) {
     const handleSubmit = (e) => {
         axios.delete(`http://localhost:8000/order/${orderId}`)
         .then((response) => {
@@ -46,6 +46,6 @@ function DeleteProduct({ openDelete, orderId }) {
   );
 };
 
-export default DeleteProduct;
+export default DeleteOrder;
 
 

@@ -98,26 +98,33 @@ const storage = multer.diskStorage({
       res.status(500).json({ message: "Failed to create the product." });
     }
   };
-  
   export const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, price, description, category, quantity, imagePath } = req.body;
   
     try {
-
+      // If imagePath is 'no-change', exclude it from the update query
+      const updateData = {
+        name, price, description, category, quantity
+      };
+      if (imagePath !== 'no-change') {
+        updateData.imagePath = imagePath;
+      }
+  
       const product = await ProductModel.findByIdAndUpdate(
         id,
-        { name, price, description, category, quantity, imagePath: req.file.originalname},
+        updateData,
         { new: true }
       );
-
-      if(!product) return res.status(404).json('Product Not Found');
+  
+      if (!product) return res.status(404).json('Product Not Found');
       res.status(201).json(product);
     } catch (error) {
       console.error('Error updating product:', error);
       res.status(500).send('Error updating product');
     }
   };
+  
 
   
   

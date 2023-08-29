@@ -29,9 +29,13 @@ function FeedbackAdmin() {
 
   
 
-     const filteredOrders = orders.filter((order) =>
-     order.customerName.toLowerCase().includes(searchTerm.toLowerCase())
-   );
+  const filteredOrders = orders.filter((order) => {
+    const searchTermLower = searchTerm.toLowerCase();
+    return (
+      (order.customerName && order.customerName.toLowerCase().includes(searchTermLower)) 
+      
+    );
+  });
 
     const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -54,8 +58,8 @@ function FeedbackAdmin() {
   return (
    
 <div>
-{show && <DeleteOrder openDelete={setShow} orderId={selectedOrderId} />}
-{orderStatus && <UpdateOrderStatus close={setOrderStatus} orderId={selectedOrderId} />}
+{show && <DeleteOrder openDelete={setShow} orderId={selectedOrderId}  setOrders={setOrders}/>}
+{orderStatus && <UpdateOrderStatus close={setOrderStatus} orderId={selectedOrderId} setOrders={setOrders} />}
 {updateOrder && <UpdateOrder closeUpdate = {setUpdateOrder} orderId = {selectedOrderId} setOrders={setOrders}/>}
 
 

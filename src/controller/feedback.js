@@ -118,3 +118,12 @@ export const FeedackUser = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+export const deleteAllFeedbacks = async (req, res) => {
+  try {
+    await FeedbackModel.deleteMany(); 
+    res.status(200).send('All Feedbacks deleted successfully');
+  } catch (error) {
+    res.status(500).send('Error deleting all Feedbacks');
+  }
+};
