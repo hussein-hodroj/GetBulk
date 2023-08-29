@@ -67,6 +67,9 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
         
         setTimeout(() => {
           setShowThankYouMessage(false);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000); 
           handleClose();
         }, 5000); 
 
@@ -177,8 +180,9 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
         </div>
         
           <div className="flex justify-end space-x-4">
-            <button type="submit" className="bg-yellow-500 hover:bg-yellow-400 text-white px-4 py-2 transition-colors rounded">Submit</button>
+           
             <button onClick={handleClose} className="bg-red-500 hover:bg-red-400 text-white px-4 py-2 transition-colors rounded">Close</button>
+            <button type="submit" className="bg-yellow-500 hover:bg-yellow-400 text-white px-4 py-2 transition-colors rounded">Submit</button>
           </div>
         </form>
         )}

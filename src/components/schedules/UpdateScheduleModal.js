@@ -21,18 +21,28 @@ const customStyles = {
 };
 
 const UpdateScheduleModal = ({ isOpen, onClose, handleUpdateSchedule, selectedSchedule }) => {
+  const [initialDate, setInitialDate] = useState('');
+  const [initialTimeSchedule, setInitialTimeSchedule] = useState('');
   const [date, setDate] = useState('');
   const [timeSchedule, setTimeSchedule] = useState('');
   const [dateError, setDateError] = useState('');
-const [timeError, setTimeError] = useState('');
+  const [timeError, setTimeError] = useState('');
 
 
-  useEffect(() => {
-    if (selectedSchedule) {
-      setDate(selectedSchedule.date);
-      setTimeSchedule(selectedSchedule.Timeschedule);
-    }
-  }, [selectedSchedule]);
+useEffect(() => {
+  if (selectedSchedule) {
+    setInitialDate(selectedSchedule.date);
+    setInitialTimeSchedule(selectedSchedule.Timeschedule);
+    setDate(selectedSchedule.date);
+    setTimeSchedule(selectedSchedule.Timeschedule);
+  }
+}, [selectedSchedule]);
+
+const handleCancel = () => {
+  setDate(initialDate);
+  setTimeSchedule(initialTimeSchedule);
+  onClose();
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -116,13 +126,13 @@ const [timeError, setTimeError] = useState('');
 </div>
 <div className="flex justify-end">
         
-        <button
-          type="button"
-          onClick={onClose}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg  hover:bg-red-600"
-        >
-          Cancel
-        </button>
+<button
+            type="button"
+            onClick={handleCancel}
+            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          >
+            Cancel
+          </button>
         <button
           type="submit"
           className="px-4 py-2 bg-yellow-500 text-white rounded-lg ml-2 hover:bg-yellow-600"
