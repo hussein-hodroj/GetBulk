@@ -187,7 +187,7 @@ function Trainers() {
             </div>
           </div>
           <table className="min-w-full divide-y  " >
-            <thead className="bg-zinc-800 ">
+            <thead className="bg-[#525252] ">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left bold font-medium items-center text-white uppercase tracking-wider Border-white border">
                        #
@@ -217,7 +217,7 @@ function Trainers() {
               {currentItems.map((trainer, index) => (
                 <tr
                   key={trainer._id}
-                  className={index % 2 === 0 ? 'bg-zinc-700' : 'bg-zinc-800'}
+                  className={index % 2 === 0 ? 'bg-[#737373]' : 'bg-[#525252]'}
                 >
                   <td className="px-6 py-4 whitespace-nowrap border Border-white">
                       {index + 1+(currentPage - 1) * itemsPerPage} 
