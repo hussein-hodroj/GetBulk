@@ -10,7 +10,7 @@ const CartItem = ({ cartItem }) => {
   const { removeFromCart, increaseAmount, decreaseAmount } = useContext(CartContext);
   const { product, amount } = cartItem; 
 
-  const { _id, name, imagePath, price } = product;
+  const { _id, name, imagePath, price , quantity } = product;
   return(
     <div className='flex gap-x-4 py-2 lg:px-6 border-b border-gray-200 w-full font-light text-gray-500'>
     <div className='w-full min-h-[150px] flex items-center gap-x-4'>
@@ -42,7 +42,8 @@ const CartItem = ({ cartItem }) => {
             </div>
           </div>
           {/* item price */}
-          <div className='flex-1 flex items-center justify-around text-red-500 text-sm font-medium'>$ {price}</div>
+          <div className='flex-1 flex items-center justify-around text-red-500 text-sm font-medium'> P : $ {price}</div>
+          <div className='flex-1 flex items-center justify-around text-green-500 text-sm font-medium'> Q : {quantity}</div>
            {/* final price */}
            {/* make the price at 2 decimals*/}
            <div className='flex-1 flex justify-end items-center text-primary font-medium'>{`$ ${parseFloat(price * amount).toFixed(2)}`}</div>

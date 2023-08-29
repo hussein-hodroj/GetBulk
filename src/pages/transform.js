@@ -91,23 +91,24 @@ function TransformPage() {
       readOnly
     />
             <div className="actions">
+              
               <button
-                className="px-4 py-4 bg-yellow-500 text-white rounded-lg mr-2 hover:bg-yellow-600"
-                onClick={() => {
-                  setSelectedTransform(transform);
-                  setIsUpdateModalOpen(true);
-                }}
-              >
-                <FaEdit />
-              </button>
-              <button
-                className="px-4 py-4 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                className="px-4 py-4 bg-red-500 text-white rounded-lg mr-2 hover:bg-red-600"
                 onClick={() => {
                   setSelectedTransformForDeletion(transform);
                   setIsDeleteModalOpen(true);
                 }}
               >
                 <FaTrash />
+              </button>
+              <button
+                className="px-4 py-4 bg-yellow-500 text-white rounded-lg  hover:bg-yellow-600"
+                onClick={() => {
+                  setSelectedTransform(transform);
+                  setIsUpdateModalOpen(true);
+                }}
+              >
+                <FaEdit />
               </button>
             </div>
           </div>
