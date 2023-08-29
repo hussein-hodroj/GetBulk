@@ -7,7 +7,7 @@ const Product = ({ product, categories }) => {
   const { addToCart } = useContext(CartContext);
  
 
-  const { _id, imagePath, name, price } = product;
+  const { _id, imagePath, name, price, quantity } = product;
 
   const category = categories.find(c => c._id === product.category);
   const categoryName = category ? category.name : 'Uncategorized';
@@ -62,6 +62,7 @@ const Product = ({ product, categories }) => {
           </h2>
         </Link>
         <div className='font-semibold text-xl text-red-500'>$ {price}</div>
+        <div className='font-semibold text-xl text-green-500'>Quantity: {quantity}</div>
       </div>
     </div>
   );

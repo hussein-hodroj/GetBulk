@@ -30,10 +30,13 @@ const ProductDetails = () => {
     );
   }
 
-  const { name, price, description, imagePath, category } = product;
+  const { name, price, description, imagePath, category, quantity } = product;
 
   const relatedProducts = findRelatedProducts(products, category);
-  const otherRelatedProducts = relatedProducts.filter(relatedProduct => relatedProduct._id !== id);
+  const otherRelatedProducts = relatedProducts.filter(
+    (relatedProduct) =>
+      relatedProduct._id !== id && relatedProduct.quantity > 0
+  );
   
   const handleWhatsAppClick = () => {
     const chatSection = document.getElementById('chat-section'); 
@@ -76,6 +79,7 @@ const ProductDetails = () => {
             <div className='flex-1 text-center lg:text-left'>
               <h1 className='text-[26px] font-medium mb-2 max-w-[450px] mx-auto lg:mx-0'>{name}</h1>
               <div className='text-xl text-red-500 font-medium mb-6'>$ {price}</div>
+              <div className='font-semibold text-xl text-green-500'>Quantity: {quantity}</div>
               
               <p className='mb-8'>{description}</p>
               <button onClick={() => addToCart(product, product._id)} className='bg-yellow-500 py-4 px-8 text-white'>Add to cart</button>
@@ -88,8 +92,12 @@ const ProductDetails = () => {
         <div className='container mx-auto'>
           <h2 className='text-5xl font-semibold mb-8 flex flex-col items-center'>You May Also Like </h2>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-            {otherRelatedProducts.map(relatedProduct => (
-              <Product key={relatedProduct._id} product={relatedProduct} categories={categories} />
+            {otherRelatedProducts.map((relatedProduct) => (
+              <Product
+                key={relatedProduct._id}
+                product={relatedProduct}
+                categories={categories}
+              />
             ))}
           </div>
         </div>

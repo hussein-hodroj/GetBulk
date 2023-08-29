@@ -113,6 +113,14 @@ formData.append('imageAfter', imageAfter);
 
 
         <div className="flex justify-end mt-4">
+        <button
+            className="ml-2 px-4 py-2 bg-red-500 mr-4 text-white rounded-lg hover:bg-red-600"
+            onClick={onClose}
+            disabled={isLoading} 
+          >
+            Cancel
+          </button>
+
           <button
             className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400"
             type="submit"
@@ -120,13 +128,7 @@ formData.append('imageAfter', imageAfter);
           >
             {isLoading ? 'Adding...' : 'Add'}
           </button>
-          <button
-            className="ml-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-            onClick={onClose}
-            disabled={isLoading} 
-          >
-            Cancel
-          </button>
+          
         </div>
       </form>
     </Modal>

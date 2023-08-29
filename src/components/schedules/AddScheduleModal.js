@@ -90,7 +90,7 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <h2 className="text-yellow-500 font-bold text-xl mb-12">Add Schedule</h2>
+      <h2 className="text-yellow-500 font-bold text-2xl mb-12">Add Schedule</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="trainer" className="block text-white font-medium mb-4">
@@ -134,18 +134,19 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
           {timeError && <p className="text-red-500">{timeError}</p>}
         </div>
         <div className="flex justify-end">
-        <button
-          type="submit"
-          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
-        >
-          Add Schedule
-        </button>
+       
         <button
           type="button"
           onClick={onClose}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg ml-2 hover:bg-red-600"
+          className="px-4 py-2 bg-red-500 text-white rounded-lg  hover:bg-red-600"
         >
           Cancel
+        </button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-yellow-500 text-white rounded-lg ml-2 hover:bg-yellow-600"
+        >
+          Add Schedule
         </button>
         </div>
       </form>

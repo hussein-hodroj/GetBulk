@@ -20,11 +20,12 @@ const DeleteScheduleModal = ({ isOpen, onCancel, onDelete }) => {
         </div>
         <p className="font-bold text-yellow-500 mb-12 text-xl">Are you sure you want to delete the schedule?</p>
         <div className="modal-actions">
-          <button className="modal-btn modal-btn-yes" onClick={handleDeleteClick}>
-            Delete
-          </button>
-          <button className="modal-btn modal-btn-no" onClick={onCancel}>
+          
+          <button className="modal-btn modal-btn-no hover:bg-red-400" onClick={onCancel}>
             Cancel
+          </button>
+          <button className="modal-btn modal-btn-yes hover:bg-yellow-600" onClick={handleDeleteClick}>
+            Delete
           </button>
         </div>
       </div>

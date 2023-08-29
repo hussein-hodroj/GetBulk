@@ -76,6 +76,10 @@ const Home = () => {
     }
   };
 
+  const filteredAndSortedProducts = sortedProducts.filter((product) => {
+    return product.quantity > 0; 
+  });
+
 
   return (
     <div >
@@ -159,12 +163,14 @@ const Home = () => {
       </div>
   
       <section className='py-20'>
-        <div className='container mx-auto'>
-          {sortedProducts.length === 0 ? (
-            <p className='text-5xl text-yellow-500 flex justify-center items-center'>No available products.</p>
+      <div className='container mx-auto'>
+          {filteredAndSortedProducts.length === 0 ? (
+            <p className='text-5xl text-yellow-500 flex justify-center items-center'>
+              No available products.
+            </p>
           ) : (
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-[30px] max-w-sm mx-auto md:max-w-none md:mx-0'>
-              {sortedProducts.map((product) => (
+              {filteredAndSortedProducts.map((product) => (
                 <Product product={product} key={product._id} categories={categories} />
               ))}
             </div>

@@ -19,12 +19,12 @@ const customStyles = {
   },
 };
 
-const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform, fetchAllTransforms }) => {
+const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform }) => {
   const [updatedImageBefore, setUpdatedImageBefore] = useState(transform.imageBefore);
   const [updatedImageAfter, setUpdatedImageAfter] = useState(transform.imageAfter);
   const [updatedDescription, setUpdatedDescription] = useState(transform.descriptionTransform);
+  const [selectedImages, setSelectedImages] = useState([]);
 
-  
   useEffect(() => {
     if (isOpen) {
       setUpdatedImageBefore(transform.imageBefore);
@@ -32,6 +32,33 @@ const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform, fetchAllTr
       setUpdatedDescription(transform.descriptionTransform);
     }
   }, [isOpen, transform]);
+
+  const handleImageChangeBefore = (e) => {
+    const newImages = Array.from(e.target.files).map((file) => ({
+      name: file.name,
+      url: URL.createObjectURL(file),
+      file: file,
+    }));
+
+    setSelectedImages((prevImages) => [...prevImages, ...newImages]);
+  };
+
+  const handleImageChangeAfter = (e) => {
+    const newImages = Array.from(e.target.files).map((file) => ({
+      name: file.name,
+      url: URL.createObjectURL(file),
+      file: file,
+    }));
+
+    setSelectedImages((prevImages) => [...prevImages, ...newImages]);
+  };
+
+  const handleRemoveImage = (index) => {
+    const removedImage = selectedImages[index];
+    setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    URL.revokeObjectURL(removedImage.url);
+  };
+
 
   const handleUpdate = async () => {
     try {
@@ -61,17 +88,26 @@ const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform, fetchAllTr
     >
       <h2 className="text-yellow-500 font-bold text-2xl mb-12">Update Transform</h2>
       <label style={{ color: 'white' }}>Image Before:</label>
-<input
-  type="file"
-  onChange={(e) => setUpdatedImageBefore(e.target.files[0])}
-  className="w-full bg-white rounded p-2 mb-8  text-black"
-/>
-<label style={{ color: 'white' }}>Image After:</label>
-<input
-  type="file"
-  onChange={(e) => setUpdatedImageAfter(e.target.files[0])}
-  className="w-full bg-white rounded p-2 mb-2 mb-8 text-black"
-/>
+      <input
+        type="file"
+        onChange={handleImageChangeBefore}
+        className="w-full bg-white rounded p-2 mb-8 text-black"
+      />
+      {selectedImages.map((img, index) => (
+        <div key={index} className="flex items-center mt-2">
+          <img src={img.url} alt={`Selected ${index + 1}`} className="h-10 w-10 rounded-full" />
+          <button onClick={() => handleRemoveImage(index)} className="text-yellow-500 ml-2">
+            Remove
+          </button>
+        </div>
+      ))}
+      
+      <label style={{ color: 'white' }}>Image After:</label>
+      <input
+        type="file"
+        onChange={handleImageChangeAfter}
+        className="w-full bg-white rounded p-2 mb-2 mb-8 text-black"
+      />
       <label style={{ color: 'white' }}>Description:</label>
       <textarea
         value={updatedDescription}
@@ -79,17 +115,18 @@ const UpdateTransformModal = ({ isOpen, onClose, onUpdate, transform, fetchAllTr
         className="w-full bg-white rounded p-2 mb-8 text-black"
       />
       <div className="flex justify-end">
-        <button
-          onClick={handleUpdate}
-          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 mr-2"
-        >
-          Update
-        </button>
+        
         <button
           onClick={onClose}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 mr-2"
         >
           Cancel
+        </button>
+        <button
+          onClick={handleUpdate}
+          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 "
+        >
+          Update
         </button>
       </div>
     </Modal>

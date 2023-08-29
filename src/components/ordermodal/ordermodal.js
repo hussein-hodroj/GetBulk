@@ -49,8 +49,11 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
       };
   
       try {
+
         const response = await axios.post('http://localhost:8000/order/', orderData);
         console.log('Order created:', response.data);
+
+        
   
        
         setFullName('');
@@ -66,6 +69,17 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
           setShowThankYouMessage(false);
           handleClose();
         }, 5000); 
+
+ 
+        for (const selectedProduct of selectedProducts) {
+          const productId = selectedProduct.product._id;
+          const newQuantity = selectedProduct.product.quantity - selectedProduct.amount;
+      
+          await axios.put(`http://localhost:8000/product/${productId}`, { quantity: newQuantity });
+          console.log('quantyty updated ');
+        }
+        
+
       } catch (error) {
         console.log('Error creating order:', error);
       }
