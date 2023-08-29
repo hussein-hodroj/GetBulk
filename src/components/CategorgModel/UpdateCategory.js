@@ -13,7 +13,7 @@ const customStyles = {
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
     maxWidth: '500px',
-    backgroundColor: 'black',
+    backgroundColor: '#2c2a2a', // Updated background color
     border: '2px solid black',
     borderRadius: '8px',
     padding: '20px',
@@ -23,7 +23,8 @@ const customStyles = {
 const UpdateCategory = ({ open, categoryId, onUpdate }) => {
   const [name, setName] = useState('');
   const [image, setImage] = useState(null); // State for image
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/category/${categoryId}`)
@@ -41,20 +42,21 @@ const UpdateCategory = ({ open, categoryId, onUpdate }) => {
     formData.append('categoryimage', image); // Append image to FormData
 
     axios
-    .put(`http://localhost:8000/category/${categoryId}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data', // Important for handling FormData
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-      onUpdate();
-      navigate('/category');
-    })
-    .catch((error) => {
-      console.log('Error while submitting the form:', error);
-    });
-};
+      .put(`http://localhost:8000/category/${categoryId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Important for handling FormData
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        onUpdate();
+        navigate('/category');
+      })
+      .catch((error) => {
+        console.log('Error while submitting the form:', error);
+      });
+  };
+
   return (
     <Modal isOpen={true} onRequestClose={() => open(false)} style={customStyles}>
       <h2 className="text-yellow-500 font-bold text-xl mb-4">Edit Category</h2>
@@ -76,23 +78,23 @@ const UpdateCategory = ({ open, categoryId, onUpdate }) => {
           className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full my-4"
         />
 
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-end space-x-4 mt-4"> {/* Updated button positioning */}
+        <button
+            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:scale-105"
+            onClick={() => open(false)}
+          >
+            Cancel
+          </button>
           <button
             className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 hover:scale-105"
             type="submit"
           >
             Save
           </button>
-          <button
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:scale-105"
-            onClick={() => open(false)}
-          >
-            Cancel
-          </button>
         </div>
       </form>
     </Modal>
   );
-}
+};
 
 export default UpdateCategory;

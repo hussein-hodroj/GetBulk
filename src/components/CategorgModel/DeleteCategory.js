@@ -12,7 +12,7 @@ const customStyles = {
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
     maxWidth: '500px',
-    backgroundColor: 'black',
+    backgroundColor: '#2c2a2a', // Updated background color
     border: '2px solid black',
     borderRadius: '8px',
     padding: '20px',
@@ -39,18 +39,18 @@ const DeleteCategory = ({ openDelete, categoryId, onDelete }) => {
       <h2 className="text-yellow-500 font-bold text-xl mb-4">Delete Category</h2>
       <p className="text-white mb-4">Are you sure you want to delete this category?</p>
 
-      <div className="flex justify-between">
-        <button
-          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 hover:scale-105"
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
+      <div className="flex justify-end space-x-4"> {/* Updated button positioning */}
         <button
           className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:scale-105"
           onClick={() => openDelete(false)}
         >
           Cancel
+        </button>
+        <button
+          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 hover:scale-105"
+          onClick={handleDelete}
+        >
+          Delete
         </button>
       </div>
     </Modal>
