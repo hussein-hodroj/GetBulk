@@ -57,20 +57,20 @@ const AddCategoryModal = ({ isOpen, onClose, onAddCategory }) => {
         <h2 className="text-yellow-500 font-bold text-xl mb-4">Add Category</h2>
   
         <form onSubmit={handleSubmit}>
-          <label className="text-white mb-4">Category Name:</label>
+          <label className="text-white mb-8">Category Name:</label>
           <input
             type="text"
             value={categoryName}
             onChange={(e) => setCategoryName(e.target.value)}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black my-4"
           />
   
-          <label className="text-white mb-4">Category Image:</label>
+          <label className="text-white">Category Image:</label>
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setCategoryImage(e.target.files[0])}
-            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+            className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full my-4"
           />
   
           <div className="flex justify-between mt-4">

@@ -18,6 +18,7 @@ import resetPasswordRouter from './src/routes/resetPasswordRoute.js';
 import { getAllProducts } from './src/controller/products.js';
 import editPasswordRouter from './src/routes/editPasswordRouter.js';
 import transform from './src/routes/transform.js';
+import bookingUserRouter from './src/routes/bookingUserRoute.js'
 dotenv.config();
 
 const app = express();
@@ -38,6 +39,7 @@ app.use('/transform', transform);
 app.use('/',forgotPasswordRouter);
 app.use('/',resetPasswordRouter);
 app.use('/',editPasswordRouter);
+app.use('/bookinguser',bookingUserRouter);
 // MongoDB Connection
 const connectionOptions = {
   useNewUrlParser: true,

@@ -4,7 +4,7 @@ import UpdateCategory from '../components/CategorgModel/UpdateCategory.js';
 import DeleteCategory from '../components/CategorgModel/DeleteCategory.js';
 import AddCategoryModal from '../components/CategorgModel/AddCategoryModal.js';
 import Dashboard from './dashboard.js';
-import { FaEdit, FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
+import { FaEdit, FaTrash, FaPlus, FaSearch, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
 
 function Category() {
   const [categories, setCategories] = useState([]);
@@ -33,11 +33,11 @@ function Category() {
 
   const handleDeleteCategory = (deletedCategoryId) => {
     setCategories(categories.filter(category => category._id !== deletedCategoryId));
-    setShowDelete(false); 
+    setShowDelete(false);
   };
 
   const handleUpdateCategory = () => {
-    fetchCategories(); 
+    fetchCategories();
     setShowUpdate(false);
   };
 
@@ -65,6 +65,7 @@ function Category() {
     indexOfFirstCategory,
     indexOfLastCategory
   );
+
   return (
     <div>
       {showUpdate && (
@@ -82,12 +83,13 @@ function Category() {
         />
       )}
 
-<div className='flex'>
+      <div className='flex'>
         <Dashboard />
         <div className='h-full w-full ml-56 mt-14 mb-10'>
           <div className='p-6 gap-4'>
             <div className='flex justify-between'>
               <div className='flex justify-start mb-3'>
+                <FaSearch className='search-icon text-zinc-500 ms-4 mt-2' size={25} />
                 <input
                   type='text'
                   placeholder='Search by name'
@@ -95,16 +97,13 @@ function Category() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <p className='text-white font-bold border rounded py-2 px-2 bg-yellow-500 ms-4'>
-                  {filteredCategories.length} categories found
-                </p>
               </div>
               <div className='flex justify-end mb-3 mr-4'>
                 <button
                   onClick={() => setShowPopup(true)}
-                  className='bg-yellow-500 text-white font-bold py-2 px-3  rounded hover:bg-yellow-400 hover:scale-105'
+                  className='flex justify-between items-center px-4 py-2 bg-yellow-500 text-white font-bold  rounded hover:bg-yellow-400 hover:scale-105'
                 >
-                  Add category
+                  <FaPlus />Add category
                 </button>
               </div>
             </div>
@@ -119,7 +118,7 @@ function Category() {
                 </tr>
               </thead>
               <tbody>
-                {filteredCategories.map((category, index) => (
+                {currentCategories.map((category, index) => (
                   <tr
                     key={category._id}
                     className={
@@ -129,9 +128,9 @@ function Category() {
                     <td className='px-1.5 py-1'>{index + 1}</td>
                     <td>{category.name}</td>
                     <td className="flex items-center justify-center">
-                    {category.categoryimage &&( 
-                    <img src={`/uploads/usersImages/${category.categoryimage}`} alt={category.name} className="w-16 h-16 object-cover rounded-full" />
-                    )}
+                      {category.categoryimage &&( 
+                      <img src={`/uploads/usersImages/${category.categoryimage}`} alt={category.name} className="w-16 h-16 object-cover rounded-full" />
+                      )}
                     </td>
                     <td>
                       <div className='flex items-center justify-center space-x-4'>
@@ -144,7 +143,7 @@ function Category() {
                               setShowUpdate(true);
                             }}
                           >
-                           <FaEdit className="w-5 h-5 " />
+                            <FaEdit className="w-5 h-5 " />
                           </button>
                         </div>
                         <div className='bg-red-600 rounded'>
@@ -156,7 +155,7 @@ function Category() {
                               setShowDelete(true);
                             }}
                           >
-                           <FaTrash className="w-5 h-5 " />
+                            <FaTrash className="w-5 h-5 " />
                           </button>
                         </div>
                       </div>
@@ -166,24 +165,24 @@ function Category() {
               </tbody>
             </table>
             <div className='flex justify-center mt-4'>
-        <div className='flex items-center ml-auto'>
-          <button
-            className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600 hover:scale-105'
-            onClick={handlePreviousPage}
-          >
-            <FaArrowLeft />
-          </button>
-          <p className='text-md text-yellow-500 ml-4 mr-4'>
-            Page {currentPage} of {Math.ceil(filteredCategories.length / categoriesPerPage)}
-          </p>
-          <button
-            className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600 hover:scale-105'
-            onClick={handleNextPage}
-          >
-            <FaArrowRight />
-          </button>
-        </div>
-      </div>
+              <div className='flex items-center ml-auto'>
+                <button
+                  className='px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600 hover:scale-105'
+                  onClick={handlePreviousPage}
+                >
+                  <FaArrowLeft />
+                </button>
+                <p className='text-md text-yellow-500 ml-4 mr-4'>
+                  Page {currentPage} of {Math.ceil(filteredCategories.length / categoriesPerPage)}
+                </p>
+                <button
+                  className='px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600 hover:scale-105'
+                  onClick={handleNextPage}
+                >
+                  <FaArrowRight />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

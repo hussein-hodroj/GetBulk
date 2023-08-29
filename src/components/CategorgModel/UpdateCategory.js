@@ -65,7 +65,7 @@ const UpdateCategory = ({ open, categoryId, onUpdate }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black"
+          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full text-black my-4"
         />
 
         <label className="text-white mb-4">Category Image:</label>
@@ -73,7 +73,7 @@ const UpdateCategory = ({ open, categoryId, onUpdate }) => {
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
-          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full"
+          className="border-yellow-500 focus:border-yellow-500 px-2 py-1 rounded-lg w-full my-4"
         />
 
         <div className="flex justify-between mt-4">
