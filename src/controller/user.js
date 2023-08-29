@@ -55,7 +55,7 @@ export const addUser = async (req, res) => {
       from: 'your@email.com',
       to: email,
       subject: 'Welcome to Our Gym',
-      text: `Thank you for signing up! Your password: ${password}`,
+      text: `Account created successfully! \nWelcome ${fullname}!,\nYour Email: ${email} \nYour password: ${password}`,
     });
 
     const saltRounds = 10; // Number of salt rounds for hashing
