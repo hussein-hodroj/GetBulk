@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Dashboard from './dashboard.js';
 import bcrypt from 'bcryptjs';
-import { FaTimes, FaTrash,FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa/index.esm.js'; 
+import { FaTimes, FaTrash,FaArrowLeft, FaArrowRight, FaSearch,FaEdit ,FaPlus} from 'react-icons/fa/index.esm.js'; 
 
 
 
 function Trainers() {
   const [trainers, setTrainers] = useState([]);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [editingTrainer, setEditingTrainer] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [selectedTrainerId, setSelectedTrainerId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -50,7 +52,31 @@ function Trainers() {
     }));
   };
 
-
+  const handleEditTrainer = (trainer) => {
+    setEditingTrainer(trainer);
+    setShowEditModal(true);
+  };
+  const handleSaveEditedTrainer = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/user/${editingTrainer._id}`,
+        editingTrainer
+      );
+  
+      // Update the trainers state with the updated trainer
+      setTrainers((prevTrainers) =>
+        prevTrainers.map((trainer) =>
+          trainer._id === editingTrainer._id ? editingTrainer : trainer
+        )
+      );
+  
+      setEditingTrainer(null); // Reset the editing state
+      setShowEditModal(false); // Close the edit modal
+    } catch (error) {
+      console.error('Error updating trainer:', error);
+    }
+  };
+  
   
   const handleAddUser = async () => {
     console.log('Adding user:', newUserDetails);
@@ -86,41 +112,8 @@ function Trainers() {
     }
   };
 
-  // const handleAddUser = async () => {
-  //   console.log('Adding user:', newUserDetails);
-  //   try {
-  //     const saltRounds = 10; // Number of salt rounds for hashing
-  //     const hashedPassword = await bcrypt.hash(newUserDetails.password, saltRounds);
-  //     const newUser = {
-  //       ...newUserDetails,
-  //       password: hashedPassword
-  //     };
-  //     const response = await axios.post('http://localhost:8000/user/addUser', newUserDetails);
-  //     const addedUser  = response.data;
-      
-  //     setTrainers(prevTrainers => [...prevTrainers, addedUser ]);
-  //     setShowAddUserModal(false);
-  //     setNewUserDetails({
-  //       fullname: '',
-  //       email: '',
-  //       password: '',
-  //       address: '',
-  //       phonenumber:'',
-  //       age: '',
-  //       role: 'trainer'
-       
-  //     });
-  //     setErrorMessage(''); // Clear any previous error message
-  //   } catch (error) {
-  //     if (error.response && error.response.data && error.response.data.message) {
-  //       setErrorMessage(error.response.data.message);
-  //     } else {
-  //       setErrorMessage('Error adding user');
-  //     }
-  //   }
-  // };
-  
 
+  
   const handleDeleteTrainer = (trainerId) => {
     setSelectedTrainerId(trainerId);
     setShowDeleteModal(true);
@@ -164,25 +157,28 @@ function Trainers() {
         <div className="p-6 gap-4">
 
         <div className="flex justify-between mb-3">
-  <div className="flex justify-start mb-3 ">
-    <FaSearch className="search-icon text-zinc-500 ms-4 mt-2 mr-3" size={25}/>
-    <input
-      type="text"
-      placeholder="Search by name or phone"
-      className="px-4 py-2 border rounded text-black"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    <p className=" px-4 py-2 rounded text-white font-bold border  bg-yellow-500 ms-4">
-      Number of Users Found: {numFilteredTrainers}
-    </p>
-  </div>
-  <button
-    className="text-white  bold border font-bold  bg-yellow-500 rounded px-2 py-1 transition-transform transform-gpu hover:scale-110"
-    onClick={toggleAddUserModal}
-  >
-    Add Trainer
-  </button>
+            <div className="flex justify-start mb-3 ">
+              <FaSearch className="search-icon text-zinc-500 ms-4 mt-2 mr-3" size={25}/>
+              <input
+                type="text"
+                placeholder="Search by name or phone"
+                className="px-4 py-2 border rounded text-black"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              
+            </div>
+            <div className=" flex justify-end mb-3 mr-4">
+            <button
+            className="text-white font-bold border bg-yellow-500 rounded px-3 py-2 transition-transform transform-gpu hover:scale-110 flex items-center"
+            onClick={toggleAddUserModal}
+          >
+            <FaPlus className="mr-2" />
+            Add Trainer
+          </button>
+            </div>
+           
+
 </div>
                 
           <div className="flex justify-between">
@@ -190,8 +186,8 @@ function Trainers() {
               
             </div>
           </div>
-          <table className="min-w-full divide-y  ">
-            <thead className="bg-zinc-600 ">
+          <table className="min-w-full divide-y  " >
+            <thead className="bg-zinc-800 ">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left bold font-medium items-center text-white uppercase tracking-wider Border-white border">
                        #
@@ -221,7 +217,7 @@ function Trainers() {
               {currentItems.map((trainer, index) => (
                 <tr
                   key={trainer._id}
-                  className={index % 2 === 0 ? 'bg-zinc-500' : 'bg-zinc-600'}
+                  className={index % 2 === 0 ? 'bg-zinc-700' : 'bg-zinc-800'}
                 >
                   <td className="px-6 py-4 whitespace-nowrap border Border-white">
                       {index + 1+(currentPage - 1) * itemsPerPage} 
@@ -243,12 +239,20 @@ function Trainers() {
                   </td>
                   
                   <td className="px-6 py-4 whitespace-nowrap border border-white flex items-center justify-center">
+                  <button
+                              className="text-white  bg-yellow-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 mr-3 "
+                              onClick={() => handleEditTrainer(trainer)}
+                            >
+                              <FaEdit className="w-5 h-5" />
+                            </button>
                           <button
                                 onClick={() => handleDeleteTrainer(trainer._id)}
-                                className="text-white  border bg-red-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 flex items-center justify-center"
+                                className="text-white   bg-red-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 flex items-center justify-center"
                               >
-                                <FaTrash className="mr-1" />
+                                <FaTrash className="w-5 h-5" />
                     </button>
+                   
+                    
                               </td>
                             </tr>
                           ))}
@@ -276,9 +280,89 @@ function Trainers() {
 
         </div>
       </div>
+      {showEditModal && editingTrainer && (
+  <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-zinc-700 bg-opacity-40">
+    <div className="bg-zinc-800 p-7 rounded-xl shadow-md">
+      <div className="flex justify-end">
+        <button
+          className="text-yellow-500"
+          onClick={() => {
+            setEditingTrainer(null);
+            setShowEditModal(false);
+          }}
+        >
+          <FaTimes />
+        </button>
+      </div>
+      <p className="text-xl text-yellow-500 font-bold mb-5">Edit Trainer</p>
+      <div className="grid grid-cols-2 gap-4 mb-4 text-black">
+        <div>
+          <p className="text-yellow-500 font-semibold mb-2">Full Name</p>
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="px-4 py-2 border rounded w-full"
+            value={editingTrainer.fullname}
+            onChange={(e) => setEditingTrainer(prevTrainer => ({ ...prevTrainer, fullname: e.target.value }))}
+          />
+        </div>
+        <div>
+          <p className="text-yellow-500 font-semibold mb-2">Email</p>
+          <input
+            type="email"
+            placeholder="Email"
+            className="px-4 py-2 border rounded w-full"
+            value={editingTrainer.email}
+            onChange={(e) => setEditingTrainer(prevTrainer => ({ ...prevTrainer, email: e.target.value }))}
+          />
+        </div>
+        <div>
+          <p className="text-yellow-500 font-semibold mb-2">Age</p>
+          <input
+            type="text"
+            placeholder="Age"
+            className="px-4 py-2 border rounded w-full"
+            value={editingTrainer.age}
+            onChange={(e) => setEditingTrainer(prevTrainer => ({ ...prevTrainer, age: e.target.value }))}
+          />
+        </div>
+        <div>
+          <p className="text-yellow-500 font-semibold mb-2">Phone Number</p>
+          <input
+            type="text"
+            placeholder="Phone Number"
+            className="px-4 py-2 border rounded w-full"
+            value={editingTrainer.phonenumber}
+            onChange={(e) => setEditingTrainer(prevTrainer => ({ ...prevTrainer, phonenumber: e.target.value }))}
+          />
+        </div>
+      </div>
+
+      <div className="mt-8 flex justify-end">
+        <button
+          className="bg-red-500 text-white font-bold px-4 py-2 mr-2 rounded-lg transition-transform transform-gpu hover:scale-110"
+          onClick={() => {
+            setEditingTrainer(null);
+            setShowEditModal(false);
+          }}
+        >
+          Cancel
+        </button>
+
+        <button
+          className="bg-yellow-500 text-white font-bold px-4 py-2 rounded-lg transition-transform transform-gpu hover:scale-110"
+          onClick={handleSaveEditedTrainer} // Implement this function to save the edited trainer
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
       {showDeleteModal && (
   <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40 ">
-    <div className="bg-zinc-800 p-4 rounded-xl w-96">
+    <div className="bg-zinc-700 p-4 rounded-xl w-96">
       <div className="flex justify-end">
         <button
           className="text-yellow-500"
@@ -309,7 +393,7 @@ function Trainers() {
        {showAddUserModal && (
      
      <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40">
-     <div className="bg-zinc-600 p-7 rounded shadow-md">
+     <div className="bg-zinc-800 p-7 rounded-xl shadow-md">
        {errorMessage && <p className="text-red-600 mb-2">{errorMessage}</p>}
        <div className="flex justify-end">
         <button
