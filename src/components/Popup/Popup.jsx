@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Popup.css';
 
-function Popup ({ close, setProducts }) {
+function Popup ({ close, setProducts,products }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -33,6 +33,7 @@ function Popup ({ close, setProducts }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    
     validateForm();
 
     if (isValid) {
@@ -51,9 +52,11 @@ function Popup ({ close, setProducts }) {
         },
       })
       .then((response) => {
-        console.log(response.data);
-        setProducts(response.data);
+       
+        setProducts(prevProducts => [...prevProducts, response.data ]);
+       
         close(false);
+  
         setShowSuccessAlert(true);
         setTimeout(() => {
           setShowSuccessAlert(false);
@@ -74,7 +77,7 @@ function Popup ({ close, setProducts }) {
 
   return (
     <div className = "modalBackground">
-          <form onSubmit={(e)=>handleSubmit(e)}>
+          <form onSubmit={handleSubmit}>
       <div className= "modalContainer">
         <div className = "titleCloseBtn flex justify-between  mb-5 mt-5">
        <h1 className="text-yellow-500 font-bold flex justify-start align-start" 
@@ -195,7 +198,7 @@ function Popup ({ close, setProducts }) {
         
           <div className = "footer">
             <button onClick = {() => close(false) } id="cancelBtn"> Cancel </button>
-            <button type = "submit"> Save </button>
+            <button type="submit" > Save </button>
 
           </div>
 

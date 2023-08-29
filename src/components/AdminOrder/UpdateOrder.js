@@ -68,7 +68,6 @@ function UpdateOrder ({closeUpdate, orderId, setOrders }) {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setOrders(response.data)
         
       }).then(()=>{

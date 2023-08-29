@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../AdminFeedback/DeleteFeedback.css';
 
-function DeleteProduct({ openDelete, productId }) {
+function DeleteProduct({ openDelete, productId,setProduct }) {
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
     const handleSubmit = (e) => {
           e.preventDefault();
         axios.delete(`http://localhost:8000/product/${productId}`)
         .then((response) => {
-          console.log(response.data); 
+          setProduct((prevProducts) =>
+          prevProducts.filter((product) => product._id !== productId)
+        );          
         }).then(() => {
           openDelete(false);
+          setShowSuccessAlert(true);
+        setTimeout(() => {
+          setShowSuccessAlert(false);
+        }, 3000);
         })
         .catch((error) => {
           console.log('Error while deleting the feedback:', error);
@@ -41,6 +49,11 @@ function DeleteProduct({ openDelete, productId }) {
           </div>
 
       </div>
+      {showSuccessAlert && (
+          <div className="success-alert bg-blue text-black">
+            Product deleted successfully!
+          </div>
+        )}
       </form>
 
     </div>

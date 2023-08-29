@@ -32,10 +32,7 @@
   color: white;
   /* Add other styling properties as needed */
 }
-.rbc-row-bg {
-  background-color: #d31414;
-  /* Add other styling properties as needed */
-}
+
 
 
 
@@ -54,11 +51,13 @@
   border:1px solid whitesmoke;
 }
 
-/* .rbc-agenda-view {
-  background-color: #ebc11b;
-  color:white
-} */
-
+ /* .rbc-agenda-view {
+  background-color: #6e6d68;
+  color:rgb(24, 23, 23)
+}  */
+.rbc-agenda-view table.rbc-agenda-table .rbc-agenda-time-cell{
+  background-color: #46443f;
+}
 /* Styling for the day view */
 .rbc-day-view {
 color: #ebc11b;

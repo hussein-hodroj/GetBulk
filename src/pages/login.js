@@ -13,6 +13,8 @@ function Login() {
 const [errors, setErrors] = useState({});
 const [isValid, setIsValid] = useState(false);
 
+const [loginError, setLoginError] = useState(false);
+
 // Regular expression for email validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -64,12 +66,13 @@ const validateForm = () => {
       })
       .catch((error) => {
         console.log('Error logging in:', error);
+        setLoginError(true);
       });
   }
 };
 
       return (
-        <div className='min-h-screen flex items-center justify-center bg-black'>     
+        <div className='min-h-screen flex items-center justify-center h-40 bg-black'>     
 <Header/>
 
 <div className='h-screen-full flex items-center justify-center bg-black mt-20'>
@@ -79,7 +82,7 @@ const validateForm = () => {
         <div className="min-h-screen flex items-center justify-center" 
         style={{
             backgroundImage: 'url(./assets/images/back2.jpg)',
-           width:'1490px',
+           width:'1340px',
         
          }}>
           
@@ -107,6 +110,11 @@ const validateForm = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
                                 {errors.email && <p className="text-red-700 ml-2 text-sm">{errors.email}</p>}
+                                {loginError && (
+        <div className="text-red-700  text-start mb-4">
+          Email or password is incorrect. Please try again.
+        </div>
+      )}
           </div>
           <div className="mb-4">
             <label

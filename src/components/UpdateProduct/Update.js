@@ -37,6 +37,7 @@ function Update ({ open, productId, setProducts }) {
         setName(response.data.name)
         setPrice(response.data.price)
         setDescription(response.data.description)
+        setQuantity(response.data.quantity)
         setImagePath(response.data.imagePath)
         setCategory(response.data.category)
     })
@@ -63,7 +64,11 @@ function Update ({ open, productId, setProducts }) {
       formData.append('quantity', quantity);
       if (imagePath) {
         formData.append('imagePath', imagePath);
+      } else {
+        // If imagePath is null, append a placeholder value (e.g., 'no-change') to indicate no change
+        formData.append('imagePath', 'no-change');
       }
+  
 
       axios
       .put(`http://localhost:8000/product/${productId}`, formData, {
@@ -72,11 +77,11 @@ function Update ({ open, productId, setProducts }) {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setProducts(response.data);
-      }).then(()=>{
-        open(false);
+                  open(false);
+
       })
+      
       .catch((error) => {
         console.log('Error while submitting the form:', error);
       });
@@ -85,8 +90,8 @@ function Update ({ open, productId, setProducts }) {
   };
   return (
     <div className = "modalBackground">
-          <form onSubmit={(e)=>handleSubmit(e)}>
-      <div className= "modalContainer">
+<form onSubmit={handleSubmit}>
+        <div className= "modalContainer">
         <div className = "titleCloseBtn flex justify-between mb-5 mt-5">
   <h1 className="text-yellow-500 font-bold flex justify-start items-start"
    style ={{ display: "inline-block",
@@ -165,6 +170,7 @@ function Update ({ open, productId, setProducts }) {
             id="quantity"
             type="number"
             name="quantity"
+             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />  
              
