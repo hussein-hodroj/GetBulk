@@ -4,8 +4,92 @@
   padding: 20px;
   border-radius: 15px;
   background-color: #3b3933; 
-  color:white;
 }
+.rbc-toolbar {
+  background-color: #333;
+  color: white;
+
+}
+
+.rbc-day-bg {
+  background-color: #46443f;
+  border: 1px solid #ccc;
+  /* Add other styling properties as needed */
+}
+.rbc-event {
+  background-color: #b8ad1e;
+  border: 1px solid #777a7c;
+  color: white;
+  /* Add other styling properties as needed */
+}
+.rbc-selected {
+  background-color: #b8ad1e;
+  border-color: #777a7c;
+  /* Add other styling properties as needed */
+}
+.rbc-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  /* Add other styling properties as needed */
+}
+.rbc-row-bg {
+  background-color: #d31414;
+  /* Add other styling properties as needed */
+}
+
+
+
+/* Styling for the entire calendar */
+
+
+/* Styling for the month view */
+/* .rbc-month-view {
+  background-color: #ebc11b;
+  color:white
+} */
+
+.rbc-week-view {
+  background-color: #ebc11b;
+  color:white;
+  border:1px solid whitesmoke;
+}
+
+/* .rbc-agenda-view {
+  background-color: #ebc11b;
+  color:white
+} */
+
+/* Styling for the day view */
+.rbc-day-view {
+color: #ebc11b;
+  background-color: #46443f;
+} 
+
+.rbc-btn-group {
+  background-color: #ebc11b;
+  color:white
+}
+
+/* Styling for the back button */
+.rbc-btn-group .rbc-btn-group-back {
+  background-color: #ebc11b;
+  color:white
+}
+
+/* Styling for the next button */
+.rbc-btn-group .rbc-btn-group-next {
+  background-color: #ebc11b;
+  color:white
+}
+
+/* Styling for the today button */
+.rbc-btn-group .rbc-btn-group-today {
+  background-color: #ebc11b;
+  color:white
+}
+
+
+
 
 .title_home {
   font-size: 3rem;
@@ -29,6 +113,7 @@
   align-items: center;
   z-index: 100;
 }
+
 
 .event-popup {
   background-color: #2b2a2a; /* Dark gray background */

@@ -79,7 +79,7 @@ const validateForm = () => {
         <div className="min-h-screen flex items-center justify-center" 
         style={{
             backgroundImage: 'url(./assets/images/back2.jpg)',
-           
+           width:'1490px',
         
          }}>
           

@@ -68,7 +68,7 @@ const storage = multer.diskStorage({
   export const createProduct = async (req, res) => {
     try {
       // Extract data from the request body
-      const { name, price, description, category, imagePath } = req.body;
+      const { name, price, description, category, quantity, imagePath } = req.body;
   
       // Create the product
       const newProduct = await ProductModel.create({
@@ -76,6 +76,7 @@ const storage = multer.diskStorage({
         price,
         description,
         category,
+        quantity,
         imagePath: req.file.originalname,
       });
   
@@ -90,6 +91,7 @@ const storage = multer.diskStorage({
         price,
         description,
         cname,
+        quantity,
         imagePath,
       });
         } catch (error) {
@@ -99,13 +101,13 @@ const storage = multer.diskStorage({
   
   export const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, price, description, category, imagePath } = req.body;
+    const { name, price, description, category, quantity, imagePath } = req.body;
   
     try {
 
       const product = await ProductModel.findByIdAndUpdate(
         id,
-        { name, price, description, category, imagePath: req.file.originalname},
+        { name, price, description, category, quantity, imagePath: req.file.originalname},
         { new: true }
       );
 

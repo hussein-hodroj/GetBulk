@@ -7,6 +7,7 @@ function Update ({ open, productId, setProducts }) {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [quantity, setQuantity] = useState('');
   const [imagePath, setImagePath] = useState(null);
   const [categories, setCategories] = useState([]);
 
@@ -21,6 +22,8 @@ function Update ({ open, productId, setProducts }) {
     if (!price) newErrors.price = 'Price is required';
     if (!description) newErrors.description = 'Description is required';
     if (!category) newErrors.category = 'Category is required';
+    if (!quantity) newErrors.quantity = 'Quantity is required';
+
 
     setErrors(newErrors);
     setIsValid(Object.keys(newErrors).length === 0);
@@ -57,6 +60,7 @@ function Update ({ open, productId, setProducts }) {
       formData.append('price', price);
       formData.append('description', description);
       formData.append('category', category);
+      formData.append('quantity', quantity);
       if (imagePath) {
         formData.append('imagePath', imagePath);
       }
@@ -83,12 +87,16 @@ function Update ({ open, productId, setProducts }) {
     <div className = "modalBackground">
           <form onSubmit={(e)=>handleSubmit(e)}>
       <div className= "modalContainer">
-        <div className = "titleCloseBtn">
+        <div className = "titleCloseBtn flex justify-between mb-5 mt-5">
+  <h1 className="text-yellow-500 font-bold flex justify-start items-start"
+   style ={{ display: "inline-block",
+   textAlign: "start",
+   width: "350px",
+   fontSize: "x-large"}}> Edit Product: </h1>
+
         <button onClick = {() => open(false) } className="text-white">  X  </button>
         </div>
-        <div className = "title">
-          <h1 className="text-yellow-500 font-bold flex justify-start align-start"> Edit Product: </h1>
-        </div>
+     
         <div className = "body">
 
    <div className="flex justify-between">
@@ -147,20 +155,22 @@ function Update ({ open, productId, setProducts }) {
               </select>
               {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
 
-               </div>       
-                <div className="mb-2">
-                <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="image">
-            Image
+               </div> 
+               <div className="mb-2">
+                  <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="quantity">
+            Quantity
           </label>
           <input
-            className="shadow  border w-64 rounded py-2 px-3 text-yellow-500 leading-tight focus:outline-none focus:shadow-outline"
-            id="image"
-            type="file"
-            name="image"
-            onChange={(e) => setImagePath(e.target.files[0])}
+            className="shadow  border w-64 rounded py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+            id="quantity"
+            type="number"
+            name="quantity"
+            onChange={(e) => setQuantity(e.target.value)}
           />  
              
+
               </div>        
+                
               </div>
               <div className="mb-2">
               <label
@@ -177,6 +187,19 @@ function Update ({ open, productId, setProducts }) {
             {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
 
         </div>
+        <div className="mb-2">
+                <label className="block text-yellow-500 text-sm font-bold mb-2" htmlFor="image">
+            Image
+          </label>
+          <input
+            className="shadow  border w-full rounded py-2 px-3 text-yellow-500 leading-tight focus:outline-none focus:shadow-outline"
+            id="image"
+            type="file"
+            name="image"
+            onChange={(e) => setImagePath(e.target.files[0])}
+          />  
+             
+              </div>        
               </div>
              
         

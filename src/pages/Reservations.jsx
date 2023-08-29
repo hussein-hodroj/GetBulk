@@ -23,7 +23,7 @@ function Reservations() {
       const token = localStorage.getItem('token');
       const decodedToken = jwt_decode(token);
       const id = decodedToken.id;
-    
+
     console.log("decodedToken=>",id);
      
       axios.get(`http://localhost:8000/user/trainers/${id}`) // Adjust the API endpoint
@@ -40,6 +40,26 @@ function Reservations() {
         });
     }, []);
 
+    function eventStyleGetter(event, start, end, isSelected) {
+      // Customize the event's background color based on your requirements
+      const backgroundColor = event.customColor || 'yellow';
+  
+      return {
+        style: {
+          backgroundColor,
+          borderRadius: '5px',
+          opacity: 0.8,
+          color: 'white',
+          border: 'none',
+          display: 'block',
+        },
+      };
+    }
+    const eventData = [
+  {
+    customColor: 'yellow', 
+  },
+];
     useEffect(() => {
       axios
         .get(`http://localhost:8000/booking/${trainerId}`)
@@ -59,6 +79,8 @@ function Reservations() {
     if (!selectedEvent) {
       return null;
     }
+
+    
 
     return (
       <div>
@@ -91,7 +113,7 @@ function Reservations() {
           <p >
             <strong className="text-yellow-500">Address:</strong> {selectedEvent.uaddress}
           </p>
-          
+         
         </div>
       </div>
       </div></div></div></div>
@@ -139,6 +161,8 @@ function Reservations() {
   popup={true}
   onSelectEvent={handleEventSelect}
   views={['month', 'week', 'day', 'agenda']}
+  eventStyleGetter={eventStyleGetter}
+
 />
 
       </div>
