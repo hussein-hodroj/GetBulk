@@ -129,7 +129,7 @@ const UserWorkout = () => {
       Page {currentPage} of {Math.ceil(trainers.length / trainersPerPage)}
     </p>
     <button
-      className="px-4 py-2 bg-yellow-500 text-white rounded-l-lg hover:bg-yellow-600"
+      className="px-4 py-2 bg-yellow-500 text-white rounded-r-lg hover:bg-yellow-600"
       onClick={() => {
         const totalPages = Math.ceil(trainers.length / trainersPerPage);
         if (currentPage < totalPages) {
