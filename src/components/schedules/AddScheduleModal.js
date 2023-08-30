@@ -14,7 +14,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     width: '70%',
     maxWidth: '500px',
-    backgroundColor: '#52525b',
+    backgroundColor: 'rgb(44, 42, 42)',
     borderRadius: '8px',
     padding: '20px',
   },
