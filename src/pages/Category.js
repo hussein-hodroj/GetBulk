@@ -5,6 +5,7 @@ import DeleteCategory from '../components/CategorgModel/DeleteCategory.js';
 import AddCategoryModal from '../components/CategorgModel/AddCategoryModal.js';
 import Dashboard from './dashboard.js';
 import { FaEdit, FaTrash, FaPlus, FaSearch, FaArrowLeft, FaArrowRight } from 'react-icons/fa/index.esm.js';
+import './style.css'; // Make sure to import your CSS file
 
 function Category() {
   const [categories, setCategories] = useState([]);
@@ -108,13 +109,20 @@ function Category() {
               </div>
             </div>
 
-            <table className='table flex items-center justify-center font-bold bg-zinc-800 text-center w-full'>
+            <table
+              className="table flex items-center justify-center font-bold bg-zinc-700 text-center w-full"
+              style={{
+                backgroundColor: "#555555", // Use the color value from Product component
+                color: "whitesmoke", // Use the color value from Product component
+                fontSize: "16px", // Use the font size value from Product component
+              }}
+            >
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Image</th>
-                  <th>Action</th>
+                  <th className='px-6 py-3 '>#</th>
+                  <th className='px-6 py-3 '>Name</th>
+                  <th className='px-6 py-3 '>Image</th>
+                  <th className='px-6 py-3 '>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -127,9 +135,9 @@ function Category() {
                   >
                     <td className='px-1.5 py-1'>{index + 1}</td>
                     <td>{category.name}</td>
-                    <td className="flex items-center justify-center">
+                    <td className="flex items-center justify-center px-6 py-4">
                       {category.categoryimage &&( 
-                      <img src={`/uploads/usersImages/${category.categoryimage}`} alt={category.name} className="w-16 h-16 object-cover rounded-full" />
+                      <img src={`/uploads/usersImages/${category.categoryimage}`} alt={category.name} className="w-16 h-16 object-cover hover:scale-110" />
                       )}
                     </td>
                     <td>
