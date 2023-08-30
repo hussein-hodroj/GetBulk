@@ -47,7 +47,7 @@ function FeedbackAdmin() {
   return (
     <div>
       {show && (
-        <DeleteFeedback open={setShow} feedbackId={selectedFeedbackId} />
+        <DeleteFeedback open={setShow} feedbackId={selectedFeedbackId}  setFeedbacks={setFeedbacks}/>
       )}
 
       <div className='flex'>

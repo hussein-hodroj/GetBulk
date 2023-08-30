@@ -17,7 +17,7 @@ function Product() {
   const [showDelete , setShowDelete ] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null); // Store selected product ID
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1); 
   const productPerPage = 10;
 
    
@@ -31,14 +31,12 @@ function Product() {
 
   
 
-  const filteredProducts = products.filter((product) => {
+  
+  const filteredProducts = products?.filter((product) => {
+    if (!product.name) return false; 
     const searchTermLower = searchTerm.toLowerCase();
-    return (
-      (product.name && product.name.toLowerCase().includes(searchTermLower)) 
-      
-    );
+    return product.name.toLowerCase().includes(searchTermLower);
   });
-
    const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -63,7 +61,7 @@ function Product() {
    
 <div>
 {show && <Popup close={setShow} setProducts={setProducts} products={products}/>}
-{showUpdate && <UpdatePopup open={setShowUpdate} productId={selectedProductId} setProducts={setProducts} />}
+{showUpdate && <UpdatePopup open={setShowUpdate} productId={selectedProductId} setProducts={setProducts} products={products} />}
 {showDelete && <DeleteProduct openDelete={setShowDelete} productId={selectedProductId} setProduct={setProducts}/>}
 
  <div className='flex'>

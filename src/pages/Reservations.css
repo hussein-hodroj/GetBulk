@@ -17,16 +17,40 @@
   /* Add other styling properties as needed */
 }
 .rbc-event {
-  background-color: #b8ad1e;
+  background-color: #ebab21;
   border: 1px solid #777a7c;
   color: white;
   /* Add other styling properties as needed */
 }
 .rbc-selected {
-  background-color: #b8ad1e;
+  background-color: #ebab21;
   border-color: #777a7c;
   /* Add other styling properties as needed */
 }
+
+/* .rbc-overflowing{
+  background-color:#46443f;
+}
+
+.rbc-time-header {
+  background-color:#46443f;
+} */
+
+/* .rbc-events-container{
+  background-color:#46443f;
+} */
+.rbc-event-content{
+display: block;
+
+}
+
+.rbc-agenda-date-cell{
+  background-color:#46443f;
+   color: white;
+   border: 1px solid white;
+}
+
+
 .rbc-overlay {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
@@ -46,7 +70,7 @@
 } */
 
 .rbc-week-view {
-  background-color: #ebc11b;
+  background-color: #ebab21;
   color:white;
   border:1px solid whitesmoke;
 }
@@ -60,30 +84,30 @@
 }
 /* Styling for the day view */
 .rbc-day-view {
-color: #ebc11b;
+color: #ebab21;
   background-color: #46443f;
 } 
 
 .rbc-btn-group {
-  background-color: #ebc11b;
+  background-color: #ebab21;
   color:white
 }
 
 /* Styling for the back button */
 .rbc-btn-group .rbc-btn-group-back {
-  background-color: #ebc11b;
+  background-color: #ebab21;
   color:white
 }
 
 /* Styling for the next button */
 .rbc-btn-group .rbc-btn-group-next {
-  background-color: #ebc11b;
+  background-color: #ebab21;
   color:white
 }
 
 /* Styling for the today button */
 .rbc-btn-group .rbc-btn-group-today {
-  background-color: #ebc11b;
+  background-color: #ebab21;
   color:white
 }
 
@@ -94,7 +118,7 @@ color: #ebc11b;
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
-  color: #e9a514; /* Yellow title color */
+  color: #ce951a; /* Yellow title color */
   margin-top: 2rem;
   margin-bottom: 2rem;
   text-shadow: 1px 1px #2b2a2a;

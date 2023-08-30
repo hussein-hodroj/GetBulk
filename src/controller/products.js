@@ -28,8 +28,9 @@ const storage = multer.diskStorage({
   try {
     const products = await ProductModel.find();
 
-    if (!products) return res.status(404).json('Products not found');
-
+    if (!Array.isArray(products)) {
+      return res.status(404).json('Products not found');
+    }
     // Create an array to hold category names for each product
     const categoryNames = await Promise.all(
       products.map(async (product) => {

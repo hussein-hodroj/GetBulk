@@ -4,12 +4,24 @@ import '../AdminFeedback/DeleteFeedback.css';
 
 function UpdateStatus({ close, orderId, setOrders }) {
     const handleSubmit = (e) => {
-        axios.put(`http://localhost:8000/order/status/${orderId}`)
+      e.preventDefault();
+      axios.put(`http://localhost:8000/order/status/${orderId}`, {
+         headers: {
+          'Content-Type': 'application/json',
+        },
+      })
         .then((response) => {
-         setOrders(response.data)   
-        }).then(()=>{
-          close(false)
+  
+          setOrders(prevOrders =>
+            prevOrders.map(order => (order.id === orderId ? response.data : order))
+          );
+          window.location.reload();
+          close(false);
+
         })
+        
+          
+        
         .catch((error) => {
           console.log('Error while deleting the feedback:', error);
         });

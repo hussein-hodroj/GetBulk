@@ -2,11 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import '../AdminFeedback/DeleteFeedback.css';
 
-function DeleteOrder({ openDelete, orderId }) {
-    const handleSubmit = (e) => {
+function DeleteOrder({ openDelete, orderId, setOrders }) {
+    const handleSubmit =(e) => {
+      e.preventDefault();
         axios.delete(`http://localhost:8000/order/${orderId}`)
         .then((response) => {
-          console.log(response.data);    
+          setOrders((prevOrders) =>
+          prevOrders.filter((order) => order._id !== orderId)
+        );     
         }).then(()=>{
           openDelete(false);
         })
