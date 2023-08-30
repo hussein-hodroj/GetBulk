@@ -225,21 +225,24 @@ function UpdateAdmin() {
                 </div>
              
 
-              <div className="  justify-between space-x-6 space-y-3 ">
+              <div className="flex justify-end ">
                 <button
                   type="submit"
-                  className="bg-yellow-400 hover:bg-yellow-500 hover:text-black text-white font-semibold py-2 px-6  rounded focus:outline-none focus:shadow-outline "
+                  className="bg-yellow-400  text-white font-semibold py-2 px-6  rounded focus:outline-none focus:shadow-outline transition-transform transform-gpu hover:scale-110"
                 >
                   Update  
                 </button>
                 <button
         type="button"
         onClick={handleCancel}
-        className="bg-red-700 hover:bg-red-800 hover:text-black text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+        className="bg-red-600  text-white font-semibold ml-3 py-2 px-6 rounded focus:outline-none focus:shadow-outline transition-transform transform-gpu hover:scale-110"
       >
         Cancel
       </button>
-      {updateSuccess && (
+      
+              </div>
+              <div>
+              {updateSuccess && (
   <p className="text-yellow-500 font-bold mt-3">
     Data has been updated successfully!
   </p>

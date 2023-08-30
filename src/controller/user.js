@@ -7,35 +7,6 @@ import { sendEmail } from '../utils/sendEmail.js';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
 
-
-
-
-// export const addUser = async (req, res) => {
-//   const { fullname, email, address, age, phonenumber ,password} = req.body;
-//   try {
-//     const hashedPassword = await bcrypt.hash(password, 10);
-    
-//     // Create a new user instance
-//     const newUser = new UserModel({
-//       fullname,
-//       email,
-//       address,
-//       age,
-//       phonenumber,
-//       password: hashedPassword,
-//       role: 'trainer',
-//     });
-
-//     // Save the user to the database
-//     const savedUser = await newUser.save();
-
-//     res.status(201).json(savedUser);
-//   } catch (error) {
-//     console.error('Error registering user:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// };
-
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
@@ -81,19 +52,6 @@ export const addUser = async (req, res) => {
 };
 
 
-
-// export const contact=async(req,res)=>{
-//   const {fullname,subject,email} = req.body;
-//   console.log(req.body);
-//  try {
-//    if(!fullname) return res.status(404).json("fullname not found");
-//    if(!subject) return res.status(404).json("Empty Message");
-//    if(!email) return res.status(404).json("email not find");
-//   const contactemail=await sendEmail("h_r_s_1994@hotmail.com",fullname,email,subject)
-//   res.status(200).json(contactemail);
-//  }
-//  catch(error){res.status(500).json(error);}
-//  }
  
 export const contact = async (req, res) => {
   const { fullname, subject, email } = req.body;
@@ -285,14 +243,7 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { 
     expiresIn: '30d' });
 };
-// export const getUsersTrainers = async (req, res) => {
-//   try {
-//     const users = await UserModel.find({ role: 'trainer' });
-//     return res.status(200).json(users);
-//   } catch (error) {
-//     return res.status(500).json({ error: 'An error occurred while fetching users.' });
-//   }
-// };
+
 
 
 export const getTrainers = async (req, res) => {
@@ -304,6 +255,7 @@ export const getTrainers = async (req, res) => {
   }
 };
 
+
 export const deleteAllUsers = async (req, res) => {
   try {
     await UserModel.deleteMany(); // Delete all documents from the collection
@@ -312,8 +264,6 @@ export const deleteAllUsers = async (req, res) => {
     res.status(500).send('Error deleting all users');
   }
 };
-
-
 
 
 export const createUser = asyncHandler(async (req, res) => {
@@ -384,3 +334,4 @@ export const getTrainerById = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Error retrieving trainer', error: error.message });
   }
 });
+
