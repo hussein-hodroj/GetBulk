@@ -71,7 +71,7 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
             window.location.reload();
           }, 1000); 
           handleClose();
-        }, 5000); 
+        }, 6000); 
 
  
         for (const selectedProduct of selectedProducts) {
@@ -94,12 +94,12 @@ const CheckoutModal = ({ isOpen, handleClose, selectedProducts, total }) => {
 
   return (
     <div className={`${isOpen ? 'block' : 'hidden'} fixed inset-0 z-50 overflow-auto top-12 bg-opacity-50 flex justify-center items-center`}>
-      <div className="bg-zinc-600 p-4 w-[500px] rounded">
+      <div className="bg-zinc-800 p-4 w-[500px] rounded">
         
         {showThankYouMessage ? (
   <div className="text-center mb-4 text-yellow-500 font-bold text-[30px]">
     <p>Thank you for your order! </p> 
-    <p> we hope you like our products </p></div>
+    <p> your order is under progress and the cash will be on delivery</p></div>
 ) : (
         <form onSubmit={handleSubmit}>
           <h2 className="text-3xl font-bold mb-4 text-yellow-500">Checkout</h2>
