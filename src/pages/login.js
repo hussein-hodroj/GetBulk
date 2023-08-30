@@ -57,11 +57,11 @@ const validateForm = () => {
         localStorage.setItem('userId', userId);
         localStorage.setItem('role', role);
         if (role === 'admin') {
-          navigate('/dashboard'); 
+          navigate('/AdminDash'); 
         } else if (role === 'trainer') {
-          navigate('/TrainerDashboard'); 
+          navigate('/TrainDash'); 
         } else if (role === 'user') {
-          navigate('/UserDashboard'); 
+          navigate('/UserDash'); 
         }
       })
       .catch((error) => {
