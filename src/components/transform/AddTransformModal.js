@@ -26,6 +26,14 @@ const AddTransformModal = ({ isOpen, onClose }) => {
   const [imageAfter, setImageAfter] = useState(null);
   const [isLoading, setIsLoading] = useState(false); 
 
+
+  const resetForm = () => {
+    setDescriptionTransform('');
+    setImageBefore(null);
+    setImageAfter(null);
+    setIsLoading(false);
+  };
+
   const handleAddTransform = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -115,8 +123,11 @@ formData.append('imageAfter', imageAfter);
         <div className="flex justify-end mt-4">
         <button
             className="ml-2 px-4 py-2 bg-red-500 mr-4 text-white rounded-lg hover:bg-red-600"
-            onClick={onClose}
-            disabled={isLoading} 
+            onClick={() => {
+              onClose();
+              resetForm(); 
+            }}
+            disabled={isLoading}
           >
             Cancel
           </button>

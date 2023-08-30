@@ -87,6 +87,13 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
       console.error('Error adding schedule:', error);
     }
   };
+  const resetForm = () => {
+    setDate('');
+    setTimeSchedule('');
+    setDateError('');
+    setTimeError('');
+  };
+  
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
@@ -136,12 +143,16 @@ const AddScheduleModal = ({ isOpen, onClose, onAdd }) => {
         <div className="flex justify-end">
        
         <button
-          type="button"
-          onClick={onClose}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg  hover:bg-red-600"
-        >
-          Cancel
-        </button>
+  type="button"
+  onClick={() => {
+    resetForm();
+    onClose();
+  }}
+  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+>
+  Cancel
+</button>
+
         <button
           type="submit"
           className="px-4 py-2 bg-yellow-500 text-white rounded-lg ml-2 hover:bg-yellow-600"

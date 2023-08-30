@@ -194,6 +194,24 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
     newDescriptions.splice(index, 1);
     setDescriptions(newDescriptions);
   };
+
+  const handleCancel = () => {
+   
+    setDescriptions(selectedWorkout.descriptionworkout);
+    setTime(selectedWorkout.Time);
+    setType(selectedWorkout.type);
+    setDay(selectedWorkout.Day);
+    setGender(selectedWorkout.gender);
+    setDuration(selectedWorkout.Duration);
+    setWorkoutPlan(selectedWorkout.workoutplan);
+    setSelectedImages(selectedWorkout.imageworkout.map((imgName) => ({
+      name: imgName,
+      url: `/uploads/usersImages/${imgName}`,
+    })));
+  
+    onClose();
+  };
+  
   
 
   return (
@@ -353,12 +371,13 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
       </div>
       <div className="flex justify-end mt-4">
         
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 mr-4"
-          onClick={onClose}
-        >
-          Cancel
-        </button>
+      <button
+  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 mr-4"
+  onClick={handleCancel}
+>
+  Cancel
+</button>
+
         <button
           className="px-4 py-2 bg-yellow-500 text-white rounded-lg  hover:bg-yellow-400"
           type="submit"
