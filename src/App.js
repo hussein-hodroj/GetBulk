@@ -52,6 +52,10 @@ import Category from './pages/Category.js';
 
 import WorkoutDescription from './pages/WorkoutDescription.jsx';
 import BookingUser from './pages/bookinguser.js';
+import AdminDash from './pages/AdminDash.js';
+
+import TrainDash from './pages/TrainDash.js';
+import UserDash from './pages/UserDash.js';
 
 
 
@@ -86,8 +90,9 @@ function Layout() {
             <Route path='/UpdateTrainer' element={<UpdateTrainer />} />
             <Route path='/UserUpdate' element={<UserUpdate />}/>    
 
-
-
+            <Route path='/AdminDash' element={<AdminDash/>}/>
+            <Route path='/TrainDash' element={<TrainDash/>}/>
+            <Route path='/UserDash' element={<UserDash/>}/>
             <Route path="/adminFeedback" element={<FeedbackAdmin />} />
             <Route path="/AdminOrder" element={<AdminOrder />} />
             <Route path="/TrainerDashboard" element= {<TrainerDashboard />}/>

@@ -225,21 +225,26 @@ function UpdateTrainer() {
                 </div>
              
 
-              <div className="  justify-between space-x-6 space-y-3 ">
-                <button
-                  type="submit"
-                  className="bg-yellow-400 hover:bg-yellow-500 hover:text-black text-white font-semibold py-2 px-6  rounded focus:outline-none focus:shadow-outline "
-                >
-                  Update  
-                </button>
-                <button
-        type="button"
-        onClick={handleCancel}
-        className="bg-red-700 hover:bg-red-800 hover:text-black text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
-      >
-        Cancel
-      </button>
-      {updateSuccess && (
+                <div className="flex justify-end ">
+  <button
+    type="submit"
+    className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline transition-transform transform-gpu hover:scale-110"
+  >
+    Update
+  </button>
+  <button
+    type="button"
+    onClick={handleCancel}
+    className="bg-red-600   text-white font-semibold py-2 px-6 ml-2 rounded focus:outline-none focus:shadow-outline transition-transform transform-gpu hover:scale-110"
+  >
+    Cancel
+  </button>
+
+
+  
+              </div>
+              <div>
+              {updateSuccess && (
   <p className="text-yellow-500 font-bold mt-3">
     Data has been updated successfully!
   </p>

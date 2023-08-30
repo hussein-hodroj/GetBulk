@@ -190,25 +190,25 @@ function UserFeedback() {
         <Dashboard />
         <div className="h-4/5 w-4/5  mx-32 mt-14 mb-10 ">
           <div className="p-6 gap-4">
-            <div className="flex mt-16">
-            <button
-                className="text-white bold border font-bold bg-yellow-500 rounded px-2 py-1 transition-transform transform-gpu hover:scale-110"
-                onClick={toggleAddModal}
-              >
-                Add Feedback
-              </button>
-             
-            </div>
+          <div className="flex justify-end mt-16">
+                <button
+                  className="text-white bold border font-bold bg-yellow-500 rounded px-2 py-1 transition-transform transform-gpu hover:scale-110"
+                  onClick={toggleAddModal}
+                >
+                  Add Feedback
+                </button>
+              </div>
+
             {showAddModal && (
                 <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40">
-                  <div className="bg-zinc-800 p-7 rounded shadow-md w-96 ">
+                  <div className="bg-zinc-800 p-6 rounded shadow-md w-[450px] ">
                     {errorMessage && <p className="text-red-600 mb-2">{errorMessage}</p>}
                     <div className="flex justify-end" aria-hidden="true">
                       <button className="text-yellow-500" onClick={toggleAddModal}>
                         <FaTimes />
                       </button>
                     </div>
-                    <p className="text-2xl text-yellow-500 font-bold mb-5">New Feedback</p>
+                    <p className="text-2xl text-yellow-500 font-bold mb-7 mt-1 mr-5">New Feedback</p>
                    
                     <div className="mb-3 flex">
                         <div className="mr-4">
@@ -216,11 +216,11 @@ function UserFeedback() {
                           <span className="text-yellow-500  text-lg">{userName}</span>
                         </div>
                         <div>
-                          <label className="text-yellow-500 text-xl font-semibold mb-4 block ">Trainer's Name:</label>
+                          <label className="text-yellow-500 text-xl font-semibold mb-4 block ml-10">Trainer's Name:</label>
                           <select
                             value={selectedTrainer}
                             onChange={handleTrainerSelect}
-                            className="px-6 py-2 w-full rounded-lg border Border-white text-black font-semibold"
+                            className="px-6 py-2 w-full rounded-lg ml-10 border Border-white text-black font-semibold"
                           >
                             <option value="">Select a Trainer</option>
                             {trainers.map((trainer) => (
@@ -317,11 +317,12 @@ function UserFeedback() {
                           </td>
                           <td className="justify-center flex items-center px-6 py-4 whitespace-nowrap border Border-white text-white font-semibold">
                           <button
-                                  className="text-yellow-500 font-bold px-4 py-2 border border-yellow-500 transition-transform transform-gpu hover:scale-110"
-                                  title="update"
+                                  // className="text-yellow-500 font-bold px-4 py-2 border border-yellow-500 transition-transform transform-gpu hover:scale-110"
+                                  // title="update"
+                                  className='text-white font-bold py-1 px-2 bg-yellow-500 rounded transition-transform transform-gpu hover:scale-110'
                                   onClick={() => {
                                     handleUpdateButtonClick(feedback);
-                                
+                              
                                   }}
                                 >
                                   <FaEdit className="w-5 h-5" />
@@ -329,17 +330,17 @@ function UserFeedback() {
 
                               {showUpdateModal && (
                               <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40">
-                                <div className="bg-zinc-800 p-7 rounded shadow-md w-96">
+                                <div className="bg-zinc-800 p-7 rounded shadow-md w-[450px]">
                                   {errorMessage && <p className="text-red-600 mb-2">{errorMessage}</p>}
                                   <div className="flex justify-end">
                                     <button className="text-yellow-500" onClick={() => setShowUpdateModal(false)}>
-                                      <FaTimes />
+                                      <FaTimes className="w-5 h-5" />
                                     </button>
                                   </div>
                                   <p className="text-xl text-yellow-500 font-bold mb-3">Update Feedback</p>
                                   
                                   <div className="mb-3">
-                                    <label className="text-yellow-500 font-semibold mb-2 block">Trainer's Name</label>
+                                    <label className="text-yellow-500 font-semibold mb-3 block">Trainer's Name</label>
                                     <select
                                       value={selectedTrainer}
                                       onChange={handleTrainerSelect}
@@ -388,17 +389,17 @@ function UserFeedback() {
 
 
 
-                                <button className="text-red-500 font-bold px-4 py-2 border ml-5 border-red-500 transition-transform transform-gpu hover:scale-110" type="button"  
+                                <button className="bg-red-500 font-bold text-white  rounded  py-1 px-2 ml-3 transition-transform transform-gpu hover:scale-110" type="button"  
                                         onClick={() => { setSelectedFeedback(feedback._id); setShowDeleteModal(true); }}>
                                         <FaTrash className="w-5 h-5" />
                                 </button>
 
 
                                 {showDeleteModal && (
-                                        <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-40">
-                                          <div className="bg-zinc-800 p-7 rounded shadow-md w-96">
-                                            <p className="text-xl text-yellow-500 font-bold mb-3">Delete Confirmation</p>
-                                            <p className="mb-3">Are you sure you want to delete this feedback?</p>
+                                        <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center   bg-black bg-opacity-40"  >
+                                          <div className="bg-zinc-800 p-7 rounded shadow-md w-[450px] h-[200px]">
+                                            <p className="text-xl text-yellow-500 font-bold mb-7">Delete Confirmation</p>
+                                            <p className="mb-7">Are you sure you want to delete this feedback?</p>
                                             <div className="flex justify-end">
                                               <button
                                                 className="bg-red-500 text-white font-bold px-4 py-2 mr-2 rounded-lg transition-transform transform-gpu hover:scale-110"

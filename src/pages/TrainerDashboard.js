@@ -103,7 +103,6 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
     Logout
   </a>
 </li>
-
           </ul>
         </div>
       </div>
@@ -116,8 +115,9 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               </div>
             </li>
             <li>
-            <a
-                href="http://localhost:3000/TrainerDashboard#"
+          
+               <a
+                href="TrainDash#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'Dashboard' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
@@ -132,24 +132,24 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             
             <li>
             <a
-                href="http://localhost:3000/Reservations#"
+                href="Reservations#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'Products' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
                 onClick={() => handleSidebarItemClick('Products')}
               >                
               <span className="inline-flex justify-center items-center ml-4">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                <circle cx="16" cy="8" r="2"></circle>
-                <circle cx="8" cy="16" r="2"></circle>
-            </svg>
+                            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4H18V1H16V4H8V1H6V4H4C2.89543 4 2 4.89543 2 6V20C2 21.1046 2.89543 22 4 22H20C21.1046 22 22 21.1046 22 20V6C22 4.89543 21.1046 4 20 4ZM20 20H4V9H20V20ZM20 6H4V8H20V6Z" fill="currentColor" />
+              </svg>
+
+
             </span>
                 <span className="ml-2 text-sm text-white tracking-wide truncate">Private Schedule</span>
               </a>
             </li>
             <li>
-              <a href="http://localhost:3000/schedules#" 
+              <a href="schedules#" 
               
               className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                 activeLink === 'Schedule' ? 'border-yellow-500' : 'border-transparent'
@@ -168,7 +168,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
            
             <li>
             <a
-                href="http://localhost:3000/workouts#"
+                href="workouts#"
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'Workout' ? 'border-yellow-500' : 'border-transparent'
                 } dark:hover:border-gray-800 pr-6`}
@@ -189,7 +189,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
             </li>
             <li>
               
-              <a href="http://localhost:3000/UpdateTrainer#"
+              <a href="UpdateTrainer#"
 
                 className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
                   activeLink === 'Update' ? 'border-yellow-500' : 'border-transparent'
@@ -203,7 +203,7 @@ const defaultImageUrl = 'https://therminic2018.eu/wp-content/uploads/2018/07/dum
               </a>
             </li>
             <li>
-              <a href="http://localhost:3000/edit-password-trainer#" 
+              <a href="edit-password-trainer#" 
              
              className={`relative flex flex-row items-center h-11 focus:outline-none hover:bg-zinc-900 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-500 ${
               activeLink === 'Edite' ? 'border-yellow-500' : 'border-transparent'

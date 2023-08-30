@@ -240,14 +240,14 @@ function Trainers() {
                   
                   <td className="px-6 py-4 whitespace-nowrap border border-white flex items-center justify-center">
                   <button
-                              className="text-white  bg-yellow-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 mr-3 "
+                              className="text-white font-bold py-1 px-2 bg-yellow-500 rounded transition-transform transform-gpu hover:scale-110 "
                               onClick={() => handleEditTrainer(trainer)}
                             >
                               <FaEdit className="w-5 h-5" />
                             </button>
                           <button
                                 onClick={() => handleDeleteTrainer(trainer._id)}
-                                className="text-white   bg-red-500 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 flex items-center justify-center"
+                                className="bg-red-500 font-bold text-white  ml-3 transition-transform transform-gpu hover:scale-110 rounded px-2 py-1 flex items-center justify-center"
                               >
                                 <FaTrash className="w-5 h-5" />
                     </button>
