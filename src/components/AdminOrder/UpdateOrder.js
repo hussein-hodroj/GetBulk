@@ -48,7 +48,6 @@ function UpdateOrder ({closeUpdate, orderId, setOrders }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate the form fields before submitting
     validateForm();
 
     if (isValid) {

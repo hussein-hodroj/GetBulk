@@ -159,7 +159,7 @@ function Reservations() {
   popup={true}
   onSelectEvent={handleEventSelect}
   views={['month', 'week', 'day', 'agenda']}
-  eventPropGetter={(booking)=>{return{style:{backgroundColor:'yellow', color: 'black',
+  eventPropGetter={(booking)=>{return{style:{backgroundColor:'#ebab21', color: 'black',
 }}}}
 
 />

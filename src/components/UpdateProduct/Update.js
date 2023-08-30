@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Update.css';
 
-function Update ({ open, productId, setProducts }) {
+function Update ({ open, productId, setProducts, products }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -15,6 +15,7 @@ function Update ({ open, productId, setProducts }) {
   const [isValid, setIsValid] = useState(false);
 
   const validateForm = () => {
+    
     const newErrors = {};
 
     // Check if the required fields are filled
@@ -34,12 +35,14 @@ function Update ({ open, productId, setProducts }) {
     axios
       .get(`http://localhost:8000/product/${productId}`)
       .then(response =>{console.log(response)
+        
         setName(response.data.name)
         setPrice(response.data.price)
         setDescription(response.data.description)
         setQuantity(response.data.quantity)
         setImagePath(response.data.imagePath)
         setCategory(response.data.category)
+        
     })
     .catch((error) => console.log(error));
 }, [productId]);
@@ -50,6 +53,7 @@ function Update ({ open, productId, setProducts }) {
       .then((response) => setCategories(response.data))
       .catch((error) => console.log(error));
   }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Validate the form fields before submitting
@@ -77,11 +81,16 @@ function Update ({ open, productId, setProducts }) {
         },
       })
       .then((response) => {
-        setProducts(response.data);
-                  open(false);
+        const updatedProduct = response.data;
+        const updatedProducts = products.map((product) =>
+          product._id === updatedProduct._id ? updatedProduct : product
+        );
+        setProducts(updatedProducts);
+        setCategory(response.data.category);
+
+        open(false);
 
       })
-      
       .catch((error) => {
         console.log('Error while submitting the form:', error);
       });
@@ -90,7 +99,7 @@ function Update ({ open, productId, setProducts }) {
   };
   return (
     <div className = "modalBackground">
-<form onSubmit={handleSubmit}>
+<form onSubmit={(e)=>handleSubmit(e)}>
         <div className= "modalContainer">
         <div className = "titleCloseBtn flex justify-between mb-5 mt-5">
   <h1 className="text-yellow-500 font-bold flex justify-start items-start"

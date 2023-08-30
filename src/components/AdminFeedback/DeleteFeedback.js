@@ -2,11 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import './DeleteFeedback.css';
 
-function DeleteAdminFeedback({ open, feedbackId }) {
+function DeleteAdminFeedback({ open, feedbackId , setFeedbacks}) {
     const handleSubmit = (e) => {
+            e.preventDefault();
+
         axios.delete(`http://localhost:8000/feedback/delete/${feedbackId}`)
         .then((response) => {
-          console.log(response.data);    
+          setFeedbacks((prevFeedbacks) =>
+          prevFeedbacks.filter((feedback) => feedback._id !== feedbackId)
+        );        
         }).then(()=>{
           open(false);
         })
