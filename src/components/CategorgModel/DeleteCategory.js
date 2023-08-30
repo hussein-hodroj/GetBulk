@@ -36,8 +36,8 @@ const DeleteCategory = ({ openDelete, categoryId, onDelete }) => {
 
   return (
     <Modal isOpen={true} onRequestClose={() => openDelete(false)} style={customStyles}>
-      <h2 className="text-yellow-500 font-bold text-xl mb-4">Delete Category</h2>
-      <p className="text-white mb-4">Are you sure you want to delete this category?</p>
+      <h2 className="text-yellow-500 font-bold text-xl mb-8">Delete Category</h2>
+      <p className="text-yellow-500 mb-8">Are you sure you want to delete this category?</p>
 
       <div className="flex justify-end space-x-4"> {/* Updated button positioning */}
         <button

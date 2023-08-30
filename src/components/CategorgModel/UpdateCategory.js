@@ -13,7 +13,7 @@ const customStyles = {
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
     maxWidth: '500px',
-    backgroundColor: '#2c2a2a', // Updated background color
+    backgroundColor: '#2c2a2a', 
     border: '2px solid black',
     borderRadius: '8px',
     padding: '20px',
