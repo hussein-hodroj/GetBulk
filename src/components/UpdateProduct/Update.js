@@ -86,9 +86,9 @@ function Update ({ open, productId, setProducts, products }) {
           product._id === updatedProduct._id ? updatedProduct : product
         );
         setProducts(updatedProducts);
-        setCategory(response.data.category);
-
+       
         open(false);
+         window.location.reload();
 
       })
       .catch((error) => {
