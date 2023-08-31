@@ -101,30 +101,41 @@ const storage = multer.diskStorage({
   };
   export const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, price, description, category, quantity, imagePath } = req.body;
+    const { name, price, description, category, quantity } = req.body;
   
     try {
-      // If imagePath is 'no-change', exclude it from the update query
+      let imagePath;
+  
+      // Check if a new image was uploaded
+      if (req.file) {
+        imagePath = req.file.originalname;
+      } else {
+        imagePath = 'no-change'; // Indicates no change to the image
+      }
+  
       const updateData = {
         name, price, description, category, quantity
       };
+  
       if (imagePath !== 'no-change') {
         updateData.imagePath = imagePath;
       }
   
-      const product = await ProductModel.findByIdAndUpdate(
+      const updatedProduct = await ProductModel.findByIdAndUpdate(
         id,
         updateData,
         { new: true }
       );
   
-      if (!product) return res.status(404).json('Product Not Found');
-      res.status(201).json(product);
+      if (!updatedProduct) return res.status(404).json('Product Not Found');
+  
+      res.status(200).json(updatedProduct);
     } catch (error) {
       console.error('Error updating product:', error);
       res.status(500).send('Error updating product');
     }
   };
+  
   
 
   
