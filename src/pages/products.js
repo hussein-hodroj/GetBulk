@@ -109,7 +109,7 @@ Description</th>
 Category</th>
 <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Quantity</th>
-                               <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
+                               <th scope="col" className="px-6 py-3  bold font-medium text-white uppercase tracking-wider Border-white border">
 Image</th>
                                <th scope="col" className="px-6 py-3 text-left bold font-medium text-white uppercase tracking-wider Border-white border">
 Action</th>
@@ -131,7 +131,7 @@ Action</th>
 {product.cname}</td>
 <td className="px-6 py-4  border Border-white">
 {product.quantity}</td>
-                           <td className="px-6 py-4 text-center flex justify-center items-center  whitespace-nowrap border Border-white">
+                           <td className="px-6 py-4 text-center flex justify-center align-center  whitespace-nowrap ">
 
                       {product.imagePath && (
                         <img
@@ -140,8 +140,8 @@ Action</th>
                         style={{
                           width: '100px',
                           height: '90px',
-                          display: 'block',
                           transition: 'transform 0.3s ease', 
+                          
                         }}
                         className="hover:scale-110"                        />
                       )}
