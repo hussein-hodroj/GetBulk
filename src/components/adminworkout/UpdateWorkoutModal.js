@@ -163,19 +163,23 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
         `http://localhost:8000/workout/${selectedWorkout._id}/update`,
         updatedWorkout
       );
-
+    
+      // Update selectedImages with the new URLs from the server
+      const updatedImageUrls = selectedImages.map((img) => ({
+        ...img,
+        url: `/uploads/usersImages/${img.name}`,
+      }));
+      setSelectedImages(updatedImageUrls);
+    
       handleUpdateWorkout(response.data);
-  
-      
-      handleUpdateWorkout(updatedWorkout);
-  
-   
+    
       onClose();
     } catch (error) {
       console.error('Error updating workout:', error.response.data);
     } finally {
       selectedImages.forEach((img) => URL.revokeObjectURL(img.url));
     }
+    
   };
   
 
@@ -346,24 +350,25 @@ const UpdateWorkoutModal = ({ isOpen, onClose, handleUpdateWorkout, selectedWork
                 multiple
               />
                {errors.images && <p className="text-red-500">{errors.images}</p>}
-              {selectedImages.length > 0 && (
-                <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
-                  <label className="text-white">Selected Images:</label>
-                  {selectedImages.map((img, index) => (
-                    <div key={index} className="flex items-center mt-2">
-                      <img
-                      src={img.url}
-                      alt={`Selected ${index + 1}`}
-                      className="h-10 w-10 rounded-full"
-                    />
+               {selectedImages.length > 0 && (
+  <div className="mt-4" style={{ maxHeight: '200px', overflowY: 'auto' }}>
+    <label className="text-white">Selected Images:</label>
+    {selectedImages.map((img, index) => (
+      <div key={index} className="flex items-center mt-2">
+        <img
+          src={img.url}
+          alt={`Selected ${index + 1}`}
+          className="h-10 w-10 rounded-full"
+        />
 
-                      <button onClick={() => handleRemoveImage(index)} className="text-yellow-500 ml-2">
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                </div>
+        <button onClick={() => handleRemoveImage(index)} className="text-yellow-500 ml-2">
+          Remove
+        </button>
+      </div>
+    ))}
+  </div>
 )}
+
 
             </div>
 </div>
