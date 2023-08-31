@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
         if (file) {
           cb(null, file.originalname);
         } else {
-          cb(null, null); // Set filename to null if no file
+          cb(null, null); 
         }
       } catch (error) {
         console.error('Error:', error.message);
@@ -70,13 +70,23 @@ export const createCategory = async (req, res) => {
 
 export const updateCategory = async (req, res) => {
     const { id } = req.params;
-    const { name, categoryimage } = req.body;
+    const { name } = req.body;
+    let categoryimage = null;
+
+    if (req.file) {
+        categoryimage = req.file.originalname;
+    } else {
+       
+        const existingCategory = await CategoryModel.findById(id);
+        if (existingCategory) {
+            categoryimage = existingCategory.categoryimage;
+        }
+    }
 
     try {
-
         const updatedCategory = await CategoryModel.findByIdAndUpdate(
             id,
-            {name, categoryimage: req.file.originalname},
+            { name, categoryimage },
             { new: true }
         );
 
@@ -88,6 +98,7 @@ export const updateCategory = async (req, res) => {
         res.status(500).send('Error updating category');
     }
 };
+
 
 export const deleteCategory = async (req, res) => {
     const { id } = req.params;
