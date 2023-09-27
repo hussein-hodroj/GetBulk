@@ -68,7 +68,7 @@ export const contact = async (req, res) => {
       Subject: ${subject}
     `;
 
-    const contactEmail = await sendEmail("h_r_s_1994@hotmail.com", "Contact Form Submission", message);
+    const contactEmail = await sendEmail("alimokbel2022@hotmail.com", "Contact Form Submission", message);
     res.status(200).json(contactEmail);
   } catch (error) {
     res.status(500).json(error);
