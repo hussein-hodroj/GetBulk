@@ -106,17 +106,13 @@ function Layout() {
             <Route path="/Workouts" element= {<Workout />}/>
             <Route path="/schedules" element= {<Schedules />}/>
             <Route path="/bookinguser/:trainerId" element= {<BookingUser />}/>
-            
             <Route path="/transforms" element= {<TransformPage />}/>
             <Route path="/UserWorkout" element= {<UserWorkout />}/>
             <Route path="/workoutselection/:trainerId" element= {<WorkoutSelection />}/>
             <Route path="/trainers" element={<Trainers />} />
-            {/* <Route path='/adminProfile' element={<AdminProfile/>} /> */}
             <Route path='/editpassword' element={<EditPassword />} />
             <Route path = '/UserCalendar/:trainerId' element = {<UserCalendar/>}/>
-
             <Route path='/category' element = {<Category/>}/>
-
             <Route path='/transformation' element={<CarouselSlider/>}/>
             <Route path='/WorkoutDescription/:trainerId/:workoutId' element={<WorkoutDescription/>}/>
 
